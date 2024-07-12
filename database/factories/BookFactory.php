@@ -4,12 +4,15 @@ namespace Database\Factories;
 
 use App\Models\BookCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
  */
 class BookFactory extends Factory
 {
+	use WithFaker;
+
     /**
      * Define the model's default state.
      *
@@ -28,6 +31,6 @@ class BookFactory extends Factory
 			'width' => $this->faker->randomFloat(max: 30),
 			'height' => $this->faker->randomFloat(max: 50),
 			'price' => $this->faker->randomFloat(2, 5, 1000),
-        ];
+		];
     }
 }
