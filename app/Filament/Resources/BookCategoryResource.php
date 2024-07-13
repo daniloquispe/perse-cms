@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookCategoryResource\Pages;
 use App\Filament\Resources\BookCategoryResource\RelationManagers;
+use App\HasSeoTagsFormFields;
 use App\Models\BookCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,6 +17,8 @@ use Illuminate\Support\Str;
 
 class BookCategoryResource extends Resource
 {
+	use HasSeoTagsFormFields;
+
     protected static ?string $model = BookCategory::class;
 
 	protected static ?string $navigationIcon = 'heroicon-o-tag';
@@ -27,29 +30,29 @@ class BookCategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-			->columns(3)
             ->schema([
 				Forms\Components\Toggle::make('is_visible')
 					->label('Visible en el sitio web')
 					->columnSpanFull(),
-				Forms\Components\TextInput::make('order')
-					->label('Orden')
-					->numeric(),
-				Forms\Components\TextInput::make('name')
-					->label('Nombre')
-					->required()
-					->live(true)
-					->afterStateUpdated(function (string $operation, string $state, Forms\Set $set)
-					{
-						return $operation == 'create'
-							? $set('slug', Str::slug($state))
-							: null;
-					}),
-				Forms\Components\TextInput::make('slug')
-					->label('Slug')
-					->required()
-					->unique(BookCategory::class, 'slug', ignoreRecord: true)
-					->dehydrated(),
+				Forms\Components\Section::make('Información básica')
+					->columns()
+					->schema([
+						Forms\Components\TextInput::make('order')
+							->label('Orden')
+							->numeric(),
+						Forms\Components\TextInput::make('name')
+							->label('Nombre')
+							->required()
+							->live(true)
+							->afterStateUpdated(function (string $operation, string $state, Forms\Set $set)
+							{
+								return $operation == 'create'
+									? $set('slug', Str::slug($state))
+									: null;
+							}),
+					]),
+				// SEO
+				self::getFormSectionWithSeoTags(),
             ]);
     }
 

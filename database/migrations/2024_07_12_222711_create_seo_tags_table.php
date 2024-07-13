@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table)
+        Schema::create('seo_tags', function (Blueprint $table)
 		{
-			$table->id();
-			$table->string('name', 50)->index();
-			$table->string('title', 150);
-			$table->text('content')->nullable();
-			$table->string('image', 255)->nullable();
-			$table->boolean('is_visible')->default(true);
-			$table->timestamps();
+            $table->id();
+			$table->integer('owner_id');
+			$table->string('owner_type');
+			$table->string('slug', 255)->nullable()->unique();
+			$table->string('meta_title', 50);
+			$table->string('meta_description', 150);
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('seo_tags');
     }
 };

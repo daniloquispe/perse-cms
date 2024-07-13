@@ -16,7 +16,6 @@ return new class extends Migration
 			$table->id();
 			$table->unsignedTinyInteger('order')->nullable();
 			$table->string('name', 50)->unique();
-			$table->string('slug', 50)->unique();
 			$table->foreignIdFor(\App\Models\BookCategory::class, 'parent_id')->nullable();
 			$table->boolean('is_visible');
 			$table->timestamps();

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\HasSeoTags;
 use App\PageRole;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property string $title Page on-page title
  * @property-read bool $has_content
  * @property-read bool $has_slug
  * @property-read bool $has_title
@@ -16,15 +18,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Page extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSeoTags;
 
 	protected $fillable = [
 		'content',
 		'image',
 		'is_visible',
-		'meta_title',
 		'name',
-		'slug',
 		'title',
 	];
 

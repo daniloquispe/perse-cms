@@ -4,8 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PageResource\Pages;
 use App\Filament\Resources\PageResource\RelationManagers;
+use App\HasSeoTagsFormFields;
 use App\Models\Page;
-use App\PageRole;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +17,8 @@ use Illuminate\Support\HtmlString;
 
 class PageResource extends Resource
 {
+	use HasSeoTagsFormFields;
+
     protected static ?string $model = Page::class;
 
 	protected static ?string $navigationIcon = 'heroicon-o-document';
@@ -29,7 +31,13 @@ class PageResource extends Resource
 
     public static function form(Form $form): Form
     {
-		$colsCount = $form->getRecord()->has_title ? 3 : 2;
+		$page = $form->getRecord();  /* @var $page Page */
+
+		$hasSlug = $page->has_slug;
+		$hasContent = $page->has_content;
+		$hasTitle = $page->has_title;
+
+		$colsCount = $hasTitle ? 3 : 2;
 
 		return $form
             ->schema([
@@ -47,8 +55,8 @@ class PageResource extends Resource
 							->maxLength(50),
 						Forms\Components\TextInput::make('title')
 							->label('Título de la página')
-							->hidden(fn(Page $page) => !$page->has_title)
-							->required(fn(Page $page) => $page->has_title)
+							->hidden(!$hasTitle)
+							->required($hasTitle)
 							->maxLength(150),
 						Forms\Components\FileUpload::make('image')
 							->label('Imagen destacada')
@@ -57,24 +65,11 @@ class PageResource extends Resource
 							->directory('pages'),
 						Forms\Components\RichEditor::make('content')
 							->label('Contenido')
-							->hidden(fn(Page $page) => !$page->has_content)
+							->hidden(!$hasContent)
 							->columnSpanFull(),
 					]),
 				// SEO
-				Forms\Components\Section::make('Información para SEO')
-					->columns()
-					->schema([
-						Forms\Components\TextInput::make('slug')
-							->hidden(fn(Page $page) => !$page->has_slug)
-							->required(fn(Page $page) => $page->has_slug),
-						Forms\Components\TextInput::make('meta_title')
-							->label('Título en el navegador')
-							->helperText('Aparece en la pestaña o ventana del navegador web')
-							->maxLength(150),
-						Forms\Components\TextInput::make('description')
-							->label('Descripción')
-							->maxLength(150),
-					]),
+				self::getFormSectionWithSeoTags($hasSlug),
             ]);
     }
 

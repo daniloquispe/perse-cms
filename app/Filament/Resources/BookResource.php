@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
+use App\HasSeoTagsFormFields;
 use App\Models\Book;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,6 +17,8 @@ use Illuminate\Support\Str;
 
 class BookResource extends Resource
 {
+	use HasSeoTagsFormFields;
+
     protected static ?string $model = Book::class;
 
 	protected static ?string $navigationIcon = 'heroicon-o-book-open';
@@ -111,22 +114,7 @@ class BookResource extends Resource
 						Forms\Components\Toggle::make('is_presale')
 							->label('En preventa'),
 					]),
-				Forms\Components\Section::make('Información para SEO')
-					->columns()
-					->schema([
-						Forms\Components\TextInput::make('slug')
-							->prefix('libro-')
-							->required()
-							->unique(Book::class, 'slug', ignoreRecord: true)
-							->dehydrated(),
-						Forms\Components\TextInput::make('meta_title')
-							->label('Título de la página')
-							->helperText('Aparece en la pestaña del navegador web')
-							->maxLength(150),
-						Forms\Components\TextInput::make('meta_description')
-							->label('Descripción')
-							->maxLength(150),
-					]),
+				self::getFormSectionWithSeoTags(),
             ]);
     }
 

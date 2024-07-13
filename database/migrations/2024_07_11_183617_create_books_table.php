@@ -22,7 +22,6 @@ return new class extends Migration
 			$table->string('isbn', 13);
 			$table->string('cover', 255)->nullable();
 			$table->string('title', 150)->unique();
-			$table->string('slug', 150)->unique();
 			$table->text('summary')->nullable();
 			$table->unsignedSmallInteger('year')->nullable();
 			$table->unsignedInteger('pages_count')->nullable();
@@ -31,8 +30,6 @@ return new class extends Migration
 			$table->decimal('height')->nullable();
 			$table->decimal('price');
 			$table->boolean('is_presale')->default(false);
-			$table->string('meta_title');
-			$table->string('meta_description')->nullable();
 			$table->timestamps();
 		});
 

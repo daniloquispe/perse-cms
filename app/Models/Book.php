@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasSeoTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,15 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSeoTags;
 
 	protected $fillable = [
 		'category_id',
 		'cover',
 		'is_presale',
 		'is_visible',
-		'meta_title',
-		'meta_description',
 		'price',
 		'publisher_id',
 		'saga_id',

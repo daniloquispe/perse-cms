@@ -14,13 +14,13 @@ class BookCategorySeeder extends Seeder
     public function run(): void
     {
 		$categoriesData = [
-			['order' => 1, 'name' => 'Comics y Mangas', 'slug' => 'comics-y-mangas', 'is_visible' => true],
-			['order' => 2, 'name' => 'Libros Infantiles', 'slug' => 'libros-infantiles', 'is_visible' => true],
-			['order' => 3, 'name' => 'Libros Juveniles', 'slug' => 'libros-juveniles', 'is_visible' => true],
-			['order' => 4, 'name' => 'Ficción', 'slug' => 'ficcion', 'is_visible' => true],
-			['order' => 5, 'name' => 'No Ficción', 'slug' => 'no-ficcion', 'is_visible' => true],
-			['order' => 6, 'name' => 'Bienestar y Salud', 'slug' => 'bienestar-y-salud', 'is_visible' => true],
-			['order' => 7, 'name' => 'Empresa y Gestión', 'slug' => 'empresa-y-gestion', 'is_visible' => true],
+			['order' => 1, 'name' => 'Comics y Mangas', 'is_visible' => true],
+			['order' => 2, 'name' => 'Libros Infantiles', 'is_visible' => true],
+			['order' => 3, 'name' => 'Libros Juveniles', 'is_visible' => true],
+			['order' => 4, 'name' => 'Ficción', 'is_visible' => true],
+			['order' => 5, 'name' => 'No Ficción', 'is_visible' => true],
+			['order' => 6, 'name' => 'Bienestar y Salud', 'is_visible' => true],
+			['order' => 7, 'name' => 'Empresa y Gestión', 'is_visible' => true],
 		];
 
 		foreach ($categoriesData as $categoryData)
