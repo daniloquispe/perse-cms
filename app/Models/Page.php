@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property-read bool $can_have_content
- * @property-read bool $can_have_slug
+ * @property-read bool $has_content
+ * @property-read bool $has_slug
+ * @property-read bool $has_title
  * @property-read int $id Page ID and {@see PageRole role}
+ * @property-read PageRole $role
  */
 class Page extends Model
 {
@@ -26,7 +28,12 @@ class Page extends Model
 		'title',
 	];
 
-	public function canHaveContent(): Attribute
+	public function role(): Attribute
+	{
+		return Attribute::make(fn() => PageRole::from($this->id));
+	}
+
+	public function hasContent(): Attribute
 	{
 		return Attribute::make(function ()
 		{
@@ -34,7 +41,15 @@ class Page extends Model
 		});
 	}
 
-	public function canHaveSlug(): Attribute
+	public function hasSlug(): Attribute
+	{
+		return Attribute::make(function ()
+		{
+			return $this->id != PageRole::Home->value;
+		});
+	}
+
+	public function hasTitle(): Attribute
 	{
 		return Attribute::make(function ()
 		{

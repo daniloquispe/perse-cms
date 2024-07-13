@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class PageResource extends Resource
 {
@@ -28,15 +29,27 @@ class PageResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
+		$colsCount = $form->getRecord()->has_title ? 3 : 2;
+
+		return $form
             ->schema([
+				// Visible?
 				Forms\Components\Toggle::make('is_visible')
 					->label('¿Visible?'),
+				// Basic info
 				Forms\Components\Section::make('Información básica')
-					->columns()
+					->description(fn(Page $page) => new HtmlString("Página: <strong>{$page->role->getLabel()}</strong>"))
+					->columns($colsCount)
 					->schema([
 						Forms\Components\TextInput::make('name')
-							->label('Nombre'),
+							->label('Nombre en menú')
+							->required()
+							->maxLength(50),
+						Forms\Components\TextInput::make('title')
+							->label('Título de la página')
+							->hidden(fn(Page $page) => !$page->has_title)
+							->required(fn(Page $page) => $page->has_title)
+							->maxLength(150),
 						Forms\Components\FileUpload::make('image')
 							->label('Imagen destacada')
 							->helperText('Esta imagen aparecerá al compartir la página en redes sociales')
@@ -44,19 +57,23 @@ class PageResource extends Resource
 							->directory('pages'),
 						Forms\Components\RichEditor::make('content')
 							->label('Contenido')
-							->disabled(fn(Page $page) => !$page->can_have_content)
+							->hidden(fn(Page $page) => !$page->has_content)
 							->columnSpanFull(),
 					]),
+				// SEO
 				Forms\Components\Section::make('Información para SEO')
 					->columns()
 					->schema([
 						Forms\Components\TextInput::make('slug')
-							->disabled(fn(Page $page) => !$page->can_have_slug),
-						Forms\Components\TextInput::make('title')
-							->label('Título de la página')
-							->helperText('Aparece en la pestaña del navegador web'),
+							->hidden(fn(Page $page) => !$page->has_slug)
+							->required(fn(Page $page) => $page->has_slug),
+						Forms\Components\TextInput::make('meta_title')
+							->label('Título en el navegador')
+							->helperText('Aparece en la pestaña o ventana del navegador web')
+							->maxLength(150),
 						Forms\Components\TextInput::make('description')
-							->label('Descripción'),
+							->label('Descripción')
+							->maxLength(150),
 					]),
             ]);
     }
@@ -65,8 +82,10 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
+				Tables\Columns\TextColumn::make('role')
+					->label('Página'),
 				Tables\Columns\TextColumn::make('name')
-					->label('Nombre')
+					->label('Nombre en menú')
 					->sortable()
 					->searchable(),
 				Tables\Columns\ToggleColumn::make('is_visible')

@@ -2,7 +2,9 @@
 
 namespace App;
 
-enum PageRole: int
+use Filament\Support\Contracts\HasLabel;
+
+enum PageRole: int implements HasLabel
 {
 	case Home = 1;
 	case Contact = 2;
@@ -13,4 +15,20 @@ enum PageRole: int
 	case DeliveryPolitics = 7;
 	case ReturningPolitics = 8;
 	case Terms = 9;
+
+	public function getLabel(): ?string
+	{
+		return match ($this)
+		{
+			self::Home => 'Inicio',
+			self::Contact => 'Contacto',
+			self::AboutUs => 'Quiénes somos',
+			self::ComplaintsBook => 'Libro de reclamaciones',
+			self::PrivacyPolitics => 'Política de privacidad',
+			self::CookiesPolitics => 'Política de cookies',
+			self::DeliveryPolitics => 'Política de entrega',
+			self::ReturningPolitics => 'Política de devoluciones',
+			self::Terms => 'Términos y condiciones',
+		};
+	}
 }
