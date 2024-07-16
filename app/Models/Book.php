@@ -19,6 +19,7 @@ class Book extends Model
 		'is_visible',
 		'price',
 		'publisher_id',
+		'format_id',
 		'saga_id',
 		'slug',
 		'summary',
@@ -44,5 +45,10 @@ class Book extends Model
 	public function saga(): BelongsTo
 	{
 		return $this->belongsTo(Saga::class);
+	}
+
+	public function format(): BelongsTo
+	{
+		return $this->belongsTo(BookFormat::class, 'format_id');
 	}
 }

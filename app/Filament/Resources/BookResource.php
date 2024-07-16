@@ -102,6 +102,10 @@ class BookResource extends Resource
 						Forms\Components\Select::make('publisher_id')
 							->label('Editorial')
 							->relationship('publisher', 'name'),
+						Forms\Components\Select::make('format_id')
+							->label('Formato')
+							->relationship('format', 'name')
+							->required(),
 					]),
 				Forms\Components\Section::make('Condiciones de venta')
 					->columns()
