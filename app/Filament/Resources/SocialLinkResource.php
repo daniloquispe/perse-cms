@@ -66,6 +66,8 @@ class SocialLinkResource extends Resource
 					->label('Nombre'),
 				Tables\Columns\TextColumn::make('url')
 					->label('URL'),
+				Tables\Columns\ToggleColumn::make('is_visible')
+					->label('¿Visible?'),
             ])
             ->filters([
                 //
