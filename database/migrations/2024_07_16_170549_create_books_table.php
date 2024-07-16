@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('books', function (Blueprint $table)
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('books', function (Blueprint $table)
 		{
 			$table->id();
 			$table->foreignIdFor(\App\Models\BookCategory::class, 'category_id');
@@ -40,14 +40,14 @@ return new class extends Migration
 			$table->foreignIdFor(\App\Models\Book::class);
 			$table->foreignIdFor(\App\Models\Author::class);
 		});
-    }
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
 		Schema::dropIfExists('author_book');
-        Schema::dropIfExists('books');
-    }
+		Schema::dropIfExists('books');
+	}
 };
