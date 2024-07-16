@@ -18,6 +18,7 @@ return new class extends Migration
 			$table->foreignIdFor(\App\Models\Saga::class)->nullable();
 			$table->foreignIdFor(\App\Models\Publisher::class)->nullable();
 			$table->foreignIdFor(\App\Models\BookFormat::class, 'format_id')->nullable();
+			$table->foreignIdFor(\App\Models\BookAgeRange::class, 'age_range_id')->nullable();
 			$table->boolean('is_visible');
 			$table->string('sku')->unique();
 			$table->string('isbn', 13);

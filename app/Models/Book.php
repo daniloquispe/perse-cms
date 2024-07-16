@@ -21,6 +21,7 @@ class Book extends Model
 		'publisher_id',
 		'format_id',
 		'saga_id',
+		'age_range_id',
 		'slug',
 		'summary',
 		'title',
@@ -50,5 +51,10 @@ class Book extends Model
 	public function format(): BelongsTo
 	{
 		return $this->belongsTo(BookFormat::class, 'format_id');
+	}
+
+	public function ageRange(): BelongsTo
+	{
+		return $this->belongsTo(BookAgeRange::class, 'age_range_id');
 	}
 }

@@ -106,6 +106,10 @@ class BookResource extends Resource
 							->label('Formato')
 							->relationship('format', 'name')
 							->required(),
+						Forms\Components\Select::make('age_range_id')
+							->label('Edad')
+							->relationship('ageRange', 'name')
+							->required(),
 					]),
 				Forms\Components\Section::make('Condiciones de venta')
 					->columns()
