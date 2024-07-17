@@ -59,7 +59,7 @@ class BookCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-			->modifyQueryUsing(fn(Builder $query) => $query->whereNull('parent_id')->withCount('books'))
+			->modifyQueryUsing(fn(Builder $query) => $query->orderBy('name')->withCount('books'))
             ->columns([
 				Tables\Columns\TextColumn::make('name')
 					->sortable()
