@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SolutionForest\FilamentTree\Concern\ModelTree;
 
 class BookCategory extends Model
 {
-    use HasFactory, HasSeoTags;
+    use HasFactory, HasSeoTags, ModelTree;
 
-	protected $fillable = ['name', 'slug', 'order', 'is_visible'];
+	protected $fillable = ['name', 'parent_id', 'order', 'is_visible'];
 
 	public function parent(): BelongsTo
 	{
@@ -27,5 +28,15 @@ class BookCategory extends Model
 	public function books(): HasMany
 	{
 		return $this->hasMany(Book::class, 'category_id');
+	}
+
+	public static function defaultParentKey()
+	{
+		return null;
+	}
+
+	public function determineTitleColumnName(): string
+	{
+		return 'name';
 	}
 }

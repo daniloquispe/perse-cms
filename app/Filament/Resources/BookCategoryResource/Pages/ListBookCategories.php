@@ -16,4 +16,10 @@ class ListBookCategories extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+	protected function getHeaderWidgets(): array
+	{
+		return [
+			BookCategoryResource\Widgets\BookCategoryWidget::class
+		];
+	}
 }
