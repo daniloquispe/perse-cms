@@ -11,6 +11,7 @@ use App\Models\BookCategory;
 use App\Models\SeoTags;
 use App\PageRole;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\JsonResponse;
 
 class SlugController extends Controller
@@ -32,9 +33,36 @@ class SlugController extends Controller
 				$query = $seoTags->owner()
 					->select(['id', 'category_id', 'publisher_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
 					->where('is_visible', true)
-					->with(['authors:id,name,photo,summary', 'publisher:id,name']);
+					->with([
+						'authors:id,name,photo,summary',
+						'publisher:id,name',
+						'category' => function (BelongsTo $query)
+						{
+							$query
+								->select('id', 'name', 'parent_id')
+								->where('is_visible', true)
+								->with([
+									'parent' => function (BelongsTo $query)
+									{
+										$query
+											->select('id', 'name', 'parent_id')
+											->with([
+												'parent:id,name,parent_id',
+												'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+											]);
+									},
+									'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+								]);
+						}
+					]);
 
-				$resource = new BookResource($query->findOrFail($seoTags->owner_id));
+				$book = $query->findOrFail($seoTags->owner_id);
+
+				$categoryLinks = $this->getBreadCrumbsLinksForCategory($book->category);
+				$bookLinks = [['text' => $book->title, 'url' => $seoTags->slug]];
+
+				$resource = new BookResource($book);
+				$breadcrumbs = array_merge($categoryLinks, $bookLinks);
 			}
 			// Is book category?
 			elseif ($seoTags->owner_type == BookCategory::class)
@@ -42,11 +70,25 @@ class SlugController extends Controller
 				$type = 'book-category';
 
 				$query = $seoTags->owner()
-					->select('name')
+					->select('id', 'name', 'parent_id')
 					->where('is_visible', true)
-					->with('books');
+					->with([
+						'parent' => function (BelongsTo $query)
+						{
+							$query
+								->select('id', 'name', 'parent_id')
+								->with([
+									'parent:id,name,parent_id',
+									'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+							]);
+						},
+						'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+					]);
 
-				$resource = new BookCategoryResource($query->findOrFail($seoTags->owner_id));
+				$category = $query->findOrFail($seoTags->owner_id);
+
+				$resource = new BookCategoryResource($category);
+				$breadcrumbs = $this->getBreadCrumbsLinksForCategory($category);
 			}
 			// Is information page?
 			else
@@ -55,6 +97,7 @@ class SlugController extends Controller
 				{
 					PageRole::AboutUs->value => 'about',
 					PageRole::Contact->value => 'contact',
+					PageRole::ComplaintsBook->value => 'complaints-book',
 					default => 'page'
 				};
 
@@ -62,14 +105,51 @@ class SlugController extends Controller
 					->select(['id', 'title', 'name', 'content', 'image'])
 					->where('is_visible',true);
 
-				$resource = new PageResource($query->findOrFail($seoTags->owner_id));
+				$page = $query->findOrFail($seoTags->owner_id);
+
+				$resource = new PageResource($page);
+				$breadcrumbs = [['text' => $page->name, 'url' => $seoTags->slug]];
 			}
 
-			return $resource->additional(['seo' => $seoTags->toArray(), 'type' => $type]);
+			// Breadcrumbs links
+			/*$breadcrumbs = [];
+			$breadcrumbResource = $resource;
+
+			for (;;)
+			{
+				if (!$breadcrumbResource)
+					break;
+
+				$breadcrumbs[] = ['name' => $breadcrumbResource->name, 'url' => $breadcrumbResource->seoTags->slug];
+
+				$breadcrumbResource = $breadcrumbResource->parent;
+			}
+
+			$breadcrumbs = array_reverse($breadcrumbs);*/
+
+			return $resource->additional(['seo' => $seoTags->toArray(), 'type' => $type, 'breadcrumbs' => $breadcrumbs]);
 		}
 		catch (ModelNotFoundException)
 		{
 			return response()->json(status: 404);
 		}
+	}
+
+	private function getBreadCrumbsLinksForCategory(BookCategory $category): array
+	{
+		$breadcrumbs = [];
+		$breadcrumbsResource = $category;
+
+		for (;;)
+		{
+			if (!$breadcrumbsResource)
+				break;
+
+			$breadcrumbs[] = ['text' => $breadcrumbsResource->name, 'url' => $breadcrumbsResource->seoTags->slug];
+
+			$breadcrumbsResource = $breadcrumbsResource->parent;
+		}
+
+		return array_reverse($breadcrumbs);
 	}
 }

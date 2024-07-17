@@ -8,8 +8,8 @@ use App\Models\MarqueeItem;
 use App\Models\Page;
 use App\Models\SocialLink;
 use App\PageRole;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 class SiteController extends Controller
@@ -33,23 +33,46 @@ class SiteController extends Controller
 			->whereKey(PageRole::Home->value)
 			->value('name');
 
-		$homeLink = ['name' => $homeLinkName, 'url' => ''];
+		$homeLink = ['id' => 0, 'name' => $homeLinkName, 'seo_tags' => ['slug' => '']];
 		$links[] = $homeLink;
 
-		// Categories
+		// Categories: Level 1
 		$categoryLinks = BookCategory::query()
 			->select(['id', 'name'])
 			->whereNull('parent_id')
+			->where('is_visible', true)
 			->orderBy('order')
-			->with('seoTags')
+			->with([
+				'seoTags:id,owner_id,slug',
+				// Categories: Level 2
+				'children' => function (HasMany $query)
+				{
+					$query
+						->select(['id', 'parent_id', 'name'])
+						->where('is_visible', true)
+						->orderBy('order')
+						->with([
+							'seoTags:id,owner_id,slug',
+							// Categories: level 3
+							'children' => function (HasMany $query)
+							{
+								$query
+									->select(['id', 'parent_id', 'name'])
+									->where('is_visible', true)
+									->orderBy('order')
+									->with('seoTags:id,owner_id,slug');
+							}
+						]);
+				}
+			])
 			->get()
-			->map(function (BookCategory $category)
+			/*->map(function (BookCategory $category)
 			{
 				return [
 					'name' => $category->name,
 					'url' => $category->seoTags->slug,
 				];
-			});
+			})*/;
 
 		$links = ['items' => array_merge($links, $categoryLinks->toArray())];
 

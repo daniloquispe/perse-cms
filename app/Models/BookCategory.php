@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use SolutionForest\FilamentTree\Concern\ModelTree;
 
+/**
+ * @property string $name
+ */
 class BookCategory extends Model
 {
     use HasFactory, HasSeoTags, ModelTree;
