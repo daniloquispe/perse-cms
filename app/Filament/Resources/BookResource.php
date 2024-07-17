@@ -6,6 +6,8 @@ use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\HasSeoTagsFormFields;
 use App\Models\Book;
+use App\Models\BookCategory;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -50,9 +52,10 @@ class BookResource extends Resource
 							->label('Año')
 							->numeric()
 							->default(date('Y')),
-						Forms\Components\Select::make('category_id')
+						SelectTree::make('category_id')
 							->label('Categoría')
-							->relationship('category', 'name'),
+							->relationship('category', 'name', 'parent_id')
+							->searchable(),
 						Forms\Components\Select::make('authors')
 							->label('Autor(es)')
 							->multiple()
@@ -148,6 +151,28 @@ class BookResource extends Resource
 					->label('¿Visible?'),
             ])
             ->filters([
+				Tables\Filters\Filter::make('tree')
+					->form([
+						SelectTree::make('categories')
+							->label('Categoría')
+							->relationship('category', 'name', 'parent_id')
+							->independent(false)
+							->enableBranchNode(),
+					])
+					->query(function (Builder $query, array $data)
+					{
+						return $query->when($data['categories'], function ($query, $categories)
+						{
+							return $query->whereHas('category', fn($query) => $query->where('id', $categories));
+						});
+					})
+					->indicateUsing(function (array $data)
+					{
+						if (!$data['categories'])
+							return null;
+
+						return 'Categoría: ' . implode(', ', BookCategory::whereKey($data['categories'])->get()->pluck('name')->toArray());
+					}),
 				Tables\Filters\SelectFilter::make('author')
 					->label('Autor')
 					->relationship('authors', 'name')
