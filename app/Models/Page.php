@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * Model for an information page.
+ *
  * @property string $title Page on-page title
  * @property-read bool $has_content
  * @property-read bool $has_slug
  * @property-read bool $has_title
  * @property-read int $id Page ID and {@see PageRole role}
  * @property-read PageRole $role
+ * @see PageRole
  */
 class Page extends Model
 {
@@ -37,7 +40,7 @@ class Page extends Model
 	{
 		return Attribute::make(function ()
 		{
-			return $this->id != PageRole::Home->value;
+			return !in_array($this->id, [PageRole::Home->value, PageRole::Login->value, PageRole::Register->value]);
 		});
 	}
 
@@ -53,7 +56,7 @@ class Page extends Model
 	{
 		return Attribute::make(function ()
 		{
-			return $this->id != PageRole::Home->value;
+			return !in_array($this->id, [PageRole::Home->value, PageRole::Login->value, PageRole::Register->value]);
 		});
 	}
 }

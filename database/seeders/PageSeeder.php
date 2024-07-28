@@ -24,6 +24,9 @@ class PageSeeder extends Seeder
 			['id' => PageRole::ReturningPolitics->value, 'name' => 'Políticas de devoluciones', 'title' => 'Políticas de envío'],
 			['id' => PageRole::ComplaintsBook->value, 'name' => 'Libro de reclamaciones', 'title' => 'Libro de reclamaciones'],
 			['id' => PageRole::Terms->value, 'name' => 'Términos y condiciones', 'title' => 'Términos y condiciones'],
+			['id' => PageRole::Login->value, 'name' => 'Iniciar sesión'],
+			['id' => PageRole::Register->value, 'name' => 'Crear cuenta'],
+			['id' => PageRole::PasswordRecovery->value, 'name' => 'Recuperar contraseña'],
 		];
 
 		foreach ($pagesData as $pageData)

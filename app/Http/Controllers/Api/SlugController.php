@@ -98,6 +98,8 @@ class SlugController extends Controller
 					PageRole::AboutUs->value => 'about',
 					PageRole::Contact->value => 'contact',
 					PageRole::ComplaintsBook->value => 'complaints-book',
+					PageRole::Login->value => 'login',
+					PageRole::Register->value => 'register',
 					default => 'page'
 				};
 

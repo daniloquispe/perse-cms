@@ -15,6 +15,9 @@ enum PageRole: int implements HasLabel
 	case DeliveryPolitics = 7;
 	case ReturningPolitics = 8;
 	case Terms = 9;
+	case Login = 10;
+	case Register = 11;
+	case PasswordRecovery = 12;
 
 	public function getLabel(): ?string
 	{
@@ -29,6 +32,9 @@ enum PageRole: int implements HasLabel
 			self::DeliveryPolitics => 'Política de entrega',
 			self::ReturningPolitics => 'Política de devoluciones',
 			self::Terms => 'Términos y condiciones',
+			self::Login => 'Iniciar sesión',
+			self::Register => 'Registro',
+			self::PasswordRecovery => 'Recuperar contraseña',
 		};
 	}
 }
