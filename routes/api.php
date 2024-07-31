@@ -18,5 +18,8 @@ Route::get('home/slider', [\App\Http\Controllers\Api\HomeController::class, 'sli
 // Slugs: Books, book categories and information pages
 Route::get('slug/{slug}', \App\Http\Controllers\Api\SlugController::class);
 
+// Books list
+Route::get('books/by-category/{id}', \App\Http\Controllers\BookCategoryController::class);
+
 // Auth
 Route::post('auth/register', \App\Http\Controllers\Api\Auth\RegisterCustomerController::class);
