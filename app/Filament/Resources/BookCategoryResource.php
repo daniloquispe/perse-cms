@@ -47,7 +47,7 @@ class BookCategoryResource extends Resource
 							->afterStateUpdated(function (string $operation, string $state, Forms\Set $set)
 							{
 								return $operation == 'create'
-									? $set('slug', Str::slug($state))
+									? $set('seoTags.slug', Str::slug($state))
 									: null;
 							}),
 					]),
