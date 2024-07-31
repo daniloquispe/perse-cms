@@ -37,9 +37,6 @@ class BookCategoryResource extends Resource
 				Forms\Components\Section::make('Información básica')
 					->columns()
 					->schema([
-						Forms\Components\TextInput::make('order')
-							->label('Orden')
-							->numeric(),
 						Forms\Components\TextInput::make('name')
 							->label('Nombre')
 							->required()
