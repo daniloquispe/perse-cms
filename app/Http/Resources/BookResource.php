@@ -26,9 +26,11 @@ class BookResource extends JsonResource
 			'width' => $this->width,
 			'height' => $this->height,
 			'price' => $this->price,
+			'discounted_price' => $this->discounted_price,
 			'is_presale' => $this->is_presale,
 			'authors' => AuthorResource::collection($this->authors),
 			'publisher' => new PublisherResource($this->publisher),
+			'seo_tags' => $this->seoTags,
 		];
     }
 }
