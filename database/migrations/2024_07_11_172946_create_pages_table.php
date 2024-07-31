@@ -15,7 +15,7 @@ return new class extends Migration
 		{
 			$table->id();
 			$table->string('name', 50)->index();
-			$table->string('title', 150);
+			$table->string('title', 150)->nullable();
 			$table->text('content')->nullable();
 			$table->string('image', 255)->nullable();
 			$table->boolean('is_visible')->default(true);
