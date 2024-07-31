@@ -17,8 +17,8 @@ return new class extends Migration
 			$table->integer('owner_id');
 			$table->string('owner_type');
 			$table->string('slug', 255)->nullable()->unique();
-			$table->string('meta_title', 50);
-			$table->string('meta_description', 150);
+			$table->string('meta_title', 150);
+			$table->string('meta_description', 300);
             $table->timestamps();
         });
     }

@@ -20,10 +20,10 @@ trait HasSeoTagsFormFields
 				TextInput::make('meta_title')
 					->label('Título en el navegador')
 					->helperText('Aparece en la pestaña o ventana del navegador web')
-					->maxLength(80),
+					->maxLength(150),
 				TextInput::make('meta_description')
 					->label('Descripción')
-					->maxLength(150),
+					->maxLength(300),
 			]);
 	}
 }
