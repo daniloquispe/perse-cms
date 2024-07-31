@@ -31,6 +31,7 @@ return new class extends Migration
 			$table->decimal('width')->nullable();
 			$table->decimal('height')->nullable();
 			$table->decimal('price');
+			$table->decimal('discounted_price')->nullable();
 			$table->boolean('is_presale')->default(false);
 			$table->timestamps();
 		});

@@ -114,6 +114,7 @@ class BookResource extends Resource
 							->relationship('ageRange', 'name')
 							->required(),
 					]),
+				// Purchasing conditions
 				Forms\Components\Section::make('Condiciones de venta')
 					->columns()
 					->schema([
@@ -122,8 +123,13 @@ class BookResource extends Resource
 							->prefix('S/')
 							->required()
 							->numeric(),
+						Forms\Components\TextInput::make('discounted_price')
+							->label('Precio de venta (con descuento)')
+							->prefix('S/')
+							->numeric(),
 						Forms\Components\Toggle::make('is_presale')
-							->label('En preventa'),
+							->label('En preventa')
+							->columnSpanFull(),
 					]),
 				self::getFormSectionWithSeoTags(),
             ]);
