@@ -33,6 +33,8 @@ return new class extends Migration
 			$table->decimal('price');
 			$table->decimal('discounted_price')->nullable();
 			$table->boolean('is_presale')->default(false);
+			$table->boolean('is_award_winning')->default(false);
+			$table->boolean('is_recommended')->default(false);
 			$table->timestamps();
 		});
 

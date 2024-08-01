@@ -127,9 +127,16 @@ class BookResource extends Resource
 							->label('Precio de venta (con descuento)')
 							->prefix('S/')
 							->numeric(),
-						Forms\Components\Toggle::make('is_presale')
-							->label('En preventa')
-							->columnSpanFull(),
+						Forms\Components\Fieldset::make('Etiquetas')
+							->columns(3)
+							->schema([
+								Forms\Components\Toggle::make('is_presale')
+									->label('En preventa'),
+								Forms\Components\Toggle::make('is_award_winning')
+									->label('Libro premiado'),
+								Forms\Components\Toggle::make('is_recommended')
+									->label('Recomendado'),
+							]),
 					]),
 				self::getFormSectionWithSeoTags(),
             ]);
