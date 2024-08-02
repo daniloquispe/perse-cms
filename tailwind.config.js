@@ -6,7 +6,16 @@ export default {
 		"./resources/**/*.vue",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				palette: {
+					orange: '#ff8300',
+					pink: '#fcf2f5',
+					purple: '#AD60BF',
+					yellow: '#ffc629',
+				}
+			}
+		},
 	},
 	plugins: [],
 }
