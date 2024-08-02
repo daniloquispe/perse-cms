@@ -17,6 +17,7 @@ class BookCategoryResource extends JsonResource
 		return [
 			'id' => $this->id,
 			'name' => $this->name,
+			'search_results_label' => $this->forced_search_results_table,
 			'parent' => new static($this->parent),
 			'seoTags' => $this->seoTags,
 		];

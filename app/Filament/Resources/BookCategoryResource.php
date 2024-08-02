@@ -31,9 +31,11 @@ class BookCategoryResource extends Resource
     {
         return $form
             ->schema([
+				// Visible?
 				Forms\Components\Toggle::make('is_visible')
 					->label('Visible en el sitio web')
 					->columnSpanFull(),
+				// Basic info
 				Forms\Components\Section::make('Información básica')
 					->columns()
 					->schema([
@@ -47,6 +49,13 @@ class BookCategoryResource extends Resource
 									? $set('seoTags.slug', Str::slug($state))
 									: null;
 							}),
+						Forms\Components\TextInput::make('menu_title')
+							->label('Título en el menú desplegable')
+							->helperText('Deja este campo en blanco para usar el nombre de la categoría como título'),
+						Forms\Components\TextInput::make('search_results_label')
+							->label('Etiqueta para los resultados de búsqueda')
+							->helperText('Deja este campo en blanco para que el mensaje sea "Se ha encontrado X libros"')
+							->prefix('Se ha encontrado X'),
 					]),
 				// SEO
 				self::getFormSectionWithSeoTags(),

@@ -15,10 +15,14 @@ return new class extends Migration
 		{
 			$table->id();
 			$table->unsignedTinyInteger('order')->nullable();
-			$table->string('name', 50)->unique();
+			$table->string('name', 50);
+			$table->string('menu_title', 50)->nullable();
+			$table->string('search_results_label', 50)->nullable();
 			$table->foreignIdFor(\App\Models\BookCategory::class, 'parent_id')->nullable();
-			$table->boolean('is_visible');
+			$table->boolean('is_visible')->default(true);
 			$table->timestamps();
+
+			$table->unique(['name', 'parent_id']);
         });
     }
 

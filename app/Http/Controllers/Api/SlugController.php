@@ -70,7 +70,7 @@ class SlugController extends Controller
 				$type = 'book-category';
 
 				$query = $seoTags->owner()
-					->select('id', 'name', 'parent_id')
+					->select('id', 'name', 'parent_id', 'search_results_label')
 					->where('is_visible', true)
 					->with([
 						'parent' => function (BelongsTo $query)

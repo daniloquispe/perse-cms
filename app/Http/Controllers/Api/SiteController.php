@@ -38,7 +38,7 @@ class SiteController extends Controller
 
 		// Categories: Level 1
 		$categoryLinks = BookCategory::query()
-			->select(['id', 'name'])
+			->select(['id', 'name', 'menu_title'])
 			->whereNull('parent_id')
 			->where('is_visible', true)
 			->orderBy('order')
