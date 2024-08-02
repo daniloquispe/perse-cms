@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->string('name', 50);
 			$table->string('url', 255);
 			$table->unsignedTinyInteger('order')->default(0);
+			$table->text('svg');
 			$table->boolean('is_visible');
 			$table->timestamps();
         });

@@ -15,7 +15,7 @@ return new class extends Migration
 		{
 			$table->id();
 			$table->string('name', 100);
-			$table->unsignedSmallInteger('delay', 3000);
+			$table->unsignedSmallInteger('delay')->default(3000);
 			$table->boolean('is_visible');
 			$table->timestamps();
         });
