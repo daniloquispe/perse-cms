@@ -1,0 +1,22 @@
+ul.breadcrumbs
+{
+	@apply flex items-center;
+	@apply my-4;
+	@apply text-gray-400;
+}
+
+ul.breadcrumbs span
+{
+	@apply sr-only;
+}
+
+ul.breadcrumbs li:not(:first-child)::before
+{
+	content: '>';
+	@apply px-2;
+}
+
+ul.breadcrumbs li:not(:first-child) a
+{
+	@apply text-palette-orange;
+}

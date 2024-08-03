@@ -1,0 +1,41 @@
+.site-header .main > div
+{
+	@apply py-2;
+	@apply flex gap-24 items-center justify-center;
+}
+
+/* Cells order */
+
+.site-header .logo-cell
+{
+	@apply 2xl:order-1;
+}
+
+.site-header .search-cell
+{
+	@apply 2xl:order-2;
+	@apply hidden 2xl:flex;
+	@apply 2xl:grow;
+}
+
+.site-header .user-cell,
+.site-header .cart-cell
+{
+	@apply flex gap-3;
+}
+
+.site-header .user-cell
+{
+	@apply 2xl:order-3;
+}
+
+.site-header .cart-cell
+{
+	@apply 2xl:order-4;
+}
+
+.site-header .user-cell svg,
+.site-header .cart-cell svg
+{
+	@apply h-6 w-6;
+}

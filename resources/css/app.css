@@ -1,8 +1,124 @@
+@import url(components/book-list/item.css);
+@import url(components/breadcrumbs.css);
+@import url(components/form/quantity-input.css);
+@import url(components/slider.css);
+@import url(components/whatsapp-link.css);
+
+@import url(components/site-header/index.css);
+@import url(components/site-header/marquee.css);
+@import url(components/site-header/menu.css);
+@import url(components/site-header/search.css);
+
+@import url(components/site-footer/index.css);
+@import url(components/site-footer/menu.css);
+@import url(components/site-footer/social-links.css);
+
+@import url(pages/about.css);
+@import url(pages/book.css);
+@import url(pages/book-category.css);
+@import url(pages/contact.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body
 {
-	font-family: 'Roboto', sans-serif;
+	font-family: Roboto, sans-serif;
+	@apply text-gray-600;
+	@apply text-justify;
+	@apply transition-colors;
+}
+
+.container-box
+{
+	@apply container mx-auto;
+	@apply 2xl:min-w-[1678px];
+}
+
+.container-box-stretch
+{
+	@apply max-w-7xl mx-auto;
+}
+
+.content-wrapper
+{
+	@apply mt-6 mb-10;
+}
+
+/* Document-style pages */
+
+.document header h1
+{
+	@apply mb-6;
+	@apply text-2xl text-center text-gray-800;
+}
+
+.document p
+{
+	@apply mb-4;
+}
+
+/* Auth pages (login, register...) */
+
+.container-box-auth
+{
+	@apply max-w-xl mx-auto;
+}
+
+.container-box-auth h2
+{
+	@apply mt-4 mb-6;
+	@apply text-center uppercase;
+}
+
+.container-box-auth p
+{
+	@apply my-4;
+	@apply text-center uppercase;
+}
+
+.container-box-auth a
+{
+	@apply underline;
+}
+
+.container-box-auth form input
+{
+	@apply block w-full rounded my-2 p-3;
+	@apply bg-slate-100;
+}
+
+.container-box-auth form button,
+.container-box-auth .access-button
+{
+	@apply block w-full py-3 rounded;
+	@apply bg-palette-orange text-white;
+	@apply uppercase;
+	@apply transition-colors;
+}
+
+.container-box-auth .access-button.access-email
+{
+	@apply border border-solid border-gray-500;
+	@apply bg-white text-gray-600 font-semibold;
+}
+.container-box-auth .access-button.access-email:hover
+{
+	@apply text-palette-orange;
+}
+
+.container-box-auth .access-button.access-google
+{
+	@apply bg-[#ea3321];
+}
+
+.container-box-auth .access-button.access-facebook
+{
+	@apply bg-[#23589a];
+}
+
+.container-box-auth .access-wrapper
+{
+	@apply grid grid-cols-2 gap-2;
 }

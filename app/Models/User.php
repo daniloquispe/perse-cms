@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property bool $is_customer
+ * @property string $name
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -17,6 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+		'is_customer',
         'name',
         'email',
         'password',

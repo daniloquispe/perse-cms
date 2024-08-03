@@ -1,0 +1,9 @@
+.about-page main
+{
+	@apply grid grid-cols-2 gap-8 items-center;
+}
+
+.about-page img
+{
+	@apply max-w-full;
+}

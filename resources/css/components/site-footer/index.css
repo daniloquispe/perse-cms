@@ -1,0 +1,121 @@
+.site-footer
+{
+	@apply pt-8;
+	@apply bg-palette-purple;
+	background-image: linear-gradient(#edf0f5, #edf0f5), linear-gradient(#AD60BF, #AD60BF);
+	background-size: 100% 12rem, 100% 100%;
+	background-repeat: no-repeat;
+	background-origin: padding-box, border-box;
+}
+
+.site-footer .container-box
+{
+	@apply mx-4 2xl:mx-auto;
+}
+
+/* Icon columns */
+
+.site-footer .icon-columns
+{
+	@apply /*px-16 */py-5;
+	@apply grid 2xl:grid-cols-3 gap-10;
+	@apply rounded-t-2xl;
+	@apply bg-white;
+}
+
+.site-footer .icon-column
+{
+	@apply px-16;
+	@apply flex gap-4 items-center;
+	@apply text-gray-800;
+}
+
+.site-footer .icon-column svg
+{
+	@apply h-16;
+	/*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
+	@apply text-[#dd4373];
+}
+
+.site-footer .icon-column .title
+{
+	@apply text-lg font-bold;
+}
+
+/* Subscription form */
+
+.site-footer .subscription-form
+{
+	@apply px-16 py-12;
+	@apply rounded-b-2xl;
+	@apply bg-palette-pink;
+	@apply 2xl:grid 2xl:grid-cols-2;
+}
+
+.site-footer .subscription-form .text .title
+{
+	@apply mb-5;
+	@apply text-gray-800;
+	@apply text-3xl font-bold;
+}
+
+.site-footer .subscription-form form
+{
+	@apply flex flex-col 2xl:flex-row gap-3;
+}
+
+.site-footer .subscription-form form > div:first-child
+{
+	@apply grow;
+}
+
+.site-footer .subscription-form form input[type="email"]
+{
+	@apply w-full;
+	@apply border border-solid border-palette-purple;
+	@apply p-2;
+	@apply rounded-lg;
+}
+
+.site-footer .subscription-form form button
+{
+	@apply w-full 2xl:w-auto;
+	@apply border border-solid border-orange-700;
+	@apply px-4 py-2;
+	@apply rounded-lg;
+	@apply text-white;
+	@apply font-bold;
+	background: rgba(223,74,120,1);
+	background: -moz-linear-gradient(left, rgba(223,74,120,1) 0%, rgba(227,105,47,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(223,74,120,1)), color-stop(100%, rgba(227,105,47,1)));
+	background: -webkit-linear-gradient(left, rgba(223,74,120,1) 0%, rgba(227,105,47,1) 100%);
+	background: -o-linear-gradient(left, rgba(223,74,120,1) 0%, rgba(227,105,47,1) 100%);
+	background: -ms-linear-gradient(left, rgba(223,74,120,1) 0%, rgba(227,105,47,1) 100%);
+	background: linear-gradient(to right, rgba(223,74,120,1) 0%, rgba(227,105,47,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df4a78', endColorstr='#e3692f', GradientType=1 );
+}
+
+.site-footer .subscription-form form .acceptance
+{
+	@apply mt-3;
+}
+
+/* Copyright */
+
+.site-footer .copyright
+{
+	@apply bg-white;
+}
+
+.site-footer .copyright > div
+{
+	@apply py-4 2xl:px-[5.5rem] 2xl:py-0;
+	@apply 2xl:h-20;
+	@apply 2xl:flex 2xl:items-center 2xl:justify-between;
+	@apply text-center;
+}
+
+.site-footer .copyright > div > div:first-child
+{
+	@apply hidden 2xl:flex;
+}

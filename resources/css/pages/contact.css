@@ -1,0 +1,53 @@
+.contact-page main
+{
+	@apply grid grid-cols-2 gap-8 items-center;
+}
+
+.contact-page img
+{
+	@apply max-w-full;
+}
+
+/* Form */
+
+.contact-page .form-row
+{
+	@apply mb-4;
+}
+.contact-page .form-row:last-child
+{
+	@apply mb-0;
+}
+
+.contact-page input[type="text"],
+.contact-page input[type="email"],
+.contact-page input[type="tel"],
+.contact-page textarea
+{
+	@apply w-full;
+	@apply px-4 py-2 rounded-lg;
+	@apply bg-gray-200;
+}
+
+.contact-page li
+{
+	@apply flex gap-3 items-start;
+	@apply text-justify;
+}
+
+.contact-page li > div
+{
+	margin-top: -0.05rem;
+}
+
+.contact-page label a
+{
+	@apply underline;
+}
+
+.contact-page button
+{
+	@apply px-4 py-2 rounded;
+	@apply bg-gray-500 text-white;
+	@apply uppercase;
+}

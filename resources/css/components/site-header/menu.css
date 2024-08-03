@@ -1,0 +1,95 @@
+.main-menu
+{
+	@apply border-y border-solid border-gray-200;
+}
+
+.main-menu .main-menu-container
+{
+	@apply container mx-auto;
+}
+
+.main-menu ul
+{
+	@apply flex justify-evenly;
+}
+
+.main-menu li
+{
+	@apply inline-block;
+	@apply py-3;
+}
+
+.main-menu li.menu-item:hover
+{
+	@apply text-palette-orange;
+}
+
+.main-menu a
+{
+	@apply text-sm uppercase;
+}
+
+.main-menu a.menu-item:after
+{
+	content: ' ▾';
+}
+
+.main-menu a.menu-item-0:after
+{
+	content: '';
+}
+
+/* Submenu */
+
+.main-menu .submenu
+{
+	@apply shadow;
+	@apply hidden z-10;
+	@apply text-left text-gray-600;
+	@apply transition-all;
+}
+
+.main-menu .submenu ul
+{
+	@apply px-8 py-4;
+	@apply flex gap-12;
+}
+
+.main-menu .submenu ul a
+{
+	@apply font-bold;
+	@apply text-nowrap;
+}
+.main-menu .submenu ul a:hover
+{
+	@apply text-palette-orange;
+}
+
+.main-menu li:hover .submenu
+{
+	@apply block absolute;
+	@apply bg-white;
+}
+
+/* Sub-submenu */
+
+.main-menu .submenu ul ul
+{
+	@apply mt-4 p-0;
+	@apply flex-col gap-0;
+}
+
+.main-menu .submenu ul ul li
+{
+	@apply block mb-1 py-0;
+}
+.main-menu .submenu ul ul li:last-child
+{
+	@apply mb-0;
+}
+
+.main-menu .submenu ul ul a
+{
+	@apply font-normal;
+	text-transform: none;
+}

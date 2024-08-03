@@ -1,0 +1,6 @@
+.marquee
+{
+	@apply w-full py-2;
+	@apply bg-palette-purple text-white;
+	@apply font-bold uppercase text-sm text-center;
+}

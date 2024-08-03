@@ -1,0 +1,31 @@
+.footer-social-links ul
+{
+	@apply flex justify-center 2xl:justify-start gap-2;
+}
+
+.footer-social-links .title
+{
+	@apply text-center 2xl:text-left;
+}
+
+.footer-social-links li
+{
+	@apply py-1;
+}
+
+.footer-social-links a
+{
+	@apply block p-3 rounded-full;
+	@apply bg-white hover:bg-white/40 transition-colors;
+}
+
+.footer-social-links svg
+{
+	@apply w-5 h-5;
+	@apply text-palette-purple fill-current;
+}
+
+.footer-social-links span
+{
+	@apply sr-only;
+}

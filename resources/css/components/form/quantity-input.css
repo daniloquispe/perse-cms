@@ -1,0 +1,31 @@
+.component--quantity-input
+{
+	@apply inline-flex;
+}
+
+.component--quantity-input input
+{
+	@apply w-16;
+	@apply p-2;
+	@apply border border-solid border-gray-300;
+	@apply text-lg text-center;
+}
+
+.component--quantity-input button
+{
+	@apply w-12;
+	@apply p-2;
+	@apply border border-solid border-gray-300;
+	@apply bg-gray-100;
+	@apply text-lg text-center;
+}
+
+.component--quantity-input .dec
+{
+	@apply /*rounded-l-lg */border-r-0;
+}
+
+.component--quantity-input .inc
+{
+	@apply /*rounded-r-lg */border-l-0;
+}

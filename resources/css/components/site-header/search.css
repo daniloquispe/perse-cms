@@ -1,0 +1,27 @@
+.search-form
+{
+	@apply w-full;
+	@apply flex;
+}
+
+.search-form input, .search-form button
+{
+	@apply p-3;
+	@apply bg-slate-100;
+}
+
+.search-form input
+{
+	@apply grow;
+	@apply rounded-l-lg;
+}
+
+.search-form button
+{
+	@apply rounded-r-lg;
+}
+
+.search-form span
+{
+	@apply sr-only;
+}

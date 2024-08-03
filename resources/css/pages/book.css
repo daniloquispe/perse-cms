@@ -1,0 +1,139 @@
+article.book
+{
+	@apply grid grid-cols-4 gap-12;
+}
+
+article.book .center
+{
+	@apply col-span-3;
+}
+
+article.book .section-title
+{
+	@apply mb-4;
+	@apply text-lg font-bold;
+}
+
+/* Cover */
+
+article.book .left img
+{
+	@apply mb-5;
+}
+
+/* Info */
+
+article.book dl
+{
+	@apply grid grid-cols-2;
+	@apply text-sm;
+}
+
+article.book dt, article.book dd
+{
+	@apply py-1;
+	@apply border-b border-dashed border-gray-300;
+}
+
+article.book dt
+{
+	@apply font-bold;
+}
+
+article.book dd
+{
+	@apply text-right;
+}
+
+/* Detail */
+
+article.book .title
+{
+	@apply text-3xl text-gray-800;
+}
+
+article.book .author
+{
+	@apply text-2xl;
+}
+
+article.book .author a
+{
+	@apply text-palette-orange;
+}
+
+/* Add to cart */
+
+article.book .cart-box
+{
+	@apply flex items-center justify-between;
+	@apply mt-5 mb-12;
+}
+
+article.book .price
+{
+	@apply text-2xl font-bold;
+}
+
+article.book button[type="submit"]
+{
+	@apply px-16 py-3;
+	@apply rounded-lg;
+	@apply bg-palette-orange text-white;
+	@apply font-bold uppercase;
+}
+
+/* Author box */
+
+article.book  main
+{
+	@apply mb-8;
+	@apply text-justify;
+}
+
+article.book  .author-box
+{
+	@apply bg-[#feedd3];
+	@apply flex;
+	@apply my-4;
+}
+
+article.book  .author-box .photo
+{
+	@apply flex-none;
+	@apply w-[170px];
+}
+
+article.book  .author-box .photo img
+{
+	@apply w-[170px];
+}
+
+article.book  footer .author-box .info
+{
+	@apply px-6 py-3;
+	@apply flex flex-col;
+}
+
+article.book  footer .author-box .info .name
+{
+	@apply text-lg font-bold;
+}
+
+article.book  .author-box .info .summary
+{
+	@apply grow;
+	@apply text-justify;
+}
+
+article.book  footer .author-box .info a
+{
+	@apply text-palette-orange;
+}
+
+/* Comments */
+
+article.book .comments-wrapper
+{
+	@apply mt-5;
+}
