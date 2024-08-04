@@ -10,7 +10,7 @@ Route::get('{slug}', \App\Http\Controllers\SlugController::class);
 // Auth
 Route::get('actions/logout', function ()
 {
-	\Illuminate\Support\Facades\Auth::logout();
+	\Illuminate\Support\Facades\Auth::guard('storefront')->logout();
 
 	session()->invalidate();
 	session()->regenerateToken();

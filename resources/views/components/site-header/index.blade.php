@@ -3,7 +3,7 @@
 	<div class="main">
 		<div class="container-box">
 			<div class="user-cell">
-				@auth
+				@auth('storefront')
 					<a href="{{ route('logout') }}">Cerrar sesión</a>
 				@else
 					<a href="/iniciar-sesion">Iniciar sesión</a>

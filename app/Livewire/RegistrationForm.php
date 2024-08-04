@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -24,10 +25,9 @@ class RegistrationForm extends Component
 		$data = [
 			'email' => $this->email,
 			'password' => bcrypt($this->password),
-			'is_customer' => 1,
 		];
 
-		$user = new User($data);
+		$user = new Customer($data);
 
 		if ($user->save())
 			$this->success = true;

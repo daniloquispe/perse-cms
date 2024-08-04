@@ -29,7 +29,7 @@ class LoginForm extends Component
         return view('livewire.login-form');
     }
 
-	public function __old_login(): void
+	/*public function __old_login(): void
 	{
 		$this->success = false;
 		$this->error = false;
@@ -42,7 +42,7 @@ class LoginForm extends Component
 
 		if ($response->ok())
 			$this->authenticated = true;
-	}
+	}*/
 
 	public function login(): void
 	{
@@ -51,9 +51,9 @@ class LoginForm extends Component
 
 		$this->validate();
 
-		$credentials = ['email' => $this->email, 'password' => $this->password, 'is_customer' => 1];
+		$credentials = ['email' => $this->email, 'password' => $this->password];
 
-		if (Auth::attempt($credentials))
+		if (Auth::guard('storefront')->attempt($credentials))
 		{
 			$this->success = true;
 
