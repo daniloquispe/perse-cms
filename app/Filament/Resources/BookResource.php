@@ -33,11 +33,18 @@ class BookResource extends Resource
     {
         return $form
             ->schema([
+				// Visible?
 				Forms\Components\Toggle::make('is_visible')
 					->label('Visible en el sitio web'),
+				// Basic info
 				Forms\Components\Section::make('Información básica')
 					->columns()
 					->schema([
+						Forms\Components\TextInput::make('order')
+							->label('Orden')
+							->helperText('Para ordenar libros por relevancia')
+							->numeric()
+							->required(),
 						Forms\Components\TextInput::make('title')
 							->label('Título')
 							->required()
@@ -52,10 +59,6 @@ class BookResource extends Resource
 							->label('Año')
 							->numeric()
 							->default(date('Y')),
-						SelectTree::make('category_id')
-							->label('Categoría')
-							->relationship('category', 'name', 'parent_id')
-							->searchable(),
 						Forms\Components\Select::make('authors')
 							->label('Autor(es)')
 							->multiple()
@@ -69,6 +72,7 @@ class BookResource extends Resource
 						Forms\Components\RichEditor::make('summary')
 							->label('Reseña'),
 					]),
+				// Dimensions
 				Forms\Components\Section::make('Dimensiones')
 					->columns(4)
 					->schema([
@@ -99,6 +103,10 @@ class BookResource extends Resource
 							->label('ISBN')
 							->minLength(10)
 							->maxLength(13),
+						SelectTree::make('category_id')
+							->label('Categoría')
+							->relationship('category', 'name', 'parent_id')
+							->searchable(),
 						Forms\Components\Select::make('saga_id')
 							->relationship('saga', 'name')
 							->placeholder('Ninguna'),
@@ -110,7 +118,7 @@ class BookResource extends Resource
 							->relationship('format', 'name')
 							->required(),
 						Forms\Components\Select::make('age_range_id')
-							->label('Edad')
+							->label('Rango de edad')
 							->relationship('ageRange', 'name')
 							->required(),
 					]),
@@ -199,6 +207,12 @@ class BookResource extends Resource
 				Tables\Filters\Filter::make('is_presale')
 					->label('En preventa')
 					->query(fn(Builder $query) => $query->where('is_presale', true)),
+				Tables\Filters\Filter::make('is_award_winning')
+					->label('Libros premiados')
+					->query(fn(Builder $query) => $query->where('is_award_winning', true)),
+				Tables\Filters\Filter::make('is_recommended')
+					->label('Recomendados')
+					->query(fn(Builder $query) => $query->where('is_recommended', true)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
