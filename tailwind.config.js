@@ -14,6 +14,12 @@ export default {
 					purple: '#AD60BF',
 					yellow: '#ffc629',
 				}
+			},
+			screens: {
+				"3xl": "1800px"
+			},
+			container: {
+				"3xl": "1678px"
 			}
 		},
 	},
