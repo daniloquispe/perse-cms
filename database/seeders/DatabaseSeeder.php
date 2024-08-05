@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
 		$this->call([
+			MarqueeItemSeeder::class,
+			SocialLinkSeeder::class,
 			PageSeeder::class,
 			AuthorSeeder::class,
 			BookCategorySeeder::class,
