@@ -1,5 +1,7 @@
 <header class="site-header">
+	{{-- Marquee --}}
 	<livewire:marquee />
+	{{-- Logo, search, login and cart --}}
 	<div class="main">
 		<div class="container-box">
 			<div class="user-cell">
@@ -24,5 +26,6 @@
 			</div>
 		</div>
 	</div>
+	{{-- Main menu --}}
 	<livewire:main-menu />
 </header>

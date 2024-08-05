@@ -13,15 +13,11 @@
 	@apply flex justify-evenly;
 }
 
-.main-menu li
+.main-menu li.menu-item
 {
 	@apply inline-block;
 	@apply py-3;
-}
-
-.main-menu li.menu-item:hover
-{
-	@apply text-palette-orange;
+	@apply hover:text-palette-orange;
 }
 
 .main-menu a
@@ -57,12 +53,8 @@
 
 .main-menu .submenu ul a
 {
-	@apply font-bold;
-	@apply text-nowrap;
-}
-.main-menu .submenu ul a:hover
-{
-	@apply text-palette-orange;
+	@apply font-bold text-nowrap;
+	@apply hover:text-palette-orange;
 }
 
 .main-menu li:hover .submenu
@@ -72,6 +64,16 @@
 }
 
 /* Sub-submenu */
+
+.main-menu .submenu-title
+{
+	@apply m-8 mb-0 text-palette-orange font-bold;
+}
+
+.main-menu .submenu ul
+{
+	@apply flex gap-12 px-8 py-4;
+}
 
 .main-menu .submenu ul ul
 {
