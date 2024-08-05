@@ -9,142 +9,71 @@
 					Filtrar por:
 				</div>
 				<div class="content">
-					<div>
-						<p>Editorial</p>
-						<ul>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-						</ul>
-						<button type="button" class="more-filters-button">Ver más 197</button>
-					</div>
-					<div>
-						<p>Autor</p>
-						<ul>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-						</ul>
-						<button type="button" class="more-filters-button">Ver más 197</button>
-					</div>
-					<div>
-						<p>Edad</p>
-						<ul>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-						</ul>
-						<button type="button" class="more-filters-button">Ver más 197</button>
-					</div>
-					<div>
-						<p>Formato</p>
-						<ul>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-							<li>
-								<input type="checkbox" />
-								<label>Filter</label>
-							</li>
-						</ul>
-						<button type="button" class="more-filters-button">Ver más 197</button>
-					</div>
+					{{-- Filter: Publisher --}}
+					@if(count($publisherFilters) > 0)
+						<div>
+							<p>Editorial</p>
+							<ul>
+								@foreach($publisherFilters as $id => $filter)
+									<li wire:key="publisher-{{ $id }}">
+										<input wire:model="$filter['checked']" type="checkbox" id="filter-publisher-{{ $id }}" />
+										<label for="filter-publisher-{{ $id }}">{{ $filter['name'] }}</label>
+									</li>
+								@endforeach
+							</ul>
+							@if(count($publisherFilters) > 7)
+								<button type="button" class="more-filters-button">Ver más 197</button>
+							@endif
+						</div>
+					@endif
+					@if(count($authorFilters) > 0)
+						<div>
+							<p>Autor</p>
+							<ul>
+								@foreach($authorFilters as $id => $filter)
+									<li wire:key="author-{{ $id }}">
+										<input wire:model="$filter['checked']" type="checkbox" id="filter-author-{{ $id }}" />
+										<label for="filter-author-{{ $id }}">{{ $filter['name'] }}</label>
+									</li>
+								@endforeach
+							</ul>
+							@if(count($authorFilters) > 7)
+								<button type="button" class="more-filters-button">Ver más 197</button>
+							@endif
+						</div>
+					@endif
+					@if(count($ageRangeFilters) > 0)
+						<div>
+							<p>Edad</p>
+							<ul>
+								@foreach($ageRangeFilters as $id => $filter)
+									<li wire:key="age-range-{{ $id }}">
+										<input wire:model="$filter['checked']" type="checkbox" id="filter-age-range-{{ $id }}" />
+										<label for="filter-age-range-{{ $id }}">{{ $filter['name'] }}</label>
+									</li>
+								@endforeach
+							</ul>
+							@if(count($ageRangeFilters) > 7)
+								<button type="button" class="more-filters-button">Ver más 197</button>
+							@endif
+						</div>
+					@endif
+					@if(count($formatFilters) > 0)
+						<div>
+							<p>Formato</p>
+							<ul>
+								@foreach($formatFilters as $id => $filter)
+									<li wire:key="format-{{ $id }}">
+										<input wire:model="$filter['checked']" type="checkbox" id="filter-format-{{ $id }}" />
+										<label for="filter-format-{{ $id }}">{{ $filter['name'] }}</label>
+									</li>
+								@endforeach
+							</ul>
+							@if(count($formatFilters) > 7)
+								<button type="button" class="more-filters-button">Ver más 197</button>
+							@endif
+						</div>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -154,7 +83,7 @@
 				<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
 				<div>
 					<label>Ordenar por:</label>
-					<select wire:model="order">
+					<select wire:model="order" wire:change="loadBooks">
 						<option value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</option>
 						<option value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</option>
 						<option value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</option>
@@ -170,7 +99,7 @@
 				@endforeach
 			</div>
 			@if($count > count($books))
-				<button type="button" class="more-button">Mostrar más</button>
+				<button wire:click="loadMoreBooks" type="button" class="more-button">Mostrar más</button>
 			@endif
 		</div>
 	</div>
