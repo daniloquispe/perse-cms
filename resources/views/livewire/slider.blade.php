@@ -3,11 +3,20 @@
 		<ul class="splide__list">
 			@foreach($slides as $slide)
 				<li class="splide__slide">
-					@if($slide->url)
-						<a href="{{ $slide->url }}"><img src="{{ $slide->image }}" alt="{{ $slide->name }}" /></a>
-					@else
-						<img src="{{ $slide->image }}" alt="{{ $slide->name }}" />
-					@endif
+					<div class="image">
+						@if($slide->url)
+							<a href="{{ $slide->url }}"><img src="{{ $slide->image }}" alt="{{ $slide->name }}" /></a>
+						@else
+							<img src="{{ $slide->image }}" alt="{{ $slide->name }}" />
+						@endif
+					</div>
+					<div class="image-mobile">
+						@if($slide->url)
+							<a href="{{ $slide->url }}"><img src="{{ $slide->image_mobile ?? $slide->image }}" alt="{{ $slide->name }}" /></a>
+						@else
+							<img src="{{ $slide->image_mobile ?? $slide->image }}" alt="{{ $slide->name }}" />
+						@endif
+					</div>
 				</li>
 			@endforeach
 		</ul>

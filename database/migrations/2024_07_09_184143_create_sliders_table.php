@@ -28,7 +28,8 @@ return new class extends Migration
 			$table->string('name', 100);
 			$table->string('image', 255);
 			$table->string('url', 255)->nullable();
-			$table->boolean('is_enabled');
+			$table->string('url_mobile', 255)->nullable();
+			$table->boolean('is_visible');
 			$table->timestamps();
 		});
     }

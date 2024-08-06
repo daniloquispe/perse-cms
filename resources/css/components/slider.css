@@ -1,3 +1,13 @@
+.slider .image
+{
+	@apply hidden xl:block;
+}
+
+.slider .image-mobile
+{
+	@apply block xl:hidden;
+}
+
 .slider img
 {
 	@apply w-full;

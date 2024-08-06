@@ -20,14 +20,19 @@ class SlidesRelationManager extends RelationManager
 	{
 		return $form
 			->schema([
+				Forms\Components\Toggle::make('is_visible')
+					->label('Visible en el sitio web')
+					->default(true)
+					->columnSpanFull(),
 				Forms\Components\Group::make([
-					Forms\Components\Toggle::make('is_enabled')
-						->label('Visible en el sitio web')
-						->default(true),
 					Forms\Components\FileUpload::make('image')
-						->label('Imagen del slide')
+						->label('Imagen del slide (escritorio y tablet)')
 						->image()
 						->required()
+						->directory('slides'),
+					Forms\Components\FileUpload::make('image_mobile')
+						->label('Imagen del slide (móvil)')
+						->image()
 						->directory('slides'),
 				]),
 				Forms\Components\Group::make([
@@ -57,11 +62,13 @@ class SlidesRelationManager extends RelationManager
 					->label('Orden'),
 				Tables\Columns\ImageColumn::make('image')
 					->label('Imagen'),
+				Tables\Columns\ImageColumn::make('image_mobile')
+					->label('Imagen (móvil)'),
 				Tables\Columns\TextColumn::make('name')
 					->label('Nombre')
 					->weight(FontWeight::Bold)
 					->searchable(),
-				Tables\Columns\IconColumn::make('is_enabled')
+				Tables\Columns\IconColumn::make('is_visible')
 					->label('¿Visible?')
 					->boolean(),
 			])

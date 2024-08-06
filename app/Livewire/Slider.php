@@ -11,7 +11,7 @@ class Slider extends Component
 {
 	public Collection $slides;
 
-	public function mount()
+	public function mount(): void
 	{
 		$query = \App\Models\Slider::query()
 			->select(['id', 'name', 'delay'])
@@ -20,8 +20,8 @@ class Slider extends Component
 				'slides' => function (HasMany $query): void
 				{
 					$query
-						->select(['slider_id', 'name', 'image', 'url'])
-						->where('is_enabled', true)
+						->select(['slider_id', 'name', 'image', 'image_mobile', 'url'])
+						->where('is_visible', true)
 						->orderBy('order');
 				}
 			]);
@@ -30,7 +30,11 @@ class Slider extends Component
 
 		if ($mainSlider)
 		{
-			$mainSlider->slides->map(fn(Slide $slide) => $slide->image = asset('storage/' . $slide->image));
+			$mainSlider->slides->map(function (Slide $slide)
+			{
+				$slide->image = asset('storage/' . $slide->image);
+				$slide->image_mobile = asset('storage/' . $slide->image_mobile);
+			});
 
 			$this->slides = $mainSlider->slides;
 		}
