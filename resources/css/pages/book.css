@@ -1,11 +1,11 @@
 article.book
 {
-	@apply grid grid-cols-4 gap-12;
+	@apply xl:grid xl:grid-cols-4 xl:gap-12;
 }
 
 article.book .center
 {
-	@apply col-span-3;
+	@apply xl:col-span-3;
 }
 
 article.book .section-title
@@ -18,13 +18,14 @@ article.book .section-title
 
 article.book .left img
 {
-	@apply mb-5;
+	@apply mx-auto mb-5;
 }
 
 /* Info */
 
 article.book dl
 {
+	@apply max-w-[40rem] mx-auto mb-10 xl:mb-0;
 	@apply grid grid-cols-2;
 	@apply text-sm;
 }

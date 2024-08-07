@@ -10,15 +10,15 @@
 
 .site-footer .container-box
 {
-	@apply mx-4 2xl:mx-auto;
+	@apply px-4 sm:px-0;
 }
 
 /* Icon columns */
 
 .site-footer .icon-columns
 {
-	@apply /*px-16 */py-5;
-	@apply grid 2xl:grid-cols-3 gap-10;
+	@apply py-5;
+	@apply grid lg:grid-cols-3 gap-10;
 	@apply rounded-t-2xl;
 	@apply bg-white;
 }
@@ -26,14 +26,14 @@
 .site-footer .icon-column
 {
 	@apply px-16;
-	@apply flex gap-4 items-center;
+	@apply flex gap-4 items-start;
 	@apply text-gray-800;
 }
 
 .site-footer .icon-column svg
 {
 	@apply h-16;
-	/*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
+/*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
 	@apply text-[#dd4373];
 }
 
@@ -61,7 +61,7 @@
 
 .site-footer .subscription-form form
 {
-	@apply flex flex-col 2xl:flex-row gap-3;
+	@apply flex flex-col md:flex-row gap-3;
 }
 
 .site-footer .subscription-form form > div:first-child
@@ -110,12 +110,17 @@
 .site-footer .copyright > div
 {
 	@apply py-4 2xl:px-[5.5rem] 2xl:py-0;
-	@apply 2xl:h-20;
-	@apply 2xl:flex 2xl:items-center 2xl:justify-between;
+	@apply xl:h-20;
+	@apply xl:flex xl:items-center xl:justify-between;
 	@apply text-center;
 }
 
 .site-footer .copyright > div > div:first-child
 {
-	@apply hidden 2xl:flex;
+	@apply hidden xl:flex;
+}
+
+.site-footer .copyright img
+{
+	@apply mx-auto xl:mx-0;
 }

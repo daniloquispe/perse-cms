@@ -1,8 +1,18 @@
 ul.breadcrumbs
 {
-	@apply flex items-center;
+	@apply text-left;
 	@apply my-4;
 	@apply text-gray-400;
+}
+
+ul.breadcrumbs li
+{
+	@apply inline-block align-middle;
+}
+
+ul.breadcrumbs svg
+{
+	@apply size-4;
 }
 
 ul.breadcrumbs span
