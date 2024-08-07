@@ -1,41 +1,51 @@
 .site-header .main > div
 {
-	@apply py-2;
-	@apply flex gap-24 items-center justify-center;
+	@apply pt-2 xl:py-2;
+	@apply flex flex-wrap gap-24 items-center justify-between xl:justify-center;
+	@apply w-full xl:container xl:mx-auto;
 }
 
 /* Cells order */
 
 .site-header .logo-cell
 {
-	@apply 2xl:order-1;
+	@apply xl:order-1;
 }
 
 .site-header .search-cell
 {
-	@apply 2xl:order-2;
-	@apply hidden 2xl:flex;
-	@apply 2xl:grow;
-}
-
-.site-header .user-cell,
-.site-header .cart-cell
-{
-	@apply flex gap-3;
+	@apply order-4 xl:order-2;
+	@apply w-full xl:w-auto flex items-center gap-8 xl:grow;
+	@apply px-8 py-3 xl:p-0;
+	@apply bg-palette-purple xl:bg-transparent;
 }
 
 .site-header .user-cell
 {
-	@apply 2xl:order-3;
+	@apply xl:order-3;
+	@apply pl-8 xl:pl-0;
 }
 
 .site-header .cart-cell
 {
-	@apply 2xl:order-4;
+	@apply xl:order-4;
+	@apply pr-8 xl:pr-0;
+}
+
+.site-header .user-cell a,
+.site-header .cart-cell a
+{
+	@apply flex gap-3;
+}
+
+.site-header .user-cell span,
+.site-header .cart-cell span
+{
+	@apply sr-only sm:not-sr-only;
 }
 
 .site-header .user-cell svg,
 .site-header .cart-cell svg
 {
-	@apply h-6 w-6;
+	@apply size-6;
 }

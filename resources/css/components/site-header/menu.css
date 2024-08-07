@@ -5,34 +5,45 @@
 
 .main-menu .main-menu-container
 {
-	@apply container mx-auto;
+	@apply fixed top-0 bottom-0 -left-full w-72 z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
+	@apply xl:static xl:w-full xl:z-0 xl:shadow-none;
+	@apply bg-white xl:bg-transparent;
+	@apply rounded-r-lg xl:rounded-r-none;
+	@apply ease-out duration-700 xl:transition-none;
 }
 
 .main-menu ul
 {
-	@apply flex justify-evenly;
+	@apply flex flex-col xl:flex-row items-start xl:justify-evenly;
 }
 
 .main-menu li.menu-item
 {
-	@apply inline-block;
-	@apply py-3;
+	@apply inline-block w-full xl:w-auto;
+	@apply px-6 xl:px-0 py-3;
+	@apply border-b border-solid border-gray-200 xl:border-b-0;
 	@apply hover:text-palette-orange;
+}
+
+.main-menu li.menu-item:first-child
+{
+	@apply hidden xl:inline-block;
 }
 
 .main-menu a
 {
-	@apply text-sm uppercase;
+	@apply text-sm xl:uppercase;
 }
 
-.main-menu a.menu-item:after
+.main-menu a.menu-item svg
 {
-	content: ' ▾';
+	@apply inline size-4;
 }
 
-.main-menu a.menu-item-0:after
+.main-menu .menu-title
 {
-	content: '';
+	@apply px-6 py-3 font-bold;
+	@apply xl:hidden;
 }
 
 /* Submenu */
@@ -47,7 +58,6 @@
 
 .main-menu .submenu ul
 {
-	@apply px-8 py-4;
 	@apply flex gap-12;
 }
 
@@ -57,17 +67,26 @@
 	@apply hover:text-palette-orange;
 }
 
+.main-menu li .submenu-container
+{
+	@apply px-8 py-4;
+}
+
 .main-menu li:hover .submenu
 {
-	@apply block absolute;
-	@apply bg-white;
+	@apply block absolute left-0 w-full;
+}
+
+.main-menu li:hover .submenu-container
+{
+	@apply container-box bg-white;
 }
 
 /* Sub-submenu */
 
 .main-menu .submenu-title
 {
-	@apply m-8 mb-0 text-palette-orange font-bold;
+	@apply mt-2 text-palette-orange text-center font-bold;
 }
 
 .main-menu .submenu ul
@@ -94,4 +113,42 @@
 {
 	@apply font-normal;
 	text-transform: none;
+}
+
+/* Open/close */
+
+#main-menu-active
+{
+	@apply hidden;
+}
+
+.open-main-menu-button
+{
+	@apply inline xl:hidden;
+	@apply size-12 text-white;
+	@apply cursor-pointer;
+}
+
+.close-main-menu-button
+{
+	@apply float-right bg-palette-purple text-white text-center rounded-bl-lg rounded-tr-lg p-2;
+	@apply cursor-pointer;
+	@apply xl:hidden;
+}
+
+.close-main-menu-button svg
+{
+	@apply inline size-8;
+}
+
+#main-menu-active:checked ~ .main-menu-container
+{
+	@apply left-0;
+}
+
+#main-menu-active:checked ~ #main-menu-overlay
+{
+	@apply bg-black opacity-75;
+	@apply w-full h-full;
+	@apply fixed top-0 left-0 z-[9];
 }

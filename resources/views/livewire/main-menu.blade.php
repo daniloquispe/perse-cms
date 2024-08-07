@@ -1,24 +1,42 @@
 <nav class="main-menu">
-	<div class="container-box">
+	<input type="checkbox" id="main-menu-active" />
+	<label for="main-menu-active" id="main-menu-overlay"></label>
+	<div class="container-box main-menu-container">
+		<label for="main-menu-active" class="close-main-menu-button">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+				<path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+			</svg>
+			<span class="sr-only">Cerrar</span>
+		</label>
+		<p class="menu-title">Categorías</p>
 		<ul>
 			@foreach($items as $item)
 				<li class="menu-item">
-					<a href="{{ $item['seo_tags']['slug'] }}" class="menu-item menu-item-{{ $item['id'] }}">{{ $item['name'] }}</a>
+					<a href="{{ $item['seo_tags']['slug'] }}" class="menu-item menu-item-{{ $item['id'] }}">
+						{{ $item['name'] }}
+						@if($item['id'])
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+							</svg>
+						@endif
+					</a>
 					@if($item['id'])
 						<div class="submenu">
-							<p class="submenu-title">{{ $item['menu_title'] ?? $item['name'] }}</p>
-							<ul>
-								@foreach($item['children'] as $subItem)
-									<li>
-										<a href="{{ $subItem['seo_tags']['slug'] }}">{{ $subItem['name'] }}</a>
-										<ul>
-											@foreach($subItem['children'] as $subItemOption)
-												<li><a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a></li>
-											@endforeach
-										</ul>
-									</li>
-								@endforeach
-							</ul>
+							<div class="submenu-container">
+								<p class="submenu-title">{{ $item['menu_title'] ?? $item['name'] }}</p>
+								<ul>
+									@foreach($item['children'] as $subItem)
+										<li>
+											<a href="{{ $subItem['seo_tags']['slug'] }}">{{ $subItem['name'] }}</a>
+											<ul>
+												@foreach($subItem['children'] as $subItemOption)
+													<li><a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a></li>
+												@endforeach
+											</ul>
+										</li>
+									@endforeach
+								</ul>
+							</div>
 						</div>
 					@endif
 				</li>
