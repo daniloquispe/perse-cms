@@ -82,6 +82,7 @@
 			<div class="description-wrapper">
 				<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
 				<div>
+					@if(false)
 					<label>Ordenar por:</label>
 					<select wire:model="order" wire:change="loadBooks">
 						<option value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</option>
@@ -91,6 +92,17 @@
 						<option value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</option>
 						<option value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</option>
 					</select>
+					@endif
+					<button type="button" class="order-menu-button">Ordenar por: <span>{{ $order->getLabel() }}</span></button>
+					<input type="hidden" wire:model.change="order" wire:change="loadBooks" id="order" />
+					<ul class="order-options closed">
+						<li data-value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</li>
+						<li data-value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</li>
+						<li data-value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</li>
+						<li data-value="{{ \App\BookSearchResultsOrder::ByPriceDescending->value }}">Precios más bajo</li>
+						<li data-value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</li>
+						<li data-value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</li>
+					</ul>
 				</div>
 			</div>
 			<div class="books">
@@ -104,3 +116,22 @@
 		</div>
 	</div>
 </div>
+
+@script
+<script>
+	const button = document.querySelector('.order-menu-button');
+	button.addEventListener('click', function ()
+	{
+		document.querySelector('.order-options').classList.toggle('closed');
+	});
+
+	document.querySelector('.order-options').addEventListener('click', function (e)
+	{
+		if (e.target && e.target.nodeName === 'LI')
+		{
+			$wire.order = e.target.getAttribute('data-value');
+			$wire.loadBooks();
+		}
+	});
+</script>
+@endscript

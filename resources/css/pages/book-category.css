@@ -75,11 +75,35 @@
 	@apply text-blue-900;
 }
 
-.book-category .description-wrapper select
+/* Order options */
+
+/*.book-category .description-wrapper select
 {
 	@apply border border-solid border-gray-300 rounded-lg;
 	@apply p-2;
 	@apply bg-white;
+}*/
+
+.book-category .order-menu-button
+{
+	@apply border border-solid border-gray-300 rounded-lg;
+	@apply p-2;
+	@apply bg-white;
+}
+
+.book-category .order-options
+{
+	@apply absolute z-10 shadow;
+}
+
+.book-category .order-options li
+{
+	@apply px-5 py-2 bg-white cursor-pointer;
+}
+
+.book-category .order-options.closed
+{
+	@apply hidden;
 }
 
 /* Books list */
