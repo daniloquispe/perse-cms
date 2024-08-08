@@ -40,7 +40,7 @@
 					</svg>
 					<span class="sr-only">Menú</span>
 				</label>
-				<x-site-header.search />
+				<livewire:search-form />
 			</div>
 		</div>
 	</div>

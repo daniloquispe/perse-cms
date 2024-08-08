@@ -32,7 +32,7 @@
 
 .main-menu a
 {
-	@apply text-sm xl:uppercase;
+	@apply text-sm xl:uppercase xl:font-[500];
 }
 
 .main-menu a.menu-item svg
@@ -50,10 +50,12 @@
 
 .main-menu .submenu
 {
-	@apply shadow;
+	@apply mt-3;
+	@apply border-y border-solid border-gray-200;
 	@apply hidden z-10;
 	@apply text-left text-gray-600;
 	@apply transition-all;
+	@apply bg-white;
 }
 
 .main-menu .submenu ul
@@ -69,7 +71,7 @@
 
 .main-menu li .submenu-container
 {
-	@apply px-8 py-4;
+	@apply px-8 py-7;
 }
 
 .main-menu li:hover .submenu
@@ -91,7 +93,12 @@
 
 .main-menu .submenu ul
 {
-	@apply flex gap-12 px-8 py-4;
+	@apply flex gap-28 justify-center px-8 py-4;
+}
+
+.main-menu .submenu li a.col-title
+{
+	@apply text-purple-900;
 }
 
 .main-menu .submenu ul ul
