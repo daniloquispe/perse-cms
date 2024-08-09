@@ -1,17 +1,19 @@
 .container-box.book-category
 {
-	@apply md:grid xl:grid-cols-6 md:gap-4;
+	/*@apply md:grid xl:grid-cols-6 md:gap-4;*/
+	@apply md:flex md:gap-7;
 }
 
 /* Filters */
 
 .book-category .filters-col
 {
-	@apply hidden xl:block;
+	@apply hidden xl:block md:min-w-72;
 }
 
 .book-category .filters-box .title
 {
+	@apply flex items-center gap-3;
 	@apply rounded-t-xl px-4 py-3;
 	@apply bg-palette-purple text-white;
 	@apply font-bold uppercase;
@@ -19,17 +21,23 @@
 
 .book-category .filters-box .title svg
 {
-	@apply inline size-5;
+	@apply inline size-[1.1rem];
+}
+
+.book-category .filters-box .title > div
+{
+	@apply pt-0.5;
 }
 
 .book-category .filters-box .content
 {
-	@apply rounded-b-xl px-4 py-3;
+	@apply rounded-b-xl px-4 py-5;
 	@apply bg-[#edf0f5];
 }
 
 .book-category .filters-box .content p
 {
+	@apply mb-2;
 	@apply font-bold uppercase;
 }
 
@@ -44,11 +52,34 @@
 	@apply border-b-0;
 }
 
+.book-category .filters-box .content > div li
+{
+	@apply flex items-center gap-2;
+	@apply my-0.5;
+}
+
+.book-category .filters-box .content > div li *
+{
+	@apply cursor-pointer;
+}
+
+.book-category .filters-box .content > div li input
+{
+	@apply accent-palette-purple;
+}
+
 .book-category .filters-box .more-filters-button
 {
-	@apply mt-4;
-	@apply block mx-auto;
-	@apply text-xs font-bold uppercase;
+	@apply mt-2 px-2 py-1 rounded;
+	@apply block mr-auto;
+	@apply text-xs text-purple-800;
+	/*@apply bg-gray-300/70 hover:bg-gray-300/40;*/
+	@apply /*border border-solid border-gray-300/70 hover:*/bg-gray-300/70 hover:bg-gray-300;
+}
+
+.book-category .filters-box .more-filters-button svg
+{
+	@apply inline size-3;
 }
 
 /* Center */
@@ -91,6 +122,11 @@
 	@apply bg-white;
 }
 
+.book-category .order-menu-button svg
+{
+	@apply inline size-4;
+}
+
 .book-category .order-options
 {
 	@apply absolute z-10 shadow;
@@ -110,14 +146,14 @@
 
 .book-category .books
 {
-	@apply mt-5 mb-12;
+	@apply mt-5;
 	@apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4;
 }
 
 .book-category .more-button
 {
 	@apply block w-full rounded-lg;
-	@apply py-3;
+	@apply mt-12 py-3;
 	@apply bg-palette-purple text-white hover:bg-palette-purple/80;
 	@apply font-bold;
 	@apply transition-colors;

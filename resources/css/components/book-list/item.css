@@ -89,5 +89,5 @@ article.book-list-item footer button
 	@apply block w-full;
 	@apply px-3 py-2;
 	@apply rounded-lg;
-	@apply bg-palette-orange text-white uppercase;
+	@apply bg-palette-orange text-white uppercase font-[500];
 }

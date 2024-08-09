@@ -3,10 +3,10 @@
 		<div class="filters-col">
 			<div class="filters-box">
 				<div class="title">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M14.7656 1C14.7656 0.447715 14.3179 0 13.7656 0C13.2133 0 12.7656 0.447715 12.7656 1V3.50879V6.38329C12.7656 6.93558 13.2133 7.38329 13.7656 7.38329C14.3179 7.38329 14.7656 6.93558 14.7656 6.38329V4.50879H18.9622C19.5145 4.50879 19.9622 4.06107 19.9622 3.50879C19.9622 2.9565 19.5145 2.50879 18.9622 2.50879H14.7656V1ZM1.07408 2.15039C0.48088 2.15039 0 2.59811 0 3.15039C0 3.70268 0.48088 4.15039 1.07408 4.15039H8.92592C9.51912 4.15039 10 3.70268 10 3.15039C10 2.59811 9.51912 2.15039 8.92592 2.15039H1.07408ZM6.4176 6.45801C6.96988 6.45801 7.4176 6.90572 7.4176 7.45801V12.496C7.4176 13.0483 6.96988 13.496 6.4176 13.496C5.86531 13.496 5.4176 13.0483 5.4176 12.496V10.8408H1.04688C0.49459 10.8408 0.046875 10.3931 0.046875 9.84082C0.046875 9.28854 0.49459 8.84082 1.04688 8.84082H5.4176V7.45801C5.4176 6.90572 5.86531 6.45801 6.4176 6.45801ZM1.35005 16.0166C0.630327 16.0166 0.046875 16.4643 0.046875 17.0166C0.046875 17.5689 0.630327 18.0166 1.35005 18.0166H6.11479C6.83452 18.0166 7.41797 17.5689 7.41797 17.0166C7.41797 16.4643 6.83452 16.0166 6.11479 16.0166H1.35005ZM9.09375 9.84082C9.09375 9.28854 9.62512 8.84082 10.2806 8.84082H18.7721C19.4276 8.84082 19.959 9.28854 19.959 9.84082C19.959 10.3931 19.4276 10.8408 18.7721 10.8408H10.2806C9.62512 10.8408 9.09375 10.3931 9.09375 9.84082ZM11.0742 15.042C11.0742 14.4897 10.6265 14.042 10.0742 14.042C9.52193 14.042 9.07422 14.4897 9.07422 15.042V18.901C9.07422 19.4533 9.52193 19.901 10.0742 19.901C10.6265 19.901 11.0742 19.4533 11.0742 18.901V18.0165H18.947C19.4993 18.0165 19.947 17.5688 19.947 17.0165C19.947 16.4642 19.4993 16.0165 18.947 16.0165H11.0742V15.042Z" fill="white"/>
 					</svg>
-					Filtrar por:
+					<div>Filtrar por</div>
 				</div>
 				<div class="content">
 					{{-- Filter: Publisher --}}
@@ -21,8 +21,12 @@
 									</li>
 								@endforeach
 							</ul>
-							@if(count($publisherFilters) > 7)
-								<button type="button" class="more-filters-button">Ver más 197</button>
+							@if(count($publisherFilters) > 1)
+								<button type="button" class="more-filters-button">Ver más
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+									</svg>
+								</button>
 							@endif
 						</div>
 					@endif
@@ -37,8 +41,12 @@
 									</li>
 								@endforeach
 							</ul>
-							@if(count($authorFilters) > 7)
-								<button type="button" class="more-filters-button">Ver más 197</button>
+							@if(count($authorFilters) > 1)
+								<button type="button" class="more-filters-button">Ver más
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+									</svg>
+								</button>
 							@endif
 						</div>
 					@endif
@@ -53,14 +61,18 @@
 									</li>
 								@endforeach
 							</ul>
-							@if(count($ageRangeFilters) > 7)
-								<button type="button" class="more-filters-button">Ver más 197</button>
+							@if(count($ageRangeFilters) > 1)
+								<button type="button" class="more-filters-button">Ver más
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+									</svg>
+								</button>
 							@endif
 						</div>
 					@endif
 					@if(count($formatFilters) > 0)
 						<div>
-							<p>Formato</p>
+							<p>Encuadernación</p>
 							<ul>
 								@foreach($formatFilters as $id => $filter)
 									<li wire:key="format-{{ $id }}">
@@ -70,7 +82,11 @@
 								@endforeach
 							</ul>
 							@if(count($formatFilters) > 7)
-								<button type="button" class="more-filters-button">Ver más 197</button>
+								<button type="button" class="more-filters-button">Ver más
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+									</svg>
+								</button>
 							@endif
 						</div>
 					@endif

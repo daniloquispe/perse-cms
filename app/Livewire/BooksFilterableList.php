@@ -147,22 +147,22 @@ class BooksFilterableList extends Component
 			// Publishers
 			$publisher = $book->publisher;
 
-			if ($publisher && !array_key_exists($publisher->id, $this->publisherFilters))
+			if ($publisher && !array_key_exists($publisher->id, $this->publisherFilters) && count($this->publisherFilters) < 4)
 				$this->publisherFilters[$publisher->id] = ['name' => $publisher->name, 'checked' => false];
 
 			// Authors
 			foreach ($book->authors as $author)
-				if (!array_key_exists($author->id, $this->authorFilters))
+				if (!array_key_exists($author->id, $this->authorFilters) && count($this->authorFilters) < 4)
 					$this->authorFilters[$author->id] = ['name' => $author->name, 'checked' => false];
 
 			// Age ranges
 			$ageRange = $book->ageRange;
-			if ($ageRange && !array_key_exists($ageRange->id, $this->ageRangeFilters))
+			if ($ageRange && !array_key_exists($ageRange->id, $this->ageRangeFilters) && count($this->ageRangeFilters) < 4)
 				$this->ageRangeFilters[$ageRange->id] = ['name' => $ageRange->name, 'checked' => false];
 
 			// Formats
 			$format = $book->format;
-			if ($format && !array_key_exists($format->id, $this->formatFilters))
+			if ($format && !array_key_exists($format->id, $this->formatFilters) && count($this->formatFilters) < 4)
 				$this->formatFilters[$format->id] = ['name' => $format->name, 'checked' => false];
 		});
 	}
