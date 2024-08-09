@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div>
-						<button>Submit</button>
+						<button>Suscribirme</button>
 					</div>
 				</form>
 			</div>
