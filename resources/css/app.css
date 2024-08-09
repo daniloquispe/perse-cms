@@ -45,7 +45,7 @@ body
 
 .content-wrapper
 {
-	@apply mt-6 mb-10;
+	@apply mt-6 mb-12;
 }
 
 /* Document-style pages */

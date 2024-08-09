@@ -100,6 +100,12 @@
 	@apply mt-3;
 }
 
+.site-footer .subscription-form form .acceptance input,
+.site-footer .subscription-form form .acceptance label
+{
+	@apply hover:cursor-pointer;
+}
+
 /* Copyright */
 
 .site-footer .copyright
