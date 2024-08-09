@@ -13,10 +13,13 @@
 @import url(components/site-footer/menu.css);
 @import url(components/site-footer/social-links.css);
 
+@import url(livewire/profile-form.css);
+
 @import url(pages/about.css);
 @import url(pages/book.css);
 @import url(pages/book-category.css);
 @import url(pages/contact.css);
+@import url(pages/user.css);
 
 @tailwind base;
 @tailwind components;

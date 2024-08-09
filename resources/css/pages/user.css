@@ -1,0 +1,81 @@
+/* Card */
+
+.card
+{
+	@apply border border-solid border-gray-300 rounded-xl;
+	@apply mb-12;
+}
+
+.card .avatar
+{
+	@apply block w-full text-center p-8 pb-5;
+}
+
+.card .avatar svg
+{
+	@apply block mx-auto size-[11rem] mb-8;
+}
+
+.card .card-header
+{
+	@apply py-6 m-6 my-0;
+	@apply border-b border-solid border-b-palette-orange;
+}
+
+.card .card-title
+{
+	@apply text-xl;
+}
+
+.card .card-body
+{
+	@apply p-6;
+}
+
+/* Menu */
+
+.card .menu
+{
+	@apply mx-4;
+}
+
+.card .menu li
+{
+	@apply border-t border-solid border-gray-300;
+}
+
+.card .menu li a
+{
+	@apply flex items-center pl-6 py-4;
+	@apply border-l-4 border-solid border-white;
+	@apply hover:text-palette-orange;
+}
+
+.card .menu li.active a
+{
+	@apply border-palette-orange text-palette-orange;
+}
+
+.card .menu li a svg
+{
+	@apply size-5 ml-auto;
+}
+
+.card .menu li.active a svg
+{
+	@apply text-palette-orange;
+}
+
+/* Forms */
+
+.card .buttonbar
+{
+	/*@apply text-right;*/
+	@apply mt-20;
+}
+
+.card .buttonbar button
+{
+	@apply px-6 py-1.5 rounded bg-gray-50;
+	@apply uppercase;
+}

@@ -1,0 +1,27 @@
+.profile-form-body
+{
+	@apply grid grid-cols-2 gap-24;
+}
+
+.profile-form-body .form-control
+{
+	@apply w-full px-2 py-1;
+	@apply border border-solid border-gray-200 rounded;
+	@apply bg-white;
+}
+
+.profile-form-body .grid-inner-cols
+{
+	@apply grid grid-cols-2 gap-12;
+	@apply text-left;
+}
+
+.profile-form-body .readonly
+{
+	@apply opacity-60;
+}
+
+.profile-form-body input[type="checkbox"]
+{
+	@apply accent-orange-600;
+}
