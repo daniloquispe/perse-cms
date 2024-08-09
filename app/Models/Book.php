@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasSearchTerms;
 use App\HasSeoTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-    use HasFactory, HasSeoTags;
+    use HasFactory, HasSearchTerms, HasSeoTags;
 
 	protected $fillable = [
 		'category_id',
@@ -30,6 +31,24 @@ class Book extends Model
 		'title',
 		'year',
 	];
+
+	protected static function boot()
+	{
+		parent::boot();
+
+		static::saved(function (Book $book)
+		{
+			// Add/update search terms
+			$terms = [
+				$book->title,
+				$book->isbn,
+				$book->category->name,
+				join('; ', $book->authors()->pluck('name')->toArray()),
+			];
+			$terms = join(PHP_EOL, $terms);
+			$book->searchTerms()->update(compact('terms'));
+		});
+	}
 
 	public function authors(): BelongsToMany
 	{

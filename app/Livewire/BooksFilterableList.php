@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\BookSearchResultsOrder;
 use App\Models\Book;
 use App\Models\BookCategory;
+use App\Models\SearchTerms;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -17,6 +18,8 @@ class BooksFilterableList extends Component
 	public int $pageNumber = 1;
 
 	public int $categoryId;
+
+	public string $searchString;
 
 	public string $title;
 
@@ -69,6 +72,25 @@ class BooksFilterableList extends Component
 			$this->searchResultsLabel = $category->forced_search_results_label ?? 'libros';
 
 			$this->booksQuery = $category->books();
+		}
+		elseif (isset($this->searchString))
+		{
+			$bookIds = SearchTerms::query()
+				->selectRaw('*, MATCH (terms) AGAINST (?) AS points', [$this->searchString])
+				->where('searchable_type', Book::class)
+				->whereRaw('MATCH (terms) AGAINST (?)', [$this->searchString])
+				->orderByDesc('points')
+				->get()
+				->pluck('searchable_id')
+				->toArray();
+
+			$this->booksQuery = Book::query()
+				->where('is_visible', true)
+				->whereKey($bookIds);
+
+			$this->title = "Buscando: {$this->searchString}";
+			$this->count = $this->booksQuery->count();
+			$this->searchResultsLabel = 'libros';
 		}
 
 		// Order by

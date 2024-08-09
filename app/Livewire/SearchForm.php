@@ -12,4 +12,9 @@ class SearchForm extends Component
     {
         return view('livewire.search-form');
     }
+
+	public function search(): void
+	{
+		$this->redirectRoute('search', $this->searchString);
+	}
 }
