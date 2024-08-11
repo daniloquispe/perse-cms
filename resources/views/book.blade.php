@@ -28,7 +28,7 @@
 				<dt>Páginas</dt>
 				<dd>{{ $book->pages_count }}</dd>
 				<dt>Encuadernación</dt>
-				<dd>Tapa blanda</dd>
+				<dd>{{ $book->bookbindingType->name }}</dd>
 				<dt>Idioma</dt>
 				<dd>Español</dd>
 				<dt>Peso</dt>
@@ -38,7 +38,7 @@
 				<dt>Altura</dt>
 				<dd>{{ $book->height }}</dd>
 				<dt>Edad</dt>
-				<dd>Mayores de 18</dd>
+				<dd>{{ $book->ageRange->name }}</dd>
 			</dl>
 		</div>
 		<div class="center">
