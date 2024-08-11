@@ -127,7 +127,7 @@ class BooksFilterableList extends Component
 		}
 
 		$this->books = $this->booksQuery
-			->with(['publisher', 'authors', 'ageRange', 'format'])
+			->with(['publisher', 'authors', 'ageRange', 'bookbindingType'])
 			->orderBy($orderColumn, $orderDirection)
 			->take($count)
 			->get();

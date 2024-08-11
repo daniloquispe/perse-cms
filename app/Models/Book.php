@@ -23,7 +23,7 @@ class Book extends Model
 		'is_visible',
 		'price',
 		'publisher_id',
-		'format_id',
+		'bookbinding_type_id',
 		'saga_id',
 		'age_range_id',
 		'slug',
@@ -70,9 +70,9 @@ class Book extends Model
 		return $this->belongsTo(Saga::class);
 	}
 
-	public function format(): BelongsTo
+	public function bookbindingType(): BelongsTo
 	{
-		return $this->belongsTo(BookFormat::class, 'format_id');
+		return $this->belongsTo(BookbindingType::class);
 	}
 
 	public function ageRange(): BelongsTo

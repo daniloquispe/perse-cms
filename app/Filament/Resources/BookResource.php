@@ -113,9 +113,9 @@ class BookResource extends Resource
 						Forms\Components\Select::make('publisher_id')
 							->label('Editorial')
 							->relationship('publisher', 'name'),
-						Forms\Components\Select::make('format_id')
-							->label('Formato')
-							->relationship('format', 'name')
+						Forms\Components\Select::make('bookbinding_type_id')
+							->label('Tipo de encuadernación')
+							->relationship('bookbindingType', 'name')
 							->required(),
 						Forms\Components\Select::make('age_range_id')
 							->label('Rango de edad')

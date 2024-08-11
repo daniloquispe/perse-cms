@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookFormatResource\Pages;
-use App\Filament\Resources\BookFormatResource\RelationManagers;
-use App\Models\BookFormat;
+use App\Filament\Resources\BookbindingTypeResource\Pages;
+use App\Filament\Resources\BookbindingTypeResource\RelationManagers;
+use App\Models\BookbindingType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,15 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BookFormatResource extends Resource
+class BookbindingTypeResource extends Resource
 {
-    protected static ?string $model = BookFormat::class;
+    protected static ?string $model = BookbindingType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
 	protected static ?string $navigationGroup = 'Catálogo';
 
-	protected static ?string $modelLabel = 'Formato';
+	protected static ?string $modelLabel = 'Tipo de encuadernación';
+
+	protected static ?string $pluralModelLabel = 'Tipos de encuadernación';
 
     public static function form(Form $form): Form
     {
@@ -67,9 +69,9 @@ class BookFormatResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookFormats::route('/'),
-            'create' => Pages\CreateBookFormat::route('/create'),
-            'edit' => Pages\EditBookFormat::route('/{record}/edit'),
+            'index' => Pages\ListBookbindingTypes::route('/'),
+            'create' => Pages\CreateBookbindingType::route('/create'),
+            'edit' => Pages\EditBookbindingType::route('/{record}/edit'),
         ];
     }
 }

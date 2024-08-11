@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class BookFormat extends Model
+class BookbindingType extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class BookFormat extends Model
 
 	public function books(): HasMany
 	{
-		return $this->hasMany(Book::class, 'format_id');
+		return $this->hasMany(Book::class);
 	}
 }
