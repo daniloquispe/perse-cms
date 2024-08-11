@@ -6,20 +6,34 @@ use App\Models\BookCategory;
 use App\Models\Page;
 use App\PageRole;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class MainMenu extends Component
 {
 	public array $items;
 
-	public function mount()
+	public array $activeIds;
+
+	public function mount(): void
+	{
+		$this->loadItems();
+		$this->setActiveIds();
+	}
+
+    public function render()
+    {
+        return view('livewire.main-menu');
+    }
+
+	private function loadItems(): void
 	{
 		// Home
 		$homeLinkName = Page::query()
 			->whereKey(PageRole::Home->value)
 			->value('name');
 
-		$homeLink = ['id' => 0, 'name' => $homeLinkName, 'seo_tags' => ['slug' => route('home')]];
+		$homeLink = ['id' => 0, 'name' => $homeLinkName, 'seo_tags' => ['slug' => route('home')], 'children' => []];
 		$links[] = $homeLink;
 
 		// Categories: Level 1
@@ -55,8 +69,42 @@ class MainMenu extends Component
 
 		$this->items = array_merge($links, $categoryLinks->toArray());
 	}
-    public function render()
-    {
-        return view('livewire.main-menu');
-    }
+
+	private function setActiveIds(): void
+	{
+		// Home
+		if (Route::is('home'))
+			$this->activeIds = [0];
+		// Book categories
+		else
+		{
+			$currentSlug = Route::current()->parameters['slug'];
+
+			// Level 1
+			foreach ($this->items as $item)
+			{
+				if ($item['seo_tags']['slug'] == $currentSlug)
+					$this->activeIds[] = $item['id'];
+
+				// Level 2
+				foreach ($item['children'] as $subItem)
+				{
+					if ($subItem['seo_tags']['slug'] == $currentSlug)
+					{
+						$this->activeIds[] = $subItem['id'];
+						$this->activeIds[] = $item['id'];
+					}
+
+					// Level 3
+					foreach ($subItem['children'] as $subItemOption)
+						if ($subItemOption['seo_tags']['slug'] == $currentSlug)
+						{
+							$this->activeIds[] = $subItemOption['id'];
+							$this->activeIds[] = $subItem['id'];
+							$this->activeIds[] = $item['id'];
+						}
+				}
+			}
+		}
+	}
 }

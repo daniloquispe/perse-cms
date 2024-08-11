@@ -30,6 +30,11 @@
 	@apply hidden xl:inline-block;
 }
 
+.main-menu li.menu-item.active
+{
+	@apply text-palette-orange;
+}
+
 .main-menu a
 {
 	@apply text-sm xl:uppercase xl:font-[500];
@@ -120,6 +125,11 @@
 {
 	@apply font-normal;
 	text-transform: none;
+}
+
+.main-menu .submenu ul ul li.active a
+{
+	@apply text-palette-orange;
 }
 
 /* Open/close */

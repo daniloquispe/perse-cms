@@ -11,7 +11,7 @@
 		<p class="menu-title">Categorías</p>
 		<ul>
 			@foreach($items as $item)
-				<li class="menu-item">
+				<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
 					<a href="{{ $item['seo_tags']['slug'] }}" class="menu-item menu-item-{{ $item['id'] }}">
 						{{ $item['name'] }}
 						@if($item['id'])
@@ -25,11 +25,13 @@
 							<div class="submenu-container">
 								<ul>
 									@foreach($item['children'] as $subItem)
-										<li>
+										<li @class(['active' => in_array($subItem['id'], $activeIds)])>
 											<a href="{{ $subItem['seo_tags']['slug'] }}" class="col-title">{{ $subItem['name'] }}</a>
 											<ul>
 												@foreach($subItem['children'] as $subItemOption)
-													<li><a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a></li>
+													<li @class(['active' => in_array($subItemOption['id'], $activeIds)])>
+														<a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a>
+													</li>
 												@endforeach
 											</ul>
 										</li>
