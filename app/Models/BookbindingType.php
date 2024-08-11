@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BookbindingType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'order'];
 
 	public function books(): HasMany
 	{

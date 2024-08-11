@@ -29,6 +29,10 @@ class BookbindingTypeResource extends Resource
     {
         return $form
             ->schema([
+				Forms\Components\TextInput::make('order')
+					->label('Orden')
+					->numeric()
+					->required(),
 				Forms\Components\TextInput::make('name')
 					->label('Nombre')
 					->required()
@@ -39,10 +43,15 @@ class BookbindingTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-			->modifyQueryUsing(fn(Builder $query) => $query->orderBy('name')->withCount('books'))
+			->modifyQueryUsing(fn(Builder $query) => $query->orderBy('order')->withCount('books'))
             ->columns([
+				Tables\Columns\TextColumn::make('order')
+					->label('Orden')
+					->numeric()
+					->sortable(),
 				Tables\Columns\TextColumn::make('name')
-					->label('Nombre'),
+					->label('Nombre')
+					->sortable(),
 				Tables\Columns\TextColumn::make('books_count')
 					->label('Libros'),
             ])

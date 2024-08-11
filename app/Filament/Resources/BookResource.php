@@ -115,7 +115,7 @@ class BookResource extends Resource
 							->relationship('publisher', 'name'),
 						Forms\Components\Select::make('bookbinding_type_id')
 							->label('Tipo de encuadernación')
-							->relationship('bookbindingType', 'name')
+							->relationship('bookbindingType', 'name', fn(Builder $query) => $query->orderBy('order'))
 							->required(),
 						Forms\Components\Select::make('age_range_id')
 							->label('Rango de edad')
