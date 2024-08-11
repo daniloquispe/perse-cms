@@ -1,0 +1,36 @@
+.add-to-favorites-button
+{
+	@apply flex items-center gap-3;
+}
+
+.add-to-favorites-button > *
+{
+	@apply py-1;
+}
+
+/* Button */
+
+.add-to-favorites-button button
+{
+	@apply rounded-lg px-4;
+	@apply hover:bg-gray-100;
+	@apply transition-all;
+}
+
+/* Icon */
+
+.add-to-favorites-button button svg
+{
+	@apply block size-12;
+	@apply text-palette-purple;
+}
+
+.add-to-favorites-button button svg:hover
+{
+	@apply fill-palette-purple/30;
+}
+
+.add-to-favorites-button button.added svg
+{
+	@apply fill-palette-purple;
+}

@@ -65,18 +65,22 @@
 			</main>
 			<footer>
 				{{-- Authors --}}
-				@foreach($book->authors as $author)
-					<div class="author-box">
-						<div class="photo">
-							<img src="{{ asset('storage/' . $author->photo) }}" alt="{{ $author->name }}" />
+				<div class="authors-box">
+					@foreach($book->authors as $author)
+						<div class="author-box">
+							<div class="photo">
+								<img src="{{ asset('storage/' . $author->photo) }}" alt="{{ $author->name }}" />
+							</div>
+							<div class="info">
+								<p class="name">{{ $author->name }}</p>
+								<p class="summary">{{ $author->summary }}</p>
+								<p><a href="/category">Ver Página del Autor</a></p>
+							</div>
 						</div>
-						<div class="info">
-							<p class="name">{{ $author->name }}</p>
-							<p class="summary">{{ $author->summary }}</p>
-							<p><a href="/category">Ver Página del Autor</a></p>
-						</div>
-					</div>
-				@endforeach
+					@endforeach
+				</div>
+				{{-- Add to favorites --}}
+				<livewire:add-to-favorites-button :book-id="$book->id" />
 			</footer>
 		</div>
 	</article>

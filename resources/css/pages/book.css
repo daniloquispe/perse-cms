@@ -86,13 +86,18 @@ article.book button[type="submit"]
 
 /* Author box */
 
-article.book  main
+article.book main
 {
 	@apply mb-8;
 	@apply text-justify;
 }
 
-article.book  .author-box
+article.book .authors-box
+{
+	@apply mb-8;
+}
+
+article.book .author-box
 {
 	@apply bg-[#feedd3];
 	@apply flex;

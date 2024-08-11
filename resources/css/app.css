@@ -13,6 +13,7 @@
 @import url(components/site-footer/menu.css);
 @import url(components/site-footer/social-links.css);
 
+@import url(livewire/add-to-favorites-button.css);
 @import url(livewire/profile-form.css);
 
 @import url(pages/about.css);
