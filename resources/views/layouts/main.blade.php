@@ -12,6 +12,7 @@
 <main class="main-content">@yield('content')</main>
 <x-site-footer />
 <x-whatsapp-link />
+<livewire:toast />
 @vite('resources/js/app.js')
 @yield('js-footer')
 </body>
