@@ -8,9 +8,9 @@
 	@vite('resources/css/app.css')
 </head>
 <body>
-<x-site-header />
+<livewire:site-header />
 <main class="main-content">@yield('content')</main>
-<x-site-footer />
+<livewire:site-footer />
 <x-whatsapp-link />
 <livewire:toast />
 @vite('resources/js/app.js')
