@@ -18,6 +18,8 @@ enum PageRole: int implements HasLabel
 	case Login = 10;
 	case Register = 11;
 	case PasswordRecovery = 12;
+	case Subscribe = 13;
+	case Unsubscribe = 14;
 
 	public function getLabel(): ?string
 	{
@@ -35,6 +37,8 @@ enum PageRole: int implements HasLabel
 			self::Login => 'Iniciar sesión',
 			self::Register => 'Registro',
 			self::PasswordRecovery => 'Recuperar contraseña',
+			self::Subscribe => 'Suscripción',
+			self::Unsubscribe => 'Desuscripción',
 		};
 	}
 }

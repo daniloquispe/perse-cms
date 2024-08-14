@@ -10,7 +10,7 @@
 		<ul>
 			<li><a href="/quienes-somos">Quiénes Somos</a></li>
 			<li><a href="/contacto">Contáctenos</a></li>
-			<li><a href="#">Suscríbete</a></li>
+			<li><a href="/suscribete">Suscríbete</a></li>
 			<li><a href="#">Blog</a></li>
 		</ul>
 	</nav>

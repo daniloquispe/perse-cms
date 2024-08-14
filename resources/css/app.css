@@ -125,3 +125,20 @@ body
 {
 	@apply grid grid-cols-2 gap-2;
 }
+
+/* Forms */
+
+.checkbox-wrapper
+{
+	@apply flex gap-3 items-start;
+}
+
+.checkbox-wrapper input[type="checkbox"]
+{
+	@apply mt-1 grow-0;
+}
+
+.form-error
+{
+	@apply text-red-700 text-sm;
+}

@@ -27,6 +27,7 @@ class PageSeeder extends Seeder
 			['id' => PageRole::Login->value, 'name' => 'Iniciar sesión'],
 			['id' => PageRole::Register->value, 'name' => 'Crear cuenta'],
 			['id' => PageRole::PasswordRecovery->value, 'name' => 'Recuperar contraseña'],
+			['id' => PageRole::Subscribe->value, 'name' => 'Suscríbete', 'title' => 'Suscríbete'],
 		];
 
 		foreach ($pagesData as $pageData)

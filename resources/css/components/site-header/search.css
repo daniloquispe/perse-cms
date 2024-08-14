@@ -42,3 +42,24 @@
 {
 	@apply sr-only;
 }
+
+/* Autocomplete */
+
+.autocomplete-box
+{
+	@apply relative;
+}
+
+.autocomplete-box ul
+{
+	@apply absolute w-full mt-1 p-1;
+	@apply rounded-xl border border-solid border-gray-300;
+	@apply bg-white;
+}
+
+.autocomplete-box li
+{
+	@apply cursor-pointer;
+	@apply px-2 py-1 rounded-lg w-full;
+	@apply hover:bg-gray-200;
+}

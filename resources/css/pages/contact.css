@@ -22,11 +22,17 @@
 .contact-page input[type="text"],
 .contact-page input[type="email"],
 .contact-page input[type="tel"],
+.contact-page select,
 .contact-page textarea
 {
 	@apply w-full;
 	@apply px-4 py-2 rounded-lg;
 	@apply bg-gray-200;
+}
+
+.contact-page select
+{
+	@apply py-2.5;
 }
 
 .contact-page li
