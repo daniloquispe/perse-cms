@@ -79,4 +79,10 @@ class Book extends Model
 	{
 		return $this->belongsTo(BookAgeRange::class, 'age_range_id');
 	}
+
+	public function bookCarousels(): BelongsToMany
+	{
+		return $this->belongsToMany(BookCarousel::class, 'book_carousel')
+			->withPivot(['order', 'can_be_visible']);
+	}
 }
