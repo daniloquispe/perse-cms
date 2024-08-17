@@ -1,28 +1,28 @@
 <form wire:submit="subscribe">
 	{{-- Name --}}
 	<div class="form-row">
-		<input type="text" wire:model="name" placeholder="Tu nombre *" required="required" aria-label="Tu nombre" />
+		<input type="text" wire:model="name" placeholder="Nombres y Apellidos *" required="required" aria-label="Nombres y Apellidos" />
 		@error('name')
 			<div class="form-error">{{ $message }}</div>
 		@enderror
 	</div>
 	{{-- E-mail --}}
 	<div class="form-row">
-		<input type="email" wire:model="email" placeholder="Correo electrónico *" required="required" aria-label="Correo electrónico" />
+		<input type="email" wire:model="email" placeholder="Correo Electrónico *" required="required" aria-label="Correo electrónico" />
 		@error('email')
 			<div class="form-error">{{ $message }}</div>
 		@enderror
 	</div>
 	{{-- Phone --}}
 	<div class="form-row">
-		<input type="tel" wire:model="phone" placeholder="Teléfono" required="required" aria-label="Teléfono" />
+		<input type="tel" wire:model="phone" placeholder="Celular *" required="required" aria-label="Celular" />
 		@error('phone')
 			<div class="form-error">{{ $message }}</div>
 		@enderror
 	</div>
 	{{-- Categories --}}
 	<fieldset class="form-row">
-		<legend>Selecciona tus categorías favoritas</legend>
+		<legend>Selecciona tus categorías favoritas:</legend>
 		<div class="form-row">
 			<select wire:model="category_id_1" required="required">
 				<option value="">Categoría Opción 1</option>
@@ -46,7 +46,7 @@
 			@enderror
 		</div>
 		<div class="form-row">
-			<input type="tel" wire:model="bookCategorySearch" wire:keyup="search" x-on:blur="$wire.showBookCategoriesList = false; $wire.$refresh()" required="required" placeholder="Categoría Opción 3" aria-label="Categoría Opción 3" />
+			<input type="tel" wire:model="bookCategorySearch" wire:keyup="search" x-on:blur="$wire.showBookCategoriesList = false; $wire.$refresh()" required="required" placeholder="Escribe tu Subcategoría favorita" aria-label="Categoría Opción 3" />
 			@if($showBookCategoriesList)
 				<div class="autocomplete-box">
 					<ul>
@@ -87,6 +87,6 @@
 	</div>
 	{{-- Submit --}}
 	<div class="form-row">
-		<button>Enviar</button>
+		<button>Suscribirme</button>
 	</div>
 </form>

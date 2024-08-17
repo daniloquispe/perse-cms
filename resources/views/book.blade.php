@@ -74,7 +74,7 @@
 							<div class="info">
 								<p class="name">{{ $author->name }}</p>
 								<p class="summary">{{ $author->summary }}</p>
-								<p><a href="/category">Ver Página del Autor</a></p>
+								<p><a href="/category">Ver otros libros del mismo Autor</a></p>
 							</div>
 						</div>
 					@endforeach
