@@ -25,14 +25,14 @@
 
 .site-footer .icon-column
 {
-	@apply px-16;
-	@apply flex gap-4 items-start;
+	@apply px-5 xl:px-16;
+	@apply flex gap-4 items-center;
 	@apply text-gray-800;
 }
 
 .site-footer .icon-column svg
 {
-	@apply h-16;
+	@apply h-16 flex-none;
 /*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
 	@apply text-[#dd4373];
 }

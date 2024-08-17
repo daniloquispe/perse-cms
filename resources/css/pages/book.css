@@ -50,6 +50,7 @@ article.book dd
 
 article.book .title
 {
+	@apply mb-0.5;
 	@apply text-3xl text-gray-800;
 }
 

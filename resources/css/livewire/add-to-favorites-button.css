@@ -1,6 +1,6 @@
 .add-to-favorites-button
 {
-	@apply flex items-center gap-3;
+	@apply flex items-center gap-2;
 }
 
 .add-to-favorites-button > *
@@ -12,7 +12,7 @@
 
 .add-to-favorites-button button
 {
-	@apply rounded-lg px-4;
+	@apply rounded-lg px-3;
 	@apply hover:bg-gray-100;
 	@apply transition-all;
 }

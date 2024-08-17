@@ -10,6 +10,11 @@
 
 /* Form */
 
+.contact-page legend
+{
+	@apply mb-2.5;
+}
+
 .contact-page .form-row
 {
 	@apply mb-4;
@@ -46,14 +51,24 @@
 	margin-top: -0.05rem;
 }
 
+.contact-page label
+{
+	@apply cursor-pointer;
+}
+
 .contact-page label a
 {
 	@apply underline;
 }
 
+.contact-page input[type="checkbox"]
+{
+	@apply cursor-pointer accent-palette-purple;
+}
+
 .contact-page button
 {
 	@apply px-4 py-2 rounded;
-	@apply bg-gray-500 text-white;
+	@apply bg-gray-500 hover:bg-palette-purple text-white;
 	@apply uppercase;
 }
