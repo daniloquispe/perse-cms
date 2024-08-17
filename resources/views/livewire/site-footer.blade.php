@@ -48,8 +48,12 @@
 					<div>
 						<input type="email" placeholder="E-mail" aria-label="E-mail" />
 						<div class="acceptance">
-							<input type="checkbox" id="check" />
-							<label for="check">Acepto los <a href="#">términos y condiciones</a> y la <a href="#">Política de seguridad</a></label>
+							<div class="checkbox-wrapper !gap-2">
+								<input type="checkbox" id="check" />
+								<div>
+									<label for="check">Acepto los <a href="#">términos y condiciones</a> y la <a href="#">Política de seguridad</a></label>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div>
