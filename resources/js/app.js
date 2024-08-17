@@ -6,9 +6,11 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 // Splide
-import '@splidejs/splide/css';
+import '@splidejs/splide/css/core';
 
 // Components
 import './components/form/quantity-input.js';
 import './components/slider.js';
 import './components/site-header/marquee.js';
+
+import './livewire/book-carousel.js';

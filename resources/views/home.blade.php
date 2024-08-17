@@ -5,12 +5,28 @@
 @section('content')
 	{{-- Main slider --}}
 	<livewire:slider />
-	{{-- Banners pequeños --}}
-	<div class="container-box my-12">
+	{{-- Book carousels (above) --}}
+	@foreach($carouselsAbove as $carousel)
+		<section class="container-box my-12">
+			<livewire:book-carousel :wire:key="$carousel->id" :carousel="$carousel" />
+		</section>
+	@endforeach
+	{{-- Big banner --}}
+	<section class="container-box my-12">
+		<img src="{{ asset('images/placeholders/wide-banner.png') }}" alt="Banner" class="w-full rounded-lg" />
+	</section>
+	{{-- Book carousels (below) --}}
+	@foreach($carouselsBelow as $carousel)
+		<section class="container-box my-12">
+			<livewire:book-carousel :wire:key="$carousel->id" :carousel="$carousel" />
+		</section>
+	@endforeach
+	{{-- Small banners --}}
+	<section class="container-box my-12">
 		<div class="grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-10">
 			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
 			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
 			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
 		</div>
-	</div>
+	</section>
 @endsection

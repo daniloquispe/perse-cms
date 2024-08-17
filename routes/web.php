@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 Route::get('search/{search}', \App\Http\Controllers\SearchController::class)->name('search');
 Route::view('cart/list', 'cart')->name('cart.list');
 

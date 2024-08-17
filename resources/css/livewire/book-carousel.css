@@ -1,0 +1,57 @@
+.book-carousel > .title
+{
+	@apply mx-14 mb-8;
+	@apply text-xl text-gray-800 font-bold uppercase tracking-wide;
+}
+
+/**********/
+/* Splide */
+/**********/
+
+.book-carousel .splide
+{
+	@apply relative px-14 py-0;
+}
+
+/* Arrows */
+
+.book-carousel .splide__arrow
+{
+	@apply size-10;
+	@apply flex items-center justify-center;
+	@apply absolute top-1/2 -translate-y-1/2;
+	@apply border border-gray-300 hover:border-gray-500 rounded-lg;
+	@apply cursor-pointer;
+	transition: all .2s linear;
+}
+
+.book-carousel .splide__arrow svg
+{
+	@apply fill-gray-300 hover:fill-gray-500;
+	@apply size-5;
+	transition: fill .2s linear;
+}
+
+.book-carousel .splide__arrow:hover svg
+{
+	@apply fill-gray-500;
+}
+
+/* Arrows: Previous */
+
+.book-carousel .splide__arrow--prev
+{
+	left: 0;
+}
+
+.book-carousel .splide__arrow--prev svg
+{
+	transform: scaleX(-1);
+}
+
+/* Arrows: Next */
+
+.book-carousel .splide__arrow--next
+{
+	right: 0;
+}

@@ -10,6 +10,8 @@ class BookListItem extends Component
 {
 	public Book $book;
 
+	public bool $inCarousel = false;
+
     public function render(UrlService $urlService)
     {
 		$cover = $urlService->fromAsset($this->book->cover);

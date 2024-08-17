@@ -1,4 +1,4 @@
-<article class="book-list-item">
+<article @class(['book-list-item', 'splide__slide' => $inCarousel])>
 	{{-- Cover and flags --}}
 	<div class="book-cover">
 		{{-- Presale? --}}

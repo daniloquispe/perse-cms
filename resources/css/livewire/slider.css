@@ -1,0 +1,67 @@
+.slider .image
+{
+	@apply hidden xl:block;
+}
+
+.slider .image-mobile
+{
+	@apply block xl:hidden;
+}
+
+.slider img
+{
+	@apply w-full;
+}
+
+/**********/
+/* Splide */
+/**********/
+
+.slider .splide
+{
+	@apply relative p-0;
+}
+
+/* Arrows */
+
+.slider .splide__arrow
+{
+	@apply size-9;
+	@apply flex items-center justify-center;
+	@apply absolute top-1/2 -translate-y-1/2;
+	@apply rounded-full;
+	@apply bg-gray-300 opacity-70 hover:opacity-90;
+	@apply cursor-pointer;
+	@apply z-[5];
+	transition: all .2s linear;
+}
+
+.slider .splide__arrow:disabled
+{
+	@apply opacity-30;
+}
+
+.slider .splide__arrow svg
+{
+	@apply fill-gray-800;
+	@apply size-5;
+}
+
+/* Arrows: Previous */
+
+.slider .splide__arrow--prev
+{
+	left: 1em;
+}
+
+.slider .splide__arrow--prev svg
+{
+	transform: scaleX(-1);
+}
+
+/* Arrows: Next */
+
+.slider .splide__arrow--next
+{
+	right: 1em;
+}
