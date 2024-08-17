@@ -29,4 +29,9 @@ class UrlService
 	{
 		return $slug ? url($slug) : null;
 	}
+
+	public function fromAsset(?string $asset): string|null
+	{
+		return $asset ? asset('storage/' . $asset) : null;
+	}
 }

@@ -153,7 +153,7 @@ class BookResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-			->modifyQueryUsing(fn(Builder $query) => $query->orderBy('title')->orderBy('year'))
+			->modifyQueryUsing(fn(Builder $query) => $query->with('authors')->orderBy('title')->orderBy('year'))
             ->columns([
 				Tables\Columns\ImageColumn::make('cover')
 					->label('Cubierta')
@@ -166,10 +166,16 @@ class BookResource extends Resource
 					->searchable(),
 				Tables\Columns\TextColumn::make('title')
 					->label('Título')
+					->description(fn(Book $record) => join(', ', $record->authors->pluck('name')->toArray()))
 					->sortable()
 					->searchable(),
+				Tables\Columns\IconColumn::make('is_presale')
+					->label('¿Preventa?')
+					->boolean()
+					->alignCenter(),
 				Tables\Columns\ToggleColumn::make('is_visible')
-					->label('¿Visible?'),
+					->label('¿Visible?')
+					->alignCenter(),
             ])
             ->filters([
 				Tables\Filters\Filter::make('tree')
