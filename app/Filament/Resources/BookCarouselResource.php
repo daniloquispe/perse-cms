@@ -45,7 +45,7 @@ class BookCarouselResource extends Resource
 							Forms\Components\TextInput::make('title')
 								->label('Título')
 								->required()
-								->unique()
+								->unique(ignoreRecord: true)
 								->maxLength(50)
 						]),
 				]),
