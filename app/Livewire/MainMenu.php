@@ -76,7 +76,7 @@ class MainMenu extends Component
 		if (Route::is('home'))
 			$this->activeIds = [0];
 		// Book categories
-		else
+		elseif (Route::current()->hasParameter('slug'))
 		{
 			$currentSlug = Route::current()->parameters['slug'];
 
@@ -106,5 +106,8 @@ class MainMenu extends Component
 				}
 			}
 		}
+		// Other routes
+		else
+			$this->activeIds = [];
 	}
 }
