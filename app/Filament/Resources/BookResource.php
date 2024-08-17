@@ -113,6 +113,10 @@ class BookResource extends Resource
 						Forms\Components\Select::make('publisher_id')
 							->label('Editorial')
 							->relationship('publisher', 'name'),
+						Forms\Components\Select::make('book_format_id')
+							->label('Formato')
+							->relationship('bookFormat', 'name', fn(Builder $query) => $query->orderBy('order'))
+							->required(),
 						Forms\Components\Select::make('bookbinding_type_id')
 							->label('Tipo de encuadernación')
 							->relationship('bookbindingType', 'name', fn(Builder $query) => $query->orderBy('order'))
@@ -210,6 +214,9 @@ class BookResource extends Resource
 					->relationship('publisher', 'name'),
 				Tables\Filters\SelectFilter::make('saga')
 					->relationship('saga', 'name'),
+				Tables\Filters\SelectFilter::make('book_format_id')
+					->label('Formato')
+					->relationship('bookFormat', 'name'),
 				Tables\Filters\Filter::make('is_presale')
 					->label('En preventa')
 					->query(fn(Builder $query) => $query->where('is_presale', true)),

@@ -25,11 +25,12 @@ class SlugController extends Controller
 			$type = 'book';
 
 			$query = $seoTags->owner()
-				->select(['id', 'category_id', 'publisher_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
+				->select(['id', 'category_id', 'publisher_id', 'book_format_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
 				->where('is_visible', true)
 				->with([
 					'authors:id,name,photo,summary',
 					'publisher:id,name',
+					'bookFormat:id,name',
 					'bookbindingType:id,name',
 					'ageRange:id,name',
 					'category' => function (BelongsTo $query)

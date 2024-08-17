@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 		$this->call([
+			BookFormatSeeder::class,
 			BookbindingTypeSeeder::class,
 			MarqueeItemSeeder::class,
 			SocialLinkSeeder::class,

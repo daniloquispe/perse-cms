@@ -13,6 +13,8 @@
 			<img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" />
 			{{-- Info box --}}
 			<dl>
+				<dt>Formato</dt>
+				<dd>{{ $book->bookFormat->name }}</dd>
 				<dt>SKU</dt>
 				<dd>{{ $book->sku }}</dd>
 				<dt>ISBN</dt>
