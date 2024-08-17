@@ -1,24 +1,31 @@
 <article class="book-list-item">
-	<header>
-		@if($isPresale)
+	{{-- Cover and flags --}}
+	<div class="book-cover">
+		{{-- Presale? --}}
+		@if($book->is_presale)
 			<div class="presale">Preventa</div>
 		@endif
-		<div class="cover">
-			<a href="{{ $url }}"><img src="{{ asset($cover) }}" alt="{{ $title }}" /></a>
-		</div>
-		<div class="title">{{ $title }}</div>
-		<div class="author">{{ $authors }}</div>
-	</header>
-	<main class="prices">
-		@if($discountedPrice)
-			<div class="current">S/{{ $discountedPrice }}</div>
-			<div class="normal"><del>S/{{ $price }}</del></div>
-			<div class="discount">-{{ $discount }}%</div>
-		@else
-			<div class="current">S/{{ $price }}</div>
-		@endif
-	</main>
-	<footer>
+		{{-- Image --}}
+		<a href="{{ $url }}"><img src="{{ asset($cover) }}" alt="{{ $book->title }}" /></a>
+	</div>
+	{{-- Book info --}}
+	<div class="book-info">
+		<a href="{{ $url }}">
+			<h1 class="title">{{ $book->title }}</h1>
+			<div class="author">{{ $authors }}</div>
+			<div class="prices">
+				@if($discount)
+					<div class="current">S/&nbsp;{{ $book->discounted_price }}</div>
+					<div class="normal"><del>S/{{ $book->price }}</del></div>
+					<div class="discount">-{{ $discount }}%</div>
+				@else
+					<div class="current">S/&nbsp;{{ $book->price }}</div>
+				@endif
+			</div>
+		</a>
+	</div>
+	{{-- Add to cart --}}
+	<div class="book-controls">
 		<button>Agregar</button>
-	</footer>
+	</div>
 </article>

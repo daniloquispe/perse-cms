@@ -117,7 +117,7 @@
 			</div>
 			<div class="books">
 				@foreach($books as $book)
-					<livewire:book-list-item wire:key="{{ $book->id }}" :cover="asset('storage/' . $book->cover)" :title="$book->title" :authors="$book->authors" :price="$book->price" :discounted-price="$book->discounted_price" :url="$book->seoTags->slug" :is-presale="$book->is_presale" />
+					<livewire:book-list-item wire:key="{{ $book->id }}" :book="$book" />
 				@endforeach
 			</div>
 			@if($count > count($books))

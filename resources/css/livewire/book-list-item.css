@@ -1,21 +1,13 @@
 article.book-list-item
 {
-	@apply border border-gray-300;
+	@apply relative overflow-hidden;
+	@apply flex flex-col;
+	@apply border border-gray-300 hover:border-palette-orange;
 	@apply rounded-lg;
 	@apply transition-colors;
 }
-article.book-list-item:hover
-{
-	@apply border-palette-orange;
-}
 
 /* Presale? */
-
-article.book-list-item header
-{
-	@apply relative;
-	@apply overflow-hidden;
-}
 
 article.book-list-item .presale
 {
@@ -28,25 +20,30 @@ article.book-list-item .presale
 
 /* Cover */
 
-article.book-list-item .cover
+article.book-list-item .book-cover
 {
-	@apply px-4 py-3;
+	@apply flex-grow;
+	@apply flex items-end justify-center;
+	@apply px-4 pt-3 pb-4;
 }
 
-article.book-list-item .cover img
+article.book-list-item .book-cover img
 {
+	@apply w-auto max-h-full;
 	@apply rounded-lg shadow-xl;
 }
 
-/* Title and author */
+/* Title */
 
 article.book-list-item .title
 {
-	@apply mb-1 px-3 h-12;
+	@apply mb-2 px-3 h-12;
 	@apply text-center;
 	@apply text-purple-900;
 	@apply line-clamp-2;
 }
+
+/* Author */
 
 article.book-list-item .author
 {
@@ -79,12 +76,12 @@ article.book-list-item .prices .discount
 
 /* Add to cart */
 
-article.book-list-item footer
+article.book-list-item .book-controls
 {
 	@apply p-3 pt-0;
 }
 
-article.book-list-item footer button
+article.book-list-item .book-controls button
 {
 	@apply block w-full;
 	@apply px-3 py-2;

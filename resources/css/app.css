@@ -1,4 +1,3 @@
-@import url(components/book-list/item.css);
 @import url(components/breadcrumbs.css);
 @import url(components/form/quantity-input.css);
 @import url(components/slider.css);
@@ -14,6 +13,7 @@
 @import url(components/site-footer/social-links.css);
 
 @import url(livewire/add-to-favorites-button.css);
+@import url(livewire/book-list-item.css);
 @import url(livewire/profile-form.css);
 
 @import url(pages/about.css);
@@ -32,6 +32,11 @@ body
 	@apply text-gray-600;
 	@apply text-justify;
 	@apply transition-colors;
+}
+
+.main-content
+{
+	@apply pt-[11.875rem];
 }
 
 .container-box
@@ -140,5 +145,6 @@ body
 
 .form-error
 {
+	@apply mt-1;
 	@apply text-red-700 text-sm;
 }

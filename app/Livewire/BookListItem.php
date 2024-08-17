@@ -2,50 +2,27 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Collection;
+use App\Models\Book;
+use App\Services\UrlService;
 use Livewire\Component;
 
 class BookListItem extends Component
 {
-	public string $url;
+	public Book $book;
 
-	public string $cover;
-
-	public string $title;
-
-	public Collection|string $authors;
-
-	public float $price;
-
-	public float|null $discountedPrice;
-
-	public bool $isPresale = false;
-
-	public function mount()
-	{
-		$authors = [];
-
-		foreach ($this->authors as $author)
-		{
-			if (is_array($author))
-				$authors[] = $author->name;
-			else
-				$authors[] = $author;
-		}
-
-		$this->authors = join(', ', $authors);
-	}
-
-    public function render()
+    public function render(UrlService $urlService)
     {
-		if ($this->discountedPrice)
-		{
-			$discount = 100 * ($this->price - $this->discountedPrice) / $this->price;
-			$data = ['discount' => round($discount)];
-		}
-		else
-			$data = [];
+		$cover = $urlService->fromAsset($this->book->cover);
 
+		$authors = $this->book->authors->pluck('name')->join(', ');
+
+		$discount = $this->book->discounted_price
+			? round(100 * ($this->book->price - $this->book->discounted_price) / $this->book->price)
+			: null;
+
+		$url = $urlService->fromSlug($this->book->seoTags->slug);
+
+		$data = compact('cover', 'authors', 'discount', 'url');
         return view('livewire.book-list-item', $data);
     }
 }
