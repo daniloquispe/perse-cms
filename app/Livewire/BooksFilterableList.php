@@ -8,6 +8,7 @@ use App\Models\BookCategory;
 use App\Models\SearchTerms;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -62,35 +63,29 @@ class BooksFilterableList extends Component
 	{
 		$count = $this->pageNumber * self::PAGE_SIZE;
 
-		if (isset($this->categoryId))
+		$isBookCategory = isset($this->categoryId);
+		$isSearch = isset($this->searchString);
+
+		// Book category?
+		if ($isBookCategory)
 		{
-			$category = BookCategory::query()
+			$bookCategory = BookCategory::query()
 				->find($this->categoryId);
 
-			$this->title = $category->name;
-			$this->count = $category->books()->count();
-			$this->searchResultsLabel = $category->forced_search_results_label ?? 'libros';
+			$this->title = $bookCategory->name;
+			$this->count = $bookCategory->books()->count();
+			$this->searchResultsLabel = $bookCategory->forced_search_results_label ?? 'libros';
 
-			$this->booksQuery = $category->books();
+			$this->booksQuery = $bookCategory->books();
 		}
-		elseif (isset($this->searchString))
+		// Search results?
+		elseif ($isSearch)
 		{
-			$bookIds = SearchTerms::query()
-				->selectRaw('*, MATCH (terms) AGAINST (?) AS points', [$this->searchString])
-				->where('searchable_type', Book::class)
-				->whereRaw('MATCH (terms) AGAINST (?)', [$this->searchString])
-				->orderByDesc('points')
-				->get()
-				->pluck('searchable_id')
-				->toArray();
-
-			$this->booksQuery = Book::query()
-				->where('is_visible', true)
-				->whereKey($bookIds);
-
 			$this->title = "Buscando: {$this->searchString}";
-			$this->count = $this->booksQuery->count();
+			$this->count = $this->newSearchQuery()->count();
 			$this->searchResultsLabel = 'libros';
+
+			$this->booksQuery = $this->newSearchQuery();
 		}
 
 		// Order by
@@ -122,17 +117,50 @@ class BooksFilterableList extends Component
 				break;
 
 			default:  // By relevance
-				$orderColumn = 'order';
-				$orderDirection = 'asc';
+				$orderColumn = 'relevance';
+				$orderDirection = 'desc';
 		}
 
-		$this->books = $this->booksQuery
-			->with(['publisher', 'authors', 'ageRange', 'bookbindingType'])
-			->orderBy($orderColumn, $orderDirection)
-			->take($count)
-			->get();
+		// Get books list
+		if ($isSearch)
+		{
+			$booksSearchTerms = $this->booksQuery
+				->orderBy($orderColumn, $orderDirection)
+				->take($count)
+				->get();
+
+			$this->books = new Collection();
+
+			$booksSearchTerms->each(function (SearchTerms $bookSearchTerms)
+			{
+				$book = $bookSearchTerms->searchable;
+				$book->relevance = $bookSearchTerms->relevance;
+
+				$this->books->add($book);
+			});
+		}
+		else
+		{
+			$this->books = $this->booksQuery
+				->with(['publisher', 'authors', 'ageRange', 'bookFormat', 'bookbindingType'])
+				->orderBy($orderColumn, $orderDirection)
+				->take($count)
+				->get();
+		}
 
 		$this->updateFilters();
+	}
+
+	private function newSearchQuery(): Builder
+	{
+		return SearchTerms::query()
+			->selectRaw('searchable_type, searchable_id, MATCH (terms) AGAINST (? with query expansion) AS relevance', [$this->searchString])
+			->where('searchable_type', Book::class)
+			->whereRaw('MATCH (terms) AGAINST (? with query expansion)', [$this->searchString])
+			->orderByDesc('relevance')
+			->with([
+				'searchable' => fn(MorphTo $query) => $query->with(['publisher', 'authors', 'ageRange', 'bookFormat', 'bookbindingType'])
+			]);
 	}
 
 	private function updateFilters(): void

@@ -20,7 +20,7 @@ return new class extends Migration
 			$table->foreignIdFor(\App\Models\BookbindingType::class)->nullable();
 			$table->foreignIdFor(\App\Models\BookFormat::class);
 			$table->foreignIdFor(\App\Models\BookAgeRange::class, 'age_range_id')->nullable();
-			$table->integer('order')->default(0)->index();
+			$table->integer('relevance')->default(0)->index();
 			$table->boolean('is_visible')->default(true);
 			$table->string('sku')->unique();
 			$table->string('isbn', 13);

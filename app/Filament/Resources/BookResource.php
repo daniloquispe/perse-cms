@@ -40,10 +40,13 @@ class BookResource extends Resource
 				Forms\Components\Section::make('Información básica')
 					->columns()
 					->schema([
-						Forms\Components\TextInput::make('order')
-							->label('Orden')
-							->helperText('Para ordenar libros por relevancia')
+						Forms\Components\TextInput::make('relevance')
+							->label('Relevancia')
+							->helperText('Los libros con mayor relevancia aparecerán primero en las listas ordenadas por relevancia')
 							->numeric()
+							->default(0)
+							->minValue(0)
+							->maxValue(20)
 							->required(),
 						Forms\Components\TextInput::make('title')
 							->label('Título')

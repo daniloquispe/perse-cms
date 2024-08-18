@@ -14,6 +14,7 @@ class Book extends Model
     use HasFactory, HasSearchTerms, HasSeoTags;
 
 	protected $fillable = [
+		'relevance',
 		'category_id',
 		'cover',
 		'discounted_price',
