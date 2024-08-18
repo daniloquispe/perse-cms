@@ -60,7 +60,7 @@
 							@endforeach
 						</select>
 					@else
-						<div class="readonly">{{ $gender->getLabel() }}</div>
+						<div class="readonly">{{ $gender?->getLabel() }}</div>
 					@endif
 				</div>
 			</div>
