@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "daniloquispe/perse",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Custom-made CMS and storefront for a library e-commerce site",
+    "keywords": ["perse", "perse librerias", "cms", "e-commerce", "website", "custom made"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
