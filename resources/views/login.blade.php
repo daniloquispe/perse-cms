@@ -6,7 +6,7 @@
 	<div class="container-box">
 		<x-breadcrumbs :links="$breadcrumbs" />
 	</div>
-	<div class="container-box-auth">
+	<div class="container-box-auth content-wrapper">
 		<h2>Escoja una opción para entrar</h2>
 		<button class="access-button access-email">Recibir código de acceso por e-mail</button>
 		<p>Ó</p>
