@@ -75,6 +75,11 @@ body
 	@apply max-w-xl mx-auto;
 }
 
+.container-box-auth.wide
+{
+	@apply max-w-2xl;
+}
+
 .container-box-auth h2
 {
 	@apply mt-4 mb-6;
@@ -98,7 +103,7 @@ body
 	@apply bg-slate-100;
 }
 
-.container-box-auth form button,
+.container-box-auth form button[type="submit"],
 .container-box-auth .access-button
 {
 	@apply block w-full py-3 rounded;
@@ -132,6 +137,11 @@ body
 	@apply grid grid-cols-2 gap-2;
 }
 
+.container-box-auth.wide .access-wrapper
+{
+	@apply grid-cols-1;
+}
+
 /* Forms */
 
 .checkbox-wrapper
@@ -141,7 +151,8 @@ body
 
 .checkbox-wrapper input[type="checkbox"]
 {
-	@apply mt-1 grow-0;
+	@apply mt-1 grow-0 size-4;
+	@apply accent-palette-purple;
 }
 
 .form-error
