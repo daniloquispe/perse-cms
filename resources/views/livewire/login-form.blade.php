@@ -9,7 +9,7 @@
 			<div class="form-error">{{ $message }}</div>
 		@enderror
 		<p><a href="/recuperar-contrasena">Olvidé mi contraseña</a></p>
-		<button>Entrar</button>
+		<button type="submit">Entrar</button>
 		@if($success)
 			<div wire:transition>¡Inicio de sesión exitoso!</div>
 		@endif
