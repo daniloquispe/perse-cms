@@ -14,6 +14,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@bugsnag/browser-performance": "^2.7.1",
         "@fontsource/roboto": "^5.0.13",
         "@splidejs/splide": "^4.1.4"
     }
