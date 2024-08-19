@@ -14,7 +14,7 @@
 				{{-- Form --}}
 				<form wire:submit="submit" id="register-form" method="post">
 					<input type="email" wire:model="accessCodeForm.email" id="input-email" required="required" placeholder="Ej. ejemplo@mail.com" aria-label="E-mail" />
-					@error('email')
+					@error('accessCodeForm.email')
 						<div class="form-error">{{ $message }}</div>
 					@enderror
 					<button type="submit">Enviar código</button>
@@ -28,21 +28,24 @@
 		{{-- Form --}}
 		<form wire:submit="submit" id="register-form" method="post">
 			<input type="text" wire:model="registrationForm.access_code" required="required" placeholder="Ingrese su código de acceso" aria-label="Código de acceso" />
-			@error('access_code')
+			@error('registrationForm.access_code')
 				<div class="form-error">{{ $message }}</div>
 			@enderror
 			<input type="password" wire:model="registrationForm.password" id="input-password" required="required" placeholder="Ingrese su contraseña" aria-label="Contraseña" />
-			@error('password')
+			@error('registrationForm.password')
 				<div class="form-error">{{ $message }}</div>
 			@enderror
 			<input type="password" wire:model="registrationForm.password_confirmation" id="input-password_confirmation" required="required" placeholder="Confirmar contraseña" aria-label="Confirmar Contraseña" />
-			@error('password_confirmation')
+			@error('registrationForm.password_confirmation')
 				<div class="form-error">{{ $message }}</div>
 			@enderror
 			<div class="checkbox-wrapper">
 				<input type="checkbox" wire:model="registrationForm.accept" id="input-accept" required="required" />
 				<div>
 					<label for="input-accept">He leído y autorizo el tratamiento de mis datos según la <a href="{{ $privacyPolicyUrl }}">Política de Privacidad</a> y <a href="{{ $termsUrl }}">Términos y Condiciones</a></label>
+					@error('registrationForm.accept')
+						<div class="form-error">{{ $message }}</div>
+					@enderror
 				</div>
 			</div>
 			<div class="grid grid-cols-2 gap-4 mb-3">
