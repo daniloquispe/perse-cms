@@ -18,6 +18,18 @@ article.book-list-item .presale
 	@apply -rotate-45 -translate-x-14 translate-y-8;
 }
 
+/* Remove from Favorites */
+
+article.book-list-item .remove-favorite-button
+{
+	@apply w-12 p-2;
+	@apply rounded-full shadow;
+	@apply absolute top-4 right-4;
+	@apply bg-white opacity-50 hover:opacity-80;
+	@apply text-gray-800;
+	@apply transition-opacity;
+}
+
 /* Cover */
 
 article.book-list-item .book-cover

@@ -115,7 +115,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="books">
+			<div class="books-list-container">
 				@foreach($books as $book)
 					<livewire:book-list-item wire:key="{{ $book->id }}" :book="$book" />
 				@endforeach
