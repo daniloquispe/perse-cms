@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Page;
+use App\Models\SeoTags;
+use App\PageRole;
+use App\Services\UrlService;
 use Bugsnag\BugsnagLaravel\OomBootstrapper;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,7 +19,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+		$middleware->redirectGuestsTo(function ()
+		{
+			$slug = SeoTags::query()
+				->where('owner_type', Page::class)
+				->where('owner_id', PageRole::Login->value)
+				->value('slug');
+
+			return (new UrlService())->fromSlug($slug);
+		});
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
