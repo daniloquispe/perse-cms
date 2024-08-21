@@ -12,7 +12,7 @@
 		</div>
 		{{-- Menu --}}
 		<ul class="menu">
-			@foreach($menuRoutes as $i => $menuRoute)
+			@foreach($menuRoutes as $menuRoute)
 				<li wire:key="{{ $menuRoute['route'] }}" @class(['active' => \Illuminate\Support\Facades\Route::is($menuRoute['route'])])>
 					<a wire:click="$activeMenuItemIndex = $i" href="{{ route($menuRoute['route']) }}">
 						{{ $menuRoute['name'] }}
