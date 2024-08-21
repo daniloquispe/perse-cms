@@ -10,14 +10,17 @@ class CustomerCard extends Component
 {
 	public ?string $title;
 
+	public ?string $subtitle;
+
 	public bool $hasBody;
 
 	/**
      * Create a new component instance.
      */
-    public function __construct(string|null $title = null, bool $hasBody = true)
+    public function __construct(string|null $title = null, string|null $subtitle = null, bool $hasBody = true)
     {
 		$this->title = $title;
+		$this->subtitle = $subtitle;
 		$this->hasBody = $hasBody;
     }
 
