@@ -31,6 +31,12 @@
 			@case('customer.profile')
 				<livewire:customer.profile-section />
 				@break
+			@case('customer.addresses')
+				<livewire:customer.addresses-section />
+				@break
+			@case('customer.orders')
+				<livewire:customer.orders-section />
+				@break
 			@case('customer.favorites')
 				<livewire:customer.favorites-section />
 				@break
