@@ -1,6 +1,6 @@
 .search-form
 {
-	@apply xl:w-full xl:pl-16 xl:pr-12;
+	@apply w-full xl:pl-16 xl:pr-12;
 	@apply flex items-center;
 }
 
