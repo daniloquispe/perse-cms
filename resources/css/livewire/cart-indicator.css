@@ -1,0 +1,75 @@
+.cart-indicator
+{
+	#cart-sidebar-active
+	{
+		@apply hidden;
+	}
+
+	#cart-sidebar-active:checked ~ .cart-sidebar-container
+	{
+		/*@apply flex;*/
+		@apply right-0;
+	}
+
+	#cart-sidebar-active:checked ~ #cart-sidebar-overlay
+	{
+		@apply fixed top-0 left-0;
+		@apply w-full h-full;
+		@apply bg-black opacity-40;
+	}
+
+	.open-cart-sidebar-button
+	{
+		@apply flex items-center gap-3;
+		@apply cursor-pointer;
+	}
+
+	.cart-sidebar-container
+	{
+		@apply fixed top-0 /*right-0*/ -right-full z-50;
+		@apply w-3/4 sm:w-[32rem] h-full;
+		@apply /*hidden*/ flex flex-col;
+		@apply bg-white;
+		@apply shadow-[-5px_0_5px_rgba(0,0,0,0.25)];
+		transition: 0.75s ease-out;
+
+		.sidebar-header
+		{
+			@apply p-4;
+			@apply bg-palette-orange;
+			@apply text-center text-2xl text-white font-bold;
+
+			svg
+			{
+				@apply inline size-8;
+				@apply border-white;
+			}
+
+			label
+			{
+				@apply float-right;
+				@apply cursor-pointer;
+			}
+		}
+
+		.sidebar-content
+		{
+			@apply grow;
+		}
+
+		.sidebar-footer
+		{
+			@apply px-6 pt-4 pb-8;
+			@apply shadow-xl;
+			@apply font-bold;
+
+			a
+			{
+				@apply block py-2.5;
+				@apply rounded-lg;
+				@apply bg-palette-orange;
+				@apply text-white text-center;
+			}
+		}
+	}
+}

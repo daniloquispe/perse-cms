@@ -8,6 +8,7 @@
 @import url(components/site-footer/social-links.css);
 
 @import url(livewire/site-header.css);
+@import url(livewire/cart-indicator.css);
 @import url(livewire/marquee.css);
 @import url(livewire/main-menu.css);
 @import url(livewire/search-form.css);
