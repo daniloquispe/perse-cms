@@ -1,6 +1,58 @@
+/* Book page */
+
 article.book
 {
 	@apply xl:grid xl:grid-cols-4 xl:gap-12;
+
+	/* Stars */
+
+	.stars
+	{
+		@apply flex items-center gap-3;
+		@apply text-sm;
+
+		svg
+		{
+			@apply inline-block size-6;
+			@apply text-gray-300 fill-gray-300;
+		}
+	}
+
+	/* Comments */
+
+	.comments-box
+	{
+		#show-comment-form
+		{
+			@apply hidden;
+		}
+
+		.show-form-button
+		{
+			@apply cursor-pointer;
+			@apply inline-block my-4;
+
+			svg
+			{
+				@apply inline size-6;
+			}
+		}
+
+		#show-comment-form ~ .comment-form-wrapper
+		{
+			@apply hidden;
+		}
+
+		#show-comment-form:checked ~ .comment-form-wrapper
+		{
+			@apply block;
+		}
+
+		#show-comment-form:checked ~ label svg
+		{
+			@apply rotate-180;
+		}
+	}
 }
 
 article.book .center
@@ -56,6 +108,7 @@ article.book .title
 
 article.book .author
 {
+	@apply mb-3;
 	@apply text-2xl;
 }
 
@@ -140,7 +193,7 @@ article.book  footer .author-box .info a
 
 /* Comments */
 
-article.book .comments-wrapper
+/*article.book .comments-wrapper
 {
 	@apply mt-5;
-}
+}*/

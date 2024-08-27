@@ -1,0 +1,61 @@
+.comment-form
+{
+	@apply rounded-lg;
+	@apply p-6;
+	@apply bg-gray-100 shadow;
+
+	> div
+	{
+		@apply flex flex-col;
+		@apply my-4;
+	}
+
+	h3
+	{
+		@apply font-bold;
+	}
+
+	label
+	{
+		@apply text-left;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	textarea
+	{
+		@apply w-full;
+		@apply border border-gray-300 rounded;
+		@apply p-1;
+	}
+
+	/* Rating */
+
+	.stars-input
+	{
+		@apply flex flex-row-reverse justify-end;
+
+		label
+		{
+			svg
+			{
+				@apply cursor-pointer;
+				@apply inline size-6;
+				@apply text-gray-400;
+				@apply transition-all;
+			}
+		}
+
+		input[type="radio"]
+		{
+			@apply hidden;
+		}
+
+		input:not(:checked) ~ label:hover svg,
+		input:not(:checked) ~ label:hover ~ label svg,
+		input:checked ~ label svg
+		{
+			@apply fill-palette-yellow;
+		}
+	}
+}

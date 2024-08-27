@@ -1,6 +1,7 @@
 .add-to-favorites-button
 {
 	@apply flex items-center gap-2;
+	@apply mb-8;
 }
 
 .add-to-favorites-button > *
