@@ -22,7 +22,7 @@
 					</a>
 				</li>
 			@endforeach
-			<li><a wire:click="logout" href="/customer/logout">Cerrar sesión</a></li>
+			<li><a wire:click.prevent="logout" href="/customer/logout">Cerrar sesión</a></li>
 		</ul>
 	</nav>
 	{{-- Center --}}
