@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class SearchForm extends Component
@@ -9,6 +10,12 @@ class SearchForm extends Component
 	public string $searchString;
 
 	public bool $canShowResetButton;
+
+	public function mount(): void
+	{
+		if (Route::is('search'))
+			$this->searchString = Route::current()->parameter('search');
+	}
 
     public function render()
     {
