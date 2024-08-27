@@ -31,7 +31,7 @@
 											<a href="{{ $subItem['seo_tags']['slug'] }}" class="col-title">{{ $subItem['name'] }}</a>
 											<ul>
 												@foreach($subItem['children'] as $subItemOption)
-													<li @class(['active' => in_array($subItemOption['id'], $activeIds)])>
+													<li @class(['submenu-item-option', 'active' => in_array($subItemOption['id'], $activeIds)])>
 														<a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a>
 													</li>
 												@endforeach

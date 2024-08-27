@@ -71,7 +71,7 @@
 
 	.submenu
 	{
-		/*apply mt-3;*/
+		@apply mt-0;
 		@apply border-y border-solid border-gray-200;
 		@apply hidden z-10;
 		@apply text-left text-gray-600;
@@ -115,7 +115,7 @@
 					@apply mb-0;
 				}
 
-				a
+				li.submenu-item-option a
 				{
 					@apply font-normal;
 					text-transform: none;
