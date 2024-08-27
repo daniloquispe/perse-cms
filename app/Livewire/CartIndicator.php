@@ -4,19 +4,43 @@ namespace App\Livewire;
 
 use App\Cart;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CartIndicator extends Component
 {
 	public bool $show = false;
 
+	public int $count;
+
+	public array $items;
+
+	public float $total;
+
     public function render(): View
     {
-		$count = Cart::getItemsCount();
-		$items = Cart::getItems();
-		$total = Cart::getTotal();
+		$this->loadData();
 
-		$data = compact('count', 'items', 'total');
-        return view('livewire.cart-indicator', $data);
+		return view('livewire.cart-indicator');
     }
+
+	private function loadData(): void
+	{
+		$this->count = Cart::getItemsCount();
+		$this->items = Cart::getItems();
+		$this->total = Cart::getTotal();
+	}
+
+	public function removeItem(int $bookId): void
+	{
+		Cart::remove($bookId);
+
+		$this->loadData();
+	}
+
+	#[On('cart-updated')]
+	public function openSidebar(): void
+	{
+		$this->show = true;
+	}
 }

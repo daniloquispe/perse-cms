@@ -33,6 +33,15 @@ class Cart
 		static::save();
 	}
 
+	public static function setQuantity(int $bookId, int $quantity): void
+	{
+		static::load();
+
+		static::$items[$bookId]['quantity'] = $quantity;
+
+		static::save();
+	}
+
 	private static function load(): void
 	{
 		static::$items = Session::get('cart', []);

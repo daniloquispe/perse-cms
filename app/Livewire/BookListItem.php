@@ -33,5 +33,7 @@ class BookListItem extends Component
 	public function addToCart(): void
 	{
 		Cart::add($this->book);
+
+		$this->dispatch('cart-updated');
 	}
 }

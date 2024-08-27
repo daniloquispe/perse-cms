@@ -2,11 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Cart;
 use Livewire\Component;
 
 class QuantityInput extends Component
 {
 	public int|string $value = 1;
+
+	public ?int $bookId = null;
 
 	public function decrement(): void
 	{
@@ -14,11 +17,22 @@ class QuantityInput extends Component
 			return;
 
 		$this->value--;
+		$this->updateCart();
 	}
 
 	public function increment(): void
 	{
 		$this->value++;
+		$this->updateCart();
+	}
+
+	private function updateCart(): void
+	{
+		if ($this->bookId)
+		{
+			Cart::setQuantity($this->bookId, $this->value);
+			$this->dispatch('cart-updated');
+		}
 	}
 
 	public function checkValue(): void
