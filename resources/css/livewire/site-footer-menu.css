@@ -1,0 +1,63 @@
+.footer-menu-box
+{
+	@apply px-4 2xl:px-0 py-12;
+	/*@apply 2xl:grid 2xl:grid-cols-5 2xl:gap-16;*/
+	@apply 2xl:flex 2xl:justify-between 2xl:gap-16;
+	@apply text-white;
+
+	.title
+	{
+		@apply cursor-pointer 2xl:cursor-auto;
+		@apply font-bold uppercase;
+	}
+}
+
+.footer-menu-box nav
+{
+	@apply border-t border-solid border-white 2xl:border-0;
+	@apply px-8 2xl:px-0 py-4 2xl:py-0;
+
+	.title
+	{
+		@apply flex items-center justify-between;
+
+		svg
+		{
+			@apply size-4;
+			@apply 2xl:hidden;
+		}
+	}
+
+	.title.open
+	{
+		svg
+		{
+			@apply rotate-180;
+		}
+	}
+
+	ul
+	{
+		@apply h-0 2xl:h-auto;
+		@apply opacity-0 2xl:opacity-100;
+		@apply hidden 2xl:block;
+		@apply transition-all;
+	}
+
+	ul.open
+	{
+		@apply h-auto block opacity-100;
+	}
+}
+
+.footer-menu-box img
+{
+	@apply mx-auto 2xl:mx-0;
+	@apply mb-14;
+}
+
+.footer-menu-box li
+{
+	@apply my-4;
+	@apply text-sm;
+}

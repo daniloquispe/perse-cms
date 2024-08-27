@@ -33,7 +33,7 @@
 .site-footer .icon-column svg
 {
 	@apply h-16 flex-none;
-/*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
+	/*	@apply bg-gradient-to-tr from-[#dd4373] to-[#e67846] fill-transparent bg-clip-text;*/
 	@apply text-[#dd4373];
 }
 

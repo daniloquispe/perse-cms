@@ -6,8 +6,13 @@
 		<livewire:social-links />
 	</div>
 	<nav>
-		<p class="title">Sobre nosotros</p>
-		<ul>
+		<p class="title" data-menu="1">
+			<span>Sobre nosotros</span>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+			</svg>
+		</p>
+		<ul data-menu="1">
 			@if($aboutUsUrl)
 				<li><a href="{{ $aboutUsUrl }}">Quiénes Somos</a></li>
 			@endif
@@ -21,8 +26,13 @@
 		</ul>
 	</nav>
 	<nav>
-		<p class="title">Mi cuenta</p>
-		<ul>
+		<p class="title" data-menu="2">
+			<span>Mi cuenta</span>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+			</svg>
+		</p>
+		<ul data-menu="2">
 			@if($loginUrl)
 				<li><a href="{{ $loginUrl }}">Iniciar Sesión</a></li>
 			@endif
@@ -34,8 +44,13 @@
 		</ul>
 	</nav>
 	<nav>
-		<p class="title">Atención al cliente</p>
-		<ul>
+		<p class="title" data-menu="3">
+			<span>Atención al cliente</span>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+			</svg>
+		</p>
+		<ul data-menu="3">
 			@if($deliveryPolicyUrl)
 				<li><a href="{{ $deliveryPolicyUrl }}">Políticas de Envío</a></li>
 			@endif
@@ -55,8 +70,13 @@
 	</nav>
 	@if($complaintsBookUrl)
 		<nav>
-			<p class="title">Libro de Reclamaciones</p>
-			<ul>
+			<p class="title" data-menu="4">
+				<span>Libro de Reclamaciones</span>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+				</svg>
+			</p>
+			<ul data-menu="4">
 				<li><a href="#"><img src="{{ asset('images/complaints-book.png') }}" alt="Libro de Reclamaciones" /></a></li>
 			</ul>
 		</nav>
