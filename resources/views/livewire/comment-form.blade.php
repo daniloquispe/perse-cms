@@ -1,12 +1,7 @@
 <form class="comment-form">
 	<h3>Agregar comentario</h3>
-	{{-- Title --}}
-	<div>
-		<label for="input-title">Comentario</label>
-		<input type="text" id="input-title" required="required" />
-	</div>
 	{{-- Rating --}}
-	<div>
+	<div class="stars-input-wrapper">
 		<p>Califique el producto de 1 a 5 estrellas</p>
 		{{-- Stars --}}
 		<div class="stars-input">
@@ -23,7 +18,7 @@
 	</div>
 	{{-- Name --}}
 	<div class="flex flex-col">
-		<label for="input-name">Su nombre</label>
+		<label for="input-name">Sus nombres y apellidos</label>
 		<input type="text" id="input-name" required="required" />
 	</div>
 	{{-- E-mail --}}
@@ -34,7 +29,8 @@
 	{{-- Comment --}}
 	<div>
 		<label for="input-comment">Escribir comentario</label>
-		<textarea id="input-comment" required="required"></textarea>
+		<textarea id="input-comment" rows="4" required="required"></textarea>
 	</div>
+	{{-- Submit --}}
 	<button type="submit">Enviar comentario</button>
 </form>

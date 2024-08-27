@@ -60,7 +60,7 @@
 							</svg>
 						@endforeach
 					</div>
-					<div>0 comentarios</div>
+					<div><a href="#comments">Escribe tu comentario</a></div>
 				</div>
 				<div class="cart-box">
 					<div class="price">S/ {{ $book->price }}</div>
@@ -76,6 +76,7 @@
 			</main>
 			<footer>
 				{{-- Authors --}}
+				<a id="comments"></a>
 				<div class="authors-box">
 					@foreach($book->authors as $author)
 						<div class="author-box">
