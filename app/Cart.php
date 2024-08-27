@@ -61,7 +61,7 @@ class Cart
 			self::$total = 0;
 
 			foreach (self::getItems() as $item)
-				self::$total += $item['book']->discounted_price ?: $item['book']->price;
+				self::$total += ($item['book']->discounted_price ?: $item['book']->price) * $item['quantity'];
 		}
 
 		return self::$total;
