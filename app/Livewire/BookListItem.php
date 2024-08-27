@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Cart;
 use App\Models\Book;
 use App\Services\UrlService;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,8 @@ class BookListItem extends Component
 
 	public bool $asRemoved = false;
 
-    public function render(UrlService $urlService): View
-    {
+	public function render(UrlService $urlService): View
+	{
 		$cover = $urlService->fromAsset($this->book->cover);
 
 		$authors = $this->book->authors->pluck('name')->join(', ');
@@ -33,8 +34,8 @@ class BookListItem extends Component
 		$url = $urlService->fromSlug($this->book->seoTags->slug);
 
 		$data = compact('cover', 'authors', 'discount', 'url');
-        return view('livewire.book-list-item', $data);
-    }
+		return view('livewire.book-list-item', $data);
+	}
 
 	public function removeFromFavorites(): void
 	{
@@ -45,5 +46,12 @@ class BookListItem extends Component
 		}
 		else
 			$this->toast('No se pudo eliminar de tus Favoritos', 'Por favor, vuelve a intentarlo');
+	}
+
+	public function addToCart(): void
+	{
+		Cart::add($this->book);
+
+		$this->dispatch('cart-updated');
 	}
 }

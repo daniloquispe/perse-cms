@@ -1,0 +1,32 @@
+.quantity-input
+{
+	@apply inline-flex;
+
+	> *
+	{
+		@apply size-[1.5em];
+	}
+
+	input
+	{
+		@apply w-[2em];
+		@apply border border-gray-300;
+		@apply text-center;
+	}
+
+	button
+	{
+		@apply border border-gray-300;
+		@apply bg-gray-100;
+	}
+
+	.dec
+	{
+		@apply border-r-0;
+	}
+
+	.inc
+	{
+		@apply border-l-0;
+	}
+}

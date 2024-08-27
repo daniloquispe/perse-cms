@@ -1,0 +1,128 @@
+.cart-indicator
+{
+	#cart-sidebar-active
+	{
+		@apply hidden;
+	}
+
+	#cart-sidebar-active:checked ~ .cart-sidebar-container
+	{
+		/*@apply flex;*/
+		@apply right-0;
+	}
+
+	#cart-sidebar-active:checked ~ #cart-sidebar-overlay
+	{
+		@apply fixed top-0 left-0;
+		@apply w-full h-full;
+		@apply bg-black opacity-40;
+	}
+
+	.open-cart-sidebar-button
+	{
+		@apply flex items-center gap-3;
+		@apply cursor-pointer;
+	}
+
+	/* Sidebar */
+
+	.cart-sidebar-container
+	{
+		@apply fixed top-0 /*right-0*/ -right-full z-50;
+		@apply w-3/4 sm:w-[32rem] h-full;
+		@apply /*hidden*/ flex flex-col;
+		@apply bg-white;
+		@apply shadow-[-5px_0_5px_rgba(0,0,0,0.25)];
+		transition: 0.75s ease-out;
+
+		/* Header */
+
+		.sidebar-header
+		{
+			@apply p-4;
+			@apply bg-palette-orange;
+			@apply text-center text-2xl text-white font-bold;
+
+			svg
+			{
+				@apply inline size-8;
+				@apply border-white;
+			}
+
+			label
+			{
+				@apply float-right;
+				@apply cursor-pointer;
+			}
+		}
+
+		/* Content */
+
+		.sidebar-content
+		{
+			@apply grow;
+
+			/* Cart items */
+
+			.cart-item
+			{
+				@apply flex items-center gap-6;
+				@apply px-8 py-6;
+
+				img
+				{
+					@apply w-16;
+				}
+
+				.item-info
+				{
+					@apply grow;
+
+					.book-title
+					{
+						@apply text-sm font-bold;
+					}
+
+					.prices
+					{
+						@apply py-3;
+
+						del
+						{
+							@apply inline-block pl-4;
+							@apply text-sm opacity-60;
+						}
+					}
+				}
+
+				button svg
+				{
+					@apply size-6;
+				}
+			}
+		}
+
+		/* Footer */
+
+		.sidebar-footer
+		{
+			@apply px-6 pt-4 pb-8;
+			@apply shadow-[0_-3px_5px_rgba(0,0,0,0.1)];
+			@apply font-bold;
+
+			.cart-totals > div
+			{
+				@apply flex justify-between;
+				@apply my-4;
+			}
+
+			a
+			{
+				@apply block mt-12 py-2.5;
+				@apply rounded-lg;
+				@apply bg-palette-orange;
+				@apply text-white text-center;
+			}
+		}
+	}
+}

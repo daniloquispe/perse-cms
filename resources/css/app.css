@@ -8,6 +8,7 @@
 @import url(components/site-footer/social-links.css);
 
 @import url(livewire/site-header.css);
+@import url(livewire/cart-indicator.css);
 @import url(livewire/marquee.css);
 @import url(livewire/main-menu.css);
 @import url(livewire/search-form.css);
@@ -16,6 +17,7 @@
 @import url(livewire/book-carousel.css);
 @import url(livewire/book-list-item.css);
 @import url(livewire/profile-form.css);
+@import url(livewire/quantity-input.css);
 @import url(livewire/site-footer.css);
 @import url(livewire/site-footer-menu.css);
 @import url(livewire/slider.css);
