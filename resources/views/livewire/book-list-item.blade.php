@@ -26,6 +26,6 @@
 	</div>
 	{{-- Add to cart --}}
 	<div class="book-controls">
-		<button>Agregar</button>
+		<button type="button" wire:click="addToCart">Agregar</button>
 	</div>
 </article>
