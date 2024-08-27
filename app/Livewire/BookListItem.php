@@ -4,15 +4,23 @@ namespace App\Livewire;
 
 use App\Models\Book;
 use App\Services\UrlService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class BookListItem extends Component
 {
+	use \App\Toast;
+
 	public Book $book;
 
 	public bool $inCarousel = false;
 
-    public function render(UrlService $urlService)
+	public bool $asFavorite = false;
+
+	public bool $asRemoved = false;
+
+    public function render(UrlService $urlService): View
     {
 		$cover = $urlService->fromAsset($this->book->cover);
 
@@ -27,4 +35,15 @@ class BookListItem extends Component
 		$data = compact('cover', 'authors', 'discount', 'url');
         return view('livewire.book-list-item', $data);
     }
+
+	public function removeFromFavorites(): void
+	{
+		if (Auth::guard('storefront')->user()->favorites()->detach($this->book->id))
+		{
+			$this->toast('Eliminado de tus Favoritos');
+			$this->asRemoved = true;
+		}
+		else
+			$this->toast('No se pudo eliminar de tus Favoritos', 'Por favor, vuelve a intentarlo');
+	}
 }

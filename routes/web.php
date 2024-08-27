@@ -6,17 +6,13 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 Route::get('search/{search}', \App\Http\Controllers\SearchController::class)->name('search');
 Route::view('cart/list', 'cart')->name('cart.list');
 
-Route::get('profile', \App\Http\Controllers\ProfileController::class)->name('profile');
-
 Route::get('{slug}', \App\Http\Controllers\SlugController::class);
 
-// Auth
-Route::get('actions/logout', function ()
+// Customer routes
+Route::middleware('auth:storefront')->group(function ()
 {
-	\Illuminate\Support\Facades\Auth::guard('storefront')->logout();
-
-	session()->invalidate();
-	session()->regenerateToken();
-
-	return redirect()->route('home');
-})->name('logout');
+	Route::get('customer/profile', \App\Livewire\Customer\CustomerPage::class)->name('customer.profile');
+	Route::get('customer/addresses', \App\Livewire\Customer\CustomerPage::class)->name('customer.addresses');
+	Route::get('customer/orders', \App\Livewire\Customer\CustomerPage::class)->name('customer.orders');
+	Route::get('customer/favorites', \App\Livewire\Customer\CustomerPage::class)->name('customer.favorites');
+});
