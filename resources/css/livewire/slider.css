@@ -1,3 +1,9 @@
+.slider
+{
+	@apply h-auto;
+	@apply mb-9;
+}
+
 .slider .image
 {
 	@apply hidden xl:block;
