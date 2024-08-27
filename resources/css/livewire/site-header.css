@@ -1,0 +1,109 @@
+.site-header
+{
+	@apply fixed top-0 w-full z-20;
+	/*@apply flex flex-col;*/
+	@apply bg-white;  /* Remove */
+
+	/* Marquee */
+
+	.marquee-wrapper
+	{
+		@apply hidden xl:block;
+		@apply h-9;
+	}
+
+	/* User, logo, cart, search */
+
+	.main-wrapper
+	{
+		@apply h-20 xl:h-[6.5rem];
+		@apply flex flex-wrap items-center;
+		@apply gap-0 xl:gap-24;
+		@apply justify-between xl:justify-center;
+		@apply /*w-full */xl:container xl:mx-auto;
+		@apply bg-white;
+
+		> div
+		{
+			@apply h-auto;
+		}
+
+		.indicator-cell a
+		{
+			@apply flex gap-3 items-center;
+
+			span
+			{
+				@apply sr-only md:not-sr-only;
+			}
+
+			svg
+			{
+				@apply size-6;
+			}
+		}
+
+		/* User */
+
+		.user-cell
+		{
+			@apply xl:order-3;
+			@apply pl-8 xl:pl-0;
+		}
+
+		/* Logo */
+
+		.logo-cell
+		{
+			@apply xl:order-1;
+			@apply h-16 xl:h-auto;
+
+			img
+			{
+				@apply xl:w-56 h-full;
+				/*@apply h-16 xl:h-auto;*/
+			}
+		}
+
+		/* Cart */
+
+		.cart-cell
+		{
+			@apply xl:order-4;
+			@apply pr-8 xl:pr-0;
+		}
+
+		/* Search */
+
+		.search-cell
+		{
+			@apply /*order-4 xl:*/order-2;
+			@apply w-full xl:w-auto hidden xl:flex items-center gap-8 xl:grow;
+			@apply px-8 py-3 xl:p-0;
+			@apply bg-palette-purple xl:bg-transparent;
+		}
+	}
+
+	/* Main menu (desktop) */
+
+	.main-menu-wrapper
+	{
+		@apply hidden xl:block;
+		@apply h-12;
+	}
+
+	/* Main menu and search (mobile) */
+
+	.mobile-main-menu-wrapper
+	{
+		@apply flex xl:hidden;
+		@apply items-center gap-4;
+		@apply h-16 px-8;
+		@apply bg-palette-purple;
+
+		> div:last-child
+		{
+			@apply grow;
+		}
+	}
+}

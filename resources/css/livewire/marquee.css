@@ -1,7 +1,6 @@
 .marquee
 {
-	@apply hidden xl:block;
-	@apply w-full py-2;
+	@apply w-full h-full flex items-center;
 	@apply bg-palette-purple text-white;
 	@apply font-bold uppercase text-sm text-center;
 }
