@@ -83,13 +83,18 @@ body
 
 .container-box-auth.wide
 {
-	@apply max-w-2xl;
+	@apply max-w-[44rem];
 }
 
 .container-box-auth h2
 {
 	@apply mt-4 mb-6;
 	@apply text-center uppercase;
+
+	+ p
+	{
+		text-transform: none;
+	}
 }
 
 .container-box-auth p
@@ -118,10 +123,15 @@ body
 	@apply transition-colors;
 }
 
+.container-box-auth form button[type="submit"]
+{
+	@apply font-[500];
+}
+
 .container-box-auth .access-button.access-email
 {
 	@apply border border-solid border-gray-500;
-	@apply bg-white text-gray-600 font-semibold;
+	@apply bg-white text-gray-600 font-[500];
 }
 .container-box-auth .access-button.access-email:hover
 {

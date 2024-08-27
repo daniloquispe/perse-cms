@@ -23,7 +23,7 @@
 			</div>
 		</div>
 	@else
-		<h2>Validar correo electrónico y crear una nueva contraseña</h2>
+		<h2 class="sr-only">Validar correo electrónico y crear una nueva contraseña</h2>
 		<p>Ingrese el código que enviamos a {{ $email }} y cree una nueva contraseña</p>
 		{{-- Form --}}
 		<form wire:submit="submit" id="register-form" method="post">
@@ -41,12 +41,12 @@
 			@enderror
 			<div class="checkbox-wrapper">
 				<input type="checkbox" wire:model="registrationForm.accept" id="input-accept" required="required" />
-				<div>
+				<div class="opacity-70">
 					<label for="input-accept">He leído y autorizo el tratamiento de mis datos según la <a href="{{ $privacyPolicyUrl }}">Política de Privacidad</a> y <a href="{{ $termsUrl }}">Términos y Condiciones</a></label>
 				</div>
 			</div>
-			<div class="grid grid-cols-2 gap-4 mb-3">
-				<button type="button" wire:click="goBack">&larr; Volver</button>
+			<div class="grid grid-cols-2 gap-10 mb-3">
+				<button type="button" wire:click="goBack" class="text-right">&larr; Volver</button>
 				<button type="submit">Entrar</button>
 			</div>
 			<p>¿Ya tiene una cuenta? <a href="{{ $loginUrl }}">Inicie sesión</a></p>
