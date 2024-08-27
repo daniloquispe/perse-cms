@@ -9,6 +9,8 @@ class Cart
 {
 	private static array $items;
 
+	private static float $total;
+
 	public static function add(Book $book, int $quantity = 1): void
 	{
 		static::load();
@@ -43,11 +45,25 @@ class Cart
 
 	public static function getItems(): array
 	{
+		static::load();
 		return static::$items;
 	}
 
 	public static function getItemsCount(): int
 	{
-		return isset(self::$items) ? count(self::$items) : 0;
+		return count(self::getItems());
+	}
+
+	public static function getTotal(): float
+	{
+		if (!isset(self::$total))
+		{
+			self::$total = 0;
+
+			foreach (self::getItems() as $item)
+				self::$total += $item['book']->discounted_price ?: $item['book']->price;
+		}
+
+		return self::$total;
 	}
 }
