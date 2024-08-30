@@ -38,7 +38,7 @@ article.book
 			}
 		}
 
-		#show-comment-form ~ .comment-form-wrapper
+		/*#show-comment-form ~ .comment-form-wrapper
 		{
 			@apply hidden;
 		}
@@ -48,9 +48,25 @@ article.book
 			@apply block;
 		}
 
-		#show-comment-form:checked ~ label svg
+		#show-comment-form:checked ~ label svg*/
+		.show-form-button.open svg
 		{
 			@apply rotate-180;
+		}
+
+		.comments
+		{
+			@apply flex flex-col gap-6;
+
+			.comment
+			{
+				@apply flex items-start gap-4;
+
+				.comment-name
+				{
+					@apply font-bold;
+				}
+			}
 		}
 	}
 }
