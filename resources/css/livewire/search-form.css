@@ -1,10 +1,46 @@
 .search-form
 {
-	@apply w-full xl:pl-16 xl:pr-12;
+	@apply w-full xl:pl-16 xl:pr-10;
 	@apply flex items-center;
+
+	form
+	{
+		@apply w-full;
+		@apply flex items-center;
+		@apply pl-4 pr-1 py-1;
+		@apply rounded-lg;
+		@apply bg-slate-100 focus-within:bg-white;
+		@apply border border-slate-100 xl:focus-within:border-palette-purple;
+		@apply xl:focus-within:shadow-[0_0_0_5px] xl:focus-within:shadow-palette-purple/15;
+		@apply transition-colors;
+
+		input
+		{
+			@apply grow;
+			@apply bg-transparent;
+			@apply focus:outline-none;
+		}
+
+		button
+		{
+			@apply rounded-full size-10;
+			@apply hover:bg-black/5;
+			@apply transition-colors;
+
+			svg
+			{
+				@apply mx-auto size-6;
+			}
+
+			span
+			{
+				@apply sr-only;
+			}
+		}
+	}
 }
 
-.search-form input
+/*.search-form input
 {
 	@apply bg-slate-100;
 }
@@ -41,7 +77,7 @@
 .search-form span
 {
 	@apply sr-only;
-}
+}*/
 
 /* Autocomplete */
 
