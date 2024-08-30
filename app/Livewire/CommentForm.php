@@ -45,7 +45,7 @@ class CommentForm extends Component
 		if ($this->form->save($this->bookId, Auth::guard('storefront')->id()))
 		{
 			$this->toast('¡Gracias por comentar!', 'Revisaremos tu comentario y lo publicaremos a la brevedad');
-			$this->form->reset();
+//			$this->form->reset(['comment', 'rate']);
 		}
 		else
 			$this->toast('No se pudo enviar el comentario', 'Por favor, inténtalo de nuevo');
