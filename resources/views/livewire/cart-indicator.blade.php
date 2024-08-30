@@ -54,16 +54,24 @@
 			@endforeach
 		</div>
 		<div class="sidebar-footer">
+			{{-- Totals --}}
 			<div class="cart-totals">
-				<div>
-					<div>Subtotal</div>
-					<div>S/&nbsp;{{ $total }}</div>
-				</div>
+				@if($totalDiscount)
+					<div>
+						<div>Subtotal</div>
+						<div>S/&nbsp;{{ $total + $totalDiscount }}</div>
+					</div>
+					<div>
+						<div>Descuento</div>
+						<div>&ndash; S/&nbsp;{{ $totalDiscount }}</div>
+					</div>
+				@endif
 				<div>
 					<div>Total</div>
 					<div>S/&nbsp;{{ $total }}</div>
 				</div>
 			</div>
+			{{-- Checkout --}}
 			<a href="{{ route('cart.list') }}">Comprar</a>
 		</div>
 	</div>

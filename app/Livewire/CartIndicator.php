@@ -17,6 +17,8 @@ class CartIndicator extends Component
 
 	public float $total;
 
+	public float $totalDiscount;
+
     public function render(): View
     {
 		$this->loadData();
@@ -29,6 +31,7 @@ class CartIndicator extends Component
 		$this->count = Cart::getItemsCount();
 		$this->items = Cart::getItems();
 		$this->total = Cart::getTotal();
+		$this->totalDiscount = Cart::getTotalDiscount();
 	}
 
 	public function removeItem(int $bookId): void

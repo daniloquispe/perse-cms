@@ -11,6 +11,8 @@ class Cart
 
 	private static float $total;
 
+	private static float $totalDiscount;
+
 	public static function add(Book $book, int $quantity = 1): void
 	{
 		static::load();
@@ -66,13 +68,36 @@ class Cart
 	public static function getTotal(): float
 	{
 		if (!isset(self::$total))
-		{
-			self::$total = 0;
-
-			foreach (self::getItems() as $item)
-				self::$total += ($item['book']->discounted_price ?: $item['book']->price) * $item['quantity'];
-		}
+			self::getTotals();
 
 		return self::$total;
+	}
+
+	public static function getTotalDiscount(): float
+	{
+		if (!isset(self::$totalDiscount))
+			self::getTotals();
+
+		return self::$totalDiscount;
+	}
+
+	private static function getTotals(): void
+	{
+		self::$total = 0;
+		self::$totalDiscount = 0;
+
+		foreach (self::getItems() as $item)
+		{
+			$book = $item['book'];
+			$quantity = $item['quantity'];
+
+			if ($book->discounted_price)
+			{
+				self::$total += $book->discounted_price * $quantity;
+				self::$totalDiscount += ($book->price - $book->discounted_price) * $quantity;
+			}
+			else
+				self::$total += $book->price * $quantity;
+		}
 	}
 }
