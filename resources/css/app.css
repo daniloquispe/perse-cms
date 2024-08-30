@@ -49,6 +49,7 @@ body
 .container-box
 {
 	@apply container mx-auto;
+	@apply px-4 sm:px-0;
 }
 
 .container-box-stretch

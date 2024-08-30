@@ -10,7 +10,8 @@
 
 .book-carousel .splide
 {
-	@apply relative px-14 py-0;
+	@apply relative;
+	@apply px-0 xl:px-14 py-0;
 
 	.splide__pagination
 	{
