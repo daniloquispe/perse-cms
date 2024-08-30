@@ -38,7 +38,7 @@ article.book
 			}
 		}
 
-		#show-comment-form ~ .comment-form-wrapper
+		/*#show-comment-form ~ .comment-form-wrapper
 		{
 			@apply hidden;
 		}
@@ -48,9 +48,52 @@ article.book
 			@apply block;
 		}
 
-		#show-comment-form:checked ~ label svg
+		#show-comment-form:checked ~ label svg*/
+		.show-form-button.open svg
 		{
 			@apply rotate-180;
+		}
+
+		.comments
+		{
+			@apply flex flex-col gap-6;
+
+			.comment
+			{
+				@apply flex items-start gap-8;
+				@apply py-6;
+				@apply border-t border-gray-200;
+
+				&:last-child
+				{
+					@apply border-b;
+				}
+
+				.comment-name
+				{
+					@apply font-bold;
+				}
+
+				button
+				{
+					@apply size-10 rounded-full;
+					@apply hover:bg-slate-100;
+					@apply text-center;
+					@apply transition-colors;
+
+					&.delete-button
+					{
+						@apply hover:bg-red-100;
+						@apply text-red-700;
+					}
+
+					svg
+					{
+						@apply inline-block;
+						@apply size-6;
+					}
+				}
+			}
 		}
 	}
 }

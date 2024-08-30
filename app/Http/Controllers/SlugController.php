@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentStatus;
 use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\SeoTags;
 use App\PageRole;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\View\View;
 
 class SlugController extends Controller
@@ -24,34 +26,7 @@ class SlugController extends Controller
 		{
 			$type = 'book';
 
-			$query = $seoTags->owner()
-				->select(['id', 'category_id', 'publisher_id', 'book_format_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
-				->where('is_visible', true)
-				->with([
-					'authors:id,name,photo,summary',
-					'publisher:id,name',
-					'bookFormat:id,name',
-					'bookbindingType:id,name',
-					'ageRange:id,name',
-					'category' => function (BelongsTo $query)
-					{
-						$query
-							->select('id', 'name', 'parent_id')
-							->where('is_visible', true)
-							->with([
-								'parent' => function (BelongsTo $query)
-								{
-									$query
-										->select('id', 'name', 'parent_id')
-										->with([
-											'parent:id,name,parent_id',
-											'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
-										]);
-								},
-								'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
-							]);
-					}
-				]);
+			$query = $this->getBookQuery($seoTags);
 
 			$book = $query->findOrFail($seoTags->owner_id);
 
@@ -115,6 +90,42 @@ class SlugController extends Controller
 		}
 
 		return view($type, $data);
+	}
+
+	private function getBookQuery(SeoTags $seoTags): MorphTo
+	{
+		return $seoTags->owner()
+			->select(['id', 'category_id', 'publisher_id', 'book_format_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
+			->where('is_visible', true)
+			->with([
+				'authors:id,name,photo,summary',
+				'publisher:id,name',
+				'bookFormat:id,name',
+				'bookbindingType:id,name',
+				'ageRange:id,name',
+				'category' => function (BelongsTo $query)
+				{
+					$query
+						->select('id', 'name', 'parent_id')
+						->where('is_visible', true)
+						->with([
+							'parent' => function (BelongsTo $query)
+							{
+								$query
+									->select('id', 'name', 'parent_id')
+									->with([
+										'parent:id,name,parent_id',
+										'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+									]);
+							},
+							'seoTags:owner_id,owner_type,slug,meta_title,meta_description',
+						]);
+				},
+				'comments' => function (HasMany $query)
+				{
+					$query->where('status', CommentStatus::Approved)->latest();
+				}
+			]);
 	}
 
 	private function getBreadCrumbsLinksForCategory(BookCategory $category): array
