@@ -80,7 +80,7 @@
 
 					.book-title
 					{
-						@apply text-sm font-bold;
+						@apply text-sm text-left font-bold;
 					}
 
 					.prices

@@ -168,7 +168,9 @@
 {
 	@apply block;
 	@apply size-12 text-white;
+	@apply rounded-lg hover:bg-white/20;
 	@apply cursor-pointer;
+	@apply transition-colors;
 }
 
 .close-main-menu-button

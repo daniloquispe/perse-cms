@@ -81,7 +81,7 @@ article.book-list-item .prices .normal
 article.book-list-item .prices .discount
 {
 	@apply flex-shrink;
-	@apply px-1;
+	@apply px-1 pt-0.5;
 	@apply rounded;
 	@apply text-white text-sm bg-red-600;
 }
