@@ -11,15 +11,19 @@ carousels.forEach(function (carousel)
 		breakpoints: {
 			640: {
 				perPage: 2,
+				arrows: false,
 			},
 			768: {
 				perPage: 2,
+				arrows: false,
 			},
 			1024: {
 				perPage: 2,
+				arrows: false,
 			},
 			1280: {
 				perPage: 3,
+				arrows: false,
 			},
 			1536: {
 				perPage: 4,
