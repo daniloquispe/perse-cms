@@ -34,6 +34,8 @@ return new class extends Migration
 			$table->decimal('height')->nullable();
 			$table->decimal('price');
 			$table->decimal('discounted_price')->nullable();
+			$table->date('discount_from')->nullable();
+			$table->date('discount_to')->nullable();
 			$table->boolean('is_presale')->default(false);
 			$table->boolean('is_award_winning')->default(false);
 			$table->boolean('is_recommended')->default(false);
