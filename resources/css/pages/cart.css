@@ -1,0 +1,273 @@
+/* Card */
+
+.cart-card
+{
+	@apply rounded-xl shadow-lg;
+	@apply bg-white;
+
+	/* Header */
+
+	.card-header
+	{
+		@apply py-6;
+
+		/* Title */
+
+		.card-title
+		{
+			@apply flex items-center gap-1.5;
+			@apply text-xl font-[500];
+
+			&.center
+			{
+				@apply justify-center;
+			}
+
+			svg
+			{
+				@apply inline-block size-8;
+				@apply text-palette-orange;
+			}
+		}
+
+		+ .card-body
+		{
+			@apply pt-0;
+		}
+	}
+
+	.card-body
+	{
+		@apply px-10 py-6;
+
+		.section-title
+		{
+			@apply mb-4;
+			@apply font-[500];
+		}
+
+		.cart-items
+		{
+			@apply table w-full;
+
+			.cart-item
+			{
+				@apply table-row;
+
+				> div
+				{
+					@apply table-cell;
+				}
+
+				.cover-cell
+				{
+					@apply w-24;
+
+					img
+					{
+						@apply inline;
+					}
+				}
+
+				.info-cell
+				{
+					@apply align-top;
+					@apply px-8;
+
+					.book-title
+					{
+						@apply mb-1;
+						@apply font-[500];
+					}
+
+					.sku
+					{
+						@apply mb-4;
+						@apply text-sm;
+					}
+
+					li
+					{
+						@apply flex items-center gap-1;
+						@apply text-sm;
+
+						svg
+						{
+							@apply size-4 text-green-700;
+						}
+					}
+				}
+
+				.price-cell
+				{
+					@apply w-32;
+					@apply pt-6;
+					@apply relative;
+					@apply text-center;
+
+					.price-name
+					{
+						@apply absolute top-0 w-full h-6;
+						@apply border-y border-gray-300;
+						@apply bg-gray-100;
+						@apply text-sm;
+
+						&.first
+						{
+							@apply border-l rounded-l-lg;
+						}
+
+						&.last
+						{
+							@apply border-r rounded-r-lg;
+						}
+					}
+
+					del
+					{
+						@apply opacity-60;
+					}
+				}
+
+				.actions-cell
+				{
+					@apply w-10;
+					@apply pl-8;
+
+					button
+					{
+						@apply size-10;
+						@apply rounded-full;
+						@apply bg-white hover:bg-gray-200;
+						@apply transition-colors;
+
+						svg
+						{
+							@apply size-6 mx-auto;
+						}
+					}
+				}
+			}
+
+			.separator
+			{
+				@apply table-row;
+
+				> div
+				{
+					@apply table-cell;
+
+					> div
+					{
+						@apply h-[1px] bg-gray-200 my-6;
+					}
+				}
+			}
+		}
+
+		.cart-item
+		{
+			@apply border-b border-gray-200;
+			@apply mx-6 py-6;
+			@apply flex items-start gap-6;
+
+			& > div
+			{
+				@apply h-full;
+			}
+		}
+
+		.go-back
+		{
+			@apply flex items-center justify-center gap-2;
+
+			svg
+			{
+				@apply size-6;
+				@apply text-palette-orange;
+			}
+		}
+
+		/* Coupon */
+
+		.coupon-form
+		{
+			@apply flex gap-2;
+
+			input
+			{
+				@apply grow;
+				@apply border border-gray-200 rounded;
+				@apply p-2;
+			}
+
+			button
+			{
+				@apply rounded-lg;
+				@apply border border-palette-purple;
+				@apply px-4 py-2;
+				@apply bg-palette-purple;
+				@apply text-white font-[500];
+			}
+		}
+
+		/* Totals */
+
+		.totals > div
+		{
+			@apply flex justify-between;
+			@apply mb-4;
+
+			&:last-child
+			{
+				@apply border-y border-gray-200;
+				@apply py-4;
+				@apply text-lg;
+			}
+		}
+
+		/* Checkout */
+
+		.checkout-button
+		{
+			@apply block w-full;
+			@apply rounded-lg;
+			@apply mb-3 py-3;
+			@apply bg-palette-orange;
+			@apply text-white font-[500];
+		}
+	}
+
+	/* Tables */
+
+	/*table
+	{
+		@apply border-collapse;
+
+		tr
+		{
+			@apply rounded-xl;
+		}
+
+		th
+		{
+			@apply w-32;
+			@apply border border-gray-300;
+			@apply bg-gray-100;
+			@apply text-sm text-center font-normal;
+		}
+	}*/
+
+	/* Buttons */
+
+	.delete-button
+	{
+		@apply size-10 rounded-full;
+		@apply bg-gray-200;
+
+		svg
+		{
+			@apply size-6 mx-auto;
+		}
+	}
+}
