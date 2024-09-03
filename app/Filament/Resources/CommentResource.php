@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\CommentStatus;
 use App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Models\Comment;
@@ -24,7 +25,12 @@ class CommentResource extends Resource
 
 	protected static ?string $modelLabel = 'Comentario';
 
-    public static function form(Form $form): Form
+	public static function getNavigationBadge(): ?string
+	{
+		return static::getModel()::where('status', CommentStatus::Pending)->count();
+	}
+
+	public static function form(Form $form): Form
     {
         return $form
             ->schema([
