@@ -1,3 +1,53 @@
+/* Steps */
+
+.cart-steps-wrapper
+{
+	@apply w-[36rem] mx-auto py-8;
+
+	.line
+	{
+		@apply h-0.5 bg-gray-400 mx-[6rem];
+		@apply mt-[1.25rem];
+	}
+}
+
+ul.cart-steps
+{
+	@apply grid grid-flow-col auto-cols-fr;
+	@apply w-[36rem];
+	@apply mx-auto;
+	@apply -mt-[1.25rem];
+
+	li
+	{
+		@apply w-48 text-center;
+
+		a
+		{
+			@apply flex flex-col items-center;
+
+			.marker
+			{
+				@apply inline-flex items-center gap-2;
+				@apply rounded-full;
+				@apply p-2;
+				@apply bg-gray-400;
+				@apply text-white text-center;
+
+				&.current
+				{
+					@apply bg-palette-orange;
+				}
+
+				svg
+				{
+					@apply size-6;
+				}
+			}
+		}
+	}
+}
+
 /* Card */
 
 .cart-card
