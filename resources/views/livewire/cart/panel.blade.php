@@ -4,7 +4,7 @@
 		<div class="line"></div>
 		<ul class="cart-steps">
 			<li>
-				<a href="{{ route('cart.list') }}">
+				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
 					<div @class(['marker', 'current' => $step == 1])>
 						<x-icons.cart />
 						@if($step == 1)
@@ -15,7 +15,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('cart.delivery') }}">
+				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
 					<div @class(['marker', 'current' => $step == 2])>
 						<x-icons.truck />
 						@if($step == 2)
@@ -26,7 +26,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('cart.list') }}">
+				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
 					<div @class(['marker', 'current' => $step == 3])>
 						<x-icons.credit-card />
 						@if($step == 3)
