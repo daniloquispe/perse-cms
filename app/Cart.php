@@ -7,11 +7,31 @@ use Illuminate\Support\Facades\Session;
 
 class Cart
 {
+	private static int $step;
+
 	private static array $items;
 
 	private static float $total;
 
 	private static float $totalDiscount;
+
+	public static function getStep(): int
+	{
+		if (!isset(static::$step))
+			static::load();
+
+		return static::$step;
+	}
+
+	public static function setStep(int $step): void
+	{
+		if (!isset(static::$step))
+			static::load();
+
+		static::$step = $step;
+
+		static::save();
+	}
 
 	public static function add(Book $book, int $quantity = 1): void
 	{
@@ -46,11 +66,13 @@ class Cart
 
 	private static function load(): void
 	{
+		static::$step = Session::get('cartStep', 1);
 		static::$items = Session::get('cart', []);
 	}
 
 	private static function save(): void
 	{
+		Session::put('cartStep', static::$step);
 		Session::put('cart', static::$items);
 	}
 

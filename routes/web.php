@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 Route::get('search/{search}', \App\Http\Controllers\SearchController::class)->name('search');
-Route::view('cart/list', 'cart')->name('cart.list');
+
+// Cart pages
+Route::get('cart/list', \App\Livewire\Cart\CartPage::class)->name('cart.list');
+Route::get('cart/delivery', \App\Livewire\Cart\CartPage::class)->name('cart.delivery');
 
 Route::get('{slug}', \App\Http\Controllers\SlugController::class);
 
