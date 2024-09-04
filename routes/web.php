@@ -7,6 +7,7 @@ Route::get('search/{search}', \App\Http\Controllers\SearchController::class)->na
 
 // Cart pages
 Route::get('cart/list', \App\Livewire\Cart\CartPage::class)->name('cart.list');
+Route::get('cart/delivery', \App\Livewire\Cart\CartPage::class)->name('cart.delivery');
 
 Route::get('{slug}', \App\Http\Controllers\SlugController::class);
 

@@ -41,4 +41,11 @@ class ProductsListSection extends Component
 
 		$this->loadData();
 	}
+
+	public function nextStep(): void
+	{
+		Cart::setStep(2);
+
+		$this->redirectRoute('cart.delivery');
+	}
 }

@@ -9,7 +9,7 @@
 
 	.card-header
 	{
-		@apply py-6;
+		@apply px-10 py-6;
 
 		/* Title */
 

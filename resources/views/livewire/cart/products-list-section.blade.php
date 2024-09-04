@@ -102,7 +102,7 @@
 						<div>S/&nbsp;{{ number_format($total, 2) }}</div>
 					</div>
 				</div>
-				<button type="button" class="checkout-button">Ir a pagar</button>
+				<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
 				<a href="{{ route('home') }}" class="go-back">
 					<x-icons.back /> Ver más productos
 				</a>

@@ -23,6 +23,16 @@ class Cart
 		return static::$step;
 	}
 
+	public static function setStep(int $step): void
+	{
+		if (!isset(static::$step))
+			static::load();
+
+		Session::put('cartStep', $step);
+
+		static::save();
+	}
+
 	public static function add(Book $book, int $quantity = 1): void
 	{
 		static::load();

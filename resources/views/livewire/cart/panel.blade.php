@@ -29,5 +29,7 @@
 	{{-- Main content --}}
 	@if($step == 1)
 		<livewire:cart.products-list-section />
+	@elseif($step == 2)
+		<livewire:cart.delivery-information-section />
 	@endif
 </div>
