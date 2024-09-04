@@ -16,9 +16,10 @@ class Panel extends Component
     public function render(): View
     {
 		$step = Cart::getStep();
+		$items = Cart::getItems();
 		$total = Cart::getTotal();
 
-		$data = compact('step', 'total');
+		$data = compact('step', 'items', 'total');
         return view('livewire.cart.panel', $data);
     }
 

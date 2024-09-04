@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Cart;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class DeliveryInformationSection extends Component
 {
+	public bool $showAddressForm;
+
 	public string $email;
 
 	public string $firstName;
@@ -42,6 +45,18 @@ class DeliveryInformationSection extends Component
 	public function mount(): void
 	{
 		$this->showInvoiceFields = false;
+		$this->showAddressForm = false;
+
+		if (Auth::guard('storefront')->check())
+		{
+			$user = Auth::guard('storefront')->user();
+
+			$this->email = $user->email;
+			$this->firstName = $user->first_name;
+			$this->lastName = $user->last_name;
+			$this->documentIdentityNumber = $user->id_document_number;
+			$this->phone = $user->phone;
+		}
 
 		$this->loadDepartments();
 	}
@@ -54,6 +69,11 @@ class DeliveryInformationSection extends Component
 	public function toggleInvoiceFields(): void
 	{
 		$this->showInvoiceFields = !$this->showInvoiceFields;
+	}
+
+	public function toggleAddressForm(): void
+	{
+		$this->showAddressForm = true;
 	}
 
 	public function loadDepartments(): void

@@ -62,6 +62,24 @@
 				<div class="card-body">
 					{{-- Resume --}}
 					<h2 class="section-title">Resumen de tu Compra</h2>
+					@if($step > 1)
+						<div class="mb-10">
+							@foreach($items as $item)
+								<div class="flex items-center gap-4 border border-gray-200 rounded-lg p-2 mb-2">
+									<div class="w-20">
+										<img src="{{ (new \App\Services\UrlService())->fromAsset($item['book']['cover']) }}" alt="{{ $item['book']['title'] }}" />
+									</div>
+									<div class="grow">
+										<div>{{ $item['book']['title'] }}</div>
+										<div>x{{ $item['quantity'] }}</div>
+									</div>
+									<div class="w-20 font-[500]">
+										S/&nbsp;{{ $item['book']['price'] }}
+									</div>
+								</div>
+							@endforeach
+						</div>
+					@endif
 					<div class="totals">
 						<div>
 							<div>Total productos</div>

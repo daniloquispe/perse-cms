@@ -247,7 +247,7 @@ ul.cart-steps
 			input
 			{
 				@apply grow;
-				@apply border border-gray-200 rounded;
+				@apply border border-gray-300 rounded;
 				@apply p-2;
 			}
 
@@ -259,6 +259,41 @@ ul.cart-steps
 				@apply bg-palette-purple;
 				@apply text-white font-[500];
 			}
+		}
+
+		/* Delivery info */
+
+		.delivery-form
+		{
+			.form-control-wrapper
+			{
+				@apply mb-4;
+
+				label
+				{
+					@apply inline-block;
+					@apply text-left;
+				}
+
+				input, select
+				{
+					@apply w-full;
+					@apply border border-gray-300 rounded;
+					@apply p-2;
+					@apply bg-white;
+				}
+			}
+		}
+
+		/* Next sub-step-button */
+
+		.next-sub-step-button
+		{
+			@apply block w-full;
+			@apply rounded-lg;
+			@apply mt-4 py-3;
+			@apply bg-palette-orange;
+			@apply text-white uppercase font-[500] tracking-widest;
 		}
 
 		/* Totals */
