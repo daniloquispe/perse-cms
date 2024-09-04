@@ -38,10 +38,50 @@
 			</li>
 		</ul>
 	</div>
-	{{-- Main content --}}
-	@if($step == 1)
-		<livewire:cart.products-list-section />
-	@elseif($step == 2)
-		<livewire:cart.delivery-information-section />
-	@endif
+	<div class="grid grid-cols-12 gap-8 pb-10">
+		<div class="col-span-8">
+			{{-- Main content --}}
+			@if($step == 1)
+				<livewire:cart.products-list-section />
+			@elseif($step == 2)
+				<livewire:cart.delivery-information-section />
+			@endif
+		</div>
+		<div class="col-span-4 flex flex-col gap-8">
+			<x-cart-card>
+				<div class="card-body">
+					{{-- Coupon --}}
+					<h2 class="section-title">Valida tu cupón</h2>
+					<form class="coupon-form">
+						<input wire:model="coupon" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+						<button type="submit">Validar</button>
+					</form>
+				</div>
+			</x-cart-card>
+			<x-cart-card>
+				<div class="card-body">
+					{{-- Resume --}}
+					<h2 class="section-title">Resumen de tu Compra</h2>
+					<div class="totals">
+						<div>
+							<div>Total productos</div>
+							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
+						</div>
+						<div>
+							<div>Entrega</div>
+							<div>Por calcular</div>
+						</div>
+						<div>
+							<div>Total</div>
+							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
+						</div>
+					</div>
+					<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
+					<a href="{{ route('home') }}" class="go-back">
+						<x-icons.back /> Ver más productos
+					</a>
+				</div>
+			</x-cart-card>
+		</div>
+	</div>
 </div>

@@ -28,7 +28,7 @@ class Cart
 		if (!isset(static::$step))
 			static::load();
 
-		Session::put('cartStep', $step);
+		static::$step = $step;
 
 		static::save();
 	}
