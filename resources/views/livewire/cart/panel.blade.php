@@ -17,9 +17,20 @@
 			<li>
 				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
 					<div @class(['marker', 'current' => $step == 2])>
-						<x-icons.truck />
+						<x-icons.user />
 						@if($step == 2)
 							Paso 2
+						@endif
+					</div>
+					<div>Datos</div>
+				</a>
+			</li>
+			<li>
+				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
+					<div @class(['marker', 'current' => $step == 3])>
+						<x-icons.truck />
+						@if($step == 3)
+							Paso 3
 						@endif
 					</div>
 					<div>Entrega</div>
@@ -27,10 +38,10 @@
 			</li>
 			<li>
 				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
-					<div @class(['marker', 'current' => $step == 3])>
+					<div @class(['marker', 'current' => $step == 4])>
 						<x-icons.credit-card />
-						@if($step == 3)
-							Paso 3
+						@if($step == 4)
+							Paso 4
 						@endif
 					</div>
 					<div>Pago</div>
@@ -82,7 +93,7 @@
 					@endif
 					<div class="totals">
 						<div>
-							<div>Total productos</div>
+							<div>Subtotal</div>
 							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
 						</div>
 						<div>

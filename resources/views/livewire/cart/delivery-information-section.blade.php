@@ -2,8 +2,8 @@
 	<x-cart-card class="row-span-2">
 		<div class="card-header">
 			<h2 class="card-title">
-				<x-icons.cart />
-				Carro de Compras
+				<x-icons.user />
+				Datos Personales
 			</h2>
 		</div>
 		<div class="card-body">
@@ -40,9 +40,9 @@
 				<div>
 					{{-- Subscribe --}}
 					<div class="checkbox-wrapper">
-						<input type="checkbox" wire:model="withSubscription" id="input-with_subscription" required="required" />
+						<input type="radio" wire:model="withSubscription" name="with_invoice" id="input-with_subscription" required="required" />
 						<div>
-							<label for="input-with_subscription">Deseo News</label>
+							<label for="input-with_subscription">Deseo Boleta</label>
 							@error('withSubscription')
 							<div class="form-error">{{ $message }}</div>
 							@enderror
@@ -50,7 +50,7 @@
 					</div>
 					{{-- Invoice --}}
 					<div class="checkbox-wrapper">
-						<input type="checkbox" wire:model="withInvoice" wire:change="toggleInvoiceFields" id="input-with_invoice" required="required" />
+						<input type="radio" wire:model="withInvoice" wire:change="toggleInvoiceFields" name="with_invoice" id="input-with_invoice" required="required" />
 						<div>
 							<label for="input-with_invoice">Deseo Factura</label>
 							@error('withInvoice')
@@ -83,8 +83,8 @@
 	<x-cart-card class="row-span-2">
 		<div class="card-header">
 			<h2 class="card-title">
-				<x-icons.cart />
-				Carro de Compras
+				<x-icons.truck />
+				Detalle de Entrega
 			</h2>
 		</div>
 		@if($showAddressForm)
@@ -134,8 +134,8 @@
 	<x-cart-card class="row-span-2">
 		<div class="card-header">
 			<h2 class="card-title">
-				<x-icons.cart />
-				Carro de Compras
+				<x-icons.credit-card />
+				Método de Pago
 			</h2>
 		</div>
 	</x-cart-card>
