@@ -46,7 +46,7 @@
 
 .site-footer .subscription-form
 {
-	@apply px-16 py-12;
+	@apply px-6 xl:px-16 py-12;
 	@apply rounded-b-2xl;
 	@apply bg-palette-pink;
 	@apply 2xl:grid 2xl:grid-cols-2;
@@ -56,7 +56,7 @@
 {
 	@apply mb-5;
 	@apply text-gray-800;
-	@apply text-3xl font-bold;
+	@apply text-2xl xl:text-3xl font-bold;
 }
 
 .site-footer .subscription-form form

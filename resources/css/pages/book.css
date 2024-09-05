@@ -60,7 +60,7 @@ article.book
 
 			.comment
 			{
-				@apply flex items-start gap-8;
+				@apply flex flex-col xl:flex-row items-start gap-4 xl:gap-8;
 				@apply py-6;
 				@apply border-t border-gray-200;
 
@@ -101,6 +101,7 @@ article.book
 article.book .center
 {
 	@apply xl:col-span-3;
+	@apply md:px-4 xl:px-0;
 }
 
 article.book .section-title

@@ -1,4 +1,4 @@
-<div>
+<div class="container-box-cart">
 	{{-- Steps indicator --}}
 	<div class="cart-steps-wrapper">
 		<div class="line"></div>
@@ -38,8 +38,8 @@
 			</li>
 		</ul>
 	</div>
-	<div class="grid grid-cols-12 gap-8 pb-10">
-		<div class="col-span-8">
+	<div class="flex gap-8 pb-10">
+		<div class="grow">
 			{{-- Main content --}}
 			@if($step == 1)
 				<livewire:cart.products-list-section />
@@ -47,7 +47,7 @@
 				<livewire:cart.delivery-information-section />
 			@endif
 		</div>
-		<div class="col-span-4 flex flex-col gap-8">
+		<div class="w-[23rem] flex flex-col gap-6">
 			<x-cart-card>
 				<div class="card-body">
 					{{-- Coupon --}}
@@ -63,17 +63,17 @@
 					{{-- Resume --}}
 					<h2 class="section-title">Resumen de tu Compra</h2>
 					@if($step > 1)
-						<div class="mb-10">
+						<div class="mb-10 h-60 overflow-y-scroll">
 							@foreach($items as $item)
-								<div class="flex items-center gap-4 border border-gray-200 rounded-lg p-2 mb-2">
-									<div class="w-20">
+								<div class="flex items-center gap-3 border border-gray-300 rounded-lg p-2 mb-2">
+									<div class="w-16 shrink-0">
 										<img src="{{ (new \App\Services\UrlService())->fromAsset($item['book']['cover']) }}" alt="{{ $item['book']['title'] }}" />
 									</div>
 									<div class="grow">
-										<div>{{ $item['book']['title'] }}</div>
-										<div>x{{ $item['quantity'] }}</div>
+										<div class="text-xs text-left">{{ $item['book']['title'] }}</div>
+										<div class="text-xs">x{{ $item['quantity'] }}</div>
 									</div>
-									<div class="w-20 font-[500]">
+									<div class="w-20 text-xs text-right text-gray-800 font-[500]">
 										S/&nbsp;{{ $item['book']['price'] }}
 									</div>
 								</div>
@@ -89,7 +89,7 @@
 							<div>Entrega</div>
 							<div>Por calcular</div>
 						</div>
-						<div>
+						<div class="text-gray-800">
 							<div>Total</div>
 							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
 						</div>

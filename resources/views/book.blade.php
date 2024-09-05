@@ -109,7 +109,7 @@
 									</div>
 									<div class="comment-text">{!! nl2br($comment->comment) !!}</div>
 								</div>
-								<div class="w-10">
+								<div class="w-full xl:w-10 text-right">
 									{{-- Reply --}}
 									<button type="button" title="Responder">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

@@ -1,6 +1,7 @@
 .footer-social-links ul
 {
-	@apply flex justify-center 2xl:justify-start gap-2;
+	@apply flex justify-center 2xl:justify-start gap-3 xl:gap-2;
+	@apply mb-7 xl:mb-0;
 }
 
 .footer-social-links .title
