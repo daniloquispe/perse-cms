@@ -12,7 +12,7 @@
 		<ul>
 			@foreach($items as $item)
 				<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
-					<a href="{{ $item['seo_tags']['slug'] }}" class="menu-item menu-item-{{ $item['id'] }}">
+					<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="menu-item menu-item-{{ $item['id'] }}">
 						<div>
 							{{ $item['name'] }}
 							@if($item['id'])
@@ -28,11 +28,11 @@
 								<ul>
 									@foreach($item['children'] as $subItem)
 										<li @class(['active' => in_array($subItem['id'], $activeIds)])>
-											<a href="{{ $subItem['seo_tags']['slug'] }}" class="col-title">{{ $subItem['name'] }}</a>
+											<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="col-title">{{ $subItem['name'] }}</a>
 											<ul>
 												@foreach($subItem['children'] as $subItemOption)
 													<li @class(['submenu-item-option', 'active' => in_array($subItemOption['id'], $activeIds)])>
-														<a href="{{ $subItemOption['seo_tags']['slug'] }}">{{ $subItemOption['name'] }}</a>
+														<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}">{{ $subItemOption['name'] }}</a>
 													</li>
 												@endforeach
 											</ul>
