@@ -2,33 +2,32 @@
 
 namespace App\Livewire\Cart;
 
-use Illuminate\Support\Facades\Auth;
+use App\Cart;
+//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class DeliveryInformationSection extends Component
 {
-	public bool $showAddressForm;
+//	public string $email;
 
-	public string $email;
+//	public string $firstName;
 
-	public string $firstName;
+//	public string $lastName;
 
-	public string $lastName;
+//	public string $documentIdentityNumber;
 
-	public string $documentIdentityNumber;
+//	public string $phone;
 
-	public string $phone;
+//	public bool $withSubscription;
 
-	public bool $withSubscription;
+//	public bool $withInvoice;
 
-	public bool $withInvoice;
+//	public bool $showInvoiceFields;
 
-	public bool $showInvoiceFields;
+//	public string $ruc;
 
-	public string $ruc;
-
-	public string $businessName;
+//	public string $businessName;
 
 	public array $departments;
 
@@ -44,7 +43,7 @@ class DeliveryInformationSection extends Component
 
 	public function mount(): void
 	{
-		$this->showInvoiceFields = false;
+		/*$this->showInvoiceFields = false;
 		$this->showAddressForm = false;
 
 		if (Auth::guard('storefront')->check())
@@ -56,7 +55,7 @@ class DeliveryInformationSection extends Component
 			$this->lastName = $user->last_name;
 			$this->documentIdentityNumber = $user->id_document_number;
 			$this->phone = $user->phone;
-		}
+		}*/
 
 		$this->loadDepartments();
 	}
@@ -65,16 +64,6 @@ class DeliveryInformationSection extends Component
     {
         return view('livewire.cart.delivery-information-section');
     }
-
-	public function toggleInvoiceFields(): void
-	{
-		$this->showInvoiceFields = !$this->showInvoiceFields;
-	}
-
-	public function toggleAddressForm(): void
-	{
-		$this->showAddressForm = true;
-	}
 
 	public function loadDepartments(): void
 	{
@@ -104,5 +93,12 @@ class DeliveryInformationSection extends Component
 		$responseBody = $response->body();
 
 		$this->districts = json_decode($responseBody, true);
+	}
+
+	public function submit(): void
+	{
+		Cart::setStep(4);
+
+		$this->redirectRoute('cart.payment');
 	}
 }

@@ -55,6 +55,8 @@
 			@if($step == 1)
 				<livewire:cart.products-list-section />
 			@elseif($step == 2)
+				<livewire:cart.personal-info-section />
+			@elseif($step == 3)
 				<livewire:cart.delivery-information-section />
 			@endif
 		</div>
@@ -106,9 +108,15 @@
 						</div>
 					</div>
 					<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
-					<a href="{{ route('home') }}" class="go-back">
-						<x-icons.back /> Ver más productos
-					</a>
+					@if($step > 1)
+						<a href="{{ route('cart.list') }}" class="go-back">
+							<x-icons.back /> Volver al Carrito
+						</a>
+					@else
+						<a href="{{ route('home') }}" class="go-back">
+							<x-icons.back /> Ver más productos
+						</a>
+					@endif
 				</div>
 			</x-cart-card>
 		</div>

@@ -83,6 +83,11 @@ ul.cart-steps
 				@apply inline-block size-8;
 				@apply text-palette-orange;
 			}
+
+			.completed-step svg
+			{
+				@apply text-white fill-green-500;
+			}
 		}
 
 		+ .card-body
