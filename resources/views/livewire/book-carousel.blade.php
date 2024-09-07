@@ -4,12 +4,7 @@
 		<div class="splide__track">
 			<div class="splide__list">
 				@foreach($carousel->books as $book)
-					@if(false)
-					<li class="splide__slide">
-						<livewire:book-list-item :book="$book" />
-					</li>
-					@endif
-					<livewire:book-list-item :book="$book" :in-carousel="true" />
+					<x-book-list-item :book="$book" />
 				@endforeach
 			</div>
 		</div>
