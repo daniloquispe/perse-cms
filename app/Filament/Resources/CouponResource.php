@@ -28,7 +28,7 @@ class CouponResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-			->columns(3)
+			->columns()
             ->schema([
 				Forms\Components\Toggle::make('is_enabled')
 					->label('Cupón activo')
@@ -40,7 +40,15 @@ class CouponResource extends Resource
 					->maxLength(20),
 				Forms\Components\TextInput::make('name')
 					->label('Nombre')
-					->helperText('No se mostrará en el sitio web'),
+					->helperText('No se mostrará en el sitio web')
+					->required(),
+				Forms\Components\TextInput::make('discount_rate')
+					->label('Descuento')
+					->numeric()
+					->suffix('%')
+					->required()
+					->minValue(0)
+					->maxValue(100),
 				Forms\Components\DatePicker::make('due_at')
 					->label('Vencimiento')
             ]);
@@ -56,12 +64,15 @@ class CouponResource extends Resource
 				Tables\Columns\TextColumn::make('name')
 					->label('Nombre')
 					->searchable(),
+				Tables\Columns\TextColumn::make('discount_rate')
+					->label('Descuento')
+					->numeric()
+					->formatStateUsing(fn(Coupon $record) => $record->discount_rate . '%'),
 				Tables\Columns\TextColumn::make('due_at')
 					->label('Vencimiento')
 					->date(),
-				Tables\Columns\IconColumn::make('is_enabled')
-					->label('¿Activo?')
-					->boolean(),
+				Tables\Columns\ToggleColumn::make('is_enabled')
+					->label('¿Activo?'),
             ])
             ->filters([
                 //
