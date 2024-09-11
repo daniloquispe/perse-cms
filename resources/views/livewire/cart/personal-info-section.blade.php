@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-10">
+<div class="flex flex-col gap-6">
 	<x-cart-card class="row-span-2">
 		<div class="card-header">
 			<h2 class="card-title">

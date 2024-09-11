@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-10">
+<div class="flex flex-col gap-6">
 	<x-cart-card class="row-span-2">
 		<div class="card-header">
 			<h2 class="card-title">
@@ -24,7 +24,7 @@
 					@endif
 				</ul>
 				<div>
-					<button type="button" wire:click="goToPersonalInfo" class="rounded-full size-10 bg-gray-100" title="Editar">
+					<button type="button" wire:click="goToPersonalInfo" class="action-button" title="Editar">
 						<x-icons.pencil-square class="size-6 mx-auto" />
 						<span class="sr-only">Editar</span>
 					</button>
@@ -123,7 +123,7 @@
 							@else
 								<div>Elija una fecha de entrega</div>
 								<div>
-									<button type="button" wire:click="showDeliveryDateField" class="rounded-full size-10 bg-gray-100" title="Elija una fecha">
+									<button type="button" wire:click="showDeliveryDateField" class="action-button" title="Elija una fecha">
 										<x-icons.calendar class="size-6 mx-auto" />
 										<span class="sr-only">Elegir fecha</span>
 									</button>

@@ -49,8 +49,8 @@
 			</li>
 		</ul>
 	</div>
-	<div class="flex gap-8 pb-10">
-		<div class="grow">
+	<div class="lg:flex lg:gap-8 pb-10">
+		<div class="grow mb-6 lg:mb-0">
 			{{-- Main content --}}
 			@if($step == 1)
 				<livewire:cart.products-list-section />
@@ -62,14 +62,16 @@
 				<livewire:cart.payment-info-section />
 			@endif
 		</div>
-		<div class="w-[23rem] flex flex-col gap-6">
+		<div class="lg:w-[23rem] flex flex-col gap-6">
 			<x-cart-card>
 				<div class="card-body">
 					{{-- Coupon --}}
 					<h2 class="section-title">Valida tu cupón</h2>
 					<form wire:submit="applyCoupon" class="coupon-form">
 						<div class="flex gap-2">
-							<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+							<div class="grow">
+								<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+							</div>
 							<button type="submit">Validar</button>
 						</div>
 						@error('couponForm.code')

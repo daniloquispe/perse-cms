@@ -7,7 +7,7 @@
 
 .cart-steps-wrapper
 {
-	@apply w-[36rem] mx-auto py-8;
+	@apply w-[30rem] sm:w-[36rem] mx-auto py-8;
 
 	.line
 	{
@@ -19,7 +19,7 @@
 ul.cart-steps
 {
 	@apply grid grid-flow-col auto-cols-fr;
-	@apply w-[36rem];
+	@apply w-[30rem] sm:w-[36rem];
 	@apply mx-auto;
 	@apply -mt-[1.25rem];
 
@@ -108,21 +108,21 @@ ul.cart-steps
 
 		.cart-items
 		{
-			@apply table w-full;
+			@apply md:table w-full;
 			@apply mt-2;
 
 			.cart-item
 			{
-				@apply table-row;
+				@apply grid grid-cols-3 gap-x-0 md:table-row;
 
 				> div
 				{
-					@apply table-cell;
+					@apply md:table-cell;
 				}
 
 				.cover-cell
 				{
-					@apply w-24;
+					@apply md:w-24;
 
 					img
 					{
@@ -132,6 +132,7 @@ ul.cart-steps
 
 				.info-cell
 				{
+					@apply col-span-2;
 					@apply align-top;
 					@apply px-8;
 
@@ -161,7 +162,7 @@ ul.cart-steps
 
 				.price-cell
 				{
-					@apply w-32;
+					@apply md:w-32;
 					@apply pt-6;
 					@apply relative;
 					@apply text-center;
@@ -193,21 +194,10 @@ ul.cart-steps
 
 				.actions-cell
 				{
-					@apply w-10;
-					@apply pl-8;
-
-					button
-					{
-						@apply size-10;
-						@apply rounded-full;
-						@apply bg-white hover:bg-gray-200;
-						@apply transition-colors;
-
-						svg
-						{
-							@apply size-6 mx-auto;
-						}
-					}
+					@apply col-span-3;
+					@apply md:w-10;
+					@apply md:pl-8;
+					@apply text-right;
 				}
 			}
 
@@ -254,11 +244,9 @@ ul.cart-steps
 
 		.coupon-form
 		{
-			/*@apply flex gap-2;*/
-
 			input
 			{
-				@apply grow;
+				@apply w-full;
 				@apply border border-gray-300 rounded;
 				@apply p-2;
 			}

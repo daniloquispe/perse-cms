@@ -1,7 +1,8 @@
 .book-carousel > .title
 {
-	@apply mx-14 mb-7;
+	@apply xl:mx-14 mb-7;
 	@apply text-xl text-gray-800 font-bold uppercase tracking-wide;
+	@apply text-left;
 }
 
 /**********/

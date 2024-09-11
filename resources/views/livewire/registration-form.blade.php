@@ -1,7 +1,7 @@
 <div>
 	@if($step == 1)
-		<div class="grid grid-cols-2 gap-4">
-			<div>
+		<div class="md:grid md:grid-cols-2 md:gap-4">
+			<div class="mb-4 md:mb-0">
 				<h2>Escoja una opción para entrar</h2>
 				<div class="access-wrapper">
 					<button class="access-button access-email">Recibir código de acceso por e-mail</button>
