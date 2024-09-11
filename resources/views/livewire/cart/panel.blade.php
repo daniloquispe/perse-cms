@@ -120,7 +120,7 @@
 					</div>
 					<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
 					@if($step > 1)
-						<a href="{{ route('cart.list') }}" class="go-back">
+						<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}" class="go-back">
 							<x-icons.back /> Volver al Carrito
 						</a>
 					@else
