@@ -60,6 +60,29 @@ class Cart
 		static::save();
 	}
 
+	/*public static function getInvoiceType(): int
+	{
+		static::load();
+
+		return static::$invoiceType;
+	}*/
+
+	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int $invoiceType, string|null $ruc, string|null $businessName): void
+	{
+		static::load();
+
+		static::$email = $email;
+		static::$firstName = $firstName;
+		static::$lastName = $lastName;
+		static::$identityDocumentNumber = $identityDocumentNumber;
+		static::$phone = $phone;
+		static::$invoiceType = $invoiceType;
+		static::$ruc = $invoiceType == 3 ? $ruc : null;
+		static::$businessName = $invoiceType == 3 ? $businessName : null;
+
+		static::save();
+	}
+
 	public static function add(Book $book, int $quantity = 1): void
 	{
 		static::load();

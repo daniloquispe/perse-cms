@@ -3,43 +3,33 @@
 namespace App\Livewire\Cart;
 
 use App\Cart;
+use App\Livewire\Forms\Cart\PersonalInfoForm;
+use App\Toast;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class PersonalInfoSection extends Component
 {
-	public string $email;
+	use Toast;
 
-	public string $firstName;
-
-	public string $lastName;
-
-	public string $documentIdentityNumber;
-
-	public string $phone;
-
-	public int $invoiceType;
+	public PersonalInfoForm $form;
 
 	public bool $showInvoiceFields;
 
-	public string $ruc;
-
-	public string $businessName;
-
 	public function mount(): void
 	{
-		$this->invoiceType = 3;
+		$this->form->invoiceType = 3;
 		$this->showInvoiceFields = false;
 
 		if (Auth::guard('storefront')->check())
 		{
 			$user = Auth::guard('storefront')->user();
 
-			$this->email = $user->email;
-			$this->firstName = $user->first_name;
-			$this->lastName = $user->last_name;
-			$this->documentIdentityNumber = $user->id_document_number;
-			$this->phone = $user->phone;
+			$this->form->email = $user->email;
+			$this->form->firstName = $user->first_name;
+			$this->form->lastName = $user->last_name;
+			$this->form->identityDocumentNumber = $user->id_document_number;
+			$this->form->phone = $user->phone;
 		}
 	}
 
@@ -50,13 +40,18 @@ class PersonalInfoSection extends Component
 
 	public function toggleInvoiceFields(): void
 	{
-		$this->showInvoiceFields = $this->invoiceType == 1;
+		$this->showInvoiceFields = $this->form->invoiceType == 1;
 	}
 
-	public function nextStep(): void
+	public function submitForm(): void
 	{
-		Cart::setStep(3);
+		if ($this->form->submit())
+		{
+			Cart::setStep(3);
 
-		$this->redirectRoute('cart.delivery');
+			$this->redirectRoute('cart.delivery');
+		}
+		else
+			$this->toast('No se puede continuar al siguiente paso', 'Por favor, inténtalo de nuevo');
 	}
 }
