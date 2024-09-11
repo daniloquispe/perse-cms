@@ -56,7 +56,10 @@
 {
 	@apply mb-5;
 	@apply text-gray-800;
-	@apply text-2xl xl:text-3xl font-bold;
+	@apply text-justify xl:text-left;
+	@apply text-2xl xl:text-3xl;
+	@apply font-bold;
+	@apply xl:text-balance;
 }
 
 .site-footer .subscription-form form
