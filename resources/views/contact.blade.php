@@ -9,7 +9,7 @@
 	</div>
 	<article class="container-box-stretch content-wrapper contact-page document">
 		<header>
-			<h1>{{ $page->name }}</h1>
+			<h1>{{ $page->title }}</h1>
 		</header>
 		<main class="grid grid-cols-2 gap-8 items-center">
 			<div>
@@ -36,20 +36,14 @@
 					</div>
 					{{-- Acceptance --}}
 					<div class="form-row">
-						<ul>
-							<li>
-								<div>
-									<input type="checkbox" id="accept-1" />
-								</div>
-								<label for="accept-1">He leído y autorizo el tratamiento de mis datos según la <a href="/politicas/politicas-de-privacidad">Política de Privacidad de Persé Librerías</a></label>
-							</li>
-							<li>
-								<div>
-									<input type="checkbox" id="accept-2" />
-								</div>
-								<label for="accept-2">Autorizo el tratamiento de mis datos con fines publicitarios según la <a href="/politicas/politicas-de-privacidad">Política de Privacidad de Persé Librerías</a></label>
-							</li>
-						</ul>
+						<div class="checkbox-wrapper">
+								<input type="checkbox" id="accept-1" />
+							<label for="accept-1">He leído y autorizo el tratamiento de mis datos según la <a href="/politicas/politicas-de-privacidad">Política de Privacidad de Persé Librerías</a></label>
+						</div>
+						<div class="checkbox-wrapper">
+								<input type="checkbox" id="accept-2" />
+							<label for="accept-2">Autorizo el tratamiento de mis datos con fines publicitarios según la <a href="/politicas/politicas-de-privacidad">Política de Privacidad de Persé Librerías</a></label>
+						</div>
 					</div>
 					{{-- Submit --}}
 					<div class="form-row">

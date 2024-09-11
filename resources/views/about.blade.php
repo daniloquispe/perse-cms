@@ -9,7 +9,7 @@
 	</div>
 	<article class="container-box-stretch content-wrapper about-page document">
 		<header>
-			<h1>{{ $page->name }}</h1>
+			<h1>{{ $page->title }}</h1>
 		</header>
 		<main>
 			<div>

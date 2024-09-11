@@ -9,7 +9,7 @@
 	</div>
 	<article class="container-box-stretch content-wrapper contact-page document">
 		<header>
-			<h1>{{ $page->name }}</h1>
+			<h1>{{ $page->title }}</h1>
 		</header>
 		<main class="grid grid-cols-2 gap-8 items-center">
 			<div>
