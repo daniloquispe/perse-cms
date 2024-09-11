@@ -73,6 +73,12 @@ body
 	@apply mb-4;
 }
 
+.document ul
+{
+	@apply list-disc;
+	@apply ml-8;
+}
+
 /* Auth pages (login, register...) */
 
 .container-box-auth
