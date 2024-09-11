@@ -13,7 +13,8 @@
 	@endforeach
 	{{-- Big banner --}}
 	<section class="container-box mb-9 pt-1">
-		<img src="{{ asset('images/placeholders/wide-banner.png') }}" alt="Banner" class="w-full rounded-lg" />
+		<img src="{{ asset('images/placeholders/banners/desktop/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="hidden md:block w-full rounded-lg" />
+		<img src="{{ asset('images/placeholders/banners/mobile/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="block md:hidden w-full rounded-lg" />
 	</section>
 	{{-- Book carousels (below) --}}
 	@foreach($carouselsBelow as $carousel)
@@ -24,9 +25,9 @@
 	{{-- Small banners --}}
 	<section class="container-box mb-11 pt-2">
 		<div class="grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-10">
-			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
-			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
-			<div><img src="{{ asset('images/placeholders/banner.png') }}" alt="Banner" class="w-full rounded-lg" /></div>
+			<div><img src="{{ asset('images/placeholders/banners/libros-infantiles-de-accion-y-aventuras-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
+			<div><img src="{{ asset('images/placeholders/banners/pack-la-serie-completa-harry-potter-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
+			<div><img src="{{ asset('images/placeholders/banners/el-hobbit-ilustrado-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
 		</div>
 	</section>
 @endsection
