@@ -166,8 +166,8 @@
 
 .open-main-menu-button
 {
-	@apply block;
-	@apply size-12 text-white;
+	@apply block xl:hidden;
+	@apply size-12;
 	@apply rounded-lg hover:bg-white/20;
 	@apply cursor-pointer;
 	@apply transition-colors;
