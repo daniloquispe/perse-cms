@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Book;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class Cart
@@ -142,6 +143,41 @@ class Cart
 		static::save();
 	}
 
+	public static function getAddress(): string|null
+	{
+		static::load();
+
+		return static::$address;
+	}
+
+	public static function getLocationNumber(): string|null
+	{
+		static::load();
+
+		return static::$locationNumber;
+	}
+
+	public static function getReference(): string|null
+	{
+		static::load();
+
+		return static::$reference;
+	}
+
+	public static function getRecipientName(): string|null
+	{
+		static::load();
+
+		return static::$recipientName;
+	}
+
+	public static function getDeliveryDate(): string|null
+	{
+		static::load();
+
+		return static::$deliveryDate;
+	}
+
 	public static function setDeliveryInfo(int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
 	{
 		static::load();
@@ -223,6 +259,12 @@ class Cart
 			static::$invoiceType = $data['invoiceType'];
 			static::$ruc = $data['ruc'];
 			static::$businessName = $data['businessName'];
+
+			static::$address = $data['address'];
+			static::$locationNumber = $data['locationNumber'];
+			static::$reference = $data['reference'];
+			static::$recipientName = $data['recipientName'];
+			static::$deliveryDate = $data['deliveryDate'];
 
 			self::$loaded = true;
 		}

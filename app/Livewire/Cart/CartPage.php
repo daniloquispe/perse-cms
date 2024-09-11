@@ -22,8 +22,9 @@ class CartPage extends Component
 		$title = match ($this->step)
 		{
 			1 => 'Mi Carrito de Compras',
-			2 => 'Información de Entrega',
-			3 => 'Información de Pago',
+			2 => 'Datos Personales',
+			3 => 'Información de Entrega',
+			4 => 'Información de Pago',
 		};
 
         return view('livewire.cart.page')

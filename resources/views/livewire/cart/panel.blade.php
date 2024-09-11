@@ -58,6 +58,8 @@
 				<livewire:cart.personal-info-section />
 			@elseif($step == 3)
 				<livewire:cart.delivery-info-section />
+			@elseif($step == 4)
+				<livewire:cart.payment-info-section />
 			@endif
 		</div>
 		<div class="w-[23rem] flex flex-col gap-6">
