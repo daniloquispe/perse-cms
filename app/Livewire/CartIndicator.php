@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class CartIndicator extends Component
 {
-	public bool $show = false;
+	public bool $showSidebar = false;
 
 	public int $count;
 
@@ -44,6 +44,6 @@ class CartIndicator extends Component
 	#[On('cart-updated')]
 	public function openSidebar(): void
 	{
-		$this->show = true;
+		$this->showSidebar = true;
 	}
 }

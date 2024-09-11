@@ -39,8 +39,13 @@
 					<div class="price-cell">
 						{{-- Unit price --}}
 						<div class="price-name first">Precio unitario</div>
-						<div><del>0.00</del></div>
-						<div>0.00</div>
+						@if($item['book']['discounted_price'])
+							<div><del>{{ $item['book']['price'] }}</del></div>
+							<div>{{ $item['book']['discounted_price'] }}</div>
+						@else
+							<br />
+							<div>{{ $item['book']['price'] }}</div>
+						@endif
 					</div>
 					<div class="price-cell">
 						{{-- Quantity --}}
@@ -58,7 +63,7 @@
 					</div>
 					<div class="actions-cell">
 						{{-- Remove from cart --}}
-						<button type="button" wire:click="removeItem({{ $item['book']['id'] }})" title="Eliminar">
+						<button type="button" wire:click="removeItem({{ $item['book']['id'] }})" title="Eliminar" aria-label="Eliminar del carrito">
 							<x-icons.trash />
 							<span class="sr-only">Eliminar</span>
 						</button>

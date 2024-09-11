@@ -65,9 +65,14 @@
 				<div class="card-body">
 					{{-- Coupon --}}
 					<h2 class="section-title">Valida tu cupón</h2>
-					<form class="coupon-form">
-						<input wire:model="coupon" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
-						<button type="submit">Validar</button>
+					<form wire:submit="applyCoupon" class="coupon-form">
+						<div class="flex gap-2">
+							<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+							<button type="submit">Validar</button>
+						</div>
+						@error('couponForm.code')
+							<div class="form-error">{{ $message }}</div>
+						@enderror
 					</form>
 				</div>
 			</x-cart-card>
@@ -102,6 +107,12 @@
 							<div>Entrega</div>
 							<div>Por calcular</div>
 						</div>
+						@if($coupon)
+							<div>
+								<div>Cupón "{{ $coupon->code }}"</div>
+								<div>&minus;{{ $coupon->discount_rate }}%</div>
+							</div>
+						@endif
 						<div class="text-gray-800">
 							<div>Total</div>
 							<div>S/&nbsp;{{ number_format($total, 2) }}</div>

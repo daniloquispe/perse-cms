@@ -3,30 +3,57 @@
 namespace App;
 
 use App\Models\Book;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 
 class Cart
 {
-	private static int $step;
+	private static bool $loaded = false;
 
-	private static array $items;
+	private static int $step = 1;
+
+	private static array $items = [];
 
 	private static float $total;
 
 	private static float $totalDiscount;
 
+//	private static ?int $couponId = null;
+
+	private static ?array $coupon = null;
+
+	private static string $email = '';
+
+	private static string $firstName = '';
+
+	private static string $lastName = '';
+
+	private static string $identityDocumentNumber = '';
+
+	private static string $phone = '';
+
+	private static int $invoiceType = 3;
+
+	private static ?string $ruc = null;
+
+	private static ?string $businessName = null;
+
+	private static int|null $departmentId = null;
+
+	private static int|null $provinceId = null;
+
+	private static int|null $districtId = null;
+
 	public static function getStep(): int
 	{
-		if (!isset(static::$step))
-			static::load();
+		static::load();
 
 		return static::$step;
 	}
 
 	public static function setStep(int $step): void
 	{
-		if (!isset(static::$step))
-			static::load();
+		static::load();
 
 		static::$step = $step;
 
@@ -40,7 +67,7 @@ class Cart
 		if (array_key_exists($book->id, static::$items))
 			static::$items[$book->id]['quantity'] += $quantity;
 		else
-			static::$items[$book->id] = ['book' => $book, 'quantity' => $quantity];
+			static::$items[$book->id] = ['book' => $book->toArray(), 'quantity' => $quantity];
 
 		static::save();
 	}
@@ -64,22 +91,58 @@ class Cart
 		static::save();
 	}
 
+	public static function applyCoupon(Coupon $coupon): void
+	{
+		static::load();
+
+		static::$coupon = $coupon->toArray();
+
+		static::save();
+	}
+
 	private static function load(): void
 	{
-		static::$step = Session::get('cartStep', 1);
-		static::$items = Session::get('cart', []);
+//		static::$step = Session::get('cartStep', 1);
+//		static::$items = Session::get('cart', []);
+
+		if (self::$loaded)
+			return;
+
+		$data = Session::get('cart');
+
+		if ($data)
+		{
+			static::$step = $data['step'];
+			static::$items = $data['items'];
+//			static::$couponId = $data['couponId'];
+			static::$coupon = $data['coupon'];
+			static::$email = $data['email'];
+
+			self::$loaded = true;
+		}
 	}
 
 	private static function save(): void
 	{
-		Session::put('cartStep', static::$step);
-		Session::put('cart', static::$items);
+//		Session::put('cartStep', static::$step);
+//		Session::put('cart', static::$items);
+
+		session::put('cart', static::toArray());
 	}
 
 	public static function getItems(): array
 	{
 		static::load();
+
 		return static::$items;
+	}
+
+	public static function getCoupon(): Coupon|null
+	{
+		if (!static::$coupon)
+			return null;
+
+		return new Coupon(static::$coupon);
 	}
 
 	public static function getItemsCount(): int
@@ -90,7 +153,7 @@ class Cart
 	public static function getTotal(): float
 	{
 		if (!isset(self::$total))
-			self::getTotals();
+			self::calculateTotals();
 
 		return self::$total;
 	}
@@ -98,12 +161,12 @@ class Cart
 	public static function getTotalDiscount(): float
 	{
 		if (!isset(self::$totalDiscount))
-			self::getTotals();
+			self::calculateTotals();
 
 		return self::$totalDiscount;
 	}
 
-	private static function getTotals(): void
+	private static function calculateTotals(): void
 	{
 		self::$total = 0;
 		self::$totalDiscount = 0;
@@ -113,13 +176,42 @@ class Cart
 			$book = $item['book'];
 			$quantity = $item['quantity'];
 
-			if ($book->discounted_price)
+			if ($book['discounted_price'])
 			{
-				self::$total += $book->discounted_price * $quantity;
-				self::$totalDiscount += ($book->price - $book->discounted_price) * $quantity;
+				self::$total += $book['discounted_price'] * $quantity;
+				self::$totalDiscount += ($book['price'] - $book['discounted_price']) * $quantity;
 			}
 			else
-				self::$total += $book->price * $quantity;
+				self::$total += $book['price'] * $quantity;
 		}
+
+		// Apply coupon?
+		if (self::$coupon)
+			self::$total = (100 - self::$coupon['discount_rate']) * self::$total / 100;
+	}
+
+	private static function toArray(): array
+	{
+		$items = [];
+		foreach (static::$items as $item)
+			$items[$item['book']['id']] = $item;
+
+		return [
+			'step' => static::$step,
+			'items' => $items,
+//			'couponId' => static::$couponId,
+			'coupon' => static::$coupon,
+			'email' => static::$email,
+			'firstName' => static::$firstName,
+			'lastName' => static::$lastName,
+			'identityDocumentNumber' => static::$identityDocumentNumber,
+			'phone' => static::$phone,
+			'invoiceType' => static::$invoiceType,
+			'ruc' => static::$invoiceType == 1 ? static::$ruc : null,
+			'businessName' => static::$invoiceType == 1 ? static::$businessName : null,
+			'departmentId' => static::$departmentId,
+			'provinceId' => static::$provinceId,
+			'districtId' => static::$districtId,
+		];
 	}
 }

@@ -14,9 +14,9 @@ class ProductsListSection extends Component
 
 	public array $items;
 
-	public float $total;
+//	public float $total;
 
-	public float $totalDiscount;
+//	public float $totalDiscount;
 
 	#[Layout('components.layouts.cart')]
 	#[Title('Lista de productos :: Persé Librerías')]
@@ -31,8 +31,8 @@ class ProductsListSection extends Component
 	{
 //		$this->count = Cart::getItemsCount();
 		$this->items = Cart::getItems();
-		$this->total = Cart::getTotal();
-		$this->totalDiscount = Cart::getTotalDiscount();
+//		$this->total = Cart::getTotal();
+//		$this->totalDiscount = Cart::getTotalDiscount();
 	}
 
 	public function removeItem(int $bookId): void
@@ -40,6 +40,7 @@ class ProductsListSection extends Component
 		Cart::remove($bookId);
 
 		$this->loadData();
+		$this->dispatch('cart-updated');
 	}
 
 	/*public function nextStep(): void
