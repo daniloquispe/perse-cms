@@ -28,11 +28,11 @@
 								<ul>
 									@foreach($item['children'] as $subItem)
 										<li @class(['active' => in_array($subItem['id'], $activeIds)])>
-											<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="col-title">{{ $subItem['name'] }}</a>
+											<a href="{{ (new \App\Services\UrlService())->fromSlug($subItem['seo_tags']['slug']) }}" class="col-title">{{ $subItem['name'] }}</a>
 											<ul>
 												@foreach($subItem['children'] as $subItemOption)
 													<li @class(['submenu-item-option', 'active' => in_array($subItemOption['id'], $activeIds)])>
-														<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}">{{ $subItemOption['name'] }}</a>
+														<a href="{{ (new \App\Services\UrlService())->fromSlug($subItemOption['seo_tags']['slug']) }}">{{ $subItemOption['name'] }}</a>
 													</li>
 												@endforeach
 											</ul>
