@@ -24,7 +24,7 @@
 	@endforeach
 	{{-- Small banners --}}
 	<section class="container-box mb-11 pt-2">
-		<div class="grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-10">
+		<div class="grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-x-10 gap-y-6">
 			<div><img src="{{ asset('images/placeholders/banners/libros-infantiles-de-accion-y-aventuras-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
 			<div><img src="{{ asset('images/placeholders/banners/pack-la-serie-completa-harry-potter-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
 			<div><img src="{{ asset('images/placeholders/banners/el-hobbit-ilustrado-perse-librerias.jpg') }}" alt="Banner" class="w-full rounded-lg" /></div>
