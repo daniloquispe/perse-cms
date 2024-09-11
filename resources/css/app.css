@@ -175,6 +175,11 @@ body
 		@apply mt-1 grow-0 size-4;
 		@apply accent-palette-purple;
 	}
+
+	a
+	{
+		@apply underline;
+	}
 }
 
 .form-error

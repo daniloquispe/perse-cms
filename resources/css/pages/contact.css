@@ -1,6 +1,12 @@
 .contact-page main
 {
-	@apply grid grid-cols-2 gap-8 items-center;
+	@apply flex flex-col md:grid md:grid-cols-2 gap-x-8 gap-y-6 items-center;
+	@apply px-4 xl:px-0;
+
+	> div:last-child
+	{
+		@apply px-4 xl:px-0;
+	}
 }
 
 .contact-page img
@@ -40,7 +46,7 @@
 	@apply py-2.5;
 }
 
-.contact-page li
+/*.contact-page li
 {
 	@apply flex gap-3 items-start;
 	@apply text-justify;
@@ -64,7 +70,7 @@
 .contact-page input[type="checkbox"]
 {
 	@apply cursor-pointer accent-palette-purple;
-}
+}*/
 
 .contact-page button
 {
