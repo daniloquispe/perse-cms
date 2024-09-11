@@ -57,7 +57,7 @@
 			@elseif($step == 2)
 				<livewire:cart.personal-info-section />
 			@elseif($step == 3)
-				<livewire:cart.delivery-information-section />
+				<livewire:cart.delivery-info-section />
 			@endif
 		</div>
 		<div class="w-[23rem] flex flex-col gap-6">

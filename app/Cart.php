@@ -44,6 +44,16 @@ class Cart
 
 	private static int|null $districtId = null;
 
+	private static string|null $address = null;
+
+	private static string|null $locationNumber = null;
+
+	private static string|null $reference = null;
+
+	private static string|null $recipientName = null;
+
+	private static string|null $deliveryDate = null;
+
 	public static function getStep(): int
 	{
 		static::load();
@@ -60,12 +70,61 @@ class Cart
 		static::save();
 	}
 
-	/*public static function getInvoiceType(): int
+	public static function getEmail(): string|null
 	{
 		static::load();
 
-		return static::$invoiceType;
-	}*/
+		return static::$email;
+	}
+
+	public static function getFirstName(): string|null
+	{
+		static::load();
+
+		return static::$firstName;
+	}
+
+	public static function getLastName(): string|null
+	{
+		static::load();
+
+		return static::$lastName;
+	}
+
+	public static function getIdentityDocumentNumber(): string|null
+	{
+		static::load();
+
+		return static::$identityDocumentNumber;
+	}
+
+	public static function getPhone(): string|null
+	{
+		static::load();
+
+		return static::$phone;
+	}
+
+	public static function getInvoiceType(): InvoiceType|null
+	{
+		static::load();
+
+		return InvoiceType::tryFrom(static::$invoiceType);
+	}
+
+	public static function getRuc(): string|null
+	{
+		static::load();
+
+		return static::$ruc;
+	}
+
+	public static function getBusinessName(): string|null
+	{
+		static::load();
+
+		return static::$businessName;
+	}
 
 	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int $invoiceType, string|null $ruc, string|null $businessName): void
 	{
@@ -79,6 +138,22 @@ class Cart
 		static::$invoiceType = $invoiceType;
 		static::$ruc = $invoiceType == 3 ? $ruc : null;
 		static::$businessName = $invoiceType == 3 ? $businessName : null;
+
+		static::save();
+	}
+
+	public static function setDeliveryInfo(int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
+	{
+		static::load();
+
+		static::$departmentId = $departmentId;
+		static::$provinceId = $provinceId;
+		static::$districtId = $districtId;
+		static::$address = $address;
+		static::$locationNumber = $locationNumber;
+		static::$reference = $reference;
+		static::$recipientName = $recipientName;
+		static::$deliveryDate = $deliveryDate;
 
 		static::save();
 	}
@@ -136,10 +211,18 @@ class Cart
 		if ($data)
 		{
 			static::$step = $data['step'];
-			static::$items = $data['items'];
-//			static::$couponId = $data['couponId'];
 			static::$coupon = $data['coupon'];
+
+			static::$items = $data['items'];
+
 			static::$email = $data['email'];
+			static::$firstName = $data['firstName'];
+			static::$lastName = $data['lastName'];
+			static::$identityDocumentNumber = $data['identityDocumentNumber'];
+			static::$phone = $data['phone'];
+			static::$invoiceType = $data['invoiceType'];
+			static::$ruc = $data['ruc'];
+			static::$businessName = $data['businessName'];
 
 			self::$loaded = true;
 		}
@@ -224,6 +307,7 @@ class Cart
 			'items' => $items,
 //			'couponId' => static::$couponId,
 			'coupon' => static::$coupon,
+
 			'email' => static::$email,
 			'firstName' => static::$firstName,
 			'lastName' => static::$lastName,
@@ -232,9 +316,15 @@ class Cart
 			'invoiceType' => static::$invoiceType,
 			'ruc' => static::$invoiceType == 1 ? static::$ruc : null,
 			'businessName' => static::$invoiceType == 1 ? static::$businessName : null,
+
 			'departmentId' => static::$departmentId,
 			'provinceId' => static::$provinceId,
 			'districtId' => static::$districtId,
+			'address' => static::$address,
+			'locationNumber' => static::$locationNumber,
+			'reference' => static::$reference,
+			'recipientName' => static::$recipientName,
+			'deliveryDate' => static::$deliveryDate,
 		];
 	}
 }
