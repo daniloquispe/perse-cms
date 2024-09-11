@@ -30,6 +30,8 @@
 
 	.title.open
 	{
+		@apply mb-4;
+
 		svg
 		{
 			@apply rotate-180;
@@ -60,4 +62,9 @@
 {
 	@apply my-4;
 	@apply text-sm;
+
+	&:last-child
+	{
+		@apply mb-0;
+	}
 }

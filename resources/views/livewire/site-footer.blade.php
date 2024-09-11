@@ -41,7 +41,7 @@
 		<div class="subscription-form">
 			<div class="text">
 				<p class="title">Suscríbete y obtén un cupón con el 10% de Descuento en tu primera compra</p>
-				Además podrás enterarte de nuestras novedades y acceder a nuestros beneficios
+				<p class="subtitle">Además podrás enterarte de nuestras novedades y acceder a nuestros beneficios</p>
 			</div>
 			<div class="form">
 				<form>

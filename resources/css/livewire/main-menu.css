@@ -167,9 +167,10 @@
 .open-main-menu-button
 {
 	@apply block xl:hidden;
-	@apply size-12;
-	@apply rounded-lg hover:bg-white/20;
+	@apply size-11;
+	@apply rounded-lg;
 	@apply cursor-pointer;
+	@apply text-gray-950;
 	@apply transition-colors;
 }
 
