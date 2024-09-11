@@ -117,7 +117,7 @@
 			</div>
 			<div class="books-list-container">
 				@foreach($books as $book)
-					<livewire:book-list-item wire:key="{{ $book->id }}" :book="$book" />
+					<x-book-list-item :book="$book" />
 				@endforeach
 			</div>
 			@if($count > count($books))

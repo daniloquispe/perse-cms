@@ -1,3 +1,4 @@
+@import url(components/book-list-item.css);
 @import url(components/breadcrumbs.css);
 @import url(components/form/quantity-input.css);
 @import url(components/whatsapp-link.css);
@@ -14,7 +15,6 @@
 
 @import url(livewire/add-to-favorites-button.css);
 @import url(livewire/book-carousel.css);
-@import url(livewire/book-list-item.css);
 @import url(livewire/comment-form.css);
 @import url(livewire/profile-form.css);
 @import url(livewire/quantity-input.css);
