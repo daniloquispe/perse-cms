@@ -131,7 +131,7 @@ class BookResource extends Resource
 					]),
 				// Purchasing conditions
 				Forms\Components\Section::make('Condiciones de venta')
-					->columns()
+					->columns(4)
 					->schema([
 						Forms\Components\TextInput::make('price')
 							->label('Precio de venta')
@@ -142,6 +142,10 @@ class BookResource extends Resource
 							->label('Precio de venta (con descuento)')
 							->prefix('S/')
 							->numeric(),
+						Forms\Components\DatePicker::make('discount_from')
+							->label('Inicio del descuento'),
+						Forms\Components\DatePicker::make('discount_to')
+							->label('Fin del descuento'),
 						Forms\Components\Fieldset::make('Etiquetas')
 							->columns(3)
 							->schema([
