@@ -25,7 +25,7 @@ ul.cart-steps
 
 	li
 	{
-		@apply w-48 text-center;
+		@apply w-36 text-center;
 
 		a
 		{
