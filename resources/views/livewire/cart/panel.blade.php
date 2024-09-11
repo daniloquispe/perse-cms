@@ -85,7 +85,7 @@
 					{{-- Resume --}}
 					<h2 class="section-title">Resumen de tu Compra</h2>
 					@if($step > 1)
-						<div class="mb-10 h-60 overflow-y-scroll">
+						<div class="mb-10 max-h-60 overflow-y-scroll">
 							@foreach($items as $item)
 								<div class="flex items-center gap-3 border border-gray-300 rounded-lg p-2 mb-2">
 									<div class="w-16 shrink-0">

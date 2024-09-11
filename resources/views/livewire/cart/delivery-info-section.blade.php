@@ -41,7 +41,7 @@
 		</div>
 		<div class="card-body">
 			<form wire:submit="submitForm" class="delivery-form">
-				<div class="grid grid-cols-3 gap-4">
+				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
 					{{-- Department --}}
 					<div class="form-control-wrapper">
 						<label>Departamento</label>
@@ -93,7 +93,7 @@
 					<label>Destinatario</label>
 					<input type="text" wire:model="form.recipientName" />
 				</div>
-				<div class="grid grid-cols-3 gap-4">
+				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
 					{{-- Delivery method --}}
 					<div class="form-control-wrapper">
 						<label>Método de entrega</label>

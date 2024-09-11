@@ -91,7 +91,7 @@
 							<img src="{{ asset('images/credit-cards.png') }}" alt="Visa, MasterCard, American Express y Diners Club" />
 						</div>
 					</div>
-					<form class="delivery-form px-32 pt-4">
+					<form class="delivery-form xl:px-32 pt-4">
 						<div class="form-control-wrapper">
 							<label for="card-number">Número</label>
 							<input type="text" id="card-number" />

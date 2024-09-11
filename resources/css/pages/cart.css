@@ -7,7 +7,7 @@
 
 .cart-steps-wrapper
 {
-	@apply w-[30rem] sm:w-[36rem] mx-auto py-8;
+	@apply sm:w-[36rem] sm:mx-auto py-8;
 
 	.line
 	{
@@ -19,13 +19,13 @@
 ul.cart-steps
 {
 	@apply grid grid-flow-col auto-cols-fr;
-	@apply w-[30rem] sm:w-[36rem];
+	@apply sm:w-[36rem];
 	@apply mx-auto;
 	@apply -mt-[1.25rem];
 
 	li
 	{
-		@apply w-36 text-center;
+		@apply sm:w-36 text-center;
 
 		a
 		{

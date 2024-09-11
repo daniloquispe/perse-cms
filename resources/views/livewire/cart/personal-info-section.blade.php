@@ -16,7 +16,7 @@
 						<div class="form-error">{{ $message }}</div>
 					@enderror
 				</div>
-				<div class="grid grid-cols-2 gap-4">
+				<div class="sm:grid sm:grid-cols-2 sm:gap-4">
 					{{-- First name --}}
 					<div class="form-control-wrapper">
 						<label for="input-first_name">Nombre</label>
@@ -34,7 +34,7 @@
 						@enderror
 					</div>
 				</div>
-				<div class="grid grid-cols-2 gap-4">
+				<div class="sm:grid sm:grid-cols-2 sm:gap-4">
 					{{-- Identity document --}}
 					<div class="form-control-wrapper">
 						<label for="input-document_identity_number">Documento de identidad</label>
