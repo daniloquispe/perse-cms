@@ -2,20 +2,20 @@
 {
 	@apply px-4 2xl:px-0 py-12;
 	/*@apply 2xl:grid 2xl:grid-cols-5 2xl:gap-16;*/
-	@apply 2xl:flex 2xl:justify-between 2xl:gap-16;
+	@apply xl:flex xl:justify-between xl:gap-16;
 	@apply text-white;
 
 	.title
 	{
-		@apply cursor-pointer 2xl:cursor-auto;
+		@apply cursor-pointer xl:cursor-auto;
 		@apply font-bold uppercase;
 	}
 }
 
 .footer-menu-box nav
 {
-	@apply border-t border-solid border-white 2xl:border-0;
-	@apply px-8 2xl:px-0 py-4 2xl:py-0;
+	@apply border-t border-solid border-white xl:border-0;
+	@apply px-8 xl:px-0 py-4 xl:py-0;
 
 	.title
 	{
@@ -24,7 +24,7 @@
 		svg
 		{
 			@apply size-4;
-			@apply 2xl:hidden;
+			@apply xl:hidden;
 		}
 	}
 
@@ -41,8 +41,8 @@
 	ul
 	{
 		@apply h-0 2xl:h-auto;
-		@apply opacity-0 2xl:opacity-100;
-		@apply hidden 2xl:block;
+		@apply opacity-0 xl:opacity-100;
+		@apply hidden xl:block;
 		@apply transition-all;
 	}
 
@@ -54,8 +54,8 @@
 
 .footer-menu-box img
 {
-	@apply mx-auto 2xl:mx-0;
-	@apply mb-7 xl:mb-14;
+	@apply mx-auto xl:mx-0;
+	@apply mb-7 lg:mb-14;
 }
 
 .footer-menu-box li

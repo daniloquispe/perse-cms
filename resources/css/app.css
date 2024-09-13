@@ -57,7 +57,8 @@ body
 
 .content-wrapper
 {
-	@apply mt-6 mb-12;
+	@apply mt-5 md:mt-6 xl:mt-0 2xl:mt-5;
+	@apply mb-12;
 }
 
 /* Document-style pages */

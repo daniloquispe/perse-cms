@@ -26,7 +26,7 @@ carousels.forEach(function (carousel)
 				arrows: false,
 			},
 			1536: {
-				perPage: 4,
+				perPage: 5,
 			},
 			1678: {
 				perPage: 5,
