@@ -42,7 +42,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="price-cell">
+					<div @class(['price-cell', 'with-discount' => $item['book']['discounted_price']])>
 						{{-- Unit price --}}
 						<div class="price-name first">Precio unitario</div>
 						@if($item['book']['discounted_price'])
@@ -53,7 +53,7 @@
 							<div>{{ $item['book']['price'] }}</div>
 						@endif
 					</div>
-					<div class="price-cell">
+					<div @class(['price-cell', 'with-discount' => $item['book']['discounted_price']])>
 						{{-- Quantity --}}
 						<div class="price-name">Cantidad</div>
 						<div>
@@ -61,7 +61,7 @@
 							<livewire:quantity-input wire:key="quantity-{{ $item['book']['id'] }}" :value="$item['quantity']" :book-id="$item['book']['id']" />
 						</div>
 					</div>
-					<div class="price-cell">
+					<div @class(['price-cell', 'with-discount' => $item['book']['discounted_price']])>
 						{{-- Subtotal --}}
 						<div class="price-name last">Subtotal</div>
 						<br />

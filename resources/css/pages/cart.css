@@ -167,6 +167,11 @@ ul.cart-steps
 					@apply relative;
 					@apply text-center;
 
+					&.with-discount
+					{
+						@apply pt-8 md:pt-6;
+					}
+
 					.price-name
 					{
 						@apply flex items-center justify-center;
@@ -203,7 +208,8 @@ ul.cart-steps
 
 			.separator
 			{
-				@apply table-row;
+				@apply md:table-row;
+				@apply h-px;
 
 				> div
 				{
@@ -211,7 +217,7 @@ ul.cart-steps
 
 					> div
 					{
-						@apply h-[1px] bg-gray-200 my-6;
+						@apply h-px bg-gray-200 my-6;
 					}
 				}
 			}
