@@ -1,7 +1,6 @@
 .footer-menu-box
 {
 	@apply px-4 2xl:px-0 py-12;
-	/*@apply 2xl:grid 2xl:grid-cols-5 2xl:gap-16;*/
 	@apply xl:flex xl:justify-between xl:gap-16;
 	@apply text-white;
 
@@ -9,6 +8,16 @@
 	{
 		@apply cursor-pointer xl:cursor-auto;
 		@apply font-bold uppercase;
+	}
+
+	.logo-link
+	{
+		@apply pr-1 xl:pr-0;
+
+		img
+		{
+			@apply mb-6 lg:mb-12;
+		}
 	}
 }
 
