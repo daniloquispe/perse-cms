@@ -12,11 +12,11 @@
 
 	.logo-link
 	{
-		@apply pr-1 xl:pr-0;
+		@apply pr-3 xl:pr-0;
 
 		img
 		{
-			@apply mb-6 lg:mb-12;
+			@apply mb-5 lg:mb-11;
 		}
 	}
 }
