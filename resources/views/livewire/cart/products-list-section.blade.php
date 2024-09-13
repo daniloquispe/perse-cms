@@ -27,9 +27,15 @@
 					</div>
 					<div class="info-cell">
 						{{-- Book title --}}
-						<div class="book-title">{{ $item['book']['title'] }}</div>
+						<div class="book-title">
+							<button type="button" wire:click="removeItem({{ $item['book']['id'] }})" title="Eliminar" class="action-button text-gray-600 float-right block md:hidden -mr-3 -mt-1" aria-label="Eliminar del carrito">
+								<x-icons.trash />
+								<span class="sr-only">Eliminar</span>
+							</button>
+							{{ $item['book']['title'] }}
+						</div>
 						<div class="sku">SKU: {{ $item['book']['sku'] }}</div>
-						<ul>
+						<ul class="text-left">
 							<li>
 								<x-icons.check />
 								Despacho a domicilio
@@ -61,7 +67,7 @@
 						<br />
 						<div>0.00</div>
 					</div>
-					<div class="actions-cell">
+					<div class="actions-cell hidden md:table-cell">
 						{{-- Remove from cart --}}
 						<button type="button" wire:click="removeItem({{ $item['book']['id'] }})" title="Eliminar" aria-label="Eliminar del carrito">
 							<x-icons.trash />

@@ -5,44 +5,32 @@
 		<ul class="cart-steps">
 			<li>
 				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
-					<div @class(['marker', 'current' => $step == 1])>
+					<div @class(['marker', 'current' => $step >= 1])>
 						<x-icons.cart />
-						@if($step == 1)
-							<div class="text-sm text-nowrap">Paso 1</div>
-						@endif
 					</div>
 					<div>Carro</div>
 				</a>
 			</li>
 			<li>
 				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
-					<div @class(['marker', 'current' => $step == 2])>
+					<div @class(['marker', 'current' => $step >= 2])>
 						<x-icons.user />
-						@if($step == 2)
-							Paso 2
-						@endif
 					</div>
 					<div>Datos</div>
 				</a>
 			</li>
 			<li>
 				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
-					<div @class(['marker', 'current' => $step == 3])>
+					<div @class(['marker', 'current' => $step >= 3])>
 						<x-icons.truck />
-						@if($step == 3)
-							Paso 3
-						@endif
 					</div>
 					<div>Entrega</div>
 				</a>
 			</li>
 			<li>
 				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
-					<div @class(['marker', 'current' => $step == 4])>
+					<div @class(['marker', 'current' => $step >= 4])>
 						<x-icons.credit-card />
-						@if($step == 4)
-							Paso 4
-						@endif
 					</div>
 					<div>Pago</div>
 				</a>

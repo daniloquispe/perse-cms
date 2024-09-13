@@ -11,7 +11,7 @@
 
 	.line
 	{
-		@apply h-0.5 bg-gray-400;
+		@apply h-0.5 bg-[#cbcbcb];
 		@apply mx-[4rem] mt-[1.25rem];
 	}
 }
@@ -36,7 +36,7 @@ ul.cart-steps
 				@apply inline-flex items-center gap-1;
 				@apply rounded-full;
 				@apply p-2;
-				@apply bg-gray-400;
+				@apply bg-[#cbcbcb];
 				@apply text-white text-center;
 
 				&.current
@@ -134,7 +134,7 @@ ul.cart-steps
 				{
 					@apply col-span-2;
 					@apply align-top;
-					@apply px-8;
+					@apply pl-4 md:px-8;
 
 					.book-title
 					{
@@ -220,7 +220,7 @@ ul.cart-steps
 		.cart-item
 		{
 			@apply border-b border-gray-200;
-			@apply mx-6 py-6;
+			@apply /*mx-6 */py-6;
 			@apply flex items-start gap-6;
 
 			& > div
