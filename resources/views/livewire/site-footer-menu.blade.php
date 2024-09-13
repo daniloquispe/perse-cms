@@ -1,7 +1,7 @@
 <div class="footer-menu-box">
 	<div>
 		{{-- Logo --}}
-		<a href="{{ route('home') }}"><img src="{{ asset('images/footer-logo.png') }}" alt="Persé Librerías" /></a>
+		<a href="{{ route('home') }}"><img src="{{ asset('images/logo-perse-librerias-pie.png') }}" alt="Persé Librerías" /></a>
 		{{-- Social links --}}
 		<livewire:social-links />
 	</div>
