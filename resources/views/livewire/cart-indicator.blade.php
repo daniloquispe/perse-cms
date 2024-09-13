@@ -1,8 +1,15 @@
 <div class="cart-indicator">
 	<input type="checkbox" wire:model="showSidebar" id="cart-sidebar-active" />
 	<label for="cart-sidebar-active" class="open-cart-sidebar-button">
-		<span>Mi Carrito</span>
-		<x-icons.cart />
+		<span class="icon-label">Mi Carrito</span>
+		<div class="counter-wrapper">
+			{{-- Icon --}}
+			<x-icons.cart />
+			{{-- Counter --}}
+			@if($count > 0)
+				<span class="counter">{{ $count }}</span>
+			@endif
+		</div>
 	</label>
 	<label for="cart-sidebar-active" id="cart-sidebar-overlay"></label>
 	<div class="cart-sidebar-container">
