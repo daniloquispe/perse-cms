@@ -52,7 +52,7 @@
 						@enderror
 					</div>
 				</div>
-				<div>
+				<div class="radios-wrapper">
 					{{-- Invoice type --}}
 					<div class="checkbox-wrapper">
 						<input type="radio" wire:model="form.invoiceType" wire:change="toggleInvoiceFields" name="invoice_type" value="3" id="input-invoice_type-3" />

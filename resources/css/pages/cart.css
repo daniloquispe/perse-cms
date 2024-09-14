@@ -315,7 +315,8 @@ ul.cart-steps
 		{
 			@apply block w-full;
 			@apply rounded-lg;
-			@apply mt-4 py-3;
+			@apply border border-palette-orange;
+			@apply mt-4 py-2;
 			@apply bg-palette-orange;
 			@apply text-white uppercase font-[500] tracking-widest;
 		}
@@ -348,7 +349,8 @@ ul.cart-steps
 		{
 			@apply block w-full;
 			@apply rounded-lg;
-			@apply mb-5 py-4;
+			@apply border border-palette-orange;
+			@apply mb-5 py-2;
 			@apply bg-palette-orange;
 			@apply text-white font-[500];
 		}
