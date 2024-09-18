@@ -170,6 +170,7 @@ body
 .radios-wrapper
 {
 	@apply space-y-2 md:space-y-0;
+	@apply pb-1;
 }
 
 .checkbox-wrapper

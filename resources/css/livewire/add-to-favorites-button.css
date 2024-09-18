@@ -2,6 +2,11 @@
 {
 	@apply flex items-center gap-2;
 	@apply mb-8;
+
+	p
+	{
+		@apply text-left;
+	}
 }
 
 .add-to-favorites-button > *

@@ -70,7 +70,7 @@
 				</div>
 				{{-- Invoice info --}}
 				@if($showInvoiceFields)
-					<div wire:transition.opacity class="mt-4">
+					<div wire:transition.opacity class="mt-3">
 						<div class="grid grid-cols-2 gap-4">
 							{{-- Identity document --}}
 							<div class="form-control-wrapper">
