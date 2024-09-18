@@ -6,7 +6,8 @@
 	{{-- Main --}}
 	<div class="main-wrapper">
 		{{-- Open/close menu (mobile) --}}
-		<label for="main-menu-active" class="open-main-menu-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+		<label for="main-menu-active" class="open-main-menu-button">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 			</svg>
 			<span class="sr-only">Menú</span>
@@ -42,7 +43,7 @@
 	</div>
 	{{-- Main menu (desktop) --}}
 	<div class="main-menu-wrapper">
-		<livewire:main-menu />
+		<livewire:main-menu :items="$menuItems" :active-ids="$activeMenuIds" />
 	</div>
 	{{-- Search (mobile) --}}
 	<div class="mobile-main-menu-wrapper">
