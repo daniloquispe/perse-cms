@@ -14,4 +14,5 @@ import './components/slider.js';
 import './components/site-header/marquee.js';
 
 import './livewire/book-carousel.js';
+import './livewire/cart-indicator.js';
 import './livewire/site-footer.js';
