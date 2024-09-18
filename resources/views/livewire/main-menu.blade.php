@@ -1,14 +1,5 @@
 <nav class="main-menu">
-	<input type="checkbox" id="main-menu-active" />
-	<label for="main-menu-active" id="main-menu-overlay"></label>
 	<div class="container-box main-menu-container">
-		<label for="main-menu-active" class="close-main-menu-button">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-				<path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-			</svg>
-			<span class="sr-only">Cerrar</span>
-		</label>
-		<p class="menu-title">Categorías</p>
 		<ul>
 			@foreach($items as $item)
 				<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
