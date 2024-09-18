@@ -1,7 +1,7 @@
 .site-header
 {
 	@apply fixed top-0 w-full z-20;
-	@apply bg-white;  /* Remove */
+	@apply bg-body-white;  /* Remove */
 
 	/* Marquee */
 
@@ -21,7 +21,7 @@
 		@apply px-7 xl:px-0;
 		@apply /*justify-between */xl:justify-center;
 		@apply xl:container xl:mx-auto;
-		@apply bg-white;
+		@apply bg-body-white;
 
 		> div
 		{

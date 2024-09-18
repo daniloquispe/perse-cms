@@ -13,6 +13,9 @@ export default {
 					pink: '#fcf2f5',
 					purple: '#AD60BF',
 					yellow: '#ffc629',
+				},
+				body: {
+					white: '#fdfdfd',
 				}
 			},
 			screens: {

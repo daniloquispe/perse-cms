@@ -34,6 +34,7 @@
 body
 {
 	font-family: Roboto, sans-serif;
+	@apply bg-body-white;
 	@apply text-gray-600;
 	@apply text-justify;
 	@apply transition-colors;

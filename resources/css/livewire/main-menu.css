@@ -2,7 +2,7 @@
 {
 	@apply h-full;
 	@apply border-y border-gray-200;
-	@apply bg-white xl:bg-transparent;  /* In .main-menu-container? */
+	@apply bg-body-white xl:bg-transparent;  /* In .main-menu-container? */
 	@apply rounded-r-lg xl:rounded-r-none;  /* In .main-menu-container? */
 
 	.main-menu-container
@@ -10,7 +10,7 @@
 		@apply h-full;
 		@apply fixed top-0 bottom-0 -left-full w-72 z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
 		@apply xl:static xl:w-full xl:z-0 xl:shadow-none;
-		/*@apply bg-white xl:bg-transparent;*/
+		/*@apply bg-body-white xl:bg-transparent;*/
 		/*@apply rounded-r-lg xl:rounded-r-none;*/
 		@apply ease-out duration-700 xl:transition-none;
 
@@ -76,7 +76,7 @@
 		@apply hidden z-10;
 		@apply text-left text-gray-600;
 		@apply transition-all;
-		@apply bg-white;
+		@apply bg-body-white;
 
 		.submenu-container
 		{
