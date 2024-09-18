@@ -1,42 +1,41 @@
 <div class="container-box-cart">
-	{{-- Steps indicator --}}
-	<div class="cart-steps-wrapper">
-		<div class="line"></div>
-		<ul class="cart-steps">
-			<li>
-				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
-					<div @class(['marker', 'current' => $step >= 1])>
-						<x-icons.cart />
-					</div>
-					<div>Carro</div>
-				</a>
-			</li>
-			<li>
-				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
-					<div @class(['marker', 'current' => $step >= 2])>
-						<x-icons.user />
-					</div>
-					<div>Datos</div>
-				</a>
-			</li>
-			<li>
-				<a wire:click.prevent="goToStep(2)" href="{{ route('cart.delivery') }}">
-					<div @class(['marker', 'current' => $step >= 3])>
-						<x-icons.truck />
-					</div>
-					<div>Entrega</div>
-				</a>
-			</li>
-			<li>
-				<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}">
-					<div @class(['marker', 'current' => $step >= 4])>
-						<x-icons.credit-card />
-					</div>
-					<div>Pago</div>
-				</a>
-			</li>
-		</ul>
+	{{-- Steps indicator (new) --}}
+	<div class="cart-steps">
+		<div @class(['cart-step', 'current' => $step >= 1])>
+			<a wire:click.prevent="goToStep(1)" href="#">
+				<span class="marker">
+					<x-icons.cart />
+				</span>
+				Carro
+			</a>
+		</div>
+		<div @class(['cart-step', 'current' => $step >= 2])>
+			<a wire:click.prevent="goToStep(2)" href="#">
+				<span class="marker">
+					<x-icons.user />
+				</span>
+				Datos
+			</a>
+		</div>
+		<div @class(['cart-step', 'current' => $step >= 3])>
+			<a wire:click.prevent="goToStep(3)" href="#">
+				<span class="marker">
+					<x-icons.truck />
+				</span>
+				Entrega
+			</a>
+		</div>
+		<div @class(['cart-step', 'current' => $step >= 4])>
+			<a wire:click.prevent="goToStep(4)" href="#">
+				<span class="marker">
+					<x-icons.credit-card />
+				</span>
+				Pago
+			</a>
+		</div>
 	</div>
+
+	{{-- Main content --}}
 	<div class="lg:flex lg:gap-8 pb-10">
 		<div class="grow mb-6 lg:mb-0">
 			{{-- Main content --}}
@@ -50,6 +49,8 @@
 				<livewire:cart.payment-info-section />
 			@endif
 		</div>
+
+		{{-- Sidebar --}}
 		<div class="lg:w-[23rem] flex flex-col gap-6">
 			<x-cart-card>
 				<div class="card-body">
@@ -125,3 +126,12 @@
 		</div>
 	</div>
 </div>
+
+@assets
+	<style>
+		.container-box-cart
+		{
+			@apply !bg-red-700;
+		}
+	</style>
+@endassets
