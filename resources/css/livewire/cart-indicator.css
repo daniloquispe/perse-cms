@@ -64,7 +64,7 @@
 		@apply w-[90%] sm:w-[32rem] h-full;
 		@apply flex flex-col;
 		@apply bg-white;
-		@apply shadow-[-5px_0_5px_rgba(0,0,0,0.25)];
+		/*@apply shadow-[-5px_0_5px_rgba(0,0,0,0.25)];*/
 		transition: 0.75s ease-out;
 
 		/* Header */

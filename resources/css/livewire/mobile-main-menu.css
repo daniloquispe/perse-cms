@@ -45,17 +45,15 @@
 
 	.main-menu-sidebar-container
 	{
-		@apply fixed top-0 bottom-0 -left-full z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
-		/*@apply xl:static xl:w-full xl:z-0 xl:shadow-none;*/
-		@apply w-[70%] sm:w-[32rem] h-full;
+		@apply fixed top-0 bottom-0 -left-full z-10/* shadow-[5px_0_5px_rgba(0,0,0,0.25)]*/;
+		@apply w-[80%] sm:w-[32rem] h-full;
 		@apply bg-white xl:bg-transparent;
-		@apply rounded-r-lg/* xl:rounded-r-none*/;
-		@apply ease-out duration-700/* xl:transition-none*/;
+		@apply rounded-r-lg;
+		@apply ease-out duration-700;
 
 		.menu-title
 		{
 			@apply px-6 py-3 font-[500];
-			/*@apply xl:hidden;*/
 		}
 
 		ul
@@ -108,16 +106,6 @@
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
 #main-menu-sidebar-active:checked ~ .main-menu-sidebar-container
 {
