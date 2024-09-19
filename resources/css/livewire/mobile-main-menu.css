@@ -45,15 +45,16 @@
 
 	.main-menu-sidebar-container
 	{
-		@apply fixed top-0 bottom-0 -left-full w-72 z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
+		@apply fixed top-0 bottom-0 -left-full z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
 		/*@apply xl:static xl:w-full xl:z-0 xl:shadow-none;*/
+		@apply w-[70%] sm:w-[32rem] h-full;
 		@apply bg-white xl:bg-transparent;
 		@apply rounded-r-lg/* xl:rounded-r-none*/;
 		@apply ease-out duration-700/* xl:transition-none*/;
 
 		.menu-title
 		{
-			@apply px-6 py-3 font-bold;
+			@apply px-6 py-3 font-[500];
 			/*@apply xl:hidden;*/
 		}
 
@@ -64,19 +65,25 @@
 			li.menu-item
 			{
 				@apply inline-block w-full;
-				@apply px-6;
+				@apply pl-6;
 				@apply border-b border-solid border-gray-200;
 
 				.menu-link
 				{
 					@apply w-full;
 					@apply flex items-center justify-between;
-					@apply py-3;
+					@apply py-4;
 					@apply hover:text-palette-orange;
+
+					div:last-child
+					{
+						@apply w-12;
+					}
 
 					svg
 					{
 						@apply w-5;
+						@apply mx-auto;
 					}
 				}
 			}
@@ -84,6 +91,19 @@
 			li.menu-item.active
 			{
 				@apply text-palette-orange;
+			}
+		}
+
+		.back-button
+		{
+			@apply flex items-center gap-2;
+			@apply ml-5 py-3;
+			@apply text-palette-purple font-[500];
+			@apply text-nowrap;
+
+			svg
+			{
+				@apply w-5;
 			}
 		}
 	}

@@ -16,28 +16,33 @@
 			</svg>
 			<span class="sr-only">Cerrar</span>
 		</label>
-		@foreach($pages as $page)
-			<div class="menu-page">
-				{{-- Menu title --}}
-				<p class="menu-title">Categorías</p>
-				{{-- Menu items --}}
-				<ul>
-					@foreach($page['items'] as $item)
-						<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
-							@if(count($item['children']) > 0)
-								<button type="button" wire:click="goToPage({{ $item['id'] }})" class="menu-link">
-									{{ $item['name'] }}
-									<x-icons.chevron-right />
-								</button>
-							@else
-								<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="menu-link">
-									{{ $item['name'] }}
-								</a>
-							@endif
-						</li>
-					@endforeach
-				</ul>
-			</div>
-		@endforeach
+		<div class="menu-page">
+			{{-- Back --}}
+			@if($pages[$currentPageId]['parentId'] !== null)
+				<button type="button" wire:click="goToPage({{ $pages[$currentPageId]['parentId'] }})" class="back-button">
+					<x-icons.chevron-left />
+					{{ $pages[$currentPageId]['parentLabel'] }}
+				</button>
+			@endif
+			{{-- Menu title --}}
+			<p class="menu-title">{{ $pages[$currentPageId]['title'] }}</p>
+			{{-- Menu items --}}
+			<ul>
+				@foreach($pages[$currentPageId]['items'] as $item)
+					<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
+						@if(array_key_exists('children', $item))
+							<button type="button" wire:click="goToPage({{ $item['id'] }})" class="menu-link">
+								<div>{{ $item['name'] }}</div>
+								<div><x-icons.chevron-right /></div>
+							</button>
+						@else
+							<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="menu-link">
+								{{ $item['name'] }}
+							</a>
+						@endif
+					</li>
+				@endforeach
+			</ul>
+		</div>
 	</div>
 </div>
