@@ -45,7 +45,7 @@
 
 	.main-menu-sidebar-container
 	{
-		@apply fixed top-0 bottom-0 -left-full z-10 shadow-[5px_0_5px_rgba(0,0,0,0.25)];
+		@apply fixed top-0 bottom-0 -left-full z-10/* shadow-[5px_0_5px_rgba(0,0,0,0.25)]*/;
 		/*@apply xl:static xl:w-full xl:z-0 xl:shadow-none;*/
 		@apply w-[70%] sm:w-[32rem] h-full;
 		@apply bg-white xl:bg-transparent;
