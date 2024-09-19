@@ -1,6 +1,6 @@
 <div class="mobile-main-menu-component">
 	<input type="checkbox" wire:model="showSidebar" id="main-menu-sidebar-active" />
-	{{-- Open/close menu (mobile) --}}
+	{{-- Open menu (mobile) --}}
 	<label for="main-menu-sidebar-active" class="open-main-menu-sidebar-button">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -9,7 +9,7 @@
 	</label>
 	<label for="main-menu-sidebar-active" id="main-menu-sidebar-overlay"></label>
 	<div class="main-menu-sidebar-container">
-		{{-- Close --}}
+		{{-- Close menu --}}
 		<label for="main-menu-sidebar-active" class="close-main-menu-sidebar-button">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 				<path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />

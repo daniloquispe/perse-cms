@@ -31,13 +31,15 @@
 
 	.close-main-menu-sidebar-button
 	{
-		@apply float-right bg-palette-purple text-white text-center rounded-bl-lg rounded-tr-lg p-2;
+		@apply size-12;
+		@apply flex items-center justify-center;
+		@apply float-right bg-palette-purple text-white text-center rounded-bl-xl rounded-tr-xl;
 		@apply cursor-pointer;
 		@apply xl:hidden;
 
 		svg
 		{
-			@apply inline size-8;
+			@apply inline size-9;
 		}
 	}
 
@@ -46,14 +48,15 @@
 	.main-menu-sidebar-container
 	{
 		@apply fixed top-0 bottom-0 -left-full z-10/* shadow-[5px_0_5px_rgba(0,0,0,0.25)]*/;
-		@apply w-[80%] sm:w-[32rem] h-full;
+		@apply w-[85%] sm:w-[32rem] h-full;
 		@apply bg-white xl:bg-transparent;
-		@apply rounded-r-lg;
+		@apply rounded-r-xl;
 		@apply ease-out duration-700;
 
 		.menu-title
 		{
-			@apply px-6 py-3 font-[500];
+			@apply px-9 py-4;
+			@apply text-lg text-gray-800 font-[500];
 		}
 
 		ul
@@ -63,45 +66,46 @@
 			li.menu-item
 			{
 				@apply inline-block w-full;
-				@apply pl-6;
 				@apply border-b border-solid border-gray-200;
 
 				.menu-link
 				{
 					@apply w-full;
 					@apply flex items-center justify-between;
-					@apply py-4;
-					@apply hover:text-palette-orange;
+					@apply pl-9 py-4;
+					@apply text-gray-800/* hover:text-palette-orange*/;
 
 					div:last-child
 					{
-						@apply w-12;
+						@apply w-14;
 					}
 
 					svg
 					{
 						@apply w-5;
 						@apply mx-auto;
+						@apply stroke-2;
 					}
 				}
 			}
 
-			li.menu-item.active
+			/*li.menu-item.active
 			{
 				@apply text-palette-orange;
-			}
+			}*/
 		}
 
 		.back-button
 		{
 			@apply flex items-center gap-2;
-			@apply ml-5 py-3;
+			@apply ml-8 py-5;
 			@apply text-palette-purple font-[500];
 			@apply text-nowrap;
 
 			svg
 			{
 				@apply w-5;
+				@apply stroke-2;
 			}
 		}
 	}

@@ -56,7 +56,7 @@ class MobileMainMenu extends Component
 				'items' => $this->extractItemsFromParent($item['children']),
 				'parentId' => 0,
 				'parentLink' => $this->urlService->fromSlug($item['seo_tags']['slug']),
-				'parentLabel' => 'Volver al menú',
+				'parentLabel' => 'Volver a Categorías',
 			];
 
 			foreach ($item['children'] as $itemChild)
