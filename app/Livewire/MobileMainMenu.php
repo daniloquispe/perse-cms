@@ -14,17 +14,22 @@ class MobileMainMenu extends Component
 
 	public int $currentPageId = 0;
 
+	public int $currentLevel = 1;
+
 	public array $items;
 
 	public array $activeIds;
 
 	public array $pages;
 
+	public array $itemsByLevel;
+
 	public function mount(): void
 	{
 		$this->urlService = new UrlService();
 
-		$this->generateMenuPages();
+//		$this->generateMenuPages();
+		$this->generateItemsByLevel();
 	}
 
     public function render(): View
@@ -32,7 +37,7 @@ class MobileMainMenu extends Component
 		return view('livewire.mobile-main-menu');
     }
 
-	private function generateMenuPages(): void
+	/*private function generateMenuPages(): void
 	{
 		$pages = [];
 
@@ -71,7 +76,50 @@ class MobileMainMenu extends Component
 			}
 		}
 
-		$this->pages = $pages;//dd($pages);
+		$this->pages = $pages;
+	}*/
+
+	private function generateItemsByLevel(): void
+	{
+		$itemsByLevel = [];  // Level, itemId, info
+
+		// Level 1
+		$itemsByLevel[1][0] = [
+			'title' => 'Categorías',
+			'items' => $this->extractItemsFromParent(),
+			'parentId' => null,
+			'parentLink' => null,
+			'parentLabel' => null,
+		];
+
+		// Level 2
+		foreach ($this->items as $item)
+		{
+			if (count($item['children']) == 0)
+				continue;
+
+			$itemsByLevel[2][$item['id']] = [
+				'title' => $item['name'],
+				'items' => $this->extractItemsFromParent($item['children']),
+				'parentId' => 0,
+				'parentLink' => $this->urlService->fromSlug($item['seo_tags']['slug']),
+				'parentLabel' => 'Volver a Categorías',
+			];
+
+			// Level 3
+			foreach ($item['children'] as $itemChild)
+			{
+				$itemsByLevel[3][$itemChild['id']] = [
+					'title' => $itemChild['name'],
+					'items' => $this->extractItemsFromParent($itemChild['children']),
+					'parentId' => $item['id'],
+					'parentLink' => $this->urlService->fromSlug($itemChild['seo_tags']['slug']),
+					'parentLabel' => "Volver a {$item['name']}",
+				];
+			}
+		}
+
+		$this->itemsByLevel = $itemsByLevel;//dd($this->itemsByLevel);
 	}
 
 	private function extractItemsFromParent(array $parentItems = null): array
@@ -92,8 +140,10 @@ class MobileMainMenu extends Component
 		return $pageItems;
 	}
 
-	public function goToPage(int $pageId): void
+	/*public function goToPage(int $pageId, bool $toParent = false): void
 	{
+		$toParent ? $this->currentLevel-- : $this->currentLevel++;
+
 		$this->currentPageId = $pageId;
-	}
+	}*/
 }

@@ -16,33 +16,84 @@
 			</svg>
 			<span class="sr-only">Cerrar</span>
 		</label>
-		<div class="menu-page">
-			{{-- Back --}}
-			@if($pages[$currentPageId]['parentId'] !== null)
-				<button type="button" wire:click="goToPage({{ $pages[$currentPageId]['parentId'] }})" class="back-button">
-					<x-icons.chevron-left />
-					{{ $pages[$currentPageId]['parentLabel'] }}
-				</button>
-			@endif
-			{{-- Menu title --}}
-			<p class="menu-title">{{ $pages[$currentPageId]['title'] }}</p>
-			{{-- Menu items --}}
-			<ul>
-				@foreach($pages[$currentPageId]['items'] as $item)
-					<li @class(['menu-item', 'active' => in_array($item['id'], $activeIds)])>
-						@if(array_key_exists('children', $item))
-							<button type="button" wire:click="goToPage({{ $item['id'] }})" class="menu-link">
-								<div>{{ $item['name'] }}</div>
-								<div><x-icons.chevron-right /></div>
-							</button>
-						@else
-							<a href="{{ (new \App\Services\UrlService())->fromSlug($item['seo_tags']['slug']) }}" class="menu-link">
-								{{ $item['name'] }}
-							</a>
-						@endif
-					</li>
+		<div>
+			{{-- Scrollpane --}}
+			<div @class(['level-cols', 'in-level-2' => $currentLevel == 2, 'in-level-3' => $currentLevel == 3]) data-level="1">
+				@foreach($itemsByLevel as $level => $itemsInLevel)
+					<div @class(['level-col', 'level-col-' . $level])>
+						@foreach($itemsInLevel as $itemId => $itemsInCol)
+							<div @class(['can-show' => $level > 1]) data-id="{{ $itemId }}">
+								{{-- Back --}}
+								@if($level > 1)
+									<button type="button" class="back-button with-scroll" data-level="{{ $level - 1 }}">
+										<x-icons.chevron-left />
+										{{ $itemsInCol['parentLabel'] }}
+									</button>
+								@endif
+								{{-- Menu title --}}
+								<p class="menu-title">{{ $itemsInCol['title'] }}</p>
+								{{-- Menu items --}}
+								<ul>
+									@foreach($itemsInCol['items'] as $itemInCol)
+										<li class="menu-item">
+											@if(array_key_exists('children', $itemInCol))
+												<button type="button" class="menu-link with-scroll" data-level="{{ $level }}" data-show="{{ $itemInCol['id'] }}">
+													<div data-level="{{ $level }}" data-show="{{ $itemInCol['id'] }}">{{ $itemInCol['name'] }}</div>
+													<div data-level="{{ $level }}" data-show="{{ $itemInCol['id'] }}">
+														<x-icons.chevron-right data-level="{{ $level }}" data-show="{{ $itemInCol['id'] }}" />
+													</div>
+												</button>
+											@else
+												<a href="{{ (new \App\Services\UrlService())->fromSlug($itemInCol['seo_tags']['slug']) }}" class="menu-link">
+													{{ $itemInCol['name'] }}
+												</a>
+											@endif
+										</li>
+									@endforeach
+								</ul>
+							</div>
+						@endforeach
+					</div>
 				@endforeach
-			</ul>
+			</div>
+			@if(false)
+			<div class="level-cols">
+				@foreach($itemsByLevel as $level => $itemsInLevel)
+					<div class="level-col">
+						@foreach($itemsInLevel as $itemId => $itemsInCol)
+							<div>
+								{{-- Back --}}
+								@if($level > 1)
+									<button type="button" wire:click="goToPage({{ $pages[$currentPageId]['parentId'] }}, {{ true }})" class="back-button">
+										<x-icons.chevron-left />
+										{{ $pages[$currentPageId]['parentLabel'] }}
+									</button>
+								@endif
+								{{-- Menu title --}}
+								<p class="menu-title">{{ $item['title'] }}</p>
+								{{-- Menu items --}}
+								<ul>
+									@foreach($item['items'] as $itemOption)
+										<li @class(['menu-item', 'active' => in_array($itemOption['id'], $activeIds)])>
+											@if(array_key_exists('children', $itemOption))
+												<button type="button" wire:click="goToPage({{ $itemOption['id'] }})" class="menu-link">
+													<div>{{ $itemOption['name'] }}</div>
+													<div><x-icons.chevron-right /></div>
+												</button>
+											@else
+												<a href="{{ (new \App\Services\UrlService())->fromSlug($itemOption['seo_tags']['slug']) }}" class="menu-link">
+													{{ $itemOption['name'] }}
+												</a>
+											@endif
+										</li>
+									@endforeach
+								</ul>
+							</div>
+						@endforeach
+					</div>
+				@endforeach
+			</div>
+			@endif
 		</div>
 	</div>
 </div>
