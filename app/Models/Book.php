@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\HasSearchTerms;
 use App\HasSeoTags;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -51,6 +53,25 @@ class Book extends Model
 			$terms = join(PHP_EOL, $terms);
 			$book->searchTerms()->update(compact('terms'));
 		});
+	}
+
+	public function hasDiscountNow(): Attribute
+	{
+		if (!$this->discounted_price)
+			$hasDiscount = false;
+		else
+		{
+			if ($this->discount_from && $this->discount_to)
+				$hasDiscount = Carbon::now()->between($this->discount_from, $this->discount_to);
+			elseif ($this->discount_from)
+				$hasDiscount = $this->discount_from < Carbon::now();
+			elseif ($this->discount_to)
+				$hasDiscount = Carbon::now() < $this->discount_to;
+			else
+				$hasDiscount = true;
+		}
+
+		return Attribute::make(fn() => $hasDiscount);
 	}
 
 	public function authors(): BelongsToMany
