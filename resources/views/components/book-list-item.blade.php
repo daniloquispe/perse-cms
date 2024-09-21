@@ -19,8 +19,10 @@
 			<div class="author">{{ $authors }}</div>
 			<div class="prices">
 				@if($discount)
-					<div class="current">S/&nbsp;{{ $book->discounted_price }}</div>
-					<div class="normal"><del>S/{{ $book->price }}</del></div>
+					<div class="amounts">
+						<div class="current">S/&nbsp;{{ $book->discounted_price }}</div>
+						<div class="normal"><del>S/{{ $book->price }}</del></div>
+					</div>
 					<div class="discount">-{{ $discount }}%</div>
 				@else
 					<div class="current">S/&nbsp;{{ $book->price }}</div>

@@ -68,19 +68,26 @@ article.book-list-item .author
 
 article.book-list-item .prices
 {
-	@apply flex gap-1.5 items-center;
-	@apply p-3;
+	/*@apply flex-grow;*/
+	@apply h-14 lg:h-auto;
+	@apply flex items-center justify-between;
+	@apply px-3 lg:p-3;
+
+	.amounts
+	{
+		@apply flex flex-col-reverse lg:flex-row items-start lg:items-center gap-0 lg:gap-1.5;
+	}
 }
 
 article.book-list-item .prices .normal
 {
-	@apply flex-grow;
+	/*@apply flex-grow;*/
 	@apply text-sm opacity-60;
 }
 
 article.book-list-item .prices .discount
 {
-	@apply flex-shrink;
+	/*@apply flex-shrink;*/
 	@apply px-1 pt-0.5;
 	@apply rounded;
 	@apply text-white text-sm bg-red-600;
