@@ -96,9 +96,35 @@
 
 .book-category .description-wrapper
 {
-	@apply flex items-center justify-between;
+	@apply flex flex-col lg:flex-row items-start lg:items-center justify-between;
 	@apply mt-4;
 	@apply border border-solid border-gray-300 rounded-lg p-3;
+
+	.description-buttons-wrapper
+	{
+		@apply grid grid-cols-2 gap-2.5 lg:gap-0 lg:block;
+		@apply w-full lg:w-auto;
+		@apply mt-4 lg:mt-0;
+
+		div:first-child
+		{
+			@apply lg:hidden;
+		}
+
+		button
+		{
+			@apply w-full lg:w-auto;
+			@apply border border-solid border-gray-300 rounded-lg;
+			@apply p-2;
+			@apply bg-white;
+
+			svg
+			{
+				@apply inline size-4;
+				@apply stroke-2;
+			}
+		}
+	}
 }
 
 .book-category .description-wrapper label
@@ -115,7 +141,7 @@
 	@apply bg-white;
 }*/
 
-.book-category .order-menu-button
+/*.book-category .order-menu-button
 {
 	@apply border border-solid border-gray-300 rounded-lg;
 	@apply p-2;
@@ -125,7 +151,7 @@
 .book-category .order-menu-button svg
 {
 	@apply inline size-4;
-}
+}*/
 
 .book-category .order-options
 {

@@ -97,22 +97,28 @@
 			<h2>{{ $title }}</h2>
 			<div class="description-wrapper">
 				<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
-				<div>
-					<button type="button" class="order-menu-button">
-						Ordenar por: <span>{{ $order->getLabel() }}</span>
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-						</svg>
-					</button>
-					<input type="hidden" wire:model.change="order" wire:change="loadBooks" id="order" />
-					<ul class="order-options closed">
-						<li data-value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</li>
-						<li data-value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</li>
-						<li data-value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</li>
-						<li data-value="{{ \App\BookSearchResultsOrder::ByPriceDescending->value }}">Precios más bajo</li>
-						<li data-value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</li>
-						<li data-value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</li>
-					</ul>
+				<div class="description-buttons-wrapper">
+					<div>
+						<button type="button">
+							Filtrar por
+							<x-icons.chevron-down />
+						</button>
+					</div>
+					<div>
+						<button type="button" class="order-menu-button">
+							Ordenar por: <span>{{ $order->getLabel() }}</span>
+							<x-icons.chevron-down />
+						</button>
+						<input type="hidden" wire:model.change="order" wire:change="loadBooks" id="order" />
+						<ul class="order-options closed">
+							<li data-value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</li>
+							<li data-value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</li>
+							<li data-value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</li>
+							<li data-value="{{ \App\BookSearchResultsOrder::ByPriceDescending->value }}">Precios más bajo</li>
+							<li data-value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</li>
+							<li data-value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="books-list-container">
