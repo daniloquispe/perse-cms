@@ -131,7 +131,7 @@
 				<li class="flex items-center justify-between rounded border border-gray-500 p-6">
 					<div class="checkbox-wrapper">
 						<input type="radio" wire:model="paymentMethod" value="2" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
-						<label for="payment-method-2" class="font-[500]">Plin/QR</label>
+						<label for="payment-method-2" class="font-[500]">Plin/Yape</label>
 					</div>
 					<div>
 						<img src="{{ asset('images/plin-yape.png') }}" alt="Plin y Yape" />
