@@ -28,6 +28,8 @@ class BooksFilterableList extends Component
 
 	public string $searchResultsLabel;
 
+	public array $selectedPublisherFilters;
+
 	public Collection $books;
 
 	public BookSearchResultsOrder $order = BookSearchResultsOrder::ByRelevance;
@@ -44,6 +46,8 @@ class BooksFilterableList extends Component
 
 	public function mount(): void
 	{
+		$this->selectedPublisherFilters = [];
+
 		$this->loadBooks();
 	}
 
@@ -121,6 +125,10 @@ class BooksFilterableList extends Component
 				$orderDirection = 'desc';
 		}
 
+		// Filters
+		if (count($this->selectedPublisherFilters) > 0)
+			$this->booksQuery->whereIn('publisher_id', $this->selectedPublisherFilters);
+
 		// Get books list
 		if ($isSearch)
 		{
@@ -193,5 +201,10 @@ class BooksFilterableList extends Component
 			if ($format && !array_key_exists($format->id, $this->formatFilters) && count($this->formatFilters) < 4)
 				$this->formatFilters[$format->id] = ['name' => $format->name, 'checked' => false];
 		});
+	}
+
+	public function applyFilters(): void
+	{
+		$this->loadBooks();
 	}
 }

@@ -1,5 +1,5 @@
-const mobileMenuButtons = document.querySelectorAll('.with-scroll');
-const mobileMenuContainer = document.querySelector('.level-cols');
+const mobileMenuButtons = document.querySelectorAll('.main-menu-sidebar-container .with-scroll');
+const mobileMenuContainer = document.querySelector('.main-menu-sidebar-container .level-cols');
 
 mobileMenuButtons.forEach(function (button)
 {
@@ -35,7 +35,7 @@ mobileMenuButtons.forEach(function (button)
 		// For non-top levels, show selected options list
 		if (newLevel !== 1 && idToShow !== undefined && !goBack)
 		{
-			const newLevelContainers = document.querySelectorAll('.level-col-' + newLevel + ' > .can-show');
+			const newLevelContainers = document.querySelectorAll('.main-menu-sidebar-container .level-col-' + newLevel + ' > .can-show');
 
 			newLevelContainers.forEach(function (container)
 			{

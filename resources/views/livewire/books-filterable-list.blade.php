@@ -30,6 +30,7 @@
 							@endif
 						</div>
 					@endif
+					{{-- Filter: Author --}}
 					@if(count($authorFilters) > 0)
 						<div>
 							<p>Autor</p>
@@ -50,6 +51,7 @@
 							@endif
 						</div>
 					@endif
+					{{-- Filter: Age range --}}
 					@if(count($ageRangeFilters) > 0)
 						<div>
 							<p>Edad</p>
@@ -70,6 +72,7 @@
 							@endif
 						</div>
 					@endif
+					{{-- Filter: Bookbinding type --}}
 					@if(count($formatFilters) > 0)
 						<div>
 							<p>Encuadernación</p>
@@ -99,13 +102,180 @@
 				<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
 				<div class="description-buttons-wrapper">
 					<div>
-						<button type="button">
-							Filtrar por
-							<x-icons.chevron-down />
-						</button>
+						{{-- Filters (mobile) --}}
+						<div class="off-canvas-wrapper">
+							<input type="checkbox" class="off-canvas-toggle" id="filters-sidebar-active" />
+							<label for="filters-sidebar-active" class="button">
+								Filtrar por
+								<x-icons.chevron-down />
+							</label>
+							{{-- Overlay --}}
+							<label for="filters-sidebar-active" class="off-canvas-overlay"></label>
+							{{-- Sidebar --}}
+							<div id="filters-sidebar" class="off-canvas-sidebar">
+								{{-- Scrollpane --}}
+								<div>
+									{{-- Level cols --}}
+									<form wire:submit="applyFilters" id="mobile-filters-form" class="level-cols" data-level="1">
+										<div class="level-col level-col-1">
+											<div data-id="0">
+												{{-- Menu title --}}
+												<p class="menu-title">Filtros</p>
+												{{-- Menu items --}}
+												<ul>
+													@if(count($publisherFilters) > 0)
+														<li class="menu-item">
+															<button type="button" class="menu-link with-scroll" data-level="1" data-show="1">
+																<div data-level="1" data-show="1">Editorial</div>
+																<div data-level="1" data-show="1">
+																	<x-icons.chevron-right data-level="1" data-show="1" />
+																</div>
+															</button>
+														</li>
+													@endif
+													@if(count($authorFilters) > 0)
+														<li class="menu-item">
+															<button type="button" class="menu-link with-scroll" data-level="1" data-show="2">
+																<div data-level="1" data-show="2">Autor</div>
+																<div data-level="1" data-show="2">
+																	<x-icons.chevron-right data-level="1" data-show="2" />
+																</div>
+															</button>
+														</li>
+													@endif
+													@if(count($ageRangeFilters) > 0)
+														<li class="menu-item">
+															<button type="button" class="menu-link with-scroll" data-level="1" data-show="3">
+																<div data-level="1" data-show="3">Edad</div>
+																<div data-level="1" data-show="3">
+																	<x-icons.chevron-right data-level="1" data-show="3" />
+																</div>
+															</button>
+														</li>
+													@endif
+													@if(count($formatFilters) > 0)
+														<li class="menu-item">
+															<button type="button" class="menu-link with-scroll" data-level="1" data-show="4">
+																<div data-level="1" data-show="4">Encuadernación</div>
+																<div data-level="1" data-show="4">
+																	<x-icons.chevron-right data-level="1" data-show="4" />
+																</div>
+															</button>
+														</li>
+													@endif
+												</ul>
+											</div>
+										</div>
+										<div class="level-col level-col-2">
+											{{-- Filter: Publisher --}}
+											@if(count($publisherFilters) > 0)
+												<div class="can-show" data-id="1">
+													{{-- Menu title --}}
+													<p class="menu-title">
+														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+														<x-icons.chevron-right class="inline size-4 stroke-2" />
+														Editorial
+													</p>
+													{{-- Menu items --}}
+													<ul>
+														@foreach($publisherFilters as $id => $filter)
+															<li class="menu-item">
+																<div class="menu-checkbox">
+																	<div class="checkbox-wrapper">
+																		<input type="checkbox" wire:model="selectedPublisherFilters" value="{{ $id }}" id="mobile-filter-publisher-{{ $id }}" />
+																		<label for="mobile-filter-publisher-{{ $id }}">{{ $filter['name'] }}</label>
+																	</div>
+																</div>
+															</li>
+														@endforeach
+													</ul>
+												</div>
+											@endif
+											{{-- Filter: Author --}}
+											@if(count($authorFilters) > 0)
+												<div class="can-show" data-id="2">
+													{{-- Menu title --}}
+													<p class="menu-title">
+														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+														<x-icons.chevron-right class="inline size-4 stroke-2" />
+														Autor
+													</p>
+													{{-- Menu items --}}
+													<ul>
+														@foreach($authorFilters as $id => $filter)
+															<li class="menu-item">
+																<div class="menu-checkbox">
+																	<div class="checkbox-wrapper">
+																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-author-{{ $id }}" />
+																		<label for="mobile-filter-author-{{ $id }}">{{ $filter['name'] }}</label>
+																	</div>
+																</div>
+															</li>
+														@endforeach
+													</ul>
+												</div>
+											@endif
+											{{-- Filter: Age range --}}
+											@if(count($ageRangeFilters) > 0)
+												<div class="can-show" data-id="3">
+													{{-- Menu title --}}
+													<p class="menu-title">
+														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+														<x-icons.chevron-right class="inline size-4 stroke-2" />
+														Edad
+													</p>
+													{{-- Menu items --}}
+													<ul>
+														@foreach($ageRangeFilters as $id => $filter)
+															<li class="menu-item">
+																<div class="menu-checkbox">
+																	<div class="checkbox-wrapper">
+																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-age-range-{{ $id }}" />
+																		<label for="mobile-filter-age-range-{{ $id }}">{{ $filter['name'] }}</label>
+																	</div>
+																</div>
+															</li>
+														@endforeach
+													</ul>
+												</div>
+											@endif
+											{{-- Filter: Bookbinding type --}}
+											@if(count($formatFilters) > 0)
+												<div class="can-show" data-id="4">
+													{{-- Menu title --}}
+													<p class="menu-title">
+														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+														<x-icons.chevron-right class="inline size-4 stroke-2" />
+														Encuadernación
+													</p>
+													{{-- Menu items --}}
+													<ul>
+														@foreach($formatFilters as $id => $filter)
+															<li class="menu-item">
+																<div class="menu-checkbox">
+																	<div class="checkbox-wrapper">
+																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-bookbinding-type-{{ $id }}" />
+																		<label for="mobile-filter-bookbinding-type-{{ $id }}">{{ $filter['name'] }}</label>
+																	</div>
+																</div>
+															</li>
+														@endforeach
+													</ul>
+												</div>
+											@endif
+										</div>
+									</form>
+								</div>
+								{{-- Buttonbar --}}
+								<div class="buttonbar">
+									<button form="mobile-filters-form" type="reset">Limpiar</button>
+									<button form="mobile-filters-form" type="submit">Aplicar</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div>
-						<button type="button" class="order-menu-button">
+						<button type="button" class="button order-menu-button">
 							Ordenar por: <span>{{ $order->getLabel() }}</span>
 							<x-icons.chevron-down />
 						</button>
@@ -135,6 +305,62 @@
 
 @script
 <script>
+	const mobileFilterButtons = document.querySelectorAll('#filters-sidebar .with-scroll');
+	const mobileFiltersContainer = document.querySelector('#filters-sidebar .level-cols');
+
+	/* Filters */
+
+	mobileFilterButtons.forEach(function (button)
+	{
+		button.addEventListener('click', function (e)
+		{
+			const level = parseInt(e.target.dataset.level);
+			const idToShow = parseInt(e.target.dataset.show);
+			console.log('ID to show: ' + idToShow);
+
+			const currentLevel = mobileFiltersContainer.dataset.level;
+			const goBack = level < currentLevel;
+			const newLevel = goBack ? level : level + 1;
+
+			if (currentLevel > 1 || newLevel > 1)
+			{
+				mobileFiltersContainer.classList.remove('in-level-' + currentLevel);
+				mobileFiltersContainer.classList.add('in-level-' + newLevel);
+			}
+			else
+				console.log('Nothing to do here :(');
+
+			mobileFiltersContainer.dataset.level = newLevel;
+
+			// For non-top levels, show selected options list
+			if (newLevel !== 1 && idToShow !== undefined && !goBack)
+			{
+				const newLevelContainers = document.querySelectorAll('#filters-sidebar .level-col-' + newLevel + ' > .can-show');
+
+				newLevelContainers.forEach(function (container)
+				{
+					console.log(container.dataset.id);
+
+					if (idToShow == container.dataset.id)
+						container.classList.add('show');
+					else
+						container.classList.remove('show');
+				});
+			}
+		});
+	});
+
+	document.getElementById('filters-sidebar-active').addEventListener('change', function (e)
+	{
+		// No scroll when main menu sidebar is open
+		if (e.target.checked)
+			document.body.style.overflowY = 'hidden';
+		else
+			document.body.style.overflowY = 'auto';
+	});
+
+	/* Order */
+
 	const button = document.querySelector('.order-menu-button');
 	button.addEventListener('click', function ()
 	{
