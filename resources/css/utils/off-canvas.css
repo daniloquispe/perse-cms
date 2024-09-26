@@ -1,0 +1,41 @@
+/* Off-canvas (sidebar) */
+
+@layer utilities
+{
+	.off-canvas-wrapper
+	{
+		@apply block xl:hidden;
+
+		.off-canvas-overlay
+		{
+			@apply z-20;
+		}
+
+		.off-canvas-toggle
+		{
+			@apply hidden;
+
+			&:checked ~ .off-canvas-overlay
+			{
+				@apply fixed top-0 right-0;
+				@apply w-full h-full;
+				@apply bg-black opacity-40;
+			}
+
+			&:checked ~ .off-canvas-sidebar
+			{
+				@apply left-0;
+			}
+		}
+
+		/* Sidebar */
+
+		.off-canvas-sidebar
+		{
+			@apply fixed top-0 bottom-0 -left-full z-20;
+			@apply w-[85%] sm:w-[32rem] h-full;
+			@apply bg-white xl:bg-transparent;
+			@apply ease-out duration-700;
+		}
+	}
+}
