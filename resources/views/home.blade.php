@@ -13,8 +13,8 @@
 	@endforeach
 	{{-- Big banner --}}
 	<section class="container-box mb-9 pt-1">
-		<img src="{{ asset('images/placeholders/banners/desktop/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="hidden md:block w-full rounded-lg" />
-		<img src="{{ asset('images/placeholders/banners/mobile/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="block md:hidden w-full rounded-lg" />
+		<img src="{{ asset('images/placeholders/banners/desktop/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="hidden lg:block w-full rounded-lg" />
+		<img src="{{ asset('images/placeholders/banners/mobile/cuentos-infantiles-de-3-a-5-anos-perse-librerias.jpg') }}" alt="Banner" class="block lg:hidden w-full rounded-lg" />
 	</section>
 	{{-- Book carousels (below) --}}
 	@foreach($carouselsBelow as $carousel)

@@ -64,7 +64,7 @@
 
 		.level-cols
 		{
-			@apply w-[300%];
+			@apply w-[300%];  /* 3 cols */
 			@apply flex items-start gap-0;
 			@apply transition-transform;
 
@@ -146,7 +146,7 @@
 			svg
 			{
 				@apply w-5;
-				@apply stroke-2;
+				@apply stroke-[2.1];
 			}
 		}
 	}
