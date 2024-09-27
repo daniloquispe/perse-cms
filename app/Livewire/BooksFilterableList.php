@@ -26,13 +26,21 @@ class BooksFilterableList extends Component
 
 	public int $count;
 
+	private Builder|HasMany $countQuery;
+
 	public string $searchResultsLabel;
 
 	public array $selectedPublisherFilters;
 
+	public array $selectedAuthorFilters;
+
+	public array $selectedAgeRangeFilters;
+
+	public array $selectedBookbindingTypeFilters;
+
 	public Collection $books;
 
-	public BookSearchResultsOrder $order = BookSearchResultsOrder::ByRelevance;
+	public BookSearchResultsOrder $order;
 
 	private Builder|HasMany $booksQuery;
 
@@ -47,14 +55,19 @@ class BooksFilterableList extends Component
 	public function mount(): void
 	{
 		$this->selectedPublisherFilters = [];
+		$this->selectedAuthorFilters = [];
+		$this->selectedAgeRangeFilters = [];
+		$this->selectedBookbindingTypeFilters = [];
+
+		$this->order = BookSearchResultsOrder::ByRelevance;
 
 		$this->loadBooks();
 	}
 
-    public function render()
+    /*public function render()
     {
         return view('livewire.books-filterable-list');
-    }
+    }*/
 
 	public function loadMoreBooks(): void
 	{
@@ -77,7 +90,7 @@ class BooksFilterableList extends Component
 				->find($this->categoryId);
 
 			$this->title = $bookCategory->name;
-			$this->count = $bookCategory->books()->count();
+			$this->countQuery = $bookCategory->books();
 			$this->searchResultsLabel = $bookCategory->forced_search_results_label ?? 'libros';
 
 			$this->booksQuery = $bookCategory->books();
@@ -86,7 +99,7 @@ class BooksFilterableList extends Component
 		elseif ($isSearch)
 		{
 			$this->title = "Buscando: {$this->searchString}";
-			$this->count = $this->newSearchQuery()->count();
+			$this->countQuery = $this->newSearchQuery();
 			$this->searchResultsLabel = 'libros';
 
 			$this->booksQuery = $this->newSearchQuery();
@@ -126,8 +139,15 @@ class BooksFilterableList extends Component
 		}
 
 		// Filters
-		if (count($this->selectedPublisherFilters) > 0)
-			$this->booksQuery->whereIn('publisher_id', $this->selectedPublisherFilters);
+		foreach ([$this->booksQuery, $this->countQuery] as $query)
+			$query
+				->when(count($this->selectedPublisherFilters) > 0, fn(Builder $query) => $query->whereIn('publisher_id', $this->selectedPublisherFilters))
+				->when(count($this->selectedAuthorFilters) > 0, function (Builder $query)
+				{
+					$query->whereHas('authors', fn(Builder $query) => $query->whereIn('author_id', $this->selectedAuthorFilters));
+				})
+				->when(count($this->selectedAgeRangeFilters) > 0, fn(Builder $query) => $query->whereIn('age_range_id', $this->selectedAgeRangeFilters))
+				->when(count($this->selectedBookbindingTypeFilters) > 0, fn(Builder $query) => $query->whereIn('bookbinding_type_id', $this->selectedBookbindingTypeFilters));
 
 		// Get books list
 		if ($isSearch)
@@ -156,7 +176,9 @@ class BooksFilterableList extends Component
 				->get();
 		}
 
-		$this->updateFilters();
+		$this->count = $this->countQuery->count();
+
+		$this->updateFiltersLists();
 	}
 
 	private function newSearchQuery(): Builder
@@ -171,7 +193,7 @@ class BooksFilterableList extends Component
 			]);
 	}
 
-	private function updateFilters(): void
+	private function updateFiltersLists(): void
 	{
 		$this->publisherFilters = [];
 		$this->authorFilters = [];
@@ -182,24 +204,23 @@ class BooksFilterableList extends Component
 		{
 			// Publishers
 			$publisher = $book->publisher;
-
 			if ($publisher && !array_key_exists($publisher->id, $this->publisherFilters) && count($this->publisherFilters) < 4)
-				$this->publisherFilters[$publisher->id] = ['name' => $publisher->name, 'checked' => false];
+				$this->publisherFilters[$publisher->id] = $publisher->name;
 
 			// Authors
 			foreach ($book->authors as $author)
 				if (!array_key_exists($author->id, $this->authorFilters) && count($this->authorFilters) < 4)
-					$this->authorFilters[$author->id] = ['name' => $author->name, 'checked' => false];
+					$this->authorFilters[$author->id] = $author->name;
 
 			// Age ranges
 			$ageRange = $book->ageRange;
 			if ($ageRange && !array_key_exists($ageRange->id, $this->ageRangeFilters) && count($this->ageRangeFilters) < 4)
-				$this->ageRangeFilters[$ageRange->id] = ['name' => $ageRange->name, 'checked' => false];
+				$this->ageRangeFilters[$ageRange->id] = $ageRange->name;
 
 			// Formats
 			$format = $book->format;
 			if ($format && !array_key_exists($format->id, $this->formatFilters) && count($this->formatFilters) < 4)
-				$this->formatFilters[$format->id] = ['name' => $format->name, 'checked' => false];
+				$this->formatFilters[$format->id] = $format->name;
 		});
 	}
 

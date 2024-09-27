@@ -14,10 +14,10 @@
 						<div>
 							<p>Editorial</p>
 							<ul>
-								@foreach($publisherFilters as $id => $filter)
+								@foreach($publisherFilters as $id => $name)
 									<li wire:key="publisher-{{ $id }}">
-										<input wire:model="$filter['checked']" type="checkbox" id="filter-publisher-{{ $id }}" />
-										<label for="filter-publisher-{{ $id }}">{{ $filter['name'] }}</label>
+										<input type="checkbox" wire:model="selectedPublisherFilters" wire:click="applyFilters" value="{{ $id }}" id="filter-publisher-{{ $id }}" />
+										<label for="filter-publisher-{{ $id }}">{{ $name }}</label>
 									</li>
 								@endforeach
 							</ul>
@@ -35,10 +35,10 @@
 						<div>
 							<p>Autor</p>
 							<ul>
-								@foreach($authorFilters as $id => $filter)
+								@foreach($authorFilters as $id => $name)
 									<li wire:key="author-{{ $id }}">
-										<input wire:model="$filter['checked']" type="checkbox" id="filter-author-{{ $id }}" />
-										<label for="filter-author-{{ $id }}">{{ $filter['name'] }}</label>
+										<input type="checkbox" wire:model="selectedAuthorFilters" wire:click="applyFilters" value="{{ $id }}" id="filter-author-{{ $id }}" />
+										<label for="filter-author-{{ $id }}">{{ $name }}</label>
 									</li>
 								@endforeach
 							</ul>
@@ -56,10 +56,10 @@
 						<div>
 							<p>Edad</p>
 							<ul>
-								@foreach($ageRangeFilters as $id => $filter)
+								@foreach($ageRangeFilters as $id => $name)
 									<li wire:key="age-range-{{ $id }}">
-										<input wire:model="$filter['checked']" type="checkbox" id="filter-age-range-{{ $id }}" />
-										<label for="filter-age-range-{{ $id }}">{{ $filter['name'] }}</label>
+										<input type="checkbox" wire:model="selectedAgeRangeFilters" wire:click="applyFilters" value="{{ $id }}" id="filter-age-range-{{ $id }}" />
+										<label for="filter-age-range-{{ $id }}">{{ $name }}</label>
 									</li>
 								@endforeach
 							</ul>
@@ -77,10 +77,10 @@
 						<div>
 							<p>Encuadernación</p>
 							<ul>
-								@foreach($formatFilters as $id => $filter)
-									<li wire:key="format-{{ $id }}">
-										<input wire:model="$filter['checked']" type="checkbox" id="filter-format-{{ $id }}" />
-										<label for="filter-format-{{ $id }}">{{ $filter['name'] }}</label>
+								@foreach($formatFilters as $id => $name)
+									<li wire:key="bookbinding-type-{{ $id }}">
+										<input type="checkbox" wire:model="selectedBookbindingTypeFilters" wire:click="applyFilters" value="{{ $id }}" id="filter-bookbinding-type-{{ $id }}" />
+										<label for="filter-bookbinding-type-{{ $id }}">{{ $name }}</label>
 									</li>
 								@endforeach
 							</ul>
@@ -178,12 +178,12 @@
 													</p>
 													{{-- Menu items --}}
 													<ul>
-														@foreach($publisherFilters as $id => $filter)
+														@foreach($publisherFilters as $id => $name)
 															<li class="menu-item">
 																<div class="menu-checkbox">
 																	<div class="checkbox-wrapper">
 																		<input type="checkbox" wire:model="selectedPublisherFilters" value="{{ $id }}" id="mobile-filter-publisher-{{ $id }}" />
-																		<label for="mobile-filter-publisher-{{ $id }}">{{ $filter['name'] }}</label>
+																		<label for="mobile-filter-publisher-{{ $id }}">{{ $name }}</label>
 																	</div>
 																</div>
 															</li>
@@ -202,12 +202,12 @@
 													</p>
 													{{-- Menu items --}}
 													<ul>
-														@foreach($authorFilters as $id => $filter)
+														@foreach($authorFilters as $id => $name)
 															<li class="menu-item">
 																<div class="menu-checkbox">
 																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-author-{{ $id }}" />
-																		<label for="mobile-filter-author-{{ $id }}">{{ $filter['name'] }}</label>
+																		<input type="checkbox" wire:model="selectedAuthorFilters" value="{{ $id }}" id="mobile-filter-author-{{ $id }}" />
+																		<label for="mobile-filter-author-{{ $id }}">{{ $name }}</label>
 																	</div>
 																</div>
 															</li>
@@ -226,12 +226,12 @@
 													</p>
 													{{-- Menu items --}}
 													<ul>
-														@foreach($ageRangeFilters as $id => $filter)
+														@foreach($ageRangeFilters as $id => $name)
 															<li class="menu-item">
 																<div class="menu-checkbox">
 																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-age-range-{{ $id }}" />
-																		<label for="mobile-filter-age-range-{{ $id }}">{{ $filter['name'] }}</label>
+																		<input type="checkbox" wire:model="selectedAgeRangeFilters" value="{{ $id }}" id="mobile-filter-age-range-{{ $id }}" />
+																		<label for="mobile-filter-age-range-{{ $id }}">{{ $name }}</label>
 																	</div>
 																</div>
 															</li>
@@ -250,12 +250,12 @@
 													</p>
 													{{-- Menu items --}}
 													<ul>
-														@foreach($formatFilters as $id => $filter)
+														@foreach($formatFilters as $id => $name)
 															<li class="menu-item">
 																<div class="menu-checkbox">
 																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="ageRangeFilters[$id]['checked']" id="mobile-filter-bookbinding-type-{{ $id }}" />
-																		<label for="mobile-filter-bookbinding-type-{{ $id }}">{{ $filter['name'] }}</label>
+																		<input type="checkbox" wire:model="selectedBookbindingTypeFilters" value="{{ $id }}" id="mobile-filter-bookbinding-type-{{ $id }}" />
+																		<label for="mobile-filter-bookbinding-type-{{ $id }}">{{ $name }}</label>
 																	</div>
 																</div>
 															</li>
@@ -293,7 +293,7 @@
 			</div>
 			<div class="books-list-container">
 				@foreach($books as $book)
-					<x-book-list-item :book="$book" />
+					<livewire:book-list-item wire:key="book-list-item-{{ $book->id }}" :book="$book" />
 				@endforeach
 			</div>
 			@if($count > count($books))

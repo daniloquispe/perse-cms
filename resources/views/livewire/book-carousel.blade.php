@@ -4,7 +4,7 @@
 		<div class="splide__track">
 			<div class="splide__list">
 				@foreach($carousel->books as $book)
-					<x-book-list-item :book="$book" />
+					<livewire:book-list-item wire:key="book-carousel-item-{{ $carousel->id }}-{{ $book->id }}" :book="$book" />
 				@endforeach
 			</div>
 		</div>
