@@ -77,7 +77,7 @@
 				</svg>
 			</p>
 			<ul data-menu="4">
-				<li><a href="#"><img src="{{ asset('images/complaints-book.png') }}" alt="Libro de Reclamaciones" /></a></li>
+				<li><a href="{{ $complaintsBookUrl }}"><img src="{{ asset('images/complaints-book.png') }}" alt="Libro de Reclamaciones" /></a></li>
 			</ul>
 		</nav>
 	@endif

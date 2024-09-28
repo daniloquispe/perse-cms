@@ -1,0 +1,57 @@
+@layer utilities
+{
+	.contact-form
+	{
+		legend
+		{
+			@apply mb-4;
+			@apply text-gray-800 text-lg font-[500];
+		}
+
+		.cols-2, .cols
+		{
+			@apply md:grid md:grid-cols-2 md:gap-x-4;
+		}
+
+		.cols-3
+		{
+			@apply md:grid md:grid-cols-3 md:gap-x-4;
+		}
+
+		.form-row
+		{
+			@apply mb-4;
+
+			:last-child
+			{
+				@apply mb-0;
+			}
+		}
+
+		label
+		{
+			@apply inline-block text-left;
+		}
+
+		input,
+		select,
+		textarea
+		{
+			@apply w-full;
+			@apply px-4 py-2 rounded-lg;
+			@apply bg-gray-200;
+		}
+
+		select
+		{
+			@apply py-2.5;
+		}
+
+		button
+		{
+			@apply px-4 py-2 rounded;
+			@apply bg-gray-500 hover:bg-palette-purple text-white;
+			@apply uppercase;
+		}
+	}
+}

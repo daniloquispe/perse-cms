@@ -29,6 +29,7 @@
 @import url(pages/contact.css);
 @import url(pages/user.css);
 
+@import url(utils/forms.css);
 @import url(utils/off-canvas.css);
 
 @tailwind base;
