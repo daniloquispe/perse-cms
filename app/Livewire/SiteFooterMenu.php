@@ -15,10 +15,10 @@ class SiteFooterMenu extends Component
 		$subscribeUrl = $urlService->fromPageRole(PageRole::Subscribe);
 		$loginUrl = $urlService->fromPageRole(PageRole::Login);
 		$registerUrl = $urlService->fromPageRole(PageRole::Register);
-		$deliveryPolicyUrl = $urlService->fromPageRole(PageRole::DeliveryPolitics);
-		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolitics);
-		$cookiesPolicyUrl = $urlService->fromPageRole(PageRole::CookiesPolitics);
-		$returnPolicyUrl = $urlService->fromPageRole(PageRole::ReturningPolitics);
+		$deliveryPolicyUrl = $urlService->fromPageRole(PageRole::DeliveryPolicy);
+		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolicy);
+		$cookiesPolicyUrl = $urlService->fromPageRole(PageRole::CookiesPolicy);
+		$returnPolicyUrl = $urlService->fromPageRole(PageRole::ReturningPolicy);
 		$termsUrl = $urlService->fromPageRole(PageRole::Terms);
 		$complaintsBookUrl = $urlService->fromPageRole(PageRole::ComplaintsBook);
 

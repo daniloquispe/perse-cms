@@ -59,7 +59,7 @@ class SubscriptionForm extends Component
 			->toArray();
 
 		$privacyPolicySlug = SeoTags::query()
-			->where('owner_id', PageRole::PrivacyPolitics->value)
+			->where('owner_id', PageRole::PrivacyPolicy->value)
 			->where('owner_type', Page::class)
 			->value('slug');
 

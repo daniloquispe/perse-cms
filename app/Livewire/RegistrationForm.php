@@ -25,7 +25,7 @@ class RegistrationForm extends Component
     public function render(UrlService $urlService)
     {
 		$loginUrl = $urlService->fromPageRole(PageRole::Login);
-		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolitics);
+		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolicy);
 		$termsUrl = $urlService->fromPageRole(PageRole::Terms);
 
 		$data = compact('loginUrl', 'privacyPolicyUrl', 'termsUrl');

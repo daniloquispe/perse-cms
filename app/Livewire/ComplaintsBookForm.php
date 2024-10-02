@@ -14,7 +14,7 @@ class ComplaintsBookForm extends Component
 
     public function render(UrlService $urlService): View
     {
-		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolitics);
+		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolicy);
 
 		$data = compact('privacyPolicyUrl');
         return view('livewire.complaints-book-form', $data);
