@@ -137,8 +137,8 @@ class Cart
 		static::$identityDocumentNumber = $identityDocumentNumber;
 		static::$phone = $phone;
 		static::$invoiceType = $invoiceType;
-		static::$ruc = $invoiceType == 3 ? $ruc : null;
-		static::$businessName = $invoiceType == 3 ? $businessName : null;
+		static::$ruc = $invoiceType == 1 ? $ruc : null;
+		static::$businessName = $invoiceType == 1 ? $businessName : null;
 
 		static::save();
 	}

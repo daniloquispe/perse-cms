@@ -47,11 +47,17 @@
 			@apply py-2.5;
 		}
 
-		button
+		.buttonbar
 		{
-			@apply px-4 py-2 rounded;
-			@apply bg-gray-500 hover:bg-palette-purple text-white;
-			@apply uppercase;
+			@apply my-4 md:mb-4;
+
+			button
+			{
+				@apply px-4 py-2 rounded;
+				@apply bg-gray-500 hover:bg-palette-purple text-white;
+				@apply uppercase;
+				@apply transition-colors;
+			}
 		}
 	}
 }
