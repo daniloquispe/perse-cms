@@ -187,7 +187,7 @@
 	</div>
 
 	{{-- Submit --}}
-	<div class="form-row">
+	<div class="buttonbar">
 		<button type="submit">Enviar reclamo</button>
 	</div>
 </form>

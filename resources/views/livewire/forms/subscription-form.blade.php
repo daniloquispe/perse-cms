@@ -1,4 +1,4 @@
-<form wire:submit="subscribe">
+<form wire:submit="subscribe" class="contact-form">
 	{{-- Name --}}
 	<div class="form-row">
 		<input type="text" wire:model="name" placeholder="Nombres y Apellidos *" required="required" aria-label="Nombres y Apellidos" />
@@ -85,8 +85,9 @@
 			</div>
 		</div>
 	</div>
+
 	{{-- Submit --}}
-	<div class="form-row">
+	<div class="buttonbar">
 		<button>Suscribirme</button>
 	</div>
 </form>
