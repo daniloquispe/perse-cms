@@ -201,7 +201,20 @@ class Cart
 		if (array_key_exists($book->id, static::$items))
 			static::$items[$book->id]['quantity'] += $quantity;
 		else
-			static::$items[$book->id] = ['book' => $book->toArray(), 'quantity' => $quantity];
+		{
+			$urlService = new UrlService();
+
+			$bookArray = [
+				'id' => $book->id,
+				'sku' => $book->sku,
+				'title' => $book->title,
+				'price' => $book->price,
+				'discounted_price' => $book->discounted_price,
+				'cover' => $urlService->fromAsset($book->cover_or_placeholder),
+			];
+
+			static::$items[$book->id] = ['book' => $bookArray, 'quantity' => $quantity];
+		}
 
 		static::save();
 	}

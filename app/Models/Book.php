@@ -55,6 +55,16 @@ class Book extends Model
 		});
 	}
 
+	public function coverOrPlaceholder(): Attribute
+	{
+		return Attribute::make(function ()
+		{
+			return $this->cover
+				? 'storage/' . $this->cover
+				: 'images/placeholders/book.png';
+		});
+	}
+
 	public function hasDiscountNow(): Attribute
 	{
 		if (!$this->discounted_price)

@@ -29,7 +29,7 @@
 							<li>
 								<a href="{{ route('slug', $book->seoTags->slug) }}">
 									<div>
-										<img src="{{ (new \App\Services\UrlService())->fromAsset($book->cover) }}" alt="{{ $book->title }}" />
+										<img src="{{ (new \App\Services\UrlService())->fromAsset($book->cover_or_placeholder) }}" alt="{{ $book->title }}" />
 										<div>
 											<p class="title">{{ $book->title }}</p>
 											<div class="prices">

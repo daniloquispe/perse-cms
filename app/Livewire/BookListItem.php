@@ -18,7 +18,7 @@ class BookListItem extends Component
 
     public function render(UrlService $urlService): View
     {
-		$cover = $urlService->fromAsset($this->book->cover);
+		$cover = $urlService->fromAsset($this->book->cover_or_placeholder);
 
 		$authors = $this->book->authors->pluck('name')->join(', ');
 

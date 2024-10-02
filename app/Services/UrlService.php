@@ -32,6 +32,6 @@ class UrlService
 
 	public function fromAsset(?string $asset): string|null
 	{
-		return $asset ? asset('storage/' . $asset) : null;
+		return $asset ? asset($asset) : null;
 	}
 }
