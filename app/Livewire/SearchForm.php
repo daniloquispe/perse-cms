@@ -3,6 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Book;
+use App\Models\SearchTerms;
+use App\Queries\SearchQuery;
+use App\Services\BookSearch;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\Computed;
@@ -12,11 +16,13 @@ class SearchForm extends Component
 {
 	public string $searchString;
 
-	public bool $canShowResetButton;
+	public bool $canShowResetButton = false;
 
 	public bool $showAutocompleteList = false;
 
 	public Collection $autocompleteList;
+
+	public int $autocompleteCount;
 
 	#[Computed]
 	public function showResetButton(): bool
@@ -41,17 +47,19 @@ class SearchForm extends Component
 		$this->showAutocompleteList = false;
 	}
 
-	public function autocomplete(): void
+	public function autocomplete(BookSearch $bookSearch): void
 	{
 		if (empty($this->searchString))
 			$this->showAutocompleteList = false;
 		else
 		{
-			$this->autocompleteList = Book::query()
-				->where('is_visible', true)
-				->where('title', 'like', "%{$this->searchString}%")
-				->with('seoTags')
-				->get();
+			Bugsnag::leaveBreadcrumb('About to start a search query', metaData: ['search' => $this->searchString]);
+
+			$bookSearch->search($this->searchString);
+
+			$this->autocompleteList = $bookSearch->getBooks();
+//			dd($this->searchString, $this->autocompleteList);
+			$this->autocompleteCount = $bookSearch->getTotalCount();
 
 			$this->showAutocompleteList = true;
 		}

@@ -85,18 +85,80 @@
 .autocomplete-box
 {
 	@apply relative;
+	@apply w-full;
+
+	> div
+	{
+		@apply absolute block;
+		@apply w-full;
+		@apply mt-1 p-2;
+		@apply rounded-xl border border-solid border-gray-300;
+		@apply bg-white;
+
+		> div
+		{
+			@apply px-2 py-2;
+
+			&:first-child
+			{
+				@apply font-[500] uppercase;
+			}
+
+			&:last-child
+			{
+				@apply text-palette-orange;
+				@apply text-center;
+			}
+		}
+	}
+
+	.autocomplete-items
+	{
+		@apply max-h-64 md:max-h-80 lg:max-h-[32rem];
+		@apply overflow-scroll md:overflow-auto;
+		@apply ml-0;
+
+		li
+		{
+			@apply cursor-pointer;
+			@apply px-2 py-1 rounded-lg w-full;
+			@apply hover:bg-gray-200;
+
+			> a > div
+			{
+				@apply flex items-center gap-2;
+
+				img
+				{
+					@apply w-12;
+				}
+
+				.title
+				{
+					@apply text-purple-900;
+				}
+
+				.prices
+				{
+					@apply flex items-center gap-2;
+
+					del
+					{
+						@apply text-sm;
+						@apply opacity-60;
+					}
+				}
+			}
+		}
+	}
 }
 
-.autocomplete-box ul
+/*.autocomplete-box ul
 {
 	@apply absolute w-full mt-1 p-1;
 	@apply rounded-xl border border-solid border-gray-300;
 	@apply bg-white;
 }
 
-.autocomplete-box li
-{
-	@apply cursor-pointer;
-	@apply px-2 py-1 rounded-lg w-full;
-	@apply hover:bg-gray-200;
-}
+.autocomplete-box
+*/

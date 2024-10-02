@@ -20,16 +20,37 @@
 		</button>
 	</form>
 	@if($showAutocompleteList)
-		<div class="autocomplete-box w-full">
-			<ul class="max-h-64 overflow-scroll">
-				@if(!empty($autocompleteList))
-					@foreach($autocompleteList as $autocompleteListItem)
-						<li>
-							<a href="{{ route('slug', $autocompleteListItem->seoTags->slug) }}">{{ $autocompleteListItem->title }}</a>
-						</li>
-					@endforeach
-				@endif
-			</ul>
+		<div class="autocomplete-box">
+			<div>
+				<div>Libros para "{{ $searchString }}"</div>
+				<ul class="autocomplete-items">
+					@if(!empty($autocompleteList))
+						@foreach($autocompleteList as $book)
+							<li>
+								<a href="{{ route('slug', $book->seoTags->slug) }}">
+									<div>
+										<img src="{{ (new \App\Services\UrlService())->fromAsset($book->cover) }}" alt="{{ $book->title }}" />
+										<div>
+											<p class="title">{{ $book->title }}</p>
+											<div class="prices">
+												@if($book->discounted_price)
+													S/&nbsp;{{ $book->discounted_price }}
+													<del>S/&nbsp;{{ $book->price }}</del>
+												@else
+													S/&nbsp;{{ $book->price }}
+												@endif
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+						@endforeach
+					@endif
+				</ul>
+				<div>
+					<a href="{{ route('search', $searchString) }}">Ver todos los {{ $autocompleteCount }} libros</a>
+				</div>
+			</div>
 		</div>
 	@endif
 </div>
