@@ -2,7 +2,7 @@
 {
 	@apply w-full;
 	@apply xl:pl-12 2xl:pl-16 xl:pr-4 2xl:pr-10;
-	@apply flex items-center;
+	@apply flex flex-col items-center;
 
 	form
 	{

@@ -11,7 +11,7 @@ Route::get('cart/personal-info', \App\Livewire\Cart\CartPage::class)->name('cart
 Route::get('cart/delivery-info', \App\Livewire\Cart\CartPage::class)->name('cart.delivery');
 Route::get('cart/payment', \App\Livewire\Cart\CartPage::class)->name('cart.payment');
 
-Route::get('{slug}', \App\Http\Controllers\SlugController::class);
+Route::get('{slug}', \App\Http\Controllers\SlugController::class)->name('slug');
 
 // Customer routes
 Route::middleware('auth:storefront')->group(function ()
