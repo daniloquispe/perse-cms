@@ -20,6 +20,11 @@
 			@apply grow;
 			@apply bg-transparent;
 			@apply focus:outline-none;
+
+			&::-webkit-search-cancel-button
+			{
+				@apply appearance-none;
+			}
 		}
 
 		button
