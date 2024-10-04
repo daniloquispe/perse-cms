@@ -95,7 +95,7 @@ class SlugController extends Controller
 	private function getBookQuery(SeoTags $seoTags): MorphTo
 	{
 		return $seoTags->owner()
-			->select(['id', 'category_id', 'publisher_id', 'book_format_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale'])
+			->select(['id', 'category_id', 'publisher_id', 'book_format_id', 'bookbinding_type_id', 'age_range_id', 'sku', 'isbn', 'cover', 'title', 'summary', 'year', 'pages_count', 'weight', 'width', 'height', 'price', 'is_presale', 'rate'])
 			->where('is_visible', true)
 			->with([
 				'authors:id,name,photo,summary',

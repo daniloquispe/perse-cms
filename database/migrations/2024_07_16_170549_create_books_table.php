@@ -39,6 +39,7 @@ return new class extends Migration
 			$table->boolean('is_presale')->default(false);
 			$table->boolean('is_award_winning')->default(false);
 			$table->boolean('is_recommended')->default(false);
+			$table->decimal('rate', 2, 1)->default(0);
 			$table->timestamps();
 		});
 

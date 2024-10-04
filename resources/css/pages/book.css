@@ -24,6 +24,16 @@ article.book
 		{
 			@apply inline-block size-6;
 			@apply text-gray-300 fill-gray-300;
+
+			&.half
+			{
+				@apply text-palette-yellow fill-palette-yellow;
+			}
+
+			&.full
+			{
+				@apply text-palette-yellow fill-palette-yellow;
+			}
 		}
 	}
 

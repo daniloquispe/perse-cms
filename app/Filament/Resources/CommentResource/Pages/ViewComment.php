@@ -25,10 +25,23 @@ class ViewComment extends ViewRecord
 				->action(function (Comment $record)
 				{
 					if ($record->update(['status' => CommentStatus::Approved]))
+					{
+						// Recalculate book rate
+						$book = $record->book()
+							->select('id')
+							->withAvg('comments', 'rate')
+							->first();
+						$newRate = $book->comments_avg_rate;
+						$book->rate = $newRate;
+						$book->saveQuietly();
+
+						// Notification
 						Notification::make()
 							->title('Aprobado')
+							->body('El comentario fue publicado, y el rating del libro fue actualizado')
 							->success()
 							->send();
+					}
 					else
 						Notification::make()
 							->title('No se pudo aprobar')
@@ -45,7 +58,8 @@ class ViewComment extends ViewRecord
 					if ($record->update(['status' => CommentStatus::Rejected]))
 						Notification::make()
 							->title('Rechazado')
-							->danger()
+							->body('El comentario no será publicado')
+							->success()
 							->send();
 					else
 						Notification::make()
