@@ -82,10 +82,15 @@
 									</div>
 									<div class="grow">
 										<div class="text-xs text-left">{{ $item['book']['title'] }}</div>
-										<div class="text-xs">x{{ $item['quantity'] }}</div>
+										<div class="text-xs">&times;{{ $item['quantity'] }}</div>
 									</div>
 									<div class="w-20 text-xs text-right text-gray-800 font-[500]">
-										S/&nbsp;{{ $item['book']['price'] }}
+										@if($item['book']['discounted_price'])
+											<del class="font-normal opacity-60">S/&nbsp;{{ $item['book']['price'] }}</del>
+											<br />S/&nbsp;{{ $item['book']['discounted_price'] }}
+										@else
+											S/&nbsp;{{ $item['book']['price'] }}
+										@endif
 									</div>
 								</div>
 							@endforeach

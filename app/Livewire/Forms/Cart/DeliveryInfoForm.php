@@ -4,6 +4,7 @@ namespace App\Livewire\Forms\Cart;
 
 use App\Cart;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Form;
 
 class DeliveryInfoForm extends Form
@@ -32,6 +33,20 @@ class DeliveryInfoForm extends Form
 	#[Validate('required', message: 'Seleccione una fecha de entrega')]
 	#[Validate('date', message: 'Seleccione una fecha válida')]
 	public string|null $deliveryDate = null;
+
+	public function __construct(Component $component, $propertyName)
+	{
+		parent::__construct($component, $propertyName);
+
+		$this->departmentId = Cart::getDepartmentId() ?? -1;
+		$this->provinceId = Cart::getProvinceId() ?? -1;
+		$this->districtId = Cart::getDistrictId() ?? -1;
+		$this->address = Cart::getAddress() ?? '';
+		$this->locationNumber = Cart::getLocationNumber() ?? '';
+		$this->reference = Cart::getReference() ?? '';
+		$this->recipientName = Cart::getRecipientName() ?? '';
+		$this->deliveryDate = Cart::getDeliveryDate() ?? '';
+	}
 
 	public function submit(): bool
 	{

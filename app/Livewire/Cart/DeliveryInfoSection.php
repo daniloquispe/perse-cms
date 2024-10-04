@@ -3,7 +3,6 @@
 namespace App\Livewire\Cart;
 
 use App\Cart;
-//use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\Cart\DeliveryInfoForm;
 use App\Toast;
 use Illuminate\Support\Facades\Http;
@@ -14,53 +13,25 @@ class DeliveryInfoSection extends Component
 {
 	use Toast;
 
-//	public string $email;
-
-//	public string $firstName;
-
-//	public string $lastName;
-
-//	public string $documentIdentityNumber;
-
-//	public string $phone;
-
-//	public bool $withSubscription;
-
-//	public bool $withInvoice;
-
-//	public bool $showInvoiceFields;
-
-//	public string $ruc;
-
-//	public string $businessName;
-
 	public DeliveryInfoForm $form;
 
 	public array $departments;
 
 	public array $provinces;
 
+	public bool $cannotSelectProvince;
+
 	public array $districts;
+
+	public bool $cannotSelectDistrict;
 
 	public bool $isDeliveryDateFieldVisible = false;
 
 	public function mount(): void
 	{
-		/*$this->showInvoiceFields = false;
-		$this->showAddressForm = false;
-
-		if (Auth::guard('storefront')->check())
-		{
-			$user = Auth::guard('storefront')->user();
-
-			$this->email = $user->email;
-			$this->firstName = $user->first_name;
-			$this->lastName = $user->last_name;
-			$this->documentIdentityNumber = $user->id_document_number;
-			$this->phone = $user->phone;
-		}*/
-
 		$this->loadDepartments();
+		$this->loadProvinces();
+		$this->loadDistricts();
 	}
 
     public function render(): View
@@ -95,6 +66,7 @@ class DeliveryInfoSection extends Component
 		$responseBody = $response->body();
 
 		$this->provinces = json_decode($responseBody, true);
+		$this->cannotSelectProvince = count($this->provinces) == 0;
 	}
 
 	public function loadDistricts(): void
@@ -106,6 +78,7 @@ class DeliveryInfoSection extends Component
 		$responseBody = $response->body();
 
 		$this->districts = json_decode($responseBody, true);
+		$this->cannotSelectDistrict = count($this->districts) == 0;
 	}
 
 	public function showDeliveryDateField(): void

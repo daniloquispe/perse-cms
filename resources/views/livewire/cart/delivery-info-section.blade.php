@@ -17,7 +17,7 @@
 					<li><strong>Apellidos:</strong> {{ $lastName }}</li>
 					<li><strong>Documento de Identidad:</strong> {{ $identityDocumentNumber }}</li>
 					<li><strong>Teléfono / Móvil:</strong> {{ $phone }}</li>
-					<li><strong>Deseo {{ $invoiceType->name }}</strong></li>
+					<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
 					@if($invoiceType == \App\InvoiceType::Factura)
 						<li><strong>RUC:</strong> {{ $ruc }}</li>
 						<li><strong>Razón Social:</strong> {{ $businessName }}</li>
@@ -46,7 +46,7 @@
 					<div class="form-control-wrapper">
 						<label>Departamento</label>
 						<select wire:model="form.departmentId" wire:change="loadProvinces" required="required">
-							<option>--</option>
+							<option value="">--</option>
 							@foreach($departments as $id => $name)
 								<option value="{{ $id }}">{{ $name }}</option>
 							@endforeach
@@ -55,8 +55,8 @@
 					{{-- Province --}}
 					<div class="form-control-wrapper">
 						<label>Provincia</label>
-						<select wire:model="form.provinceId" wire:change="loadDistricts" required="required">
-							<option>--</option>
+						<select wire:model="form.provinceId" wire:change="loadDistricts" @disabled($cannotSelectProvince) required="required">
+							<option value="">--</option>
 							@foreach($provinces as $id => $name)
 								<option value="{{ $id }}">{{ $name }}</option>
 							@endforeach
@@ -65,8 +65,8 @@
 					{{-- District --}}
 					<div class="form-control-wrapper">
 						<label>Distrito</label>
-						<select wire:model="form.districtId" required="required">
-							<option>--</option>
+						<select wire:model="form.districtId" @disabled($cannotSelectDistrict) required="required">
+							<option value="">--</option>
 							@foreach($districts as $id => $name)
 								<option value="{{ $id }}">{{ $name }}</option>
 							@endforeach
