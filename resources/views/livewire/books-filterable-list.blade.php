@@ -98,206 +98,212 @@
 		</div>
 		<div class="center">
 			<h2>{{ $title }}</h2>
-			<div class="description-wrapper">
-				<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
-				<div class="description-buttons-wrapper">
-					<div>
-						{{-- Filters (mobile) --}}
-						<div class="off-canvas-wrapper">
-							<input type="checkbox" class="off-canvas-toggle" id="filters-sidebar-active" />
-							<label for="filters-sidebar-active" class="button">
-								Filtrar por
-								<x-icons.chevron-down />
-							</label>
-							{{-- Overlay --}}
-							<label for="filters-sidebar-active" class="off-canvas-overlay"></label>
-							{{-- Sidebar --}}
-							<div id="filters-sidebar" class="off-canvas-sidebar">
-								{{-- Scrollpane --}}
-								<div>
-									{{-- Level cols --}}
-									<form wire:submit="applyFilters" id="mobile-filters-form" class="level-cols" data-level="1">
-										<div class="level-col level-col-1">
-											<div data-id="0">
-												{{-- Menu title --}}
-												<p class="menu-title">Filtros</p>
-												{{-- Menu items --}}
-												<ul>
-													@if(count($publisherFilters) > 0)
-														<li class="menu-item">
-															<button type="button" class="menu-link with-scroll" data-level="1" data-show="1">
-																<div data-level="1" data-show="1">Editorial</div>
-																<div data-level="1" data-show="1">
-																	<x-icons.chevron-right data-level="1" data-show="1" />
-																</div>
-															</button>
-														</li>
-													@endif
-													@if(count($authorFilters) > 0)
-														<li class="menu-item">
-															<button type="button" class="menu-link with-scroll" data-level="1" data-show="2">
-																<div data-level="1" data-show="2">Autor</div>
-																<div data-level="1" data-show="2">
-																	<x-icons.chevron-right data-level="1" data-show="2" />
-																</div>
-															</button>
-														</li>
-													@endif
-													@if(count($ageRangeFilters) > 0)
-														<li class="menu-item">
-															<button type="button" class="menu-link with-scroll" data-level="1" data-show="3">
-																<div data-level="1" data-show="3">Edad</div>
-																<div data-level="1" data-show="3">
-																	<x-icons.chevron-right data-level="1" data-show="3" />
-																</div>
-															</button>
-														</li>
-													@endif
-													@if(count($formatFilters) > 0)
-														<li class="menu-item">
-															<button type="button" class="menu-link with-scroll" data-level="1" data-show="4">
-																<div data-level="1" data-show="4">Encuadernación</div>
-																<div data-level="1" data-show="4">
-																	<x-icons.chevron-right data-level="1" data-show="4" />
-																</div>
-															</button>
-														</li>
-													@endif
-												</ul>
+			@if($count)
+				<div class="description-wrapper">
+					<div>Se ha encontrado {{ $count }} {{ $searchResultsLabel }}</div>
+					<div class="description-buttons-wrapper">
+						<div>
+							{{-- Filters (mobile) --}}
+							<div class="off-canvas-wrapper">
+								<input type="checkbox" class="off-canvas-toggle" id="filters-sidebar-active" />
+								<label for="filters-sidebar-active" class="button">
+									Filtrar por
+									<x-icons.chevron-down />
+								</label>
+								{{-- Overlay --}}
+								<label for="filters-sidebar-active" class="off-canvas-overlay"></label>
+								{{-- Sidebar --}}
+								<div id="filters-sidebar" class="off-canvas-sidebar">
+									{{-- Scrollpane --}}
+									<div>
+										{{-- Level cols --}}
+										<form wire:submit="applyFilters" id="mobile-filters-form" class="level-cols" data-level="1">
+											<div class="level-col level-col-1">
+												<div data-id="0">
+													{{-- Menu title --}}
+													<p class="menu-title">Filtros</p>
+													{{-- Menu items --}}
+													<ul>
+														@if(count($publisherFilters) > 0)
+															<li class="menu-item">
+																<button type="button" class="menu-link with-scroll" data-level="1" data-show="1">
+																	<div data-level="1" data-show="1">Editorial</div>
+																	<div data-level="1" data-show="1">
+																		<x-icons.chevron-right data-level="1" data-show="1" />
+																	</div>
+																</button>
+															</li>
+														@endif
+														@if(count($authorFilters) > 0)
+															<li class="menu-item">
+																<button type="button" class="menu-link with-scroll" data-level="1" data-show="2">
+																	<div data-level="1" data-show="2">Autor</div>
+																	<div data-level="1" data-show="2">
+																		<x-icons.chevron-right data-level="1" data-show="2" />
+																	</div>
+																</button>
+															</li>
+														@endif
+														@if(count($ageRangeFilters) > 0)
+															<li class="menu-item">
+																<button type="button" class="menu-link with-scroll" data-level="1" data-show="3">
+																	<div data-level="1" data-show="3">Edad</div>
+																	<div data-level="1" data-show="3">
+																		<x-icons.chevron-right data-level="1" data-show="3" />
+																	</div>
+																</button>
+															</li>
+														@endif
+														@if(count($formatFilters) > 0)
+															<li class="menu-item">
+																<button type="button" class="menu-link with-scroll" data-level="1" data-show="4">
+																	<div data-level="1" data-show="4">Encuadernación</div>
+																	<div data-level="1" data-show="4">
+																		<x-icons.chevron-right data-level="1" data-show="4" />
+																	</div>
+																</button>
+															</li>
+														@endif
+													</ul>
+												</div>
 											</div>
-										</div>
-										<div class="level-col level-col-2">
-											{{-- Filter: Publisher --}}
-											@if(count($publisherFilters) > 0)
-												<div class="can-show" data-id="1">
-													{{-- Menu title --}}
-													<p class="menu-title">
-														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
-														<x-icons.chevron-right class="inline size-4 stroke-2" />
-														Editorial
-													</p>
-													{{-- Menu items --}}
-													<ul>
-														@foreach($publisherFilters as $id => $name)
-															<li class="menu-item">
-																<div class="menu-checkbox">
-																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="selectedPublisherFilters" value="{{ $id }}" id="mobile-filter-publisher-{{ $id }}" />
-																		<label for="mobile-filter-publisher-{{ $id }}">{{ $name }}</label>
+											<div class="level-col level-col-2">
+												{{-- Filter: Publisher --}}
+												@if(count($publisherFilters) > 0)
+													<div class="can-show" data-id="1">
+														{{-- Menu title --}}
+														<p class="menu-title">
+															<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+															<x-icons.chevron-right class="inline size-4 stroke-2" />
+															Editorial
+														</p>
+														{{-- Menu items --}}
+														<ul>
+															@foreach($publisherFilters as $id => $name)
+																<li class="menu-item">
+																	<div class="menu-checkbox">
+																		<div class="checkbox-wrapper">
+																			<input type="checkbox" wire:model="selectedPublisherFilters" value="{{ $id }}" id="mobile-filter-publisher-{{ $id }}" />
+																			<label for="mobile-filter-publisher-{{ $id }}">{{ $name }}</label>
+																		</div>
 																	</div>
-																</div>
-															</li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-											{{-- Filter: Author --}}
-											@if(count($authorFilters) > 0)
-												<div class="can-show" data-id="2">
-													{{-- Menu title --}}
-													<p class="menu-title">
-														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
-														<x-icons.chevron-right class="inline size-4 stroke-2" />
-														Autor
-													</p>
-													{{-- Menu items --}}
-													<ul>
-														@foreach($authorFilters as $id => $name)
-															<li class="menu-item">
-																<div class="menu-checkbox">
-																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="selectedAuthorFilters" value="{{ $id }}" id="mobile-filter-author-{{ $id }}" />
-																		<label for="mobile-filter-author-{{ $id }}">{{ $name }}</label>
+																</li>
+															@endforeach
+														</ul>
+													</div>
+												@endif
+												{{-- Filter: Author --}}
+												@if(count($authorFilters) > 0)
+													<div class="can-show" data-id="2">
+														{{-- Menu title --}}
+														<p class="menu-title">
+															<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+															<x-icons.chevron-right class="inline size-4 stroke-2" />
+															Autor
+														</p>
+														{{-- Menu items --}}
+														<ul>
+															@foreach($authorFilters as $id => $name)
+																<li class="menu-item">
+																	<div class="menu-checkbox">
+																		<div class="checkbox-wrapper">
+																			<input type="checkbox" wire:model="selectedAuthorFilters" value="{{ $id }}" id="mobile-filter-author-{{ $id }}" />
+																			<label for="mobile-filter-author-{{ $id }}">{{ $name }}</label>
+																		</div>
 																	</div>
-																</div>
-															</li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-											{{-- Filter: Age range --}}
-											@if(count($ageRangeFilters) > 0)
-												<div class="can-show" data-id="3">
-													{{-- Menu title --}}
-													<p class="menu-title">
-														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
-														<x-icons.chevron-right class="inline size-4 stroke-2" />
-														Edad
-													</p>
-													{{-- Menu items --}}
-													<ul>
-														@foreach($ageRangeFilters as $id => $name)
-															<li class="menu-item">
-																<div class="menu-checkbox">
-																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="selectedAgeRangeFilters" value="{{ $id }}" id="mobile-filter-age-range-{{ $id }}" />
-																		<label for="mobile-filter-age-range-{{ $id }}">{{ $name }}</label>
+																</li>
+															@endforeach
+														</ul>
+													</div>
+												@endif
+												{{-- Filter: Age range --}}
+												@if(count($ageRangeFilters) > 0)
+													<div class="can-show" data-id="3">
+														{{-- Menu title --}}
+														<p class="menu-title">
+															<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+															<x-icons.chevron-right class="inline size-4 stroke-2" />
+															Edad
+														</p>
+														{{-- Menu items --}}
+														<ul>
+															@foreach($ageRangeFilters as $id => $name)
+																<li class="menu-item">
+																	<div class="menu-checkbox">
+																		<div class="checkbox-wrapper">
+																			<input type="checkbox" wire:model="selectedAgeRangeFilters" value="{{ $id }}" id="mobile-filter-age-range-{{ $id }}" />
+																			<label for="mobile-filter-age-range-{{ $id }}">{{ $name }}</label>
+																		</div>
 																	</div>
-																</div>
-															</li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-											{{-- Filter: Bookbinding type --}}
-											@if(count($formatFilters) > 0)
-												<div class="can-show" data-id="4">
-													{{-- Menu title --}}
-													<p class="menu-title">
-														<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
-														<x-icons.chevron-right class="inline size-4 stroke-2" />
-														Encuadernación
-													</p>
-													{{-- Menu items --}}
-													<ul>
-														@foreach($formatFilters as $id => $name)
-															<li class="menu-item">
-																<div class="menu-checkbox">
-																	<div class="checkbox-wrapper">
-																		<input type="checkbox" wire:model="selectedBookbindingTypeFilters" value="{{ $id }}" id="mobile-filter-bookbinding-type-{{ $id }}" />
-																		<label for="mobile-filter-bookbinding-type-{{ $id }}">{{ $name }}</label>
+																</li>
+															@endforeach
+														</ul>
+													</div>
+												@endif
+												{{-- Filter: Bookbinding type --}}
+												@if(count($formatFilters) > 0)
+													<div class="can-show" data-id="4">
+														{{-- Menu title --}}
+														<p class="menu-title">
+															<button type="button" class="back-button with-scroll" data-level="0">Filtros</button>
+															<x-icons.chevron-right class="inline size-4 stroke-2" />
+															Encuadernación
+														</p>
+														{{-- Menu items --}}
+														<ul>
+															@foreach($formatFilters as $id => $name)
+																<li class="menu-item">
+																	<div class="menu-checkbox">
+																		<div class="checkbox-wrapper">
+																			<input type="checkbox" wire:model="selectedBookbindingTypeFilters" value="{{ $id }}" id="mobile-filter-bookbinding-type-{{ $id }}" />
+																			<label for="mobile-filter-bookbinding-type-{{ $id }}">{{ $name }}</label>
+																		</div>
 																	</div>
-																</div>
-															</li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-										</div>
-									</form>
-								</div>
-								{{-- Buttonbar --}}
-								<div class="buttonbar">
-									<button form="mobile-filters-form" type="reset">Limpiar</button>
-									<button form="mobile-filters-form" type="submit">Aplicar</button>
+																</li>
+															@endforeach
+														</ul>
+													</div>
+												@endif
+											</div>
+										</form>
+									</div>
+									{{-- Buttonbar --}}
+									<div class="buttonbar">
+										<button form="mobile-filters-form" type="reset">Limpiar</button>
+										<button form="mobile-filters-form" type="submit">Aplicar</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div>
-						<button type="button" class="button order-menu-button">
-							Ordenar por: <span>{{ $order->getLabel() }}</span>
-							<x-icons.chevron-down />
-						</button>
-						<input type="hidden" wire:model.change="order" wire:change="loadBooks" id="order" />
-						<ul class="order-options closed">
-							<li data-value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</li>
-							<li data-value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</li>
-							<li data-value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</li>
-							<li data-value="{{ \App\BookSearchResultsOrder::ByPriceDescending->value }}">Precios más bajo</li>
-							<li data-value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</li>
-							<li data-value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</li>
-						</ul>
+						<div>
+							<button type="button" class="button order-menu-button">
+								Ordenar por: <span>{{ $order->getLabel() }}</span>
+								<x-icons.chevron-down />
+							</button>
+							<input type="hidden" wire:model.change="order" wire:change="loadBooks" id="order" />
+							<ul class="order-options closed">
+								<li data-value="{{ \App\BookSearchResultsOrder::ByRelevance->value }}">Relevancia</li>
+								<li data-value="{{ \App\BookSearchResultsOrder::Latest->value }}">Más reciente</li>
+								<li data-value="{{ \App\BookSearchResultsOrder::ByPriceAscending->value }}">Precios más alto</li>
+								<li data-value="{{ \App\BookSearchResultsOrder::ByPriceDescending->value }}">Precios más bajo</li>
+								<li data-value="{{ \App\BookSearchResultsOrder::ByTitleAscending->value }}">Nombre, creciente</li>
+								<li data-value="{{ \App\BookSearchResultsOrder::ByTitleDescending->value }}">Nombre, decreciente</li>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="books-list-container">
-				@foreach($books as $book)
-					<livewire:book-list-item wire:key="book-list-item-{{ $book->id }}" :book="$book" />
-				@endforeach
-			</div>
-			@if($count > count($books))
-				<button wire:click="loadMoreBooks" type="button" class="more-button">Mostrar más</button>
+				{{-- Books list --}}
+				<div class="books-list-container">
+					@foreach($books as $book)
+						<livewire:book-list-item wire:key="book-list-item-{{ $book->id }}" :book="$book" />
+					@endforeach
+				</div>
+				{{-- Load more --}}
+				@if($count > count($books))
+					<button wire:click="loadMoreBooks" type="button" class="more-button">Mostrar más</button>
+				@endif
+			@else
+				<p>No se encontró resultados para esta búsqueda</p>
 			@endif
 		</div>
 	</div>
