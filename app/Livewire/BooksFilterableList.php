@@ -189,7 +189,12 @@ class BooksFilterableList extends Component
 			->whereRaw('MATCH (terms) AGAINST (? with query expansion)', [$this->searchString])
 			->orderByDesc('relevance')
 			->with([
-				'searchable' => fn(MorphTo $query) => $query->with(['publisher', 'authors', 'ageRange', 'bookFormat', 'bookbindingType'])
+				'searchable' => function (MorphTo $query)
+				{
+					$query
+						->where('is_visible', true)
+						->with(['publisher', 'authors', 'ageRange', 'bookbindingType', 'seoTags']);
+				}
 			]);
 	}
 
