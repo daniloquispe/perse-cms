@@ -52,23 +52,26 @@
 
 		{{-- Sidebar --}}
 		<div class="lg:w-[23rem] flex flex-col gap-6">
-			<x-cart-card>
-				<div class="card-body">
-					{{-- Coupon --}}
-					<h2 class="section-title">Valida tu cupón</h2>
-					<form wire:submit="applyCoupon" class="coupon-form">
-						<div class="flex gap-2">
-							<div class="grow">
-								<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+			{{-- Coupon --}}
+			@if($this->showCouponForm)
+				<x-cart-card>
+					<div class="card-body">
+						{{-- Coupon --}}
+						<h2 class="section-title">Valida tu cupón</h2>
+						<form wire:submit="applyCoupon" class="coupon-form">
+							<div class="flex gap-2">
+								<div class="grow">
+									<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+								</div>
+								<button type="submit">Validar</button>
 							</div>
-							<button type="submit">Validar</button>
-						</div>
-						@error('couponForm.code')
-							<div class="form-error">{{ $message }}</div>
-						@enderror
-					</form>
-				</div>
-			</x-cart-card>
+							@error('couponForm.code')
+								<div class="form-error">{{ $message }}</div>
+							@enderror
+						</form>
+					</div>
+				</x-cart-card>
+			@endif
 			<x-cart-card>
 				<div class="card-body">
 					{{-- Resume --}}

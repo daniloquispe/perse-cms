@@ -284,6 +284,7 @@ class Cart
 		static::load();
 
 		static::$coupon = $coupon->toArray();
+		static::calculateTotals();
 
 		static::save();
 	}

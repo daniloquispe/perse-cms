@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Toast;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -22,6 +23,12 @@ class Panel extends Component
 	public Coupon|null $coupon;
 
 	public float $total;
+
+	#[Computed]
+	public function showCouponForm(): bool
+	{
+		return !Cart::getCoupon();
+	}
 
     public function render(): View
     {
