@@ -81,6 +81,13 @@ class DeliveryInfoSection extends Component
 		$this->cannotSelectDistrict = count($this->districts) == 0;
 	}
 
+	public function calculateDeliveryPrice(): void
+	{
+		Cart::setDeliveryPrice(5);
+
+		$this->dispatch('cart_updated');
+	}
+
 	public function showDeliveryDateField(): void
 	{
 		$this->isDeliveryDateFieldVisible = true;

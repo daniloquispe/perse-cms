@@ -106,7 +106,13 @@
 						</div>
 						<div>
 							<div>Entrega</div>
-							<div>Por calcular</div>
+							<div>
+								@if($deliveryPrice)
+									S/&nbsp;{{ number_format($deliveryPrice, 2) }}
+								@else
+									Por calcular
+								@endif
+							</div>
 						</div>
 						@if($coupon)
 							<div>
@@ -119,7 +125,7 @@
 							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
 						</div>
 					</div>
-					<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
+					<button type="button" wire:click="nextStep" @disabled($step == 2 || $step == 3) class="checkout-button">Ir a pagar</button>
 					@if($step > 1)
 						<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}" class="go-back">
 							<x-icons.back /> Volver al Carrito

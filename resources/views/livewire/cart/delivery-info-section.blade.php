@@ -65,7 +65,7 @@
 					{{-- District --}}
 					<div class="form-control-wrapper">
 						<label>Distrito</label>
-						<select wire:model="form.districtId" @disabled($cannotSelectDistrict) required="required">
+						<select wire:model="form.districtId" wire:change="calculateDeliveryPrice" @disabled($cannotSelectDistrict) required="required">
 							<option value="">--</option>
 							@foreach($districts as $id => $name)
 								<option value="{{ $id }}">{{ $name }}</option>

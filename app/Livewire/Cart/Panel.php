@@ -7,8 +7,11 @@ use App\Livewire\Forms\Cart\ApplyCouponForm;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\PaymentMethodType;
+use App\Services\ErpServiceInterface;
 use App\Toast;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -21,6 +24,8 @@ class Panel extends Component
 	public ApplyCouponForm $couponForm;
 
 	public Coupon|null $coupon;
+
+	public int|null $deliveryPrice;
 
 	public float $total;
 
@@ -43,7 +48,8 @@ class Panel extends Component
 	public function loadData(): void
 	{
 		$this->coupon = Cart::getCoupon();
-		$this->total = Cart::getTotal();
+		$this->deliveryPrice = Cart::getDeliveryPrice();
+		$this->total = Cart::getTotal() + Cart::getTotalDiscountFromItems();
 	}
 
 	public function applyCoupon(): void
@@ -92,13 +98,17 @@ class Panel extends Component
 	private function processCart(): void
 	{
 		$this->generateOrder();
+
+		$this->redirectRoute('cart.thanks');
 	}
 
 	private function generateOrder(): void
 	{
+		$erpService = app(ErpServiceInterface::class);
 		$order = new Order();
 
 		$order->customer_id = Auth::guard('storefront')->id();
+		$order->number = $erpService->getOrderNumber();
 
 		$order->email = Cart::getEmail();
 		$order->first_name = Cart::getFirstName();
@@ -110,13 +120,20 @@ class Panel extends Component
 		$order->business_name = Cart::getBusinessName();
 
 		$order->department_id = Cart::getDepartmentId();
+		$order->department_name = Cart::getDepartmentName();
 		$order->province_id = Cart::getProvinceId();
+		$order->province_name = Cart::getProvinceName();
 		$order->district_id = Cart::getDistrictId();
+		$order->district_name = Cart::getDistrictName();
 		$order->address = Cart::getAddress();
-		$order->locationNumber = Cart::getLocationNumber();
+		$order->location_number = Cart::getLocationNumber();
 		$order->reference = Cart::getReference();
 		$order->recipient_name = Cart::getRecipientName();
 		$order->delivery_date = Cart::getDeliveryDate();
+		$order->delivery_price = Cart::getDeliveryPrice();
+
+		$order->payment_method_type = PaymentMethodType::QrCode;
+		$order->payment_method_info = [];
 
 		if ($order->save())
 		{
@@ -126,10 +143,13 @@ class Panel extends Component
 
 				$orderItem->book_id = $id;
 				$orderItem->quantity = $cartItem['quantity'];
-				$orderItem->price = $cartItem['discounted_price'] ?? $cartItem['price'];
+				$orderItem->gross_price = $cartItem['book']['price'];
+				$orderItem->discounted_price = $cartItem['book']['discounted_price'];
 
 				$order->items()->save($orderItem);
 			}
+
+			Session::put('orderEmail', $order->email);
 
 			Cart::empty();
 		}

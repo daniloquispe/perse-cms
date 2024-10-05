@@ -46,8 +46,9 @@
 			<div class="flex justify-between">
 				<div>
 					<p class="mb-4">
-						<strong>Dirección:</strong><br />
-						{{ $address }} {{ $locationNumber }}
+						<strong>Dirección:</strong>
+						<br />{{ $address }} {{ $locationNumber }}
+						<br />{{ $districtName }}, {{ $provinceName }}, {{ $departmentName }}
 						@if($reference)
 							<br />{{ $reference }}
 						@endif
