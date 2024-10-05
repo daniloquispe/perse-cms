@@ -110,7 +110,7 @@
 
 			&:last-child
 			{
-				@apply px-2 pt-2 pb-3 xl:pb-2;
+				@apply px-2 pt-1.5 pb-4 xl:pb-2.5;
 				@apply mt-2;
 				@apply text-palette-orange;
 				@apply text-center underline;
@@ -127,7 +127,7 @@
 		li
 		{
 			@apply cursor-pointer;
-			@apply px-2 py-1 rounded-lg w-full;
+			@apply px-2 py-1.5 rounded-lg w-full;
 			@apply hover:bg-gray-200;
 			@apply text-left;
 
