@@ -9,7 +9,7 @@
 		<livewire:mobile-main-menu :items="$menuItems" :active-ids="$activeMenuIds" />
 		{{-- Logo --}}
 		<div class="logo-cell">
-			<a href="{{ route('home') }}"><img src="{{ asset('images/header-logo.png') }}" alt="Persé Librerías" /></a>
+			<a href="{{ route('home') }}"><img src="{{ asset('images/logo-perse-librerias-principal.png') }}" alt="{{ config('app.name') }}" /></a>
 		</div>
 		{{-- Search (desktop) --}}
 		<div class="search-cell">

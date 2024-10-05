@@ -10,7 +10,7 @@
 <body>
 {{-- Header --}}
 <header class="bg-palette-purple h-24 flex items-center fixed w-full z-10">
-	<img src="{{ asset('images/logo-perse-librerias-pie.png') }}" alt="Persé Librerías" class="mx-auto" />
+	<img src="{{ asset('images/logo-carrito-perse-librerias-pie.png') }}" alt="{{ config('app.name') }}" class="mx-auto" />
 </header>
 {{-- Main --}}
 <main class="bg-palette-pink pt-24">{{ $slot }}</main>
