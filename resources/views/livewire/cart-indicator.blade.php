@@ -19,9 +19,7 @@
 				Carrito
 			</span>
 			<label for="cart-sidebar-active" class="close-cart-sidebar-button">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-label="Cerrar">
-					<path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
+				<x-icons.x-mark aria-label="Cerrar" />
 			</label>
 		</div>
 		<div class="sidebar-content">
@@ -59,26 +57,28 @@
 				</div>
 			@endforelse
 		</div>
-		<div class="sidebar-footer">
-			{{-- Totals --}}
-			<div class="cart-totals">
-				@if($totalDiscount)
+		@if(count($items) > 0)
+			<div class="sidebar-footer">
+				{{-- Totals --}}
+				<div class="cart-totals">
+					@if($totalDiscount)
+						<div>
+							<div>Subtotal</div>
+							<div>S/&nbsp;{{ $total + $totalDiscount }}</div>
+						</div>
+						<div>
+							<div>Descuento</div>
+							<div>&ndash; S/&nbsp;{{ $totalDiscount }}</div>
+						</div>
+					@endif
 					<div>
-						<div>Subtotal</div>
-						<div>S/&nbsp;{{ $total + $totalDiscount }}</div>
+						<div>Total</div>
+						<div>S/&nbsp;{{ $total }}</div>
 					</div>
-					<div>
-						<div>Descuento</div>
-						<div>&ndash; S/&nbsp;{{ $totalDiscount }}</div>
-					</div>
-				@endif
-				<div>
-					<div>Total</div>
-					<div>S/&nbsp;{{ $total }}</div>
 				</div>
+				{{-- Checkout --}}
+				<a href="{{ route('cart.list') }}">Comprar</a>
 			</div>
-			{{-- Checkout --}}
-			<a href="{{ route('cart.list') }}">Comprar</a>
-		</div>
+		@endif
 	</div>
 </div>

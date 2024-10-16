@@ -27,13 +27,16 @@ class PaymentInfoSection extends Component
 		$ruc = Cart::getRuc();
 		$businessName = Cart::getBusinessName();
 
+		$departmentName = Cart::getDepartmentName();
+		$provinceName = Cart::getProvinceName();
+		$districtName = Cart::getDistrictName();
 		$address = Cart::getAddress();
 		$locationNumber = Cart::getLocationNumber();
 		$reference = Cart::getReference();
 		$recipientName = Cart::getRecipientName();
 		$deliveryDate = Cart::getDeliveryDate();
 
-		$data = compact('email', 'firstName', 'lastName', 'identityDocumentNumber', 'phone', 'invoiceType', 'ruc', 'businessName', 'address', 'locationNumber', 'reference', 'recipientName', 'deliveryDate');
+		$data = compact('email', 'firstName', 'lastName', 'identityDocumentNumber', 'phone', 'invoiceType', 'ruc', 'businessName', 'departmentName', 'provinceName', 'districtName', 'address', 'locationNumber', 'reference', 'recipientName', 'deliveryDate');
 		return view('livewire.cart.payment-info-section', $data);
     }
 

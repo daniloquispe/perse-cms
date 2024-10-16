@@ -52,23 +52,26 @@
 
 		{{-- Sidebar --}}
 		<div class="lg:w-[23rem] flex flex-col gap-6">
-			<x-cart-card>
-				<div class="card-body">
-					{{-- Coupon --}}
-					<h2 class="section-title">Valida tu cupón</h2>
-					<form wire:submit="applyCoupon" class="coupon-form">
-						<div class="flex gap-2">
-							<div class="grow">
-								<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+			{{-- Coupon --}}
+			@if($this->showCouponForm)
+				<x-cart-card>
+					<div class="card-body">
+						{{-- Coupon --}}
+						<h2 class="section-title">Valida tu cupón</h2>
+						<form wire:submit="applyCoupon" class="coupon-form">
+							<div class="flex gap-2">
+								<div class="grow">
+									<input wire:model="couponForm.code" wire:blur="couponForm.code = $wire.couponForm.code.toUpperCase()" placeholder="Código de cupón" required="required" aria-label="Código de cupón" />
+								</div>
+								<button type="submit">Validar</button>
 							</div>
-							<button type="submit">Validar</button>
-						</div>
-						@error('couponForm.code')
-							<div class="form-error">{{ $message }}</div>
-						@enderror
-					</form>
-				</div>
-			</x-cart-card>
+							@error('couponForm.code')
+								<div class="form-error">{{ $message }}</div>
+							@enderror
+						</form>
+					</div>
+				</x-cart-card>
+			@endif
 			<x-cart-card>
 				<div class="card-body">
 					{{-- Resume --}}
@@ -82,10 +85,15 @@
 									</div>
 									<div class="grow">
 										<div class="text-xs text-left">{{ $item['book']['title'] }}</div>
-										<div class="text-xs">x{{ $item['quantity'] }}</div>
+										<div class="text-xs">&times;{{ $item['quantity'] }}</div>
 									</div>
 									<div class="w-20 text-xs text-right text-gray-800 font-[500]">
-										S/&nbsp;{{ $item['book']['price'] }}
+										@if($item['book']['discounted_price'])
+											<del class="font-normal opacity-60">S/&nbsp;{{ $item['book']['price'] }}</del>
+											<br />S/&nbsp;{{ $item['book']['discounted_price'] }}
+										@else
+											S/&nbsp;{{ $item['book']['price'] }}
+										@endif
 									</div>
 								</div>
 							@endforeach
@@ -98,7 +106,13 @@
 						</div>
 						<div>
 							<div>Entrega</div>
-							<div>Por calcular</div>
+							<div>
+								@if($deliveryPrice)
+									S/&nbsp;{{ number_format($deliveryPrice, 2) }}
+								@else
+									Por calcular
+								@endif
+							</div>
 						</div>
 						@if($coupon)
 							<div>
@@ -111,7 +125,7 @@
 							<div>S/&nbsp;{{ number_format($total, 2) }}</div>
 						</div>
 					</div>
-					<button type="button" wire:click="nextStep" class="checkout-button">Ir a pagar</button>
+					<button type="button" wire:click="nextStep" @disabled($step == 2 || $step == 3) class="checkout-button">Ir a pagar</button>
 					@if($step > 1)
 						<a wire:click.prevent="goToStep(1)" href="{{ route('cart.list') }}" class="go-back">
 							<x-icons.back /> Volver al Carrito

@@ -4,6 +4,7 @@ namespace App\Livewire\Forms\Cart;
 
 use App\Cart;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Form;
 
 class PersonalInfoForm extends Form
@@ -25,13 +26,27 @@ class PersonalInfoForm extends Form
 	public string $phone;
 
 	#[Validate('required', message: 'Por favor selecciona un tipo de comprobante de pago')]
-	public int $invoiceType;
+	public int $invoiceType = 3;
 
 	#[Validate('required_if:invoiceType,1', message: 'Por favor ingresa tu número de RUC')]
-	public string $ruc = '';
+	public ?string $ruc = '';
 
 	#[Validate('required_if:invoiceType,1', message: 'Por favor ingresa tu razón social')]
-	public string $businessName = '';
+	public ?string $businessName = '';
+
+	public function __construct(Component $component, $propertyName)
+	{
+		parent::__construct($component, $propertyName);
+
+		$this->email = Cart::getEmail();
+		$this->firstName = Cart::getFirstName();
+		$this->lastName = Cart::getLastName();
+		$this->identityDocumentNumber = Cart::getIdentityDocumentNumber();
+		$this->phone = Cart::getPhone();
+		$this->invoiceType = Cart::getInvoiceType()->value;
+		$this->ruc = Cart::getRuc();
+		$this->businessName = Cart::getBusinessName();
+	}
 
 	public function submit(): bool
 	{

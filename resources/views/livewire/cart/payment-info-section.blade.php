@@ -17,7 +17,7 @@
 					<li><strong>Apellidos:</strong> {{ $lastName }}</li>
 					<li><strong>Documento de Identidad:</strong> {{ $identityDocumentNumber }}</li>
 					<li><strong>Teléfono / Móvil:</strong> {{ $phone }}</li>
-					<li><strong>Deseo {{ $invoiceType->name }}</strong></li>
+					<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
 					@if($invoiceType == \App\InvoiceType::Factura)
 						<li><strong>RUC:</strong> {{ $ruc }}</li>
 						<li><strong>Razón Social:</strong> {{ $businessName }}</li>
@@ -46,8 +46,9 @@
 			<div class="flex justify-between">
 				<div>
 					<p class="mb-4">
-						<strong>Dirección:</strong><br />
-						{{ $address }} {{ $locationNumber }}
+						<strong>Dirección:</strong>
+						<br />{{ $address }} {{ $locationNumber }}
+						<br />{{ $districtName }}, {{ $provinceName }}, {{ $departmentName }}
 						@if($reference)
 							<br />{{ $reference }}
 						@endif
@@ -84,7 +85,7 @@
 				<li>
 					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
 						<div class="checkbox-wrapper">
-							<input type="radio" wire:model="paymentMethod" checked="checked" value="1" id="payment-method-1" name="payment-method" class="accent-palette-orange" />
+							<input type="radio" wire:model="paymentMethod" checked="checked" value="{{ \App\PaymentMethodType::CreditOrDebitCard }}" id="payment-method-1" name="payment-method" class="accent-palette-orange" />
 							<label for="payment-method-1" class="font-[500]">Tarjeta débito o crédito</label>
 						</div>
 						<div>
@@ -130,7 +131,7 @@
 				</li>
 				<li class="flex items-center justify-between rounded border border-gray-500 p-6">
 					<div class="checkbox-wrapper">
-						<input type="radio" wire:model="paymentMethod" value="2" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
+						<input type="radio" wire:model="paymentMethod" value="{{ \App\PaymentMethodType::QrCode }}" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
 						<label for="payment-method-2" class="font-[500]">Plin/Yape</label>
 					</div>
 					<div>
@@ -139,7 +140,7 @@
 				</li>
 				<li class="flex items-center justify-between rounded border border-gray-500 p-6">
 					<div class="checkbox-wrapper">
-						<input type="radio" wire:model="paymentMethod" value="3" id="payment-method-3" name="payment-method" class="accent-palette-orange" />
+						<input type="radio" wire:model="paymentMethod" value="{{ \App\PaymentMethodType::PagoEfectivo }}" id="payment-method-3" name="payment-method" class="accent-palette-orange" />
 						<label for="payment-method-3" class="font-[500]">PagoEfectivo</label>
 					</div>
 					<div>

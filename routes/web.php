@@ -10,6 +10,7 @@ Route::get('cart/list', \App\Livewire\Cart\CartPage::class)->name('cart.list');
 Route::get('cart/personal-info', \App\Livewire\Cart\CartPage::class)->name('cart.personal-info');
 Route::get('cart/delivery-info', \App\Livewire\Cart\CartPage::class)->name('cart.delivery');
 Route::get('cart/payment', \App\Livewire\Cart\CartPage::class)->name('cart.payment');
+Route::get('cart/thanks', \App\Livewire\Cart\CartFinalPage::class)->name('cart.thanks');
 
 Route::get('{slug}', \App\Http\Controllers\SlugController::class)->name('slug');
 
