@@ -52,6 +52,24 @@ class Order extends Model
 		return Attribute::make(fn() => $this->status == OrderStatus::Created);
 	}
 
+	public function subtotal(): Attribute
+	{
+		return Attribute::make(function ()
+		{
+			$total = 0;
+
+			foreach ($this->items as $item)
+				$total += $item->subtotal;
+
+			return $total;
+		});
+	}
+
+	public function total(): Attribute
+	{
+		return Attribute::make(fn() => $this->subtotal + $this->delivery_price);
+	}
+
 	public function customer(): BelongsTo
 	{
 		return $this->belongsTo(Customer::class);

@@ -2,9 +2,11 @@
 
 namespace App;
 
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-enum OrderStatus: int implements HasLabel
+enum OrderStatus: int implements HasLabel, HasColor, HasIcon
 {
 //	case InCart = 0;
 
@@ -27,6 +29,29 @@ enum OrderStatus: int implements HasLabel
 			self::Delivering => 'En camino',
 			self::Delivered => 'Entregado',
 			self::Cancelled => 'Cancelado',
+		};
+	}
+
+	public function getColor(): string|array|null
+	{
+		return match ($this)
+		{
+			self::Created => 'gray',
+			self::Delivered => 'success',
+			self::Cancelled => 'warning',
+			default => 'info',
+		};
+	}
+
+	public function getIcon(): ?string
+	{
+		return match ($this)
+		{
+			self::Created => 'heroicon-o-clock',
+			self::Confirmed => 'heroicon-o-list-bullet',
+			self::Delivering => 'heroicon-o-truck',
+			self::Delivered => 'heroicon-o-check',
+			self::Cancelled => 'microns-cancel',
 		};
 	}
 }

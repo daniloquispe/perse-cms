@@ -19,6 +19,11 @@ class OrderItem extends Model
 		return Attribute::make(fn() => $this->gross_price - $this->discounted_price);
 	}
 
+	public function subtotal(): Attribute
+	{
+		return Attribute::make(fn() => $this->price * $this->quantity);
+	}
+
 	public function order(): BelongsTo
 	{
 		return $this->belongsTo(Order::class);
