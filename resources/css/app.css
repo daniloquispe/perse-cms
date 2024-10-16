@@ -29,6 +29,7 @@
 @import url(pages/contact.css);
 @import url(pages/user.css);
 
+@import url(utils/document.css);
 @import url(utils/forms.css);
 @import url(utils/off-canvas.css);
 
@@ -65,25 +66,6 @@ body
 {
 	@apply mt-5 md:mt-6 xl:mt-0 2xl:mt-5;
 	@apply mb-12;
-}
-
-/* Document-style pages */
-
-.document header h1
-{
-	@apply mb-6;
-	@apply text-2xl text-center text-gray-800;
-}
-
-.document p
-{
-	@apply mb-4;
-}
-
-.document ul
-{
-	@apply list-disc;
-	@apply ml-8;
 }
 
 /* Auth pages (login, register...) */
