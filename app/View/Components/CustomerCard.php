@@ -10,17 +10,20 @@ class CustomerCard extends Component
 {
 	public ?string $title;
 
-	public ?string $subtitle;
+	public string|null $subtitle;
+
+	public string|null $backUrl;
 
 	public bool $hasBody;
 
 	/**
      * Create a new component instance.
      */
-    public function __construct(string|null $title = null, string|null $subtitle = null, bool $hasBody = true)
+    public function __construct(string|null $title = null, string|null $subtitle = null, string|null $backUrl = null, bool $hasBody = true)
     {
 		$this->title = $title;
 		$this->subtitle = $subtitle;
+		$this->backUrl = $backUrl;
 		$this->hasBody = $hasBody;
     }
 
@@ -30,8 +33,9 @@ class CustomerCard extends Component
     public function render(): View|Closure|string
     {
 		$withHeader = $this->title != null;
+		$withBackLink = $this->backUrl != null;
 
-		$data = compact('withHeader');
+		$data = compact('withHeader', 'withBackLink');
         return view('components.customer-card', $data);
     }
 }

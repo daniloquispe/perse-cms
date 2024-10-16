@@ -37,6 +37,9 @@
 			@case('customer.orders')
 				<livewire:customer.orders-section />
 				@break
+			@case('customer.order')
+				<livewire:customer.order-section :order="\Illuminate\Support\Facades\Route::current()->parameter('order')" />
+				@break
 			@case('customer.favorites')
 				<livewire:customer.favorites-section />
 				@break
