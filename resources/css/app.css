@@ -106,7 +106,7 @@ body
 .container-box-auth form input
 {
 	@apply block w-full rounded p-3;
-	@apply mt-2 mb-4 md:mb-2;
+	@apply mt-2 mb-3.5 md:mb-2;
 	@apply bg-slate-100;
 }
 
@@ -148,7 +148,7 @@ body
 {
 	@apply grid;
 	@apply grid-rows-2 sm:grid-rows-1 sm:grid-cols-2;
-	@apply gap-4 md:gap-2;
+	@apply gap-3.5 md:gap-2;
 	@apply mb-10;
 }
 
