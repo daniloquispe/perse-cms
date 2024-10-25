@@ -83,7 +83,7 @@ body
 
 .container-box-auth h2
 {
-	@apply mt-4 mb-6;
+	@apply mt-4 mb-4 md:mb-6;
 	@apply text-center uppercase;
 
 	+ p
@@ -105,7 +105,8 @@ body
 
 .container-box-auth form input
 {
-	@apply block w-full rounded my-2 p-3;
+	@apply block w-full rounded p-3;
+	@apply mt-2 mb-4 md:mb-2;
 	@apply bg-slate-100;
 }
 
@@ -145,12 +146,29 @@ body
 
 .container-box-auth .access-wrapper
 {
-	@apply grid grid-rows-2 sm:grid-cols-2 gap-2;
+	@apply grid;
+	@apply grid-rows-2 sm:grid-rows-1 sm:grid-cols-2;
+	@apply gap-4 md:gap-2;
+	@apply mb-10;
 }
 
 .container-box-auth.wide .access-wrapper
 {
 	@apply grid-cols-1;
+	@apply mb-0;
+}
+
+.auth-form-layout
+{
+	.cols
+	{
+		@apply md:grid md:grid-cols-2 md:gap-4;
+
+		> div:first-child
+		{
+			@apply mb-4 md:mb-0;
+		}
+	}
 }
 
 /* Forms */
