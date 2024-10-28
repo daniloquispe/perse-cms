@@ -8,13 +8,7 @@
 		@error('password')
 			<div class="form-error">{{ $message }}</div>
 		@enderror
-		<p><a href="/recuperar-contrasena">Olvidé mi contraseña</a></p>
+		<p><a href="{{ $passwordRecoveryLink }}">Olvidé mi contraseña</a></p>
 		<button type="submit">Entrar</button>
-		@if($success)
-			<div wire:transition>¡Inicio de sesión exitoso!</div>
-		@endif
-		@if($error)
-			<div wire:transition>Error en el inicio de sesión</div>
-		@endif
 	</form>
 </div>

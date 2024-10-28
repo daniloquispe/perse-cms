@@ -2,66 +2,47 @@
 
 namespace App\Livewire;
 
+use App\PageRole;
+use App\Services\UrlService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class LoginForm extends Component
 {
+	use \App\Toast;
+
 	#[Validate('required|email')]
 	public string $email = '';
 
 	#[Validate('required')]
 	public string $password = '';
 
-	public bool $success = false;
-
-	public bool $error = false;
-
-	private bool $authenticated = false;
-
-    public function render()
+    public function render(UrlService $urlService): View
     {
-		if ($this->authenticated)
-			$this->redirectRoute('home');
+		if (Auth::guard('storefront')->check())
+			$this->redirectRoute('customer.profile');
 
-        return view('livewire.login-form');
+		$passwordRecoveryLink = $urlService->fromPageRole(PageRole::PasswordRecovery);
+
+		$data = compact('passwordRecoveryLink');
+        return view('livewire.login-form', $data);
     }
-
-	/*public function __old_login(): void
-	{
-		$this->success = false;
-		$this->error = false;
-
-		$this->validate();
-
-		$data = ['email' => $this->email, 'password' => $this->password];
-
-		$response = Http::post(route('api.login'), $data);
-
-		if ($response->ok())
-			$this->authenticated = true;
-	}*/
 
 	public function login(): void
 	{
-		$this->success = false;
-		$this->error = false;
-
 		$this->validate();
 
 		$credentials = ['email' => $this->email, 'password' => $this->password];
 
 		if (Auth::guard('storefront')->attempt($credentials))
 		{
-			$this->success = true;
-
 			session()->regenerate();
 
 			$this->redirectRoute('home');
 		}
 		else
-			$this->error = true;
+			$this->toast('Correo electrónico o contraseña incorrectos');
 	}
 }
