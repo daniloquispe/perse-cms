@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Mail\AccessCodeRequested;
 use App\Models\AccessCode;
-use App\Notifications\AccessCodeRequested;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -26,15 +26,15 @@ class AccessCodeForm extends Form
 
 		if ($accessCode->save())
 		{
-			$this->sendNotification($accessCode->access_code);
+			$this->sendEmail($accessCode->access_code);
 			return true;
 		}
 
 		return false;
 	}
 
-	private function sendNotification(string|int $accessCode): void
+	private function sendEmail(string|int $accessCode): void
 	{
-		Notification::route('mail', $this->email)->notify(new AccessCodeRequested($accessCode));
+		Mail::to($this->email)->send(new AccessCodeRequested($accessCode, $this->email));
 	}
 }
