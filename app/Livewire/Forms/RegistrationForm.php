@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Mail\CustomerRegistered;
 use App\Models\Customer;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Exception;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -34,6 +34,8 @@ class RegistrationForm extends Form
 		];
 
 		$user = new Customer($data);
+
+		Mail::to($email)->send(new CustomerRegistered($user));
 
 		return $user->save() ? $user : null;
 	}
