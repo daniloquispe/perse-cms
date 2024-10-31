@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\DefontanaService;
 use App\Services\ErpServiceInterface;
+use App\Services\NoErpService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-		$this->app->bind(ErpServiceInterface::class, DefontanaService::class);
+		$this->app->bind(ErpServiceInterface::class, NoErpService::class);
     }
 
     /**
