@@ -11,8 +11,7 @@
 			gap: 1rem;
 			padding-left: calc(3.5rem + 2rem + 1rem + 1px + 1rem);
 			font-size: 4rem;
-			{{-- @apply text-palette-purple; --}}
-			color: #AD60BF;
+			color: #9143bc;
 			font-weight: bold;
 
 			img

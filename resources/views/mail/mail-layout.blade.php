@@ -34,8 +34,14 @@
 
 			header
 			{
-				padding: 1rem 0;
-				text-align: center;
+				display: flex;
+				justify-content: center;
+				padding: 0.67rem 0;
+
+				img
+				{
+					width: 218px;
+				}
 			}
 
 			/*main
@@ -46,7 +52,7 @@
 			main h1
 			{
 				padding: 2.5rem 3.5rem;
-				background-color: #AD60BF;
+				background-color: #9143bc;
 				color: #fff;
 				font-size: 2.5rem;
 				font-weight: 500;
@@ -117,8 +123,7 @@
 
 					a
 					{
-						{{-- @apply text-red-500; --}}
-						color: rgb(239 68 68);
+						color: #9143bc;
 						text-decoration: none;
 					}
 				}
