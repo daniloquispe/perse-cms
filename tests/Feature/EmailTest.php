@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\AbandonedCart;
 use App\Mail\AccessCodeRequested;
 use App\Mail\OrderConfirmed;
 use App\Mail\OrderCreated;
@@ -93,5 +94,16 @@ class EmailTest extends TestCase
 		Mail::to($order->email)->queue(new OrderDelivered($order));
 
 		Mail::assertQueued(OrderDelivered::class);
+	}
+
+	#[Group('email')]
+	#[Group('cart')]
+	public function test_queue_abandoned_cart_email(): void
+	{
+		Mail::fake();
+
+		Mail::to('dql@daniloquispe.dev')->queue(new AbandonedCart());
+
+		Mail::assertQueued(AbandonedCart::class);
 	}
 }
