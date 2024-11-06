@@ -83,7 +83,11 @@ class DeliveryInfoSection extends Component
 
 	public function calculateDeliveryPrice(): void
 	{
-		Cart::setDeliveryPrice(5);
+		$deliveryPrice = $this->form->departmentId == 15  // Lima?
+			? 7
+			: 16;
+
+		Cart::setDeliveryPrice($deliveryPrice);
 
 		$this->dispatch('cart_updated');
 	}
