@@ -4,13 +4,16 @@ namespace App\Livewire\Cart;
 
 use App\Cart;
 use App\Livewire\Forms\Cart\ApplyCouponForm;
+use App\Mail\OrderCreated;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\PaymentMethodType;
 use App\Services\ErpServiceInterface;
 use App\Toast;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
@@ -148,6 +151,9 @@ class Panel extends Component
 
 				$order->items()->save($orderItem);
 			}
+
+			Bugsnag::leaveBreadcrumb("Sending order-created e-mail to {$order->email} for order #{$order->number}");
+			Mail::to($order->email)->send(new OrderCreated($order));
 
 			Session::put('orderEmail', $order->email);
 
