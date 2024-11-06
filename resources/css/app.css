@@ -98,6 +98,11 @@ body
 	@apply text-center uppercase;
 }
 
+.container-box-auth p.or
+{
+	@apply my-3.5;
+}
+
 .container-box-auth a
 {
 	@apply underline;
@@ -108,6 +113,8 @@ body
 	@apply block w-full rounded p-3;
 	@apply mt-2 mb-3.5 md:mb-2;
 	@apply bg-slate-100;
+	@apply outline-none outline-offset-0 focus:outline-palette-purple;
+	@apply transition-all;
 }
 
 .container-box-auth form button[type="submit"],
