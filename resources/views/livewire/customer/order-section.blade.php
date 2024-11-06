@@ -69,7 +69,51 @@
 	<section class="mb-8">
 		<div class="bg-palette-orange/20 rounded-xl py-4">
 			<p class="text-lg text-center text-palette-orange">Seguimiento de despacho</p>
-			Steps here!
+			<div>
+				<div class="cart-steps">
+					<div @class(['cart-step', 'current'])>
+						<a href="#">
+							<span class="marker">
+								<x-icons.cart />
+							</span>
+							Recibido
+						</a>
+					</div>
+					<div @class(['cart-step', 'current' => $order->confirmed_at])>
+						<a href="#">
+							<span class="marker">
+								<x-icons.user />
+							</span>
+							Confirmado
+							@if($order->confirmed_at)
+								<br /><small>{{ $order->confirmed_at->format('d/m/Y') }}</small>
+							@endif
+						</a>
+					</div>
+					<div @class(['cart-step', 'current' => $order->delivering_at])>
+						<a href="#">
+							<span class="marker">
+								<x-icons.truck />
+							</span>
+							En camino
+							@if($order->delivering_at)
+								<br /><small>{{ $order->delivering_at->format('d/m/Y') }}</small>
+							@endif
+						</a>
+					</div>
+					<div @class(['cart-step', 'current' => $order->delivered_at])>
+						<a href="#">
+							<span class="marker">
+								<x-icons.credit-card />
+							</span>
+							Entregado
+							@if($order->delivered_at)
+								<br /><small>{{ $order->delivered_at->format('d/m/Y') }}</small>
+							@endif
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	{{-- Delivery info --}}
