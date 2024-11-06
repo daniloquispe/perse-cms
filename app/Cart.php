@@ -428,7 +428,10 @@ class Cart
 		if (!static::$coupon)
 			return null;
 
-		return new Coupon(static::$coupon);
+		$coupon = new Coupon(static::$coupon);
+		$coupon->id = static::$coupon['id'];
+
+		return $coupon;
 	}
 
 	public static function getItemsCount(): int
