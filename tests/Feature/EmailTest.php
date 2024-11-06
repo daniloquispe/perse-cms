@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Mail\AccessCodeRequested;
 use App\Mail\OrderConfirmed;
 use App\Mail\OrderCreated;
+use App\Mail\OrderDelivered;
 use App\Mail\OrderDelivering;
 use App\Models\Order;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -76,5 +77,21 @@ class EmailTest extends TestCase
 		Mail::to($order->email)->queue(new OrderDelivering($order));
 
 		Mail::assertQueued(OrderDelivering::class);
+	}
+
+	#[Group('email')]
+	#[Group('order')]
+	public function test_queue_order_delivered_email(): void
+	{
+		Mail::fake();
+
+		$order = Order::latest()->first();
+
+		$this->assertTrue($order instanceof Order);
+		$this->assertNotEmpty($order->email);
+
+		Mail::to($order->email)->queue(new OrderDelivered($order));
+
+		Mail::assertQueued(OrderDelivered::class);
 	}
 }

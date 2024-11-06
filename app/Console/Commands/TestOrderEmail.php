@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\OrderConfirmed;
 use App\Mail\OrderCreated;
+use App\Mail\OrderDelivered;
 use App\Mail\OrderDelivering;
 use App\Models\Order;
 use App\OrderStatus;
@@ -54,6 +55,7 @@ class TestOrderEmail extends Command
 			OrderStatus::Created => OrderCreated::class,
 			OrderStatus::Confirmed => OrderConfirmed::class,
 			OrderStatus::Delivering => OrderDelivering::class,
+			OrderStatus::Delivered => OrderDelivered::class,
 			default => null,
 		};
 
