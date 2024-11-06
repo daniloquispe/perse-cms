@@ -93,7 +93,7 @@ class Panel extends Component
 		{
 			1 => 'cart.list',
 			2 => 'cart.delivery',
-			3 => 'home',
+			3 => 'cart.payment',
 		};
 		$this->redirectRoute($routeName);
 	}
@@ -112,6 +112,8 @@ class Panel extends Component
 
 		$order->customer_id = Auth::guard('storefront')->id();
 		$order->number = $erpService->getOrderNumber();
+
+		$order->coupon_id = Cart::getCoupon()?->id;
 
 		$order->email = Cart::getEmail();
 		$order->first_name = Cart::getFirstName();
