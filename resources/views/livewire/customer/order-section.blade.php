@@ -2,7 +2,7 @@
 	{{-- Order info --}}
 	<section class="mb-8">
 		<div class="flex justify-between">
-			<p class="mb-2 text-xl text-palette-orange">Información de compra</p>
+			<p class="mb-2 text-xl text-palette-orange font-[500]">Información de compra</p>
 			<div class="flex gap-5">
 				@if($order->is_cancellable)
 					<a wire:click="cancelOrder" href="#" class="flex items-center gap-1 mb-2 underline">
@@ -36,8 +36,8 @@
 			<div class="px-16">
 				<p class="mb-3 text-lg font-[500] text-gray-800">Medios de Pago</p>
 				<p class="text-gray-800">{{ $order->payment_method_type->getLabel() }}</p>
-				<p><span class="text-gray-800">Tipo de comprobante:</span> {{ $order->invoice_type->name }}</p>
 				@if(false)
+				<p><span class="text-gray-800">Tipo de comprobante:</span> {{ $order->invoice_type->name }}</p>
 				<button class="flex items-center justify-center gap-1 w-full border border-palette-orange text-palette-orange rounded-lg py-3">
 					<x-icons.document-currency-dollar class="size-6" class="inline size-6" />
 					Comprobante de pago
@@ -68,18 +68,19 @@
 	{{-- Order status --}}
 	<section class="mb-8">
 		<div class="bg-palette-orange/20 rounded-xl py-4">
-			<p class="text-lg text-center text-palette-orange">Seguimiento de despacho</p>
+			<p class="text-lg text-center text-palette-orange font-[500]">Seguimiento de despacho</p>
 			<div>
-				<div class="cart-steps">
-					<div @class(['cart-step', 'current'])>
+				<div class="steps-indicator for-order">
+					<div class="step current">
 						<a href="#">
 							<span class="marker">
 								<x-icons.cart />
 							</span>
 							Recibido
+							<br /><small>{{ $order->created_at->format('d/m/Y') }}</small>
 						</a>
 					</div>
-					<div @class(['cart-step', 'current' => $order->confirmed_at])>
+					<div @class(['step', 'current' => $order->confirmed_at])>
 						<a href="#">
 							<span class="marker">
 								<x-icons.user />
@@ -90,7 +91,7 @@
 							@endif
 						</a>
 					</div>
-					<div @class(['cart-step', 'current' => $order->delivering_at])>
+					<div @class(['step', 'current' => $order->delivering_at])>
 						<a href="#">
 							<span class="marker">
 								<x-icons.truck />
@@ -101,7 +102,7 @@
 							@endif
 						</a>
 					</div>
-					<div @class(['cart-step', 'current' => $order->delivered_at])>
+					<div @class(['step', 'current' => $order->delivered_at])>
 						<a href="#">
 							<span class="marker">
 								<x-icons.credit-card />
@@ -119,23 +120,23 @@
 	{{-- Delivery info --}}
 	<section class="mb-8">
 		<div>
-			<p class="mb-2 text-xl text-palette-orange">Despacho programado</p>
+			<p class="mb-2 text-xl text-palette-orange font-[500]">Despacho programado</p>
 			<p class="mb-4">Entrega {{ $order->delivery_date->locale(config('app.locale'))->isoFormat('dddd D [de] MMMM [de] YYYY') }}, entre 09:00 y las 19:00 hrs.</p>
 			<p class="text-lg text-gray-800">Paquete</p>
-			<p>Enviado por: <span class="text-gray-800 font-[500] uppercase">{{ $order->department_id == 15 ? 'Olva' : 'Shalom' }}</span></p>
+			<p>Enviado por: <span class="text-gray-800 font-[500] uppercase">Olva</span></p>
 		</div>
 	</section>
 	{{-- Items --}}
 	<section class="mx-32 text-gray-800">
-		<div class="grid grid-cols-5 gap-4 font-[500]">
-			<div class="col-span-2"></div>
+		<div class="grid grid-cols-7 gap-24 font-[500]">
+			<div class="col-span-4"></div>
 			<div>Precio</div>
 			<div>Cantidad</div>
 			<div>Subtotal</div>
 		</div>
 		@foreach($order->items as $item)
-			<div wire:key="item-{{ $item->id }}" class="grid grid-cols-5 gap-4 mt-3">
-				<div class="col-span-2 flex items-start gap-4">
+			<div wire:key="item-{{ $item->id }}" class="grid grid-cols-7 gap-24 mt-3">
+				<div class="col-span-4 flex items-start gap-4">
 					<img src="{{ asset($item->book->cover_or_placeholder) }}" alt="{{ $item->book->title }}" class="w-12" />
 					<div>{{ $item->book->title }}</div>
 				</div>

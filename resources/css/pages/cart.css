@@ -3,7 +3,8 @@
 	@apply max-w-[86rem] mx-auto;
 }
 
-/* Steps (new) */
+/* Steps */
+/* Replace by .steps-indicator in resources/css/utils/steps.css */
 
 .cart-steps
 {

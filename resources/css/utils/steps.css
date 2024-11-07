@@ -1,0 +1,99 @@
+/* Steps indicator */
+
+@layer utilities
+{
+	.steps-indicator
+	{
+		@apply flex justify-center;
+
+		/* Step */
+
+		.step
+		{
+			@apply flex justify-center relative;
+			@apply first-of-type:before:hidden;
+
+			&:before
+			{
+				@apply bg-[#cbcbcb] h-0.5 absolute top-5 right-1/2;
+				width: calc(100% - 1.25rem);
+				content: '';
+			}
+
+			/* Step marker */
+
+			a
+			{
+				@apply flex flex-col items-center text-center w-full pointer-events-none;
+			}
+
+			.marker
+			{
+				@apply relative;
+				@apply flex justify-center items-center;
+				@apply size-10;
+				@apply mb-1.5;
+				@apply border border-[#cbcbcb] rounded-full;
+				@apply bg-[#cbcbcb];
+
+				svg
+				{
+					@apply size-6;
+					@apply text-white;
+				}
+			}
+
+			/* Current step */
+
+			&.current
+			{
+				@apply before:bg-palette-orange;
+
+				a
+				{
+					@apply pointer-events-auto;
+				}
+
+				.marker
+				{
+					@apply border-palette-orange;
+					@apply bg-palette-orange;
+				}
+			}
+		}
+
+		/* For shopping cart pages */
+
+		&.for-cart
+		{
+			@apply pt-6 pb-5;
+
+			.step
+			{
+				@apply w-32;
+			}
+		}
+
+		/* For order details page */
+
+		&.for-order
+		{
+			@apply pt-6;
+
+			.step
+			{
+				@apply w-[20rem];
+
+				a
+				{
+					@apply font-[500];
+
+					small
+					{
+						@apply font-normal;
+					}
+				}
+			}
+		}
+	}
+}
