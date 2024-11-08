@@ -5,6 +5,7 @@ namespace App\Livewire\Cart;
 use App\Cart;
 //use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\Cart\DeliveryInfoForm;
+use App\PaymentMethodType;
 use App\Toast;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
@@ -15,6 +16,10 @@ class PaymentInfoSection extends Component
 	use Toast;
 
 	public int $paymentMethod = 1;
+
+	public bool $showQrCodePaymentMethodOptions = false;
+
+	public bool $showBankTransferPaymentMethodOptions = false;
 
 	public function render(): View
     {
@@ -52,5 +57,21 @@ class PaymentInfoSection extends Component
 		Cart::setStep(3);
 
 		$this->redirectRoute('cart.delivery');
+	}
+
+	/*public function toggleQrCodePaymentMethodOptions(): void
+	{
+		$this->showQrCodePaymentMethodOptions = $this->paymentMethod == PaymentMethodType::QrCode->value;
+	}
+
+	public function toggleBankTransferPaymentMethodOptions(): void
+	{
+		$this->showBankTransferPaymentMethodOptions = $this->paymentMethod == PaymentMethodType::QrCode->value;
+	}*/
+
+	public function togglePaymentMethodOptions(): void
+	{
+		$this->showQrCodePaymentMethodOptions = $this->paymentMethod == PaymentMethodType::QrCode->value;
+		$this->showBankTransferPaymentMethodOptions = $this->paymentMethod == PaymentMethodType::BankTransfer->value;
 	}
 }

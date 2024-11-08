@@ -12,6 +12,8 @@ enum PaymentMethodType: int implements HasLabel
 
 	case PagoEfectivo = 3;
 
+	case BankTransfer = 4;
+
 	public function getLabel(): ?string
 	{
 		return match ($this)
@@ -19,6 +21,7 @@ enum PaymentMethodType: int implements HasLabel
 			self::CreditOrDebitCard => 'Tarjeta de crédito o débito',
 			self::QrCode => 'Código QR',
 			self::PagoEfectivo => 'PagoEfectivo',
+			self::BankTransfer => 'Transferencia bancaria',
 		};
 	}
 }
