@@ -19,6 +19,7 @@ Route::middleware('auth:storefront')->group(function ()
 {
 	Route::get('customer/profile', \App\Livewire\Customer\CustomerPage::class)->name('customer.profile');
 	Route::get('customer/addresses', \App\Livewire\Customer\CustomerPage::class)->name('customer.addresses');
+	Route::get('customer/orders/{order}', \App\Livewire\Customer\CustomerOrderPage::class)->name('customer.order');
 	Route::get('customer/orders', \App\Livewire\Customer\CustomerPage::class)->name('customer.orders');
 	Route::get('customer/favorites', \App\Livewire\Customer\CustomerPage::class)->name('customer.favorites');
 });

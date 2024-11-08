@@ -24,7 +24,15 @@
 
 .card .card-title
 {
-	@apply text-xl;
+	@apply flex items-end gap-2;
+	@apply text-xl text-gray-800;
+
+	svg
+	{
+		@apply inline;
+		@apply size-6;
+		@apply text-palette-orange;
+	}
 }
 
 .card .card-body
