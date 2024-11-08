@@ -29,7 +29,8 @@
 					p
 					{
 						font-size: 0.9rem;
-						margin-bottom: 1.1rem;
+						margin-bottom: 1rem;
+						line-height: 1.3rem;
 
 						&:last-child
 						{
@@ -305,7 +306,7 @@
 
 		.table-wrapper
 		{
-			margin: 0.5rem 1rem 1rem;
+			margin: 1.5rem 1rem 1rem;
 		}
 
 		.products-table
@@ -629,7 +630,7 @@
 						</div>
 						<div>
 							<x-icons.headset />
-							<p>Llámanos al<br /><span>(01) 981 306-233<br />de lunes a domingo de 8am a 8pm</span></p>
+							<p>Llámanos al<br /><span>(01) 960&nbsp;155&nbsp;037<br />de lunes a domingo de 8am a 8pm</span></p>
 						</div>
 					</div>
 				</section>
