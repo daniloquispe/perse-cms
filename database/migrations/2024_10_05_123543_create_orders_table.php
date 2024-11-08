@@ -22,7 +22,7 @@ return new class extends Migration
 			$table->string('last_name', 50);
 			$table->string('id_document_number', 11);
 			$table->string('phone', 50);
-			$table->unsignedTinyInteger('invoice_type')->default(\App\InvoiceType::Boleta);
+			$table->unsignedTinyInteger('invoice_type')->nullable();  // Nullable only during non-ERP-integration stage
 			$table->string('ruc', 11)->nullable();
 			$table->string('business_name', 100)->nullable();
 			$table->unsignedMediumInteger('department_id');

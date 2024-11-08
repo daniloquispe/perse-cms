@@ -17,10 +17,12 @@
 					<li><strong>Apellidos:</strong> {{ $lastName }}</li>
 					<li><strong>Documento de Identidad:</strong> {{ $identityDocumentNumber }}</li>
 					<li><strong>Teléfono / Móvil:</strong> {{ $phone }}</li>
-					<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
-					@if($invoiceType == \App\InvoiceType::Factura)
-						<li><strong>RUC:</strong> {{ $ruc }}</li>
-						<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+					@if(config('services.erp.enable'))
+						<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
+						@if($invoiceType == \App\InvoiceType::Factura)
+							<li><strong>RUC:</strong> {{ $ruc }}</li>
+							<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+						@endif
 					@endif
 				</ul>
 				<div>

@@ -7,6 +7,11 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Form;
 
+/**
+ * Cart personal info form.
+ *
+ * @todo Update invoice type validation rules (when ERP integration is set)
+ */
 class PersonalInfoForm extends Form
 {
 	#[Validate('required', message: 'Por favor ingresa un correo electrónico')]
@@ -25,8 +30,8 @@ class PersonalInfoForm extends Form
 	#[Validate('required', message: 'Por favor ingresa tu teléfono')]
 	public string $phone;
 
-	#[Validate('required', message: 'Por favor selecciona un tipo de comprobante de pago')]
-	public int $invoiceType = 3;
+	#[Validate('nullable')]
+	public ?int $invoiceType = null;
 
 	#[Validate('required_if:invoiceType,1', message: 'Por favor ingresa tu número de RUC')]
 	public ?string $ruc = '';
@@ -43,7 +48,7 @@ class PersonalInfoForm extends Form
 		$this->lastName = Cart::getLastName();
 		$this->identityDocumentNumber = Cart::getIdentityDocumentNumber();
 		$this->phone = Cart::getPhone();
-		$this->invoiceType = Cart::getInvoiceType()->value;
+		$this->invoiceType = Cart::getInvoiceType()?->value;
 		$this->ruc = Cart::getRuc();
 		$this->businessName = Cart::getBusinessName();
 	}
