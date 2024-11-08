@@ -74,7 +74,7 @@
 					<div class="step current">
 						<a href="#">
 							<span class="marker">
-								<x-icons.cart />
+								<x-icons.arrow-path />
 							</span>
 							Recibido
 							<br /><small>{{ $order->created_at->format('d/m/Y') }}</small>
@@ -83,7 +83,7 @@
 					<div @class(['step', 'current' => $order->confirmed_at])>
 						<a href="#">
 							<span class="marker">
-								<x-icons.user />
+								<x-icons.shopping-bag />
 							</span>
 							Confirmado
 							@if($order->confirmed_at)
@@ -105,7 +105,7 @@
 					<div @class(['step', 'current' => $order->delivered_at])>
 						<a href="#">
 							<span class="marker">
-								<x-icons.credit-card />
+								<x-icons.package />
 							</span>
 							Entregado
 							@if($order->delivered_at)
