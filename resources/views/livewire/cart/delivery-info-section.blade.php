@@ -100,7 +100,7 @@
 					<div class="form-control-wrapper">
 						<label>Método de entrega</label>
 						<div class="h-24 p-6 flex items-center justify-center gap-2 border border-gray-400 rounded">
-							<x-icons.truck class="size-10 text-palette-orange" />
+							<img src="{{ asset('images/delivery.png') }}" alt="" class="size-16" />
 							<span>Entrega a domicilio</span>
 						</div>
 					</div>
@@ -109,7 +109,7 @@
 						<label>Fecha de entrega</label>
 						<div class="h-24 p-6 flex items-center justify-between gap-2 border border-gray-400 rounded">
 							@if($isDeliveryDateFieldVisible)
-								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ \Carbon\Carbon::today()->toDateString() }}" />
+								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ $this->minDeliveryDate }}" />
 							@elseif($form->deliveryDate)
 								<ul>
 									<li>
@@ -121,7 +121,13 @@
 									</li>
 									<li><strong>Hora:</strong> De 08:00 a 20:00</li>
 								</ul>
-								<div>S/&nbsp;8.00</div>
+								<div>
+									@if($deliveryPrice)
+										S/&nbsp;{{ number_format($deliveryPrice, 2) }}
+									@else
+										Por calcular
+									@endif
+								</div>
 							@else
 								<div>Elija una fecha de entrega</div>
 								<div>
