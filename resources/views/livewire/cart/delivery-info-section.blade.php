@@ -77,7 +77,7 @@
 				</div>
 				{{-- Address --}}
 				<div class="form-control-wrapper">
-					<label>Dirección de la calle</label>
+					<label>Dirección</label>
 					<input type="text" wire:model="form.address" required="required" />
 				</div>
 				{{-- Location number --}}
@@ -92,7 +92,7 @@
 				</div>
 				{{-- Destinatario --}}
 				<div class="form-control-wrapper">
-					<label>Destinatario</label>
+					<label>Persona autorizada para recibir el pedido</label>
 					<input type="text" wire:model="form.recipientName" />
 				</div>
 				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
