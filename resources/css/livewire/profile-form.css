@@ -1,3 +1,5 @@
+/* Replace by .customer-form in resources/css/livewire/customer-form.css */
+
 .profile-form-body
 {
 	@apply grid grid-cols-2 gap-24;
