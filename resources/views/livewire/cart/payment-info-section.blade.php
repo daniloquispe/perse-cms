@@ -138,10 +138,13 @@
 					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
 						<div class="checkbox-wrapper">
 							<input type="radio" wire:model="paymentMethod" wire:change="togglePaymentMethodOptions" value="{{ \App\PaymentMethodType::QrCode }}" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
-							<label for="payment-method-2" class="font-[500]">Plin/Yape</label>
+							<label for="payment-method-2" class="font-[500]">Yape / Plin</label>
 						</div>
 						<div>
-							<img src="{{ asset('images/plin-yape.png') }}" alt="Plin y Yape" />
+							<div class="flex gap-4">
+								<img src="{{ asset('images/yape.png') }}" alt="Logo Yape" />
+								<img src="{{ asset('images/plin.png') }}" alt="Logo Plin" />
+							</div>
 						</div>
 					</div>
 					@if($showQrCodePaymentMethodOptions)
