@@ -173,7 +173,7 @@
 					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
 						<div class="checkbox-wrapper">
 							<input type="radio" wire:model="paymentMethod" wire:change="togglePaymentMethodOptions" value="{{ \App\PaymentMethodType::BankTransfer }}" id="payment-method-4" name="payment-method" class="accent-palette-orange" />
-							<label for="payment-method-4" class="font-[500]">Transferencia bancaria</label>
+							<label for="payment-method-4" class="font-[500]">Depósito / Transferencia bancaria</label>
 						</div>
 						<div></div>
 					</div>
