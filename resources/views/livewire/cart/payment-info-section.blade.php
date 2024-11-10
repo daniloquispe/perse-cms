@@ -146,12 +146,12 @@
 					</div>
 					@if($showQrCodePaymentMethodOptions)
 						<div wire:transition.opacity class="xl:px-32 pt-4">
-							<div class="grid grid-cols-2 gap-4">
+							<div class="grid grid-cols-2 gap-24">
 								<div>
-									<img src="{{ asset('images/qr-yape.png') }}" alt="QR Yape" class="rounded-lg" />
+									<img src="{{ asset('images/qr/Yape-Perse-Librerias.png') }}" alt="QR Yape" class="rounded-lg" />
 								</div>
 								<div>
-									<img src="{{ asset('images/qr-plin.jpg') }}" alt="QR Plin" class="rounded-lg" />
+									<img src="{{ asset('images/qr/Plin-Perse-Librerias.png') }}" alt="QR Plin" class="rounded-lg" />
 								</div>
 							</div>
 						</div>
