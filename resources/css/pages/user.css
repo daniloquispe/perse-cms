@@ -76,11 +76,10 @@
 
 /* Forms */
 
-.card .buttonbar
+/*.card .buttonbar
 {
-	/*@apply text-right;*/
 	@apply mt-20;
-}
+}*/
 
 .card .buttonbar button
 {

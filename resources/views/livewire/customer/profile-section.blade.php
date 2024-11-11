@@ -96,7 +96,7 @@
 				@endif
 			</div>
 		</div>
-		<div class="buttonbar">
+		<div class="buttonbar mt-20">
 			@if($isEditable)
 				<button type="submit">Guardar perfil</button>
 			@else
