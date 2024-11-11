@@ -6,7 +6,7 @@
 	@apply mb-12;
 }
 
-.card .avatar
+/*.card .avatar
 {
 	@apply block w-full text-center p-8 pb-5;
 }
@@ -14,7 +14,7 @@
 .card .avatar svg
 {
 	@apply block mx-auto size-[11rem] mb-8;
-}
+}*/
 
 .card .card-header
 {

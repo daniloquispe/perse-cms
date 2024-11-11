@@ -2,14 +2,7 @@
 	{{-- Sidebar --}}
 	<nav class="card">
 		{{-- Avatar --}}
-		<div class="avatar">
-			<livewire:avatar-indicator />
-			<p class="greeting">{{ auth('storefront')->user()->gender == \App\Gender::female ? 'Bienvenida' : 'Bienvenido' }}</p>
-			@if(auth('storefront')->user()->first_name)
-				<p class="user-name">{{ auth('storefront')->user()->first_name ?? 'usuario' }}</p>
-			@endif
-			<br />
-		</div>
+		<livewire:avatar-indicator />
 		{{-- Menu --}}
 		<ul class="menu">
 			@foreach($menuRoutes as $menuRoute)
