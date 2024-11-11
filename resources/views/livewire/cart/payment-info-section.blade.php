@@ -17,10 +17,12 @@
 					<li><strong>Apellidos:</strong> {{ $lastName }}</li>
 					<li><strong>Documento de Identidad:</strong> {{ $identityDocumentNumber }}</li>
 					<li><strong>Teléfono / Móvil:</strong> {{ $phone }}</li>
-					<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
-					@if($invoiceType == \App\InvoiceType::Factura)
-						<li><strong>RUC:</strong> {{ $ruc }}</li>
-						<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+					@if(config('services.erp.enable'))
+						<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
+						@if($invoiceType == \App\InvoiceType::Factura)
+							<li><strong>RUC:</strong> {{ $ruc }}</li>
+							<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+						@endif
 					@endif
 				</ul>
 				<div>
@@ -82,6 +84,7 @@
 		</div>
 		<div class="card-body">
 			<ul class="space-y-4">
+				@if(false)
 				<li>
 					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
 						<div class="checkbox-wrapper">
@@ -129,15 +132,35 @@
 						</div>
 					</form>
 				</li>
-				<li class="flex items-center justify-between rounded border border-gray-500 p-6">
-					<div class="checkbox-wrapper">
-						<input type="radio" wire:model="paymentMethod" value="{{ \App\PaymentMethodType::QrCode }}" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
-						<label for="payment-method-2" class="font-[500]">Plin/Yape</label>
+				@endif
+				{{-- QR code --}}
+				<li>
+					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
+						<div class="checkbox-wrapper">
+							<input type="radio" wire:model="paymentMethod" wire:change="togglePaymentMethodOptions" value="{{ \App\PaymentMethodType::QrCode }}" id="payment-method-2" name="payment-method" class="accent-palette-orange" />
+							<label for="payment-method-2" class="font-[500]">Yape / Plin</label>
+						</div>
+						<div>
+							<div class="flex gap-4">
+								<img src="{{ asset('images/yape.png') }}" alt="Logo Yape" />
+								<img src="{{ asset('images/plin.png') }}" alt="Logo Plin" />
+							</div>
+						</div>
 					</div>
-					<div>
-						<img src="{{ asset('images/plin-yape.png') }}" alt="Plin y Yape" />
-					</div>
+					@if($showQrCodePaymentMethodOptions)
+						<div wire:transition.opacity class="xl:px-32 pt-4">
+							<div class="grid grid-cols-2 gap-24">
+								<div>
+									<img src="{{ asset('images/qr/Yape-Perse-Librerias.png') }}" alt="QR Yape" class="rounded-lg" />
+								</div>
+								<div>
+									<img src="{{ asset('images/qr/Plin-Perse-Librerias.png') }}" alt="QR Plin" class="rounded-lg" />
+								</div>
+							</div>
+						</div>
+					@endif
 				</li>
+				@if(false)
 				<li class="flex items-center justify-between rounded border border-gray-500 p-6">
 					<div class="checkbox-wrapper">
 						<input type="radio" wire:model="paymentMethod" value="{{ \App\PaymentMethodType::PagoEfectivo }}" id="payment-method-3" name="payment-method" class="accent-palette-orange" />
@@ -146,6 +169,33 @@
 					<div>
 						<img src="{{ asset('images/pago-efectivo.png') }}" alt="PagoEfectivo" />
 					</div>
+				</li>
+				@endif
+				{{-- Bank transfer --}}
+				<li>
+					<div class="flex items-center justify-between rounded border border-gray-500 p-6">
+						<div class="checkbox-wrapper">
+							<input type="radio" wire:model="paymentMethod" wire:change="togglePaymentMethodOptions" value="{{ \App\PaymentMethodType::BankTransfer }}" id="payment-method-4" name="payment-method" class="accent-palette-orange" />
+							<label for="payment-method-4" class="font-[500]">Depósito / Transferencia bancaria</label>
+						</div>
+						<div></div>
+					</div>
+					@if($showBankTransferPaymentMethodOptions)
+						<div wire:transition.opacity class="xl:px-32 pt-4">
+							<div class="flex justify-between">
+								<div>
+									<p><strong>Banco de Crédito BCP:</strong></p>
+									<p>19199494659053</p>
+									<p>CCI: 00219119949465905359</p>
+								</div>
+								<div>
+									<p><strong>BBVA:</strong></p>
+									<p>0011-0814-0265672669</p>
+									<p>CCI: 01181400026567266918</p>
+								</div>
+							</div>
+						</div>
+					@endif
 				</li>
 			</ul>
 		</div>

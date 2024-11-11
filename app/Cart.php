@@ -41,7 +41,12 @@ class Cart
 
 	private static string $phone = '';
 
-	private static int $invoiceType = 3;
+	/**
+	 * Invoice type ID.
+	 *
+	 * @todo Update attribute type (when ERP integration is set)
+	 */
+	private static ?int $invoiceType = null;
 
 	private static ?string $ruc = null;
 
@@ -143,7 +148,12 @@ class Cart
 		return static::$businessName;
 	}
 
-	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int $invoiceType, string|null $ruc, string|null $businessName): void
+	/**
+	 * Set customer personal info.
+	 *
+	 * @todo Update invoice type parameter type (when ERP integration is set)
+	 */
+	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int|null $invoiceType, string|null $ruc, string|null $businessName): void
 	{
 		static::load();
 

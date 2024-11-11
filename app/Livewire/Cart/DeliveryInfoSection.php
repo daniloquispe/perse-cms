@@ -5,8 +5,10 @@ namespace App\Livewire\Cart;
 use App\Cart;
 use App\Livewire\Forms\Cart\DeliveryInfoForm;
 use App\Toast;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class DeliveryInfoSection extends Component
@@ -27,11 +29,32 @@ class DeliveryInfoSection extends Component
 
 	public bool $isDeliveryDateFieldVisible = false;
 
+	public int|null $deliveryPrice;
+
+	#[Computed]
+	public function minDeliveryDate(): string
+	{
+		$referenceDate = Carbon::today();
+
+		$daysToAdd = match ($referenceDate->dayOfWeek)
+		{
+			5 => 5,
+			6 => 4,
+			default => 3
+		};
+
+		$referenceDate->addDays($daysToAdd);
+
+		return $referenceDate->toDateString();
+	}
+
 	public function mount(): void
 	{
 		$this->loadDepartments();
 		$this->loadProvinces();
 		$this->loadDistricts();
+
+		$this->deliveryPrice = Cart::getDeliveryPrice();
 	}
 
     public function render(): View

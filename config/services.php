@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+	// ERP integration
+
+	'erp' => [
+		'enable' => env('ERP_ENABLE'),
+	],
+
 ];

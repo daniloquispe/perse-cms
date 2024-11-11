@@ -51,7 +51,7 @@
 		</div>
 
 		{{-- Sidebar --}}
-		<div class="lg:w-[23rem] flex flex-col gap-6">
+		<div class="lg:w-[23rem] flex flex-col gap-6 shrink-0">
 			{{-- Coupon --}}
 			@if($this->showCouponForm)
 				<x-cart-card>
