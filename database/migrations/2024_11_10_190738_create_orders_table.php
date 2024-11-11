@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('orders', function (Blueprint $table)
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('orders', function (Blueprint $table)
 		{
 			$table->id();
 			$table->foreignIdFor(\App\Models\Customer::class);
@@ -34,6 +34,7 @@ return new class extends Migration
 			$table->string('address', 100);
 			$table->string('location_number', 100);
 			$table->string('reference', 100)->nullable();
+//			$table->foreignIdFor(\App\Models\Address::class);
 			$table->string('recipient_name', 100)->nullable();
 			$table->date('delivery_date');
 			$table->unsignedInteger('delivery_price')->default(0);
@@ -44,7 +45,7 @@ return new class extends Migration
 			$table->date('delivered_at')->nullable();
 			$table->date('cancelled_at')->nullable();
 			$table->timestamps();
-        });
+		});
 
 		Schema::create('order_items', function (Blueprint $table)
 		{
@@ -56,14 +57,14 @@ return new class extends Migration
 			$table->unsignedInteger('discounted_price')->nullable();
 			$table->timestamps();
 		});
-    }
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
 		Schema::dropIfExists('order_items');
-        Schema::dropIfExists('orders');
-    }
+		Schema::dropIfExists('orders');
+	}
 };
