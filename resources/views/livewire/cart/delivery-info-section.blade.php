@@ -130,7 +130,7 @@
 						<label>Fecha de entrega</label>
 						<div class="h-24 p-6 flex items-center justify-between gap-2 border border-gray-400 rounded">
 							@if($isDeliveryDateFieldVisible)
-								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ $this->minDeliveryDate }}" />
+								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ $this->minDeliveryDate }}" required="required" />
 							@elseif($form->deliveryDate)
 								<ul>
 									<li>
