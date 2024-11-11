@@ -43,53 +43,74 @@
 		</div>
 		<div class="card-body">
 			<form wire:submit="submitForm" class="delivery-form">
-				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
-					{{-- Department --}}
-					<div class="form-control-wrapper">
-						<label>Departamento</label>
-						<select wire:model="form.departmentId" wire:change="loadProvinces" required="required">
-							<option value="">--</option>
-							@foreach($departments as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+				@if($lastAddress)
+					<div class="flex justify-between form-control-wrapper">
+						<div>
+							<p><strong>Dirección:</strong></p>
+							<address>
+								{{ $lastAddress->address }} {{ $lastAddress->location_number }}
+								<br />{{ $lastAddress->district_name }}, {{ $lastAddress->province_name }}, {{ $lastAddress->department_name }}
+								@if($lastAddress->reference)
+									<br />Referencia: {{ $lastAddress->reference }}
+								@endif
+							</address>
+						</div>
+						<div>
+							<button type="button" wire:click="showAddressFields" class="action-button" title="Editar">
+								<x-icons.pencil-square class="size-6 mx-auto" />
+								<span class="sr-only">Editar</span>
+							</button>
+						</div>
 					</div>
-					{{-- Province --}}
-					<div class="form-control-wrapper">
-						<label>Provincia</label>
-						<select wire:model="form.provinceId" wire:change="loadDistricts" @disabled($cannotSelectProvince) required="required">
-							<option value="">--</option>
-							@foreach($provinces as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+				@else
+					<div class="sm:grid sm:grid-cols-3 sm:gap-4">
+						{{-- Department --}}
+						<div class="form-control-wrapper">
+							<label>Departamento</label>
+							<select wire:model="form.departmentId" wire:change="loadProvinces" required="required">
+								<option value="">--</option>
+								@foreach($departments as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
+						{{-- Province --}}
+						<div class="form-control-wrapper">
+							<label>Provincia</label>
+							<select wire:model="form.provinceId" wire:change="loadDistricts" @disabled($cannotSelectProvince) required="required">
+								<option value="">--</option>
+								@foreach($provinces as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
+						{{-- District --}}
+						<div class="form-control-wrapper">
+							<label>Distrito</label>
+							<select wire:model="form.districtId" wire:change="calculateDeliveryPrice" @disabled($cannotSelectDistrict) required="required">
+								<option value="">--</option>
+								@foreach($districts as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
-					{{-- District --}}
+					{{-- Address --}}
 					<div class="form-control-wrapper">
-						<label>Distrito</label>
-						<select wire:model="form.districtId" wire:change="calculateDeliveryPrice" @disabled($cannotSelectDistrict) required="required">
-							<option value="">--</option>
-							@foreach($districts as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+						<label>Dirección</label>
+						<input type="text" wire:model="form.address" required="required" />
 					</div>
-				</div>
-				{{-- Address --}}
-				<div class="form-control-wrapper">
-					<label>Dirección</label>
-					<input type="text" wire:model="form.address" required="required" />
-				</div>
-				{{-- Location number --}}
-				<div class="form-control-wrapper">
-					<label>Número de la dirección</label>
-					<input type="text" wire:model="form.locationNumber" required="required" />
-				</div>
-				{{-- Reference --}}
-				<div class="form-control-wrapper">
-					<label>Referencia</label>
-					<input type="text" wire:model="form.reference" />
-				</div>
+					{{-- Location number --}}
+					<div class="form-control-wrapper">
+						<label>Número de la dirección</label>
+						<input type="text" wire:model="form.locationNumber" required="required" />
+					</div>
+					{{-- Reference --}}
+					<div class="form-control-wrapper">
+						<label>Referencia</label>
+						<input type="text" wire:model="form.reference" />
+					</div>
+				@endif
 				{{-- Destinatario --}}
 				<div class="form-control-wrapper">
 					<label>Persona autorizada para recibir el pedido</label>

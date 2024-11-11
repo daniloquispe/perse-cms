@@ -52,6 +52,8 @@ class Cart
 
 	private static ?string $businessName = null;
 
+	private static int|null $addressId = null;
+
 	private static ?int $departmentId = null;
 
 	private static ?string $departmentName = null;
@@ -169,6 +171,13 @@ class Cart
 		static::save();
 	}
 
+	public static function getAddressId(): int|null
+	{
+		static::load();
+
+		return static::$addressId;
+	}
+
 	public static function getDepartmentId(): ?int
 	{
 		static::load();
@@ -262,10 +271,11 @@ class Cart
 		static::save();
 	}
 
-	public static function setDeliveryInfo(int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
+	public static function setDeliveryInfo(int|null $addressId, int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
 	{
 		static::load();
 
+		static::$addressId = $addressId;
 		static::$departmentId = $departmentId;
 		static::$provinceId = $provinceId;
 		static::$districtId = $districtId;
@@ -389,6 +399,7 @@ class Cart
 			static::$ruc = $data['ruc'];
 			static::$businessName = $data['businessName'];
 
+			static::$addressId = $data['addressId'];
 			static::$departmentId = $data['departmentId'];
 			static::$departmentName = $data['departmentName'];
 			static::$provinceId = $data['provinceId'];
@@ -532,6 +543,7 @@ class Cart
 			'ruc' => static::$invoiceType == 1 ? static::$ruc : null,
 			'businessName' => static::$invoiceType == 1 ? static::$businessName : null,
 
+			'addressId' => static::$addressId,
 			'departmentId' => static::$departmentId,
 			'departmentName' => static::$departmentName,
 			'provinceId' => static::$provinceId,

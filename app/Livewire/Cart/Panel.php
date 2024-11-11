@@ -5,6 +5,7 @@ namespace App\Livewire\Cart;
 use App\Cart;
 use App\Livewire\Forms\Cart\ApplyCouponForm;
 use App\Mail\OrderCreated;
+use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -100,9 +101,29 @@ class Panel extends Component
 
 	private function processCart(): void
 	{
+		$this->saveNewAddress();
 		$this->generateOrder();
 
 		$this->redirectRoute('cart.thanks');
+	}
+
+	private function saveNewAddress(): void
+	{
+		if (Cart::getAddressId())
+			return;
+
+		$address = new Address();
+		$address->customer_id = Auth::guard('storefront')->id();
+		$address->department_id = Cart::getDepartmentId();
+		$address->department_name = Cart::getDepartmentName();
+		$address->province_id = Cart::getProvinceId();
+		$address->province_name = Cart::getProvinceName();
+		$address->district_id = Cart::getDistrictId();
+		$address->district_name = Cart::getDistrictName();
+		$address->address = Cart::getAddress();
+		$address->location_number = Cart::getLocationNumber();
+		$address->reference = Cart::getReference();
+		$address->save();
 	}
 
 	private function generateOrder(): void

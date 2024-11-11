@@ -9,6 +9,8 @@ use Livewire\Form;
 
 class DeliveryInfoForm extends Form
 {
+	public int|null $addressId = null;
+
 	#[Validate('required', message: 'Seleccione un departamento')]
 	public int $departmentId;
 
@@ -52,7 +54,7 @@ class DeliveryInfoForm extends Form
 	{
 		$this->validate();
 
-		Cart::setDeliveryInfo($this->departmentId, $this->provinceId, $this->districtId, $this->address, $this->locationNumber, $this->reference, $this->recipientName, $this->deliveryDate);
+		Cart::setDeliveryInfo($this->addressId, $this->departmentId, $this->provinceId, $this->districtId, $this->address, $this->locationNumber, $this->reference, $this->recipientName, $this->deliveryDate);
 
 		return true;
 	}

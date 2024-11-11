@@ -4,8 +4,10 @@ namespace App\Livewire\Cart;
 
 use App\Cart;
 use App\Livewire\Forms\Cart\DeliveryInfoForm;
+use App\Models\Address;
 use App\Toast;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
@@ -27,6 +29,8 @@ class DeliveryInfoSection extends Component
 
 	public bool $cannotSelectDistrict;
 
+	public Address|null $lastAddress = null;
+
 	public bool $isDeliveryDateFieldVisible = false;
 
 	public int|null $deliveryPrice;
@@ -38,9 +42,9 @@ class DeliveryInfoSection extends Component
 
 		$daysToAdd = match ($referenceDate->dayOfWeek)
 		{
-			5 => 5,
-			6 => 4,
-			default => 3
+			5 => 5,  // Friday
+			6 => 4,  // Saturday
+			default => 3  // Other day
 		};
 
 		$referenceDate->addDays($daysToAdd);
@@ -53,6 +57,8 @@ class DeliveryInfoSection extends Component
 		$this->loadDepartments();
 		$this->loadProvinces();
 		$this->loadDistricts();
+
+		$this->loadLastAddress();
 
 		$this->deliveryPrice = Cart::getDeliveryPrice();
 	}
@@ -71,6 +77,11 @@ class DeliveryInfoSection extends Component
 		$data = compact('email', 'firstName', 'lastName', 'identityDocumentNumber', 'phone', 'invoiceType', 'ruc', 'businessName');
         return view('livewire.cart.delivery-info-section', $data);
     }
+
+	public function showAddressFields(): void
+	{
+		$this->lastAddress = null;
+	}
 
 	public function loadDepartments(): void
 	{
@@ -104,6 +115,17 @@ class DeliveryInfoSection extends Component
 		$this->cannotSelectDistrict = count($this->districts) == 0;
 	}
 
+	private function loadLastAddress(): void
+	{
+		$lastAddress = Auth::guard('storefront')->user()->addresses()->latest()->first();
+
+		if ($lastAddress)
+		{
+			$this->lastAddress = $lastAddress;
+			$this->form->addressId = $lastAddress->id;
+		}
+	}
+
 	public function calculateDeliveryPrice(): void
 	{
 		$deliveryPrice = $this->form->departmentId == 15  // Lima?
@@ -134,6 +156,19 @@ class DeliveryInfoSection extends Component
 
 	public function submitForm(): void
 	{
+		if ($this->lastAddress)
+		{
+			$this->form->addressId = $this->lastAddress->id;
+			$this->form->departmentId = $this->lastAddress->department_id;
+			$this->form->provinceId = $this->lastAddress->province_id;
+			$this->form->districtId = $this->lastAddress->district_id;
+			$this->form->address = $this->lastAddress->address;
+			$this->form->locationNumber = $this->lastAddress->location_number;
+			$this->form->reference = $this->lastAddress->reference;
+
+			$this->calculateDeliveryPrice();
+		}
+
 		if ($this->form->submit())
 		{
 			Cart::setStep(4);
