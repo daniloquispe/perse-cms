@@ -1,0 +1,65 @@
+@layer utilities
+{
+	.orders-list
+	{
+		.orders-list-header
+		{
+			@apply grid;
+			@apply grid-cols-5 3xl:grid-cols-6;
+			@apply font-[500] -mt-3 pb-3 border-b border-palette-orange;
+
+			> div
+			{
+				@apply text-center;
+
+				&:first-child
+				{
+					@apply col-span-2 3xl:col-span-3;
+					@apply text-left;
+				}
+			}
+		}
+
+		.orders-list-row
+		{
+			@apply mt-5 flex flex-col gap-5;
+
+			.orders-list-row-summary
+			{
+				@apply grid;
+				@apply grid-cols-5 3xl:grid-cols-6;
+
+				> div
+				{
+					@apply text-center;
+
+					&:first-child
+					{
+						@apply col-span-2 3xl:col-span-3;
+						@apply text-left;
+					}
+				}
+			}
+
+			.orders-list-row-detail
+			{
+				@apply flex flex-col gap-2;
+				@apply max-w-[24rem] 3xl:max-w-[36rem];
+			}
+
+			.order-details-button
+			{
+				@apply block py-1 bg-gray-100 text-center uppercase;
+				@apply rounded;
+				@apply bg-gray-500 hover:bg-palette-purple;
+				@apply text-white;
+				@apply transition-colors;
+
+				span
+				{
+					@apply hidden 2xl:inline;
+				}
+			}
+		}
+	}
+}

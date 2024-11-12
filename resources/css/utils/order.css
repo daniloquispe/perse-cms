@@ -30,7 +30,8 @@
 
 					svg
 					{
-						@apply inline size-6 text-palette-orange stroke-2;
+						@apply inline size-6 stroke-2;
+						@apply sm:text-palette-orange;
 					}
 				}
 			}
@@ -42,11 +43,12 @@
 			@apply divide-y lg:divide-x lg:divide-y-0 divide-solid divide-gray-300;
 			@apply bg-gray-100;
 			@apply rounded-xl;
-			@apply px-5 lg:py-5;
+			@apply px-2 xl:px-5 lg:py-5;
 
 			> div
 			{
-				@apply py-6 lg:px-16;
+				@apply py-6;
+				@apply px-4 xl:px-16;
 
 				.cell-title
 				{
@@ -61,7 +63,7 @@
 
 			.repeat-order-buttonbar
 			{
-				@apply mt-16 w-full px-8;
+				@apply mt-16 w-full 2xl:px-8;
 
 				.repeat-order-button
 				{
@@ -109,6 +111,7 @@
 
 			&.header-row
 			{
+				@apply pb-[1.1rem];
 				@apply font-[500];
 			}
 
