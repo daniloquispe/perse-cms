@@ -84,7 +84,7 @@
 .card .buttonbar button
 {
 	@apply px-6 py-1.5 rounded bg-gray-100;
-	@apply bg-gray-500 hover:bg-palette-purple;
+	@apply bg-palette-purple hover:bg-[#9143bc];
 	@apply text-white;
 	@apply uppercase;
 	@apply transition-colors;

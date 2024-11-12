@@ -67,7 +67,11 @@
 
 				.repeat-order-button
 				{
-					@apply w-full border border-palette-orange bg-palette-orange text-white rounded-lg py-3;
+					@apply w-full border border-palette-orange rounded-lg py-3;
+					@apply hover:bg-palette-orange/5;
+					@apply text-palette-orange;
+					@apply font-[500];
+					@apply transition-colors;
 				}
 			}
 		}
