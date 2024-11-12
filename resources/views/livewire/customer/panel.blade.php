@@ -1,4 +1,4 @@
-<div class="grid grid-cols-5 gap-4">
+<div class="flex flex-col lg:grid lg:grid-cols-5 gap-4">
 	{{-- Sidebar --}}
 	<nav class="card">
 		{{-- Avatar --}}
@@ -19,7 +19,7 @@
 		</ul>
 	</nav>
 	{{-- Center --}}
-	<div class="col-span-4">
+	<div class="lg:col-span-4">
 		@switch(\Illuminate\Support\Facades\Route::current()->action['as'])
 			@case('customer.profile')
 				<livewire:customer.profile-section />

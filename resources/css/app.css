@@ -34,6 +34,7 @@
 @import url(utils/document.css);
 @import url(utils/forms.css);
 @import url(utils/off-canvas.css);
+@import url(utils/order.css);
 @import url(utils/steps.css);
 
 @tailwind base;
