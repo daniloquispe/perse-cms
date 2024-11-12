@@ -164,7 +164,7 @@ article.book .cart-box
 		button[type="submit"]
 		{
 			@apply grow md:grow-0;
-			@apply md:px-16 py-3;
+			@apply md:px-28 py-3;
 			@apply rounded-lg;
 			@apply bg-palette-orange text-white;
 			@apply font-bold uppercase;
