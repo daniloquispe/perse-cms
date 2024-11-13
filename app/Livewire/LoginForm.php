@@ -2,22 +2,22 @@
 
 namespace App\Livewire;
 
+use App\Cart;
+use App\Livewire\Forms\LoginForm as Form;
 use App\PageRole;
 use App\Services\UrlService;
+use App\Toast;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class LoginForm extends Component
 {
-	use \App\Toast;
+	use Toast;
 
-	#[Validate('required|email')]
-	public string $email = '';
+	public bool $redirectToCart = false;
 
-	#[Validate('required')]
-	public string $password = '';
+	public Form $form;
 
     public function render(UrlService $urlService): View
     {
@@ -32,15 +32,21 @@ class LoginForm extends Component
 
 	public function login(): void
 	{
-		$this->validate();
-
-		$credentials = ['email' => $this->email, 'password' => $this->password];
-
-		if (Auth::guard('storefront')->attempt($credentials))
+		if ($this->form->login())
 		{
-			session()->regenerate();
+			if ($this->redirectToCart)
+			{
+				// Force cart to reload personal info
+				if (Cart::getStep() > 1)
+				{
+					Cart::setStep(1);
+					Cart::setStep(2);
+				}
 
-			$this->redirectRoute('home');
+				$this->redirectRoute('cart.personal-info');
+			}
+			else
+				$this->redirectRoute('home');
 		}
 		else
 			$this->toast('Correo electrónico o contraseña incorrectos');
