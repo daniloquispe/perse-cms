@@ -14,6 +14,9 @@ class UrlService
 		if ($role instanceof PageRole)
 			$role = $role->value;
 
+		if ($role == PageRole::Home->value)
+			return route('home');
+
 		$slug = SeoTags::query()
 			->where('owner_type', Page::class)
 			->whereHas('owner', function (Builder $query) use ($role): Builder
