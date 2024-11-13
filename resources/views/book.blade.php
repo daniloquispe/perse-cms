@@ -65,11 +65,10 @@
 					<div><a href="#comments">Escribe tu comentario</a></div>
 				</div>
 				<div class="cart-box">
+					{{-- Price --}}
 					<div class="price">S/&nbsp;{{ $book->price }}</div>
-					<form>
-						<x-form.quantity-input name="quantity" />
-						<button type="submit">Agregar al carrito</button>
-					</form>
+					{{-- Add to cart --}}
+					<livewire:add-to-cart-form :book="$book" />
 				</div>
 			</header>
 			<main>
