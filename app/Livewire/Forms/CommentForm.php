@@ -9,15 +9,16 @@ use Livewire\Form;
 class CommentForm extends Form
 {
 	#[Validate('required', message: 'Ingresa su nombre')]
-	#[Validate('max:150')]
+	#[Validate('max:150', message: 'El nombre no puede tener más de :max caracteres')]
 	public string $name;
 
 	#[Validate('required', message: 'Ingrese su correo electrónico')]
 	#[Validate('email', message: 'Ingrese un correo electrónico válido')]
-	#[Validate('max:150')]
+	#[Validate('max:150', message: 'El correo electrónico no puede tener más de :max caracteres')]
 	public string $email;
 
-	#[Validate('in:[1,2,3,4,5]', message: 'La calificación debe ser entre 1 y 5')]
+	#[Validate('min:1', message: 'La calificación debe ser entre 1 y 5')]
+	#[Validate('max:5', message: 'La calificación debe ser entre 1 y 5')]
 	public int $rate;
 
 	#[Validate('required', message: 'Ingrese su comentario')]
