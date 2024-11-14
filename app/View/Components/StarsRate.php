@@ -8,10 +8,10 @@ use Illuminate\View\Component;
 
 class StarsRate extends Component
 {
-    /**
+	/**
      * Create a new component instance.
      */
-    public function __construct(public int $value)
+    public function __construct(public int|float $rate)
     {
         //
     }

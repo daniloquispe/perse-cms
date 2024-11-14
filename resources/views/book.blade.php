@@ -56,9 +56,7 @@
 				</div>
 				<div class="stars">
 					<div>
-						@foreach([1, 2, 3, 4, 5] as $rate)
-							<x-icons.star @class(['full' => $rate <= $book->rate]) />
-						@endforeach
+						<x-stars-rate :rate="$book->rate" />
 					</div>
 					<div><a href="#comments">Escribe tu comentario</a></div>
 				</div>
@@ -104,7 +102,7 @@
 								</div>
 								<div class="grow">
 									<div class="comment-rate">
-										<x-stars-rate :value="$comment->rate" />
+										<x-stars-rate :rate="$comment->rate" />
 									</div>
 									<div class="comment-text">{!! nl2br($comment->comment) !!}</div>
 								</div>

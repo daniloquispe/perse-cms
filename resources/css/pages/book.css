@@ -22,17 +22,17 @@ article.book
 
 		svg
 		{
-			@apply inline-block size-6;
-			@apply text-gray-300 fill-gray-300;
+			/*@apply inline-block size-6;
+			@apply fill-gray-300;*/
 
-			&.half
+			/*&.half-star
 			{
 				@apply text-palette-yellow fill-palette-yellow;
-			}
+			}*/
 
-			&.full
+			&.full-star
 			{
-				@apply text-palette-yellow fill-palette-yellow;
+				@apply /*text-palette-yellow */fill-palette-yellow;
 			}
 		}
 	}
