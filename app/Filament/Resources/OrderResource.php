@@ -37,7 +37,7 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-			->modifyQueryUsing(fn(Builder $query) => $query->with(['customer', 'items']))
+			->modifyQueryUsing(fn(Builder $query) => $query->with(['customer', 'items'])->latest())
             ->columns([
 				Tables\Columns\TextColumn::make('created_at')
 					->label('Fecha de compra')
