@@ -7,9 +7,9 @@ use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\SearchTerms;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class BooksFilterableList extends Component
@@ -26,7 +26,7 @@ class BooksFilterableList extends Component
 
 	public int $count;
 
-	private Builder|HasMany $countQuery;
+	private Builder $countQuery;
 
 	public string $searchResultsLabel;
 
@@ -42,7 +42,7 @@ class BooksFilterableList extends Component
 
 	public BookSearchResultsOrder $order;
 
-	private Builder|HasMany $booksQuery;
+	private Builder $booksQuery;
 
 	public array $publisherFilters;
 
@@ -64,10 +64,10 @@ class BooksFilterableList extends Component
 		$this->loadBooks();
 	}
 
-    /*public function render()
+    public function render(): View
     {
         return view('livewire.books-filterable-list');
-    }*/
+    }
 
 	public function loadMoreBooks(): void
 	{
@@ -90,10 +90,10 @@ class BooksFilterableList extends Component
 				->find($this->categoryId);
 
 			$this->title = $bookCategory->name;
-			$this->countQuery = $bookCategory->books();
+			$this->countQuery = $this->newBookCategoryQuery($bookCategory);
 			$this->searchResultsLabel = $bookCategory->forced_search_results_label ?? 'libros';
 
-			$this->booksQuery = $bookCategory->books();
+			$this->booksQuery = $this->newBookCategoryQuery($bookCategory);
 		}
 		// Search results?
 		elseif ($isSearch)
@@ -170,7 +170,6 @@ class BooksFilterableList extends Component
 		else
 		{
 			$this->books = $this->booksQuery
-				->with(['publisher', 'authors', 'ageRange', 'bookFormat', 'bookbindingType'])
 				->orderBy($orderColumn, $orderDirection)
 				->take($count)
 				->get();
@@ -179,6 +178,26 @@ class BooksFilterableList extends Component
 		$this->count = $this->countQuery->count();
 
 		$this->updateFiltersLists();
+	}
+
+	private function newBookCategoryQuery(BookCategory $bookCategory): Builder
+	{
+		$categoryIds = collect([$bookCategory->id]);
+
+		$categoryChildren = $bookCategory->children()->select(['id', 'parent_id'])->get();
+		foreach ($categoryChildren as $categoryChild)
+		{
+			$categoryIds->push($categoryChild->id);
+
+			$subcategoryChildren = $categoryChild->children()->select(['id', 'parent_id'])->get();
+
+			foreach ($subcategoryChildren as $subcategoryChild)
+				$categoryIds->push($subcategoryChild->id);
+		}
+
+		return Book::query()
+			->whereIn('category_id', $categoryIds)
+			->with(['publisher', 'authors', 'ageRange', 'bookFormat', 'bookbindingType']);
 	}
 
 	private function newSearchQuery(): Builder
