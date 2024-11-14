@@ -47,11 +47,11 @@ enum OrderStatus: int implements HasLabel, HasColor, HasIcon
 	{
 		return match ($this)
 		{
-			self::Created => 'heroicon-o-clock',
-			self::Confirmed => 'heroicon-o-list-bullet',
+			self::Created => 'heroicon-o-arrow-path',
+			self::Confirmed => 'heroicon-o-shopping-bag',
 			self::Delivering => 'heroicon-o-truck',
-			self::Delivered => 'heroicon-o-check',
-			self::Cancelled => 'microns-cancel',
+			self::Delivered => 'heroicon-o-gift',
+			self::Cancelled => 'heroicon-o-x-mark',
 		};
 	}
 }
