@@ -17,10 +17,12 @@
 					<li><strong>Apellidos:</strong> {{ $lastName }}</li>
 					<li><strong>Documento de Identidad:</strong> {{ $identityDocumentNumber }}</li>
 					<li><strong>Teléfono / Móvil:</strong> {{ $phone }}</li>
-					<li><strong>Deseo {{ $invoiceType->name }}</strong></li>
-					@if($invoiceType == \App\InvoiceType::Factura)
-						<li><strong>RUC:</strong> {{ $ruc }}</li>
-						<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+					@if(config('services.erp.enable'))
+						<li><strong>Deseo:</strong> {{ $invoiceType->name }}</li>
+						@if($invoiceType == \App\InvoiceType::Factura)
+							<li><strong>RUC:</strong> {{ $ruc }}</li>
+							<li><strong>Razón Social:</strong> {{ $businessName }}</li>
+						@endif
 					@endif
 				</ul>
 				<div>
@@ -41,56 +43,77 @@
 		</div>
 		<div class="card-body">
 			<form wire:submit="submitForm" class="delivery-form">
-				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
-					{{-- Department --}}
-					<div class="form-control-wrapper">
-						<label>Departamento</label>
-						<select wire:model="form.departmentId" wire:change="loadProvinces" required="required">
-							<option>--</option>
-							@foreach($departments as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+				@if($lastAddress)
+					<div class="flex justify-between form-control-wrapper">
+						<div>
+							<p><strong>Dirección:</strong></p>
+							<address>
+								{{ $lastAddress->address }} {{ $lastAddress->location_number }}
+								<br />{{ $lastAddress->district_name }}, {{ $lastAddress->province_name }}, {{ $lastAddress->department_name }}
+								@if($lastAddress->reference)
+									<br />Referencia: {{ $lastAddress->reference }}
+								@endif
+							</address>
+						</div>
+						<div>
+							<button type="button" wire:click="showAddressFields" class="action-button" title="Editar">
+								<x-icons.pencil-square class="size-6 mx-auto" />
+								<span class="sr-only">Editar</span>
+							</button>
+						</div>
 					</div>
-					{{-- Province --}}
-					<div class="form-control-wrapper">
-						<label>Provincia</label>
-						<select wire:model="form.provinceId" wire:change="loadDistricts" required="required">
-							<option>--</option>
-							@foreach($provinces as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+				@else
+					<div class="sm:grid sm:grid-cols-3 sm:gap-4">
+						{{-- Department --}}
+						<div class="form-control-wrapper">
+							<label>Departamento</label>
+							<select wire:model="form.departmentId" wire:change="loadProvinces" required="required">
+								<option value="">--</option>
+								@foreach($departments as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
+						{{-- Province --}}
+						<div class="form-control-wrapper">
+							<label>Provincia</label>
+							<select wire:model="form.provinceId" wire:change="loadDistricts" @disabled($cannotSelectProvince) required="required">
+								<option value="">--</option>
+								@foreach($provinces as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
+						{{-- District --}}
+						<div class="form-control-wrapper">
+							<label>Distrito</label>
+							<select wire:model="form.districtId" wire:change="calculateDeliveryPrice" @disabled($cannotSelectDistrict) required="required">
+								<option value="">--</option>
+								@foreach($districts as $id => $name)
+									<option value="{{ $id }}">{{ $name }}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
-					{{-- District --}}
+					{{-- Address --}}
 					<div class="form-control-wrapper">
-						<label>Distrito</label>
-						<select wire:model="form.districtId" required="required">
-							<option>--</option>
-							@foreach($districts as $id => $name)
-								<option value="{{ $id }}">{{ $name }}</option>
-							@endforeach
-						</select>
+						<label>Dirección</label>
+						<input type="text" wire:model="form.address" required="required" />
 					</div>
-				</div>
-				{{-- Address --}}
-				<div class="form-control-wrapper">
-					<label>Dirección de la calle</label>
-					<input type="text" wire:model="form.address" required="required" />
-				</div>
-				{{-- Location number --}}
-				<div class="form-control-wrapper">
-					<label>Número de la dirección</label>
-					<input type="text" wire:model="form.locationNumber" required="required" />
-				</div>
-				{{-- Reference --}}
-				<div class="form-control-wrapper">
-					<label>Referencia</label>
-					<input type="text" wire:model="form.reference" />
-				</div>
+					{{-- Location number --}}
+					<div class="form-control-wrapper">
+						<label>Número de la dirección</label>
+						<input type="text" wire:model="form.locationNumber" required="required" />
+					</div>
+					{{-- Reference --}}
+					<div class="form-control-wrapper">
+						<label>Referencia</label>
+						<input type="text" wire:model="form.reference" />
+					</div>
+				@endif
 				{{-- Destinatario --}}
 				<div class="form-control-wrapper">
-					<label>Destinatario</label>
+					<label>Persona autorizada para recibir el pedido</label>
 					<input type="text" wire:model="form.recipientName" />
 				</div>
 				<div class="sm:grid sm:grid-cols-3 sm:gap-4">
@@ -98,7 +121,7 @@
 					<div class="form-control-wrapper">
 						<label>Método de entrega</label>
 						<div class="h-24 p-6 flex items-center justify-center gap-2 border border-gray-400 rounded">
-							<x-icons.truck class="size-10 text-palette-orange" />
+							<img src="{{ asset('images/delivery.png') }}" alt="" class="size-16" />
 							<span>Entrega a domicilio</span>
 						</div>
 					</div>
@@ -107,7 +130,7 @@
 						<label>Fecha de entrega</label>
 						<div class="h-24 p-6 flex items-center justify-between gap-2 border border-gray-400 rounded">
 							@if($isDeliveryDateFieldVisible)
-								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ \Carbon\Carbon::today()->toDateString() }}" />
+								<input type="date" wire:model="form.deliveryDate" wire:blur="hideDeliveryDateField" min="{{ $this->minDeliveryDate }}" required="required" />
 							@elseif($form->deliveryDate)
 								<ul>
 									<li>
@@ -119,7 +142,13 @@
 									</li>
 									<li><strong>Hora:</strong> De 08:00 a 20:00</li>
 								</ul>
-								<div>S/&nbsp;8.00</div>
+								<div>
+									@if($deliveryPrice)
+										S/&nbsp;{{ number_format($deliveryPrice, 2) }}
+									@else
+										Por calcular
+									@endif
+								</div>
 							@else
 								<div>Elija una fecha de entrega</div>
 								<div>

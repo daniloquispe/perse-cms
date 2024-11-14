@@ -3,36 +3,19 @@
 namespace App\Livewire\Cart;
 
 use App\Cart;
-//use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\Cart\DeliveryInfoForm;
+use App\Models\Address;
 use App\Toast;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class DeliveryInfoSection extends Component
 {
 	use Toast;
-
-//	public string $email;
-
-//	public string $firstName;
-
-//	public string $lastName;
-
-//	public string $documentIdentityNumber;
-
-//	public string $phone;
-
-//	public bool $withSubscription;
-
-//	public bool $withInvoice;
-
-//	public bool $showInvoiceFields;
-
-//	public string $ruc;
-
-//	public string $businessName;
 
 	public DeliveryInfoForm $form;
 
@@ -40,27 +23,44 @@ class DeliveryInfoSection extends Component
 
 	public array $provinces;
 
+	public bool $cannotSelectProvince;
+
 	public array $districts;
+
+	public bool $cannotSelectDistrict;
+
+	public Address|null $lastAddress = null;
 
 	public bool $isDeliveryDateFieldVisible = false;
 
+	public int|null $deliveryPrice;
+
+	#[Computed]
+	public function minDeliveryDate(): string
+	{
+		$referenceDate = Carbon::today();
+
+		$daysToAdd = match ($referenceDate->dayOfWeek)
+		{
+			5 => 5,  // Friday
+			6 => 4,  // Saturday
+			default => 3  // Other day
+		};
+
+		$referenceDate->addDays($daysToAdd);
+
+		return $referenceDate->toDateString();
+	}
+
 	public function mount(): void
 	{
-		/*$this->showInvoiceFields = false;
-		$this->showAddressForm = false;
-
-		if (Auth::guard('storefront')->check())
-		{
-			$user = Auth::guard('storefront')->user();
-
-			$this->email = $user->email;
-			$this->firstName = $user->first_name;
-			$this->lastName = $user->last_name;
-			$this->documentIdentityNumber = $user->id_document_number;
-			$this->phone = $user->phone;
-		}*/
-
 		$this->loadDepartments();
+		$this->loadProvinces();
+		$this->loadDistricts();
+
+		$this->loadLastAddress();
+
+		$this->deliveryPrice = Cart::getDeliveryPrice();
 	}
 
     public function render(): View
@@ -77,6 +77,11 @@ class DeliveryInfoSection extends Component
 		$data = compact('email', 'firstName', 'lastName', 'identityDocumentNumber', 'phone', 'invoiceType', 'ruc', 'businessName');
         return view('livewire.cart.delivery-info-section', $data);
     }
+
+	public function showAddressFields(): void
+	{
+		$this->lastAddress = null;
+	}
 
 	public function loadDepartments(): void
 	{
@@ -95,6 +100,7 @@ class DeliveryInfoSection extends Component
 		$responseBody = $response->body();
 
 		$this->provinces = json_decode($responseBody, true);
+		$this->cannotSelectProvince = count($this->provinces) == 0;
 	}
 
 	public function loadDistricts(): void
@@ -106,6 +112,29 @@ class DeliveryInfoSection extends Component
 		$responseBody = $response->body();
 
 		$this->districts = json_decode($responseBody, true);
+		$this->cannotSelectDistrict = count($this->districts) == 0;
+	}
+
+	private function loadLastAddress(): void
+	{
+		$lastAddress = Auth::guard('storefront')->user()->addresses()->latest()->first();
+
+		if ($lastAddress)
+		{
+			$this->lastAddress = $lastAddress;
+			$this->form->addressId = $lastAddress->id;
+		}
+	}
+
+	public function calculateDeliveryPrice(): void
+	{
+		$deliveryPrice = $this->form->departmentId == 15  // Lima?
+			? 7
+			: 16;
+
+		Cart::setDeliveryPrice($deliveryPrice);
+
+		$this->dispatch('cart_updated');
 	}
 
 	public function showDeliveryDateField(): void
@@ -127,6 +156,19 @@ class DeliveryInfoSection extends Component
 
 	public function submitForm(): void
 	{
+		if ($this->lastAddress)
+		{
+			$this->form->addressId = $this->lastAddress->id;
+			$this->form->departmentId = $this->lastAddress->department_id;
+			$this->form->provinceId = $this->lastAddress->province_id;
+			$this->form->districtId = $this->lastAddress->district_id;
+			$this->form->address = $this->lastAddress->address;
+			$this->form->locationNumber = $this->lastAddress->location_number;
+			$this->form->reference = $this->lastAddress->reference;
+
+			$this->calculateDeliveryPrice();
+		}
+
 		if ($this->form->submit())
 		{
 			Cart::setStep(4);

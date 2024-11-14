@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\PageRole;
 use App\Services\UrlService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class RegistrationForm extends Component
@@ -20,9 +21,9 @@ class RegistrationForm extends Component
 
 	public AccessCodeForm $accessCodeForm;
 
-	public \App\Livewire\Forms\RegistrationForm $registrationForm;
+	public Forms\RegistrationForm $registrationForm;
 
-    public function render(UrlService $urlService)
+    public function render(UrlService $urlService): View
     {
 		$loginUrl = $urlService->fromPageRole(PageRole::Login);
 		$privacyPolicyUrl = $urlService->fromPageRole(PageRole::PrivacyPolicy);

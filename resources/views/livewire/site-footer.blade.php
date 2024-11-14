@@ -44,20 +44,26 @@
 				<p class="subtitle">Además podrás enterarte de nuestras novedades y acceder a nuestros beneficios</p>
 			</div>
 			<div class="form">
-				<form>
+				<form wire:submit="subscribe">
 					<div>
-						<input type="email" placeholder="E-mail" aria-label="E-mail" />
+						<input type="email" wire:model="subscriptionForm.email" placeholder="E-mail" required="required" aria-label="E-mail" />
+						@error('subscriptionForm.email')
+							<div class="form-error">{{ $message }}</div>
+						@enderror
 						<div class="acceptance">
 							<div class="checkbox-wrapper !gap-2">
-								<input type="checkbox" id="check" />
+								<input type="checkbox" wire:model="subscriptionForm.acceptance" id="check" required="required" />
 								<div>
-									<label for="check">Acepto los <a href="#">términos y condiciones</a> y la <a href="#">Política de seguridad</a></label>
+									<label for="check">Acepto los <a href="{{ $termsUrl }}">términos y condiciones</a> y la <a href="{{ $privacyPolicy }}">Política de seguridad</a></label>
 								</div>
 							</div>
+							@error('subscriptionForm.acceptance')
+								<div class="form-error">{{ $message }}</div>
+							@enderror
 						</div>
 					</div>
 					<div>
-						<button>Suscribirme</button>
+						<button type="submit">Suscribirme</button>
 					</div>
 				</form>
 			</div>

@@ -4,8 +4,14 @@ namespace App\Livewire\Forms\Cart;
 
 use App\Cart;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Form;
 
+/**
+ * Cart personal info form.
+ *
+ * @todo Update invoice type validation rules (when ERP integration is set)
+ */
 class PersonalInfoForm extends Form
 {
 	#[Validate('required', message: 'Por favor ingresa un correo electrónico')]
@@ -24,14 +30,28 @@ class PersonalInfoForm extends Form
 	#[Validate('required', message: 'Por favor ingresa tu teléfono')]
 	public string $phone;
 
-	#[Validate('required', message: 'Por favor selecciona un tipo de comprobante de pago')]
-	public int $invoiceType;
+	#[Validate('nullable')]
+	public ?int $invoiceType = null;
 
 	#[Validate('required_if:invoiceType,1', message: 'Por favor ingresa tu número de RUC')]
-	public string $ruc = '';
+	public ?string $ruc = '';
 
 	#[Validate('required_if:invoiceType,1', message: 'Por favor ingresa tu razón social')]
-	public string $businessName = '';
+	public ?string $businessName = '';
+
+	public function __construct(Component $component, $propertyName)
+	{
+		parent::__construct($component, $propertyName);
+
+		$this->email = Cart::getEmail();
+		$this->firstName = Cart::getFirstName();
+		$this->lastName = Cart::getLastName();
+		$this->identityDocumentNumber = Cart::getIdentityDocumentNumber();
+		$this->phone = Cart::getPhone();
+		$this->invoiceType = Cart::getInvoiceType()?->value;
+		$this->ruc = Cart::getRuc();
+		$this->businessName = Cart::getBusinessName();
+	}
 
 	public function submit(): bool
 	{

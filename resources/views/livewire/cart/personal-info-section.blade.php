@@ -52,6 +52,7 @@
 						@enderror
 					</div>
 				</div>
+				@if(config('services.erp.enable'))
 				<div class="radios-wrapper">
 					{{-- Invoice type --}}
 					<div class="checkbox-wrapper">
@@ -68,6 +69,7 @@
 						</div>
 					</div>
 				</div>
+				@endif
 				{{-- Invoice info --}}
 				@if($showInvoiceFields)
 					<div wire:transition.opacity class="mt-3">

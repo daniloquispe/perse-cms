@@ -19,15 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-		$middleware->redirectGuestsTo(function ()
-		{
-			$slug = SeoTags::query()
-				->where('owner_type', Page::class)
-				->where('owner_id', PageRole::Login->value)
-				->value('slug');
-
-			return (new UrlService())->fromSlug($slug);
-		});
+		$middleware->redirectGuestsTo(fn() => (new UrlService())->fromPageRole(PageRole::Login));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

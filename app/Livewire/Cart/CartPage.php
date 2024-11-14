@@ -25,9 +25,10 @@ class CartPage extends Component
 			2 => 'Datos Personales',
 			3 => 'Información de Entrega',
 			4 => 'Información de Pago',
+			5 => '¡Gracias por la compra!',
 		};
 
         return view('livewire.cart.page')
-			->title($title . ' :: Persé Librerías');
+			->title($title . ' :: ' . config('app.name'));
     }
 }

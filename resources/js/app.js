@@ -9,7 +9,6 @@ import '@fontsource/roboto/700.css';
 import '@splidejs/splide/css/core';
 
 // Components
-import './components/form/quantity-input.js';
 import './components/slider.js';
 import './components/site-header/marquee.js';
 

@@ -6,7 +6,7 @@
 	@apply mb-12;
 }
 
-.card .avatar
+/*.card .avatar
 {
 	@apply block w-full text-center p-8 pb-5;
 }
@@ -14,7 +14,7 @@
 .card .avatar svg
 {
 	@apply block mx-auto size-[11rem] mb-8;
-}
+}*/
 
 .card .card-header
 {
@@ -24,7 +24,15 @@
 
 .card .card-title
 {
-	@apply text-xl;
+	@apply flex items-end gap-2;
+	@apply text-xl text-gray-800;
+
+	svg
+	{
+		@apply inline;
+		@apply size-6;
+		@apply text-palette-orange;
+	}
 }
 
 .card .card-body
@@ -68,14 +76,16 @@
 
 /* Forms */
 
-.card .buttonbar
+/*.card .buttonbar
 {
-	/*@apply text-right;*/
 	@apply mt-20;
-}
+}*/
 
 .card .buttonbar button
 {
-	@apply px-6 py-1.5 rounded bg-gray-50;
+	@apply px-6 py-1.5 rounded bg-gray-100;
+	@apply bg-palette-purple hover:bg-[#9143bc];
+	@apply text-white;
 	@apply uppercase;
+	@apply transition-colors;
 }

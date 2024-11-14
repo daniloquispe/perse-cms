@@ -3,7 +3,8 @@
 	@apply max-w-[86rem] mx-auto;
 }
 
-/* Steps (new) */
+/* Steps */
+/* Replace by .steps-indicator in resources/css/utils/steps.css */
 
 .cart-steps
 {
@@ -325,6 +326,8 @@ ul.cart-steps
 				@apply w-full;
 				@apply border border-gray-300 rounded;
 				@apply p-2;
+				@apply outline-none outline-offset-0 focus:outline-palette-purple;
+				@apply transition-all;
 			}
 
 			button
@@ -355,8 +358,16 @@ ul.cart-steps
 				{
 					@apply w-full;
 					@apply border border-gray-400 rounded;
+					@apply outline-none outline-offset-0 focus:outline-palette-purple;
 					@apply p-2;
 					@apply bg-white;
+					@apply transition-all;
+
+					&:disabled
+					{
+						@apply bg-gray-200;
+						@apply opacity-60;
+					}
 				}
 			}
 
@@ -388,7 +399,6 @@ ul.cart-steps
 
 		/* Totals */
 
-
 		.totals
 		{
 			@apply pt-1;
@@ -418,6 +428,31 @@ ul.cart-steps
 			@apply mb-5 py-2;
 			@apply bg-palette-orange;
 			@apply text-white font-[500];
+
+			&:disabled
+			{
+				@apply border-gray-100 bg-gray-100;
+				@apply text-gray-400;
+			}
+		}
+
+		/* Final step */
+
+		a.home-link
+		{
+			@apply rounded-lg;
+			@apply border border-palette-purple;
+			@apply px-4 py-2;
+			@apply bg-palette-purple;
+			@apply text-white font-[500];
+		}
+
+		ul.final-notes li
+		{
+			@apply rounded;
+			@apply mb-2 last-of-type:mb-0;
+			@apply p-3;
+			@apply bg-gray-50;
 		}
 	}
 

@@ -8,7 +8,7 @@
 	<div class="card-body">
 		{{-- Cart items --}}
 		<div class="cart-items">
-			@foreach($items as $item)
+			@foreach($items as $id => $item)
 				{{-- Separator --}}
 				@if(!$loop->first)
 					<div class="separator">
@@ -65,7 +65,7 @@
 						{{-- Subtotal --}}
 						<div class="price-name last">Subtotal</div>
 						<br />
-						<div>0.00</div>
+						<div>{{ number_format($subtotals[$id], 2) }}</div>
 					</div>
 					<div class="actions-cell hidden md:table-cell">
 						{{-- Remove from cart --}}

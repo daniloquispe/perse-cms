@@ -1,15 +1,8 @@
-<div class="grid grid-cols-5 gap-4">
+<div class="flex flex-col lg:grid lg:grid-cols-5 gap-4">
 	{{-- Sidebar --}}
 	<nav class="card">
 		{{-- Avatar --}}
-		<div class="avatar">
-			<livewire:avatar-indicator />
-			<p class="greeting">{{ auth('storefront')->user()->gender == \App\Gender::female ? 'Bienvenida' : 'Bienvenido' }}</p>
-			@if(auth('storefront')->user()->first_name)
-				<p class="user-name">{{ auth('storefront')->user()->first_name ?? 'usuario' }}</p>
-			@endif
-			<br />
-		</div>
+		<livewire:avatar-indicator />
 		{{-- Menu --}}
 		<ul class="menu">
 			@foreach($menuRoutes as $menuRoute)
@@ -26,7 +19,7 @@
 		</ul>
 	</nav>
 	{{-- Center --}}
-	<div class="col-span-4">
+	<div class="lg:col-span-4">
 		@switch(\Illuminate\Support\Facades\Route::current()->action['as'])
 			@case('customer.profile')
 				<livewire:customer.profile-section />
@@ -36,6 +29,9 @@
 				@break
 			@case('customer.orders')
 				<livewire:customer.orders-section />
+				@break
+			@case('customer.order')
+				<livewire:customer.order-section :order="\Illuminate\Support\Facades\Route::current()->parameter('order')" />
 				@break
 			@case('customer.favorites')
 				<livewire:customer.favorites-section />

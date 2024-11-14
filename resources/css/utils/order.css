@@ -1,0 +1,140 @@
+@layer utilities
+{
+	.order-section-title
+	{
+		@apply mb-2 text-xl text-palette-orange font-[500];
+
+		&.status
+		{
+			@apply mb-0 text-lg text-center;
+		}
+	}
+
+	/* Section: Order info */
+
+	section.order-info
+	{
+		@apply mb-8;
+
+		.order-section-header
+		{
+			@apply flex justify-between;
+
+			.order-section-header-buttonbar
+			{
+				@apply flex gap-5;
+
+				a
+				{
+					@apply flex items-center gap-1 mb-2 underline;
+
+					svg
+					{
+						@apply inline size-6 stroke-2;
+						@apply sm:text-palette-orange;
+					}
+				}
+			}
+		}
+
+		.order-section-body
+		{
+			@apply flex flex-col lg:grid lg:grid-cols-3;
+			@apply divide-y lg:divide-x lg:divide-y-0 divide-solid divide-gray-300;
+			@apply bg-gray-100;
+			@apply rounded-xl;
+			@apply px-2 xl:px-5 lg:py-5;
+
+			> div
+			{
+				@apply py-6;
+				@apply px-4 xl:px-16;
+
+				.cell-title
+				{
+					@apply mb-3 text-lg font-[500] text-gray-800;
+				}
+
+				&.prices .price-row
+				{
+					@apply flex justify-between;
+				}
+			}
+
+			.repeat-order-buttonbar
+			{
+				@apply mt-16 w-full 2xl:px-8;
+
+				.repeat-order-button
+				{
+					@apply w-full border border-palette-orange rounded-lg py-3;
+					@apply hover:bg-palette-orange/5;
+					@apply text-palette-orange;
+					@apply font-[500];
+					@apply transition-colors;
+				}
+			}
+		}
+	}
+
+	/* Section: Order status info */
+
+	section.order-status-info
+	{
+		@apply rounded-xl;
+		@apply mb-8;
+		@apply bg-palette-orange/20;
+
+		.order-section-body
+		{
+			@apply py-4;
+		}
+	}
+
+	/* Section: Details (table) */
+
+	section.order-details
+	{
+		@apply xl:mx-16 2xl:mx-32;
+		@apply text-gray-800;
+
+		/* Rows */
+
+		> div
+		{
+			@apply grid;
+			@apply grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7;
+			@apply gap-12 xl:gap-24;
+
+			> div:first-child
+			{
+				@apply col-span-2 xl:col-span-3 2xl:col-span-4;
+			}
+
+			/* Header row */
+
+			&.header-row
+			{
+				@apply pb-[1.1rem];
+				@apply font-[500];
+			}
+
+			/* Body row */
+
+			&.body-row
+			{
+				@apply mt-3;
+
+				> div:first-child
+				{
+					@apply flex items-start gap-4;
+				}
+
+				img
+				{
+					@apply w-12;
+				}
+			}
+		}
+	}
+}

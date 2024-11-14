@@ -6,6 +6,7 @@
 
 @import url(livewire/site-header.css);
 
+@import url(livewire/avatar-indicator.css);
 @import url(livewire/book-list-item.css);
 @import url(livewire/cart-indicator.css);
 @import url(livewire/marquee.css);
@@ -16,6 +17,7 @@
 @import url(livewire/add-to-favorites-button.css);
 @import url(livewire/book-carousel.css);
 @import url(livewire/comment-form.css);
+@import url(livewire/customer-form.css);
 @import url(livewire/profile-form.css);
 @import url(livewire/quantity-input.css);
 @import url(livewire/site-footer.css);
@@ -29,8 +31,12 @@
 @import url(pages/contact.css);
 @import url(pages/user.css);
 
+@import url(utils/document.css);
 @import url(utils/forms.css);
 @import url(utils/off-canvas.css);
+@import url(utils/order.css);
+@import url(utils/orders.css);
+@import url(utils/steps.css);
 
 @tailwind base;
 @tailwind components;
@@ -67,25 +73,6 @@ body
 	@apply mb-12;
 }
 
-/* Document-style pages */
-
-.document header h1
-{
-	@apply mb-6;
-	@apply text-2xl text-center text-gray-800;
-}
-
-.document p
-{
-	@apply mb-4;
-}
-
-.document ul
-{
-	@apply list-disc;
-	@apply ml-8;
-}
-
 /* Auth pages (login, register...) */
 
 .container-box-auth
@@ -101,7 +88,7 @@ body
 
 .container-box-auth h2
 {
-	@apply mt-4 mb-6;
+	@apply mt-4 mb-4 md:mb-6;
 	@apply text-center uppercase;
 
 	+ p
@@ -116,6 +103,11 @@ body
 	@apply text-center uppercase;
 }
 
+.container-box-auth p.or
+{
+	@apply my-3.5;
+}
+
 .container-box-auth a
 {
 	@apply underline;
@@ -123,8 +115,11 @@ body
 
 .container-box-auth form input
 {
-	@apply block w-full rounded my-2 p-3;
+	@apply block w-full rounded p-3;
+	@apply mt-2 mb-3.5 md:mb-2;
 	@apply bg-slate-100;
+	@apply outline-none outline-offset-0 focus:outline-palette-purple;
+	@apply transition-all;
 }
 
 .container-box-auth form button[type="submit"],
@@ -163,12 +158,29 @@ body
 
 .container-box-auth .access-wrapper
 {
-	@apply grid grid-rows-2 sm:grid-cols-2 gap-2;
+	@apply grid;
+	@apply grid-rows-2 sm:grid-rows-1 sm:grid-cols-2;
+	@apply gap-3.5 md:gap-2;
+	@apply mb-10;
 }
 
 .container-box-auth.wide .access-wrapper
 {
 	@apply grid-cols-1;
+	@apply mb-0;
+}
+
+.auth-form-layout
+{
+	.cols
+	{
+		@apply md:grid md:grid-cols-2 md:gap-4;
+
+		> div:first-child
+		{
+			@apply mb-4 md:mb-0;
+		}
+	}
 }
 
 /* Forms */

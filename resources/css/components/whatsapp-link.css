@@ -1,6 +1,6 @@
 a.component--whatsapp-link
 {
-	@apply fixed bottom-6 right-6;
+	@apply fixed bottom-2 md:bottom-6 right-6;
 	@apply block rounded-full h-20 w-20 p-3;
 	@apply bg-[#25D366] shadow-lg;
 }

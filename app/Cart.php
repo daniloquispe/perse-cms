@@ -4,22 +4,30 @@ namespace App;
 
 use App\Models\Book;
 use App\Models\Coupon;
-use Carbon\Carbon;
+use App\Services\UrlService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class Cart
 {
 	private static bool $loaded = false;
 
+	private static bool $personalInfoLoaded = false;
+
 	private static int $step = 1;
 
 	private static array $items = [];
 
+	private static float $grossTotal;
+
 	private static float $total;
 
-	private static float $totalDiscount;
+//	private static float $totalDiscount;
 
-//	private static ?int $couponId = null;
+	private static float $totalDiscountFromItems;
+
+	private static float $totalDiscountFromCoupon;
 
 	private static ?array $coupon = null;
 
@@ -33,17 +41,30 @@ class Cart
 
 	private static string $phone = '';
 
-	private static int $invoiceType = 3;
+	/**
+	 * Invoice type ID.
+	 *
+	 * @todo Update attribute type (when ERP integration is set)
+	 */
+	private static ?int $invoiceType = null;
 
 	private static ?string $ruc = null;
 
 	private static ?string $businessName = null;
 
-	private static int|null $departmentId = null;
+	private static int|null $addressId = null;
 
-	private static int|null $provinceId = null;
+	private static ?int $departmentId = null;
 
-	private static int|null $districtId = null;
+	private static ?string $departmentName = null;
+
+	private static ?int $provinceId = null;
+
+	private static ?string $provinceName = null;
+
+	private static ?int $districtId = null;
+
+	private static ?string $districtName = null;
 
 	private static string|null $address = null;
 
@@ -54,6 +75,8 @@ class Cart
 	private static string|null $recipientName = null;
 
 	private static string|null $deliveryDate = null;
+
+	private static int|null $deliveryPrice = null;
 
 	public static function getStep(): int
 	{
@@ -127,7 +150,12 @@ class Cart
 		return static::$businessName;
 	}
 
-	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int $invoiceType, string|null $ruc, string|null $businessName): void
+	/**
+	 * Set customer personal info.
+	 *
+	 * @todo Update invoice type parameter type (when ERP integration is set)
+	 */
+	public static function setPersonalInfo(string $email, string $firstName, string $lastName, string $identityDocumentNumber, string $phone, int|null $invoiceType, string|null $ruc, string|null $businessName): void
 	{
 		static::load();
 
@@ -141,6 +169,55 @@ class Cart
 		static::$businessName = $invoiceType == 1 ? $businessName : null;
 
 		static::save();
+	}
+
+	public static function getAddressId(): int|null
+	{
+		static::load();
+
+		return static::$addressId;
+	}
+
+	public static function getDepartmentId(): ?int
+	{
+		static::load();
+
+		return static::$departmentId;
+	}
+
+	public static function getDepartmentName(): ?string
+	{
+		static::load();
+
+		return static::$departmentName;
+	}
+
+	public static function getProvinceId(): int|null
+	{
+		static::load();
+
+		return static::$provinceId;
+	}
+
+	public static function getProvinceName(): ?string
+	{
+		static::load();
+
+		return static::$provinceName;
+	}
+
+	public static function getDistrictId(): int|null
+	{
+		static::load();
+
+		return static::$districtId;
+	}
+
+	public static function getDistrictName(): ?string
+	{
+		static::load();
+
+		return static::$districtName;
 	}
 
 	public static function getAddress(): string|null
@@ -178,10 +255,27 @@ class Cart
 		return static::$deliveryDate;
 	}
 
-	public static function setDeliveryInfo(int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
+	public static function getDeliveryPrice(): ?int
 	{
 		static::load();
 
+		return static::$deliveryPrice;
+	}
+
+	public static function setDeliveryPrice(int $price): void
+	{
+		static::load();
+
+		static::$deliveryPrice = $price;
+
+		static::save();
+	}
+
+	public static function setDeliveryInfo(int|null $addressId, int $departmentId, int $provinceId, int $districtId, string $address, string $locationNumber, string|null $reference, string|null $recipientName, string $deliveryDate): void
+	{
+		static::load();
+
+		static::$addressId = $addressId;
 		static::$departmentId = $departmentId;
 		static::$provinceId = $provinceId;
 		static::$districtId = $districtId;
@@ -190,6 +284,24 @@ class Cart
 		static::$reference = $reference;
 		static::$recipientName = $recipientName;
 		static::$deliveryDate = $deliveryDate;
+
+		// Get department name
+		$response = Http::get("https://adminisol.isolperu.com/api/department/$departmentId");
+		$responseBody = $response->body();
+		$departmentInfo = json_decode($responseBody, true);
+		static::$departmentName = $departmentInfo['name'];
+
+		// Get province name
+		$response = Http::get("https://adminisol.isolperu.com/api/province/$provinceId");
+		$responseBody = $response->body();
+		$provinceInfo = json_decode($responseBody, true);
+		static::$provinceName = $provinceInfo['name'];
+
+		// Get district name
+		$response = Http::get("https://adminisol.isolperu.com/api/district/$districtId");
+		$responseBody = $response->body();
+		$districtInfo = json_decode($responseBody, true);
+		static::$districtName = $districtInfo['name'];
 
 		static::save();
 	}
@@ -238,11 +350,25 @@ class Cart
 		static::save();
 	}
 
+	public static function getItemSubtotal(int $bookId): float
+	{
+		static::load();
+
+		$item = static::$items[$bookId];
+		$book = $item['book'];
+
+		$quantity = $item['quantity'];
+		$price = $book['discounted_price'] ?? $book['price'];
+
+		return $quantity * $price;
+	}
+
 	public static function applyCoupon(Coupon $coupon): void
 	{
 		static::load();
 
 		static::$coupon = $coupon->toArray();
+		static::calculateTotals();
 
 		static::save();
 	}
@@ -273,22 +399,42 @@ class Cart
 			static::$ruc = $data['ruc'];
 			static::$businessName = $data['businessName'];
 
+			static::$addressId = $data['addressId'];
+			static::$departmentId = $data['departmentId'];
+			static::$departmentName = $data['departmentName'];
+			static::$provinceId = $data['provinceId'];
+			static::$provinceName = $data['provinceName'];
+			static::$districtId = $data['districtId'];
+			static::$districtName = $data['districtName'];
 			static::$address = $data['address'];
 			static::$locationNumber = $data['locationNumber'];
 			static::$reference = $data['reference'];
 			static::$recipientName = $data['recipientName'];
 			static::$deliveryDate = $data['deliveryDate'];
+			static::$deliveryPrice = $data['deliveryPrice'];
 
-			self::$loaded = true;
+			static::$personalInfoLoaded = $data['personalInfoLoaded']/* ?? false*/;
+
+			static::$loaded = true;
 		}
 	}
 
 	private static function save(): void
 	{
-//		Session::put('cartStep', static::$step);
-//		Session::put('cart', static::$items);
+		if (!static::$personalInfoLoaded && Auth::guard('storefront')->check())
+		{
+			$customer = Auth::guard('storefront')->user();
 
-		session::put('cart', static::toArray());
+			static::$email = $customer->email;
+			static::$firstName = $customer->first_name;
+			static::$lastName = $customer->last_name;
+			static::$identityDocumentNumber = $customer->id_document_number;
+			static::$phone = $customer->phone;
+
+			static::$personalInfoLoaded = true;
+		}
+
+		Session::put('cart', static::toArray());
 	}
 
 	public static function getItems(): array
@@ -303,7 +449,10 @@ class Cart
 		if (!static::$coupon)
 			return null;
 
-		return new Coupon(static::$coupon);
+		$coupon = new Coupon(static::$coupon);
+		$coupon->id = static::$coupon['id'];
+
+		return $coupon;
 	}
 
 	public static function getItemsCount(): int
@@ -319,36 +468,57 @@ class Cart
 		return self::$total;
 	}
 
+	public static function getTotalDiscountFromItems(): float
+	{
+		if (!isset(self::$totalDiscountFromItems))
+			static::calculateTotals();
+
+		return static::$totalDiscountFromItems;
+	}
+
+	public static function getTotalDiscountFromCoupon(): float
+	{
+		if (!isset(self::$totalDiscountFromCoupon))
+			static::calculateTotals();
+
+		return static::$totalDiscountFromCoupon;
+	}
+
 	public static function getTotalDiscount(): float
 	{
-		if (!isset(self::$totalDiscount))
-			self::calculateTotals();
-
-		return self::$totalDiscount;
+		return static::getTotalDiscountFromItems() + static::getTotalDiscountFromCoupon();
 	}
 
 	private static function calculateTotals(): void
 	{
-		self::$total = 0;
-		self::$totalDiscount = 0;
+		static::$grossTotal = 0;
+		static::$totalDiscountFromItems = 0;
+		static::$totalDiscountFromCoupon = 0;
 
 		foreach (self::getItems() as $item)
 		{
 			$book = $item['book'];
 			$quantity = $item['quantity'];
 
+			static::$grossTotal += $book['price'] * $quantity;
+
 			if ($book['discounted_price'])
 			{
-				self::$total += $book['discounted_price'] * $quantity;
-				self::$totalDiscount += ($book['price'] - $book['discounted_price']) * $quantity;
+//				static::$grossTotal += $book['discounted_price'] * $quantity;
+				static::$totalDiscountFromItems += ($book['price'] - $book['discounted_price']) * $quantity;
 			}
-			else
-				self::$total += $book['price'] * $quantity;
+//			else
+//				static::$grossTotal += $book['price'] * $quantity;
 		}
 
 		// Apply coupon?
-		if (self::$coupon)
-			self::$total = (100 - self::$coupon['discount_rate']) * self::$total / 100;
+		if (static::$coupon)
+			static::$totalDiscountFromCoupon = self::$coupon['discount_rate'] * static::$grossTotal / 100;
+
+		static::$total = static::$grossTotal
+			- static::$totalDiscountFromItems
+			- static::$totalDiscountFromCoupon
+			+ static::$deliveryPrice;
 	}
 
 	private static function toArray(): array
@@ -359,6 +529,7 @@ class Cart
 
 		return [
 			'step' => static::$step,
+			'personalInfoLoaded' => static::$personalInfoLoaded,
 			'items' => $items,
 //			'couponId' => static::$couponId,
 			'coupon' => static::$coupon,
@@ -372,14 +543,26 @@ class Cart
 			'ruc' => static::$invoiceType == 1 ? static::$ruc : null,
 			'businessName' => static::$invoiceType == 1 ? static::$businessName : null,
 
+			'addressId' => static::$addressId,
 			'departmentId' => static::$departmentId,
+			'departmentName' => static::$departmentName,
 			'provinceId' => static::$provinceId,
+			'provinceName' => static::$provinceName,
 			'districtId' => static::$districtId,
+			'districtName' => static::$districtName,
 			'address' => static::$address,
 			'locationNumber' => static::$locationNumber,
 			'reference' => static::$reference,
 			'recipientName' => static::$recipientName,
 			'deliveryDate' => static::$deliveryDate,
+			'deliveryPrice' => static::$deliveryPrice,
 		];
+	}
+
+	public static function empty(): void
+	{
+		Session::forget('cart');
+
+		static::load();
 	}
 }

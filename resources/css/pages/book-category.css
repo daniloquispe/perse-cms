@@ -202,12 +202,12 @@
 .book-category h2
 {
 	@apply font-bold uppercase;
+	@apply mb-4;
 }
 
 .book-category .description-wrapper
 {
 	@apply flex flex-col lg:flex-row items-start lg:items-center justify-between;
-	@apply mt-4;
 	@apply border border-solid border-gray-300 rounded-lg p-3;
 
 	.description-buttons-wrapper

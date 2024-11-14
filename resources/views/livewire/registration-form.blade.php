@@ -1,7 +1,7 @@
-<div>
+<div class="auth-form-layout">
 	@if($step == 1)
-		<div class="md:grid md:grid-cols-2 md:gap-4">
-			<div class="mb-4 md:mb-0">
+		<div class="cols">
+			<div>
 				<h2>Escoja una opción para entrar</h2>
 				<div class="access-wrapper">
 					<button class="access-button access-email">Recibir código de acceso por e-mail</button>

@@ -1,0 +1,27 @@
+/* Document-style pages */
+
+@layer utilities
+{
+	.document header h1
+	{
+		@apply mb-6;
+		@apply text-2xl text-center text-gray-800;
+	}
+
+	.document p
+	{
+		@apply mb-4;
+	}
+
+	.document ul
+	{
+		@apply list-disc;
+		@apply ml-8 mb-4;
+	}
+
+	.document ol
+	{
+		@apply list-decimal;
+		@apply ml-8 mb-4;
+	}
+}

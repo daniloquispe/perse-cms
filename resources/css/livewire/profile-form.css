@@ -1,6 +1,8 @@
+/* Replace by .customer-form in resources/css/livewire/customer-form.css */
+
 .profile-form-body
 {
-	@apply grid grid-cols-2 gap-24;
+	@apply flex flex-col md:grid md:grid-cols-2 md:gap-24;
 }
 
 .profile-form-body .form-control
@@ -12,8 +14,9 @@
 
 .profile-form-body .grid-inner-cols
 {
-	@apply grid grid-cols-2 gap-12;
+	@apply flex flex-col sm:grid sm:grid-cols-2 gap-12;
 	@apply text-left;
+	@apply mb-12 md:mb-0;
 }
 
 .profile-form-body .readonly

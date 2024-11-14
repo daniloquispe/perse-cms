@@ -9,7 +9,7 @@
 	<div class="container-box-auth content-wrapper">
 		<h2>Escoja una opción para entrar</h2>
 		<button class="access-button access-email">Recibir código de acceso por e-mail</button>
-		<p>Ó</p>
+		<p class="or">Ó</p>
 		<div class="access-wrapper">
 			<button class="access-button access-google">Ingresa con Google</button>
 			<button class="access-button access-facebook">Ingresa con Facebook</button>

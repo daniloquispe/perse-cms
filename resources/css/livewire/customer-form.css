@@ -1,0 +1,21 @@
+.customer-form
+{
+	.form-control-wrapper
+	{
+		@apply mb-4;
+
+		label
+		{
+			@apply block;
+		}
+
+		input, select
+		{
+			@apply w-full px-2 py-1;
+			@apply border border-solid border-gray-200 rounded;
+			@apply bg-white;
+			@apply outline-none outline-offset-0 focus:outline-palette-purple;
+			@apply transition-all;
+		}
+	}
+}

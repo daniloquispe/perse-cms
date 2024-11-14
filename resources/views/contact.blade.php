@@ -17,7 +17,7 @@
 			</div>
 			<div>
 				<div>{!! $page->content !!}</div>
-				<form>
+				<form class="contact-form">
 					{{-- Name --}}
 					<div class="form-row">
 						<input type="text" id="input-name" name="name" placeholder="Tu nombre *" required="required" aria-label="Tu nombre" />
@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					{{-- Submit --}}
-					<div class="form-row">
+					<div class="buttonbar">
 						<button>Enviar</button>
 					</div>
 				</form>
